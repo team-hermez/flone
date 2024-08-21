@@ -31,6 +31,8 @@
     <mybatis-spring:scan base-package="org.hermez.member.mapper" />
     <mybatis-spring:scan base-package="org.hermez.reservation.mapper" />
     <mybatis-spring:scan base-package="org.hermez.classroom.classroom.mapper" />
+    <mybatis-spring:scan base-package="org.hermez.classroom.board.mapper" />
+    <mybatis-spring:scan base-package="org.hermez.classroom.reply.mapper" />
     <mybatis-spring:scan base-package="org.hermez.image.mapper" />
 
     <context:component-scan base-package="org.hermez"/>

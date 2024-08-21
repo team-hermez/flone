@@ -5,10 +5,7 @@ import org.hermez.classroom.reply.model.Reply;
 import org.hermez.classroom.reply.service.ReplyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,6 +15,7 @@ import java.util.List;
  * @author 김혁진
  */
 @Controller
+@RequestMapping("flone/reply")
 public class ReplyController {
 
     private final ReplyService replyService;
@@ -38,7 +36,7 @@ public class ReplyController {
      * @param model 댓글 목록을 저장할 모델 객체
      * @return 댓글 목록 페이지의 뷰 이름
      */
-    @GetMapping("/reply-list.hm")
+    @GetMapping("reply-list.hm")
     public String getReplyList(@RequestParam("boardId") int boardId, Model model) {
         List<Reply> replies = replyService.getRepliesByBoardId(boardId);
         model.addAttribute("replies", replies);
@@ -51,10 +49,10 @@ public class ReplyController {
      * @param replyRequest 댓글 등록 요청 데이터를 담고 있는 DTO
      * @return 등록 후 해당 게시판 상세 페이지로 리다이렉트
      */
-    @PostMapping("/reply-register.hm")
+    @PostMapping("reply-register.hm")
     public String postRegisterReply(@ModelAttribute ReplyRegisterRequest replyRequest) {
         replyService.registerReply(replyRequest);
-        return "redirect:/board-detail.hm?boardId=" + replyRequest.getBoardId();
+        return "redirect:../board/board-detail.hm?boardId=" + replyRequest.getBoardId();
     }
 
     /**
@@ -64,9 +62,9 @@ public class ReplyController {
      * @param boardId 댓글이 속한 게시판의 ID
      * @return 삭제 후 해당 게시판 상세 페이지로 리다이렉트
      */
-    @PostMapping("/reply-delete.hm")
+    @PostMapping("reply-delete.hm")
     public String deleteReply(@RequestParam("replyId") int replyId, @RequestParam("boardId") int boardId) {
         replyService.deleteReply(replyId);
-        return "redirect:/board-detail.hm?boardId=" + boardId;
+        return "redirect:board-detail.hm?boardId=" + boardId;
     }
 }

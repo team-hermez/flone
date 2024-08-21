@@ -51,7 +51,7 @@
                                                     <a href="#"><i class="fa fa-arrow-up"></i> back</a>
                                                 </div>
                                                 <div class="billing-btn">
-                                                    <a href="/board-detail.hm?boardId=${board.boardId}&classroomId=${classroomId}" class="btn btn-primary">자세히</a>
+                                                    <a href="/flone/board/board-detail.hm?boardId=${board.boardId}&classroomId=${classroomId}" class="btn btn-primary">자세히</a>
                                                 </div>
                                             </div>
                                         </div>

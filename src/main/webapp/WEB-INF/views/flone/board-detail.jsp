@@ -24,8 +24,8 @@
 <div class="welcome-area pt-100 pb-95">
     <div class="container">
         <div>
-            <a href="/board-edit-form.hm?boardId=${board.boardId}" class="btn btn-secondary">수정</a>
-            <form action="/board-delete.hm" method="post" style="display:inline;">
+            <a href="/flone/board/board-edit-form.hm?boardId=${board.boardId}" class="btn btn-secondary">수정</a>
+            <form action="/flone/board/board-delete.hm" method="post" style="display:inline;">
                 <input type="hidden" name="boardId" value="${board.boardId}">
                 <input type="hidden" name="classroomId" value="${board.classroomId}">
 
@@ -103,7 +103,7 @@
                             <div class="ratting-form-wrapper pl-50">
                                 <h2 class="mb-4"> 질문 </h2>
                                 <div class="ratting-form">
-                                    <form action="/reply-register.hm" method="post">
+                                    <form action="/flone/reply/reply-register.hm" method="post">
                                         <input type="hidden" name="boardId" value="${board.boardId}">
                                         <div class="row">
                                             <div class="col-md-12">

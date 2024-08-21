@@ -17,7 +17,7 @@
                 <div class="blog-details-wrapper ml-20">
                     <div class="blog-reply-wrapper mt-50">
                         <h4 class="blog-dec-title">수업 게시글 수정</h4>
-                        <form class="blog-form" action="/board-edit.hm" method="post">
+                        <form class="blog-form" action="/flone/board/board-edit.hm" method="post">
                             <input type="hidden" name="boardId" value="${board.boardId}" />
                             <input type="hidden" name="classroomId" value="${board.classroomId}" />
                             <div class="row">

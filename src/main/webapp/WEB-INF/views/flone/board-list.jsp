@@ -27,14 +27,17 @@
         <div class="section-title text-center mb-sm-5">
             <h2>강의 룸</h2>
         </div>
+        <div class="section-title text-center mb-sm-5">
+            <h2>${boardListResponse.videoLink}</h2>
+        </div>
         <div class="text-center mb-30">
-            <a href="board-register-form.hm?classroomId=${classroomId}" class="btn btn-primary">글 등록하기</a>
+            <a href="board-register-form.hm?classroomId=${boardListResponse.classroomId}" class="btn btn-primary">글 등록하기</a>
         </div>
         <div class="row">
             <div class="ms-auto me-auto col-lg-9">
                 <div class="checkout-wrapper">
                     <div id="faq" class="panel-group">
-                        <c:forEach var="board" items="${boards}">
+                        <c:forEach var="board" items="${boardListResponse.boards}">
                             <div class="panel panel-default single-my-account">
                                 <div class="panel-heading my-account-title">
                                     <h3 class="panel-title"><a data-bs-toggle="collapse"

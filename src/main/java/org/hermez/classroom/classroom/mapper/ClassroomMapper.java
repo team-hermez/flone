@@ -36,6 +36,15 @@ public interface ClassroomMapper {
     List<ClassroomCardResponse> selectClassroomList(@Param("courseId") int courseId, @Param("offset") int offset);
 
     /**
+     * 클래스룸의 영상링크를 가져오는 메서드입니다.
+     *
+     * @param classroomId
+     * @return 등록된 영상 링크
+     */
+    @Select("SELECT video_link as videoLink from classroom where classroom_id=#{classroomId}")
+    String selectVideoLinkByClassroomId(int classroomId);
+
+    /**
      * 특정 강의에 포함된 클래스룸의 수를 반환하는 메서드입니다.
      *
      * @param courseId 강의의 고유 키 값
@@ -50,8 +59,8 @@ public interface ClassroomMapper {
      * @param classroomRegisterRequest 등록할 클래스룸의 정보를 담고 있는 객체
      * @return 삽입된 행의 수
      */
-    @Insert("INSERT INTO classroom (course_id, classroom_name, description, created_at) " +
-            "VALUES (#{courseId}, #{classroomName}, #{description}, NOW())")
+    @Insert("INSERT INTO classroom (course_id, classroom_name, description, created_at, video_link) " +
+            "VALUES (#{courseId}, #{classroomName}, #{description}, NOW(), #{videoLink})")
     @Options(useGeneratedKeys = true, keyProperty = "classroomId")
     int insertClassroom(ClassroomRegisterRequest classroomRegisterRequest);
 

@@ -20,6 +20,9 @@ public class Reply {
     private String content;
     private LocalDateTime createdAt;
 
+    public Reply() {
+    }
+
     /**
      * 댓글 필드 생성자입니다.
      *

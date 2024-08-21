@@ -33,12 +33,20 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="leave-form">
-                                        <input type="text" id="classroomName" name="classroomName" placeholder="클래스룸 제목" required />
+                                        <label>클래스룸 제목</label>
+                                        <input type="text" id="classroomName" name="classroomName" placeholder="제목" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="leave-form">
+                                        <label>영상 링크</label>
+                                        <input type="text" id="videoLink" name="videoLink" placeholder="url"  />
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="text-leave">
-                                        <textarea id="description" name="description" placeholder="클래스룸 내용" required></textarea>
+                                        <label>클래스룸 내용</label>
+                                        <textarea id="description" name="description" placeholder="내용" required></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-8">
@@ -48,12 +56,14 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="leave-form">
+                                        <label>이미지 파일 (선택사항)</label>
                                         <input type="file" id="imageFile" name="imageFile" accept=".jpg, .jpeg, .png"/>
                                         <input type="submit" value="등록하기" />
                                     </div>
                                 </div>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>

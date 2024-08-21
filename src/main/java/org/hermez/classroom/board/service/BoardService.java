@@ -1,10 +1,9 @@
 package org.hermez.classroom.board.service;
 
 import org.hermez.classroom.board.dto.BoardEditRequest;
+import org.hermez.classroom.board.dto.BoardListResponse;
 import org.hermez.classroom.board.dto.BoardRegisterRequest;
 import org.hermez.classroom.board.model.Board;
-
-import java.util.List;
 
 /**
  * 게시판 서비스 인터페이스입니다.
@@ -19,7 +18,7 @@ public interface BoardService {
      * @param classroomId 강의실 ID
      * @return 게시판 목록
      */
-    List<Board> getBoardsByClassroomId(int classroomId);
+    BoardListResponse getBoardsByClassroomId(int classroomId);
 
     /**
      * 새로운 게시판을 등록합니다.

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +20,7 @@ import java.util.Map;
  * @author 김혁진
  */
 @Controller
+@RequestMapping("flone/classroom")
 public class ClassroomController {
 
     private final ClassroomService classroomService;
@@ -40,7 +42,7 @@ public class ClassroomController {
      * @param model 뷰로 데이터를 전달하기 위한 모델 객체
      * @return 강의룸 목록 페이지 경로
      */
-    @GetMapping("classroom/classroom-list.hm")
+    @GetMapping("classroom-list.hm")
     public String getClassroomList(
             @RequestParam(value = "courseId") int courseId,
             @RequestParam(value = "page", defaultValue = "1") int page,
@@ -62,7 +64,7 @@ public class ClassroomController {
      * @param model 뷰로 데이터를 전달하기 위한 모델 객체
      * @return 강의룸 등록 폼 페이지 경로
      */
-    @GetMapping("/classroom-register-form.hm")
+    @GetMapping("classroom-register-form.hm")
     public String getRegisterForm(@RequestParam(value = "courseId") int courseId, Model model) {
         model.addAttribute("courseId", courseId);
         return "flone/classroom-register-form";
@@ -77,7 +79,7 @@ public class ClassroomController {
      * @param imageFile 강의룸 이미지 파일
      * @return 강의룸 목록 페이지로 리다이렉트
      */
-    @PostMapping("/classroom-register.hm")
+    @PostMapping("classroom-register.hm")
     public String registerClassroom(
             @RequestParam("classroomName") String classroomName,
             @RequestParam("description") String description,
@@ -91,7 +93,7 @@ public class ClassroomController {
         request.setImageFile(imageFile);
 
         classroomService.registerClassroom(request);
-        return "redirect:/classroom-list.hm?courseId=" + courseId;
+        return "redirect:classroom-list.hm?courseId=" + courseId;
     }
 
     /**
@@ -101,12 +103,12 @@ public class ClassroomController {
      * @param courseId 강의의 고유 ID
      * @return 강의룸 목록 페이지로 리다이렉트
      */
-    @PostMapping("/classroom-delete.hm")
+    @PostMapping("classroom-delete.hm")
     public String deleteClassroom(
             @RequestParam("classroomId") int classroomId,
             @RequestParam("courseId") int courseId) {
 
         classroomService.deleteClassroom(classroomId);
-        return "redirect:/classroom-list.hm?courseId=" + courseId;
+        return "redirect:classroom-list.hm?courseId=" + courseId;
     }
 }

@@ -17,7 +17,7 @@
                 <div class="blog-details-wrapper ml-20">
                     <div class="blog-reply-wrapper mt-50">
                         <h4 class="blog-dec-title">수업 게시글 등록</h4>
-                        <form class="blog-form" action="/board-register.hm" method="post">
+                        <form class="blog-form" action="/flone/board/board-register.hm" method="post">
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="leave-form">

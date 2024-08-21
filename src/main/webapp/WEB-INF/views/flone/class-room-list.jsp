@@ -45,7 +45,7 @@
                                             <li><a href="#">4 <i class="fa fa-comments-o"></i></a></li>
                                         </ul>
                                     </div>
-                                    <h4><a href="/board-list.hm?classroomId=${classroom.classroomId}">${classroom.classroomName}</a></h4>
+                                    <h4><a href="/flone/board/board-list.hm?classroomId=${classroom.classroomId}">${classroom.classroomName}</a></h4>
                                     <p>${classroom.description}</p>
                                     <div class="blog-share-comment">
                                         <div class="blog-btn-2">

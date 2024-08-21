@@ -20,6 +20,8 @@ public class Board {
     private String boardContent;
     private LocalDateTime createdAt;
 
+    public Board() {}
+
     /**
      * Board 생성자 입니다.
      *

@@ -29,7 +29,7 @@
                 <div class="blog-details-wrapper ml-20">
                     <div class="blog-reply-wrapper mt-50">
                         <h4 class="blog-dec-title">강의 클래스룸 등록 </h4>
-                        <form class="blog-form" action="/classroom-register.hm" method="post" enctype="multipart/form-data">
+                        <form class="blog-form" action="/flone/classroom/classroom-register.hm" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="leave-form">

@@ -48,7 +48,7 @@
                 <div class="col-xl-2 col-lg-2 col-md-6 col-4">
                     <div class="logo">
                         <a href="index.jsp">
-                            <img alt="" src="assets/img/logo/logo.png">
+                            <img alt="" src="/assets/img/logo/logo.png">
                         </a>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                     <div class="main-menu">
                         <nav>
                             <ul>
-                                <li><a href="/main.hm">홈 <i class="fa fa-angle-down"></i></a>
+                                <li><a href="/flone/index.hm">홈 <i class="fa fa-angle-down"></i></a>
                                 </li>
                                 <li><a href="/course-list.hm"> 강의 <i class="fa fa-angle-down"></i> </a>
                                     <ul class="mega-menu">
@@ -72,7 +72,7 @@
                                         </li>
                                         <li>
                                             <ul>
-                                                <li class="mega-menu-img"><a href="shop.html"><img src="assets/img/banner/banner-12.png" alt=""></a></li>
+                                                <li class="mega-menu-img"><a href="shop.html"><img src="/assets/img/banner/banner-12.png" alt=""></a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -97,7 +97,7 @@
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-2 col-md-6 col-8">
-                       <div class="header-right-wrap">
+                    <div class="header-right-wrap">
                         <div class="same-style header-search">
                             <a class="search-active" href="#"><i class="pe-7s-search"></i></a>
                             <div class="search-content">
@@ -105,15 +105,15 @@
                                     <input type="text" placeholder="Search" />
                                     <button class="button-search"><i class="pe-7s-search"></i></button>
                                 </form>
-                            </div> 
+                            </div>
                         </div>
                         <div class="same-style account-satting">
                             <a class="account-satting-active" href="#"><i class="pe-7s-user-female"></i></a>
                             <div class="account-dropdown">
                                 <ul>
-                                    <li><a href="/login-register.hm">Login</a></li>
-                                    <li><a href="/login-register.hm">Register</a></li>
-                                    <li><a href="/my-account.hm">my account</a></li>
+                                    <li><a href="/flone/member/login.hm">Login</a></li>
+                                    <li><a href="/flone/member/register.hm">Register</a></li>
+                                    <li><a href="/flone/member/my-account.hm">my account</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -129,7 +129,7 @@
                                 <ul>
                                     <li class="single-shopping-cart">
                                         <div class="shopping-cart-img">
-                                            <a href="#"><img alt="" src="assets/img/cart/cart-1.png"></a>
+                                            <a href="#"><img alt="" src="/assets/img/cart/cart-1.png"></a>
                                         </div>
                                         <div class="shopping-cart-title">
                                             <h4><a href="#">T- Shart & Jeans </a></h4>
@@ -142,7 +142,7 @@
                                     </li>
                                     <li class="single-shopping-cart">
                                         <div class="shopping-cart-img">
-                                            <a href="#"><img alt="" src="assets/img/cart/cart-2.png"></a>
+                                            <a href="#"><img alt="" src="/assets/img/cart/cart-2.png"></a>
                                         </div>
                                         <div class="shopping-cart-title">
                                             <h4><a href="#">T- Shart & Jeans </a></h4>
@@ -256,8 +256,8 @@
                                     <li><a href="reservation-list.jsp">cart page</a></li>
                                     <li><a href="payment-detail.jsp">checkout </a></li>
                                     <li><a href="wishlist.html">wishlist </a></li>
-                                    <li><a href=" /my-account.hm">my account</a></li>
-                                    <li><a href="/login-register.hm">login / register </a></li>
+                                    <li><a href="my-account.hm">my account</a></li>
+                                    <li><a href="login.hm">login / register </a></li>
                                     <li><a href="contact.jsp">contact us </a></li>
                                     <li><a href="404.html">404 page </a></li>
                                 </ul>

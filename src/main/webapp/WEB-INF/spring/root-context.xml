@@ -29,6 +29,7 @@
         <constructor-arg ref="hikariConfig"/>
     </bean>
     <mybatis-spring:scan base-package="org.hermez.member.mapper" />
+    <mybatis-spring:scan base-package="org.hermez.reservation.mapper" />
     <context:component-scan base-package="org.hermez"/>
     <context:annotation-config/>
 

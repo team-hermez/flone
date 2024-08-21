@@ -1,4 +1,4 @@
-package org.hermez.reservation.service;
+package org.hermez.paymenthistory.service.payapi;
 
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
@@ -9,9 +9,6 @@ import java.io.IOException;
 import lombok.extern.slf4j.Slf4j;
 import org.hermez.paymenthistory.dto.CancelDTO;
 import org.hermez.reservation.model.Reservation;
-import org.hermez.reservation.model.ReservationRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 
@@ -61,12 +58,12 @@ public class IamportService {
   }
 
   /**
-   *
+   * 취소/환불 요청시 결제 API( 아임포트 ) 서버 응답입니다.
    *
    * @param cancelDTO 취소/환불 요청시 요청 데이터
    * @param findReservation 고객의 환불 요청한 예약 정보
    * @return 결제 API( 아임포트 ) 서버 응답
-   * @throws IamportResponseException 결제 API( 아임포트 ) 서버 응답시 발생
+   * @throws IamportResponseException 결제 API( 아임포트 ) 서버 응답 요류시 발생
    * @throws IOException
    */
   public IamportResponse<Payment> cancelMethod(CancelDTO cancelDTO, Reservation findReservation) throws IamportResponseException, IOException {
@@ -79,6 +76,15 @@ public class IamportService {
     return cancelResponse;
   }
 
+  /**
+   * 결제시 잘못된 요청으로 인한 환불인지 고객 요청으로 인한 환불인지 구분하여 취소/환불 데이터를 만듭니다.
+   *
+   * @param cancelDTO 취소 요청 데이터
+   * @param findReservation 고객의 환불 요청한 예약 정보
+   * @return 취소/환불 데이터
+   * @throws IamportResponseException 결제 API( 아임포트 ) 서버 응답 요류시 발생
+   * @throws IOException
+   */
   public CancelData getCancelData(CancelDTO cancelDTO , Reservation findReservation)
       throws IamportResponseException, IOException {
     IamportResponse<Payment> cancelResponse = cancelMethod(cancelDTO, findReservation);

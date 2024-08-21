@@ -1,8 +1,8 @@
 package org.hermez.member.service;
 
-import org.hm.member.dto.MemberLoginRequest;
-import org.hm.member.dto.MemberRegisterRequest;
-import org.hm.member.model.Member;
+import org.hermez.member.dto.MemberLoginRequest;
+import org.hermez.member.dto.MemberRegisterRequest;
+import org.hermez.member.model.Member;
 
 public interface MemberService {
    void registerMember(MemberRegisterRequest memberRegisterRequest);

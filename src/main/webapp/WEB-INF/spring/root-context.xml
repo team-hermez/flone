@@ -28,7 +28,7 @@
     <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
         <constructor-arg ref="hikariConfig"/>
     </bean>
-
+    <mybatis-spring:scan base-package="org.hermez.member.mapper" />
     <context:component-scan base-package="org.hermez"/>
     <context:annotation-config/>
 

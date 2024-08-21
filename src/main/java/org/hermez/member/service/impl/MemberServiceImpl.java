@@ -1,11 +1,11 @@
 package org.hermez.member.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.hm.member.dto.MemberLoginRequest;
-import org.hm.member.dto.MemberRegisterRequest;
-import org.hm.member.model.Member;
-import org.hm.member.model.MemberRepository;
-import org.hm.member.service.MemberService;
+import org.hermez.member.dto.MemberLoginRequest;
+import org.hermez.member.dto.MemberRegisterRequest;
+import org.hermez.member.model.Member;
+import org.hermez.member.model.MemberRepository;
+import org.hermez.member.service.MemberService;
 import org.springframework.stereotype.Service;
 
 @Service

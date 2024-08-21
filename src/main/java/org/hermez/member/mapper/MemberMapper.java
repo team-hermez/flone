@@ -3,7 +3,7 @@ package org.hermez.member.mapper;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.hm.member.model.Member;
+import org.hermez.member.model.Member;
 
 @Mapper
 public interface MemberMapper {

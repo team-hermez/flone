@@ -1,0 +1,95 @@
+package org.hermez.reservation.service;
+
+import com.siot.IamportRestClient.IamportClient;
+import com.siot.IamportRestClient.exception.IamportResponseException;
+import com.siot.IamportRestClient.request.CancelData;
+import com.siot.IamportRestClient.response.IamportResponse;
+import com.siot.IamportRestClient.response.Payment;
+import java.io.IOException;
+import lombok.extern.slf4j.Slf4j;
+import org.hermez.paymenthistory.dto.CancelDTO;
+import org.hermez.reservation.model.Reservation;
+import org.hermez.reservation.model.ReservationRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+
+/**
+ * 결제 API( 아임포트 ) 사용과 관련된 클래스입니다.
+ * 이 클래스는 결제 API( 아임포트 ) 를 사용하여 결제와 취소 기능을 제공합니다.
+ *
+ * @author 허상범
+ */
+@Slf4j
+@PropertySource("classpath:apikey.properties")
+public class IamportService {
+
+  @Value("${IAM_PORT_APIKEY}")
+  private String IAM_PORT_APIKEY;
+
+  @Value("${IAM_PORT_APISECRET}")
+  private String IAM_PORT_APISECRET;
+
+  private final IamportClient iamportClient = new IamportClient(IAM_PORT_APIKEY,IAM_PORT_APISECRET);
+
+  public IamportClient getIamportClient() {return iamportClient;}
+
+  /**
+   * 결제 API( 아임포트 ) 서버에 요청한 응답입니다.
+   *
+   * @param payResponse 결제 API( 아임포트 ) 서버에 요청한 응답
+   * @param amount 클라이언트가 보낸 강의 가격
+   * @param courseId 클라이언트가 예약한 강의 키값
+   * @throws IllegalArgumentException 클라이언트가 요청한 강의 가격이 결제 API( 아임포트 ) 서버와 hermez 서버에 저장된 가격과 다를 경우 발생
+   */
+  public void verifyPayment(IamportResponse<Payment> payResponse, int amount, int courseId) {
+    log.info("[결제 검증 시작] 강의 금액 = {}, 강의 키값 ={}",amount ,courseId);
+    int iamportAmount = payResponse.getResponse().getAmount().intValue();
+    //결제금액과 아임포트 서버 금액 대조
+    if (iamportAmount != amount) {
+      log.info("[아임포트 서버(실결제 금액)과 강의 가격이 다릅니다] 아임포트 서버 금액 = {} , 클라이언트가 보낸 강의 가격 = {} ",iamportAmount ,amount);
+      throw new IllegalStateException("클라이언트가 보낸 강의 가격이 아임포트 서버 결제 금액과 다릅니다.");
+    }
+    // Double payAmount = reservationRepository.findPayAmount(courseId);//강의에서 가져와야함
+    Integer payAmount = 100;
+    //db에서 강의 가격과 결제금액 같은지 확인
+    if (amount != payAmount) {
+      log.info("[결제시 hermez 서버에 저장된 금액과 클라이언트가 보낸 강의 가격이 다릅니다] hermez 서버 금액 = {} , 클라이언트가 보낸 강의 가격 = {}",payAmount,amount);
+      throw new IllegalStateException("결제시 hermez 서버에 저장된 금액과 클라이언트가 보낸 강의 가격이 다릅니다.");
+    }
+  }
+
+  /**
+   *
+   *
+   * @param cancelDTO 취소/환불 요청시 요청 데이터
+   * @param findReservation 고객의 환불 요청한 예약 정보
+   * @return 결제 API( 아임포트 ) 서버 응답
+   * @throws IamportResponseException 결제 API( 아임포트 ) 서버 응답시 발생
+   * @throws IOException
+   */
+  public IamportResponse<Payment> cancelMethod(CancelDTO cancelDTO, Reservation findReservation) throws IamportResponseException, IOException {
+    IamportResponse<Payment> cancelResponse = null;
+    if(findReservation == null){
+      cancelResponse = iamportClient.paymentByImpUid(cancelDTO.getImp_uid());
+    }else {
+      cancelResponse = iamportClient.paymentByImpUid(findReservation.getImp_uid());
+    }
+    return cancelResponse;
+  }
+
+  public CancelData getCancelData(CancelDTO cancelDTO , Reservation findReservation)
+      throws IamportResponseException, IOException {
+    IamportResponse<Payment> cancelResponse = cancelMethod(cancelDTO, findReservation);
+    CancelData cancelData = null;
+    if(cancelDTO.getImp_uid()!=null){
+      cancelData = new CancelData(cancelResponse.getResponse().getImpUid(),true);
+    }else {
+      cancelData = new CancelData(cancelDTO.getMerchant_uid(),false);
+    }
+    cancelData.setReason(cancelDTO.getReason());
+    cancelData.setRefund_holder(cancelDTO.getRefundHolder());
+    return cancelData;
+  }
+}

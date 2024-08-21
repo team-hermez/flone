@@ -1,11 +1,11 @@
 package org.hermez.member.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.hm.member.dto.MemberLoginRequest;
-import org.hm.member.dto.MemberRegisterRequest;
-import org.hm.member.dto.MyAccountResponse;
-import org.hm.member.model.Member;
-import org.hm.member.service.MemberService;
+import org.hermez.member.dto.MemberLoginRequest;
+import org.hermez.member.dto.MemberRegisterRequest;
+import org.hermez.member.dto.MyAccountResponse;
+import org.hermez.member.model.Member;
+import org.hermez.member.service.MemberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

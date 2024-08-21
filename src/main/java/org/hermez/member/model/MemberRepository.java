@@ -1,7 +1,7 @@
 package org.hermez.member.model;
 
 import lombok.RequiredArgsConstructor;
-import org.hm.member.mapper.MemberMapper;
+import org.hermez.member.mapper.MemberMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository

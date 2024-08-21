@@ -28,18 +28,18 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @GetMapping("/login.hm")
+    @GetMapping("login.hm")
     public String getMemberLoginPage(Model model) {
         return "flone/login";
     }
 
-    @GetMapping("/register.hm")
+    @GetMapping("register.hm")
     public String getMemberRegisterPage(@ModelAttribute("member") Member member, Model model) {
         model.addAttribute("member",member);
         return "flone/register";
     }
 
-    @PostMapping("/login.hm")
+    @PostMapping("login.hm")
     public String postLogin(@Validated @ModelAttribute("member") MemberLoginRequest memberLoginRequest, HttpSession session) {
 
         Member member = memberService.loginMember(memberLoginRequest);
@@ -50,13 +50,13 @@ public class MemberController {
         System.out.println("postLogin member = " + member);
         return "redirect:/main.hm";
     }
-    @PostMapping("/logout.hm")
+    @PostMapping("logout.hm")
     public String postLogout(HttpSession session) {
         session.invalidate();
         return "redirect:/index";
     }
 
-    @GetMapping("/my-account.hm")
+    @GetMapping("my-account.hm")
     public String getMyAccountPage(HttpSession session, Model model) {
         MyAccountResponse myAccount = new MyAccountResponse(
                 "example@example.com",
@@ -69,7 +69,7 @@ public class MemberController {
         return "flone/my-account";
     }
 
-    @PostMapping("/register.hm")
+    @PostMapping("register.hm")
         public String postMemberRegister(@Validated @ModelAttribute("member") MemberRegisterRequest memberRegisterRequest, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()){
             log.info("bindingResult = {}",bindingResult);

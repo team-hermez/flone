@@ -4,10 +4,7 @@ import org.hermez.classroom.classroom.dto.ClassroomRegisterRequest;
 import org.hermez.classroom.classroom.service.ClassroomService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
@@ -73,27 +70,12 @@ public class ClassroomController {
     /**
      * 강의룸을 등록하고, 강의룸 목록 페이지로 리다이렉트하는 메서드입니다.
      *
-     * @param classroomName 강의룸 이름
-     * @param description 강의룸 설명
-     * @param courseId 강의의 고유 ID
-     * @param imageFile 강의룸 이미지 파일
      * @return 강의룸 목록 페이지로 리다이렉트
      */
     @PostMapping("classroom-register.hm")
-    public String registerClassroom(
-            @RequestParam("classroomName") String classroomName,
-            @RequestParam("description") String description,
-            @RequestParam("courseId") int courseId,
-            @RequestParam("imageFile") MultipartFile imageFile) {
-
-        ClassroomRegisterRequest request = new ClassroomRegisterRequest();
-        request.setClassroomName(classroomName);
-        request.setDescription(description);
-        request.setCourseId(courseId);
-        request.setImageFile(imageFile);
-
+    public String registerClassroom(@ModelAttribute ClassroomRegisterRequest request) {
         classroomService.registerClassroom(request);
-        return "redirect:classroom-list.hm?courseId=" + courseId;
+        return "redirect:classroom-list.hm?courseId=" + request.getCourseId();
     }
 
     /**

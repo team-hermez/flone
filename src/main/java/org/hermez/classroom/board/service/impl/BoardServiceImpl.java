@@ -1,13 +1,13 @@
 package org.hermez.classroom.board.service.impl;
 
 import org.hermez.classroom.board.dto.BoardEditRequest;
+import org.hermez.classroom.board.dto.BoardListResponse;
 import org.hermez.classroom.board.dto.BoardRegisterRequest;
 import org.hermez.classroom.board.mapper.BoardMapper;
 import org.hermez.classroom.board.model.Board;
 import org.hermez.classroom.board.service.BoardService;
+import org.hermez.classroom.classroom.mapper.ClassroomMapper;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * 게시판 서비스 구현체입니다.
@@ -18,14 +18,17 @@ import java.util.List;
 public class BoardServiceImpl implements BoardService {
 
     private final BoardMapper boardMapper;
+    private final ClassroomMapper classroomMapper;
 
     /**
      * 생성자
      *
      * @param boardMapper 게시판 매퍼
+     * @param classroomMapper 클래스룸 매퍼
      */
-    public BoardServiceImpl(BoardMapper boardMapper) {
+    public BoardServiceImpl(BoardMapper boardMapper, ClassroomMapper classroomMapper) {
         this.boardMapper = boardMapper;
+        this.classroomMapper = classroomMapper;
     }
 
     /**
@@ -35,8 +38,12 @@ public class BoardServiceImpl implements BoardService {
      * @return 게시판 목록
      */
     @Override
-    public List<Board> getBoardsByClassroomId(int classroomId) {
-        return boardMapper.selectBoardsByClassroomId(classroomId);
+    public BoardListResponse getBoardsByClassroomId(int classroomId) {
+        BoardListResponse boardListResponse = new BoardListResponse();
+        boardListResponse.setClassroomId(classroomId);
+        boardListResponse.setBoards(boardMapper.selectBoardsByClassroomId(classroomId));
+        boardListResponse.setVideoLink(classroomMapper.selectVideoLinkByClassroomId(classroomId));
+        return boardListResponse;
     }
 
     /**

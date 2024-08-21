@@ -1,6 +1,7 @@
 package org.hermez.classroom.board.controller;
 
 import org.hermez.classroom.board.dto.BoardEditRequest;
+import org.hermez.classroom.board.dto.BoardListResponse;
 import org.hermez.classroom.board.dto.BoardRegisterRequest;
 import org.hermez.classroom.board.model.Board;
 import org.hermez.classroom.board.service.BoardService;
@@ -47,8 +48,8 @@ public class BoardController {
      */
     @GetMapping("board-list.hm")
     public String getClassroomBoardList(@RequestParam("classroomId") int classroomId, Model model) {
-        List<Board> boards = boardService.getBoardsByClassroomId(classroomId);
-        model.addAttribute("boards", boards);
+        BoardListResponse boardListResponse = boardService.getBoardsByClassroomId(classroomId);
+        model.addAttribute("boardListResponse", boardListResponse);
         model.addAttribute("classroomId", classroomId);
         return "flone/board-list";
     }

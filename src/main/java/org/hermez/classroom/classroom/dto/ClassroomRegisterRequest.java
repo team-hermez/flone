@@ -17,13 +17,16 @@ public class ClassroomRegisterRequest {
     private String classroomName;
     private String description;
     private MultipartFile imageFile;
+    private String videoLink;
 
     public ClassroomRegisterRequest() {}
 
-    public ClassroomRegisterRequest(int courseId, String classroomName, String description, MultipartFile imageFile) {
+    public ClassroomRegisterRequest(int classroomId, int courseId, String classroomName, String description, MultipartFile imageFile, String videoLink) {
+        this.classroomId = classroomId;
         this.courseId = courseId;
         this.classroomName = classroomName;
         this.description = description;
-        this.imageFile = this.imageFile;
+        this.imageFile = imageFile;
+        this.videoLink = videoLink;
     }
 }

@@ -7,6 +7,7 @@ import org.hermez.classroom.classroom.service.ClassroomService;
 import org.hermez.image.dto.RegisterImageRequest;
 import org.hermez.image.service.ImageService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -56,6 +57,7 @@ public class ClassroomServiceImpl implements ClassroomService {
     /**
      * {@inheritDoc}
      */
+    @Transactional
     @Override
     public void registerClassroom(ClassroomRegisterRequest classroomRegisterRequest) {
         classroomMapper.insertClassroom(classroomRegisterRequest);

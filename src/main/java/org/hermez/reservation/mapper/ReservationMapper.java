@@ -1,10 +1,12 @@
 package org.hermez.reservation.mapper;
 
+import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.hermez.reservation.dto.ReservationListResponse;
 import org.hermez.reservation.model.Reservation;
 
 /**
@@ -63,4 +65,7 @@ public interface ReservationMapper {
    */
   @Update("update reservation set reservation_status_id= 2 where merchant_uid = #{merchantUid}")
   void updateReservationStatus(String merchantUid);
+
+  @Select("select reservation_status_id as reservationStatusId, merchant_uid as merchantUid,payment_amount as paymentAmount ,payment_history.created_at as createdAt,cancel_at as cancelAt,title,start_date as startDate,end_date as endDate from reservation join payment_history using (payment_history_id) join course using (course_id) where member_id=#{memberId} order by reservation_id desc")
+  List<ReservationListResponse> reservationList(int memberId);
 }

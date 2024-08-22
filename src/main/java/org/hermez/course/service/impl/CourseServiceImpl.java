@@ -2,10 +2,12 @@ package org.hermez.course.service.impl;
 
 import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.course.dto.CourseListResponse;
+import org.hermez.course.dto.CourseRegisterRequest;
 import org.hermez.course.mapper.CourseMapper;
 import org.hermez.course.model.CourseTime;
 import org.hermez.course.service.CourseService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -39,7 +41,7 @@ public class CourseServiceImpl implements CourseService {
 
     /**
      * 강의 상세 페이지를 조회합니다.
-     * @param courseId
+     * @param courseId course의 pk값
      * @return 상세 페이지
      */
     @Override
@@ -49,11 +51,28 @@ public class CourseServiceImpl implements CourseService {
 
     /**
      * 상세 페이지의 시간 정보를 조회합니다
-     * @param courseId
+     * @param courseId course의 pk값
      * @return 상세 페이지 시간 List
      */
     @Override
     public List<CourseTime> courseDetailTime(int courseId) {
         return courseMapper.courseDetailTime(courseId);
+    }
+
+    /**
+     * 신규 강의를 등록합니다.
+     * @param courseRegisterRequest 강의의 상세 정보
+     * @param courseTime 강의 시간
+     */
+    @Transactional
+    @Override
+    public void insertCourse(CourseRegisterRequest courseRegisterRequest, CourseTime courseTime) {
+        courseMapper.insertCourse(courseRegisterRequest);
+        int courseId = courseRegisterRequest.getCourseId();
+        List<CourseTime> courseTimes = courseRegisterRequest.getCourseTimes();
+        for (CourseTime item : courseTimes) {
+            item.setCourseId(courseId);
+            courseMapper.insertCourseSchedule(item);
+        }
     }
 }

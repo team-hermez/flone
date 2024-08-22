@@ -1,5 +1,8 @@
 package org.hermez.reservation.model;
 
+import java.util.List;
+import org.hermez.reservation.dto.ReservationListResponse;
+
 /**
  * hermez서버로 예약 정보를 입력하고 가져오기 위한 클래스입니다.
  *
@@ -40,4 +43,6 @@ public interface ReservationRepository {
   Double findPayAmount(String merchantUid);
 
   void updateReservationStatus(String merchantUid);
+
+  List<ReservationListResponse> reservationList(int memberId);
 }

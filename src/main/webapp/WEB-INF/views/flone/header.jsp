@@ -85,6 +85,7 @@
                                     <ul class="submenu">
                                         <li><a href="/flone/member/my-account.hm">내 정보</a></li>
                                         <li><a href="/flone/reservation-list.hm">예약 및 결제</a></li>
+
                                     </ul>
                                 </li>
                                 <li><a href="about.html"> About </a></li>

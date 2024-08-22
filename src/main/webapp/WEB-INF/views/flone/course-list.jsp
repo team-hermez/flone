@@ -32,7 +32,7 @@
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="blog-wrap-2 mb-30">
                             <div class="blog-img-2">
-                                <a href="/course-detail.hm?courseId=${course.courseId}"><img src="/assets/img/blog/blog-9.jpg" alt=""></a>
+                                <a href="/flone/course/detail.hm?courseId=${course.courseId}"><img src="/assets/img/blog/blog-9.jpg" alt=""></a>
                             </div>
                             <div class="blog-content-2">
                                 <div class="blog-meta-2">
@@ -41,7 +41,7 @@
                                         <li><a href="#">${course.instructorName}<i class="fa fa-comments-o"></i></a></li>
                                     </ul>
                                 </div>
-                                <h4><a href="/course-detail.hm?courseId=${course.courseId}">${course.title}</a></h4>
+                                <h4><a href="/flone/course/detail.hm?courseId=${course.courseId}">${course.title}</a></h4>
                                 <p> ${course.description}</p>
                                 <div class="blog-share-comment">
                                     <div class="blog-btn-2">

@@ -1,11 +1,14 @@
 package org.hermez.course.controller;
 
+import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.course.dto.CourseListResponse;
+import org.hermez.course.model.CourseTime;
 import org.hermez.course.service.CourseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -24,7 +27,6 @@ public class CourseController {
      *
      * @param courseService
      */
-
     public CourseController(CourseService courseService) {
         this.courseService = courseService;
     }
@@ -41,4 +43,23 @@ public class CourseController {
         model.addAttribute("courses", courseList);
         return "flone/course-list";
     }
+
+    /**
+     * 강의 상세 페이지 목록을 조회합니다.
+     *
+     * @param model 모델 객체
+     * @param courseId  course의 pk
+     * @return 상세 페이지 뷰 이름
+     */
+    @GetMapping(value = "detail.hm")
+    public String getCourseDetailPage(Model model, @RequestParam int courseId) {
+        CourseDetailResponse courseDetailList = courseService.courseDetailService(courseId);
+        List<CourseTime> courseTimeList = courseService.courseDetailTime(courseId);
+
+        model.addAttribute("courseDetail", courseDetailList);
+        model.addAttribute("courseTime", courseTimeList);
+
+        return "flone/course-detail";
+    }
+
 }

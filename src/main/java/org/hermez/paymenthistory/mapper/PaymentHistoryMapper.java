@@ -25,7 +25,7 @@ public interface PaymentHistoryMapper {
    *
    * @param merchantUid hermez서버에서 발급한 주문번호
    */
-  @Update("update payment_history set cancel_at = now() where payment_history_id = (select payment_history_id from reservation where reservation.merchant_uid=#{})")
+  @Update("update payment_history set cancel_at = now() where payment_history_id = (select payment_history_id from reservation where reservation.merchant_uid=#{merchantUid})")
   void updateCancelAt(String merchantUid);
 
   /**

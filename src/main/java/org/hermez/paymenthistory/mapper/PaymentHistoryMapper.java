@@ -2,6 +2,7 @@ package org.hermez.paymenthistory.mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.hermez.paymenthistory.model.PaymentHistory;
 
@@ -27,4 +28,11 @@ public interface PaymentHistoryMapper {
   @Update("update payment_history set cancel_at = now() where payment_history_id = (select payment_history_id from reservation where reservation.merchant_uid=#{})")
   void updateCancelAt(String merchantUid);
 
+  /**
+   * 가장 최근 결제 기록에 대한 키값을 가져옵니다.
+   *
+   * @return 가장 최근 결제 기록 키값
+   */
+  @Select("select payment_history_id from payment_history order by payment_history_id desc limit 1")
+  int findOne();
 }

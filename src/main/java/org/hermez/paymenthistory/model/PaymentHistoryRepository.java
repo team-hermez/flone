@@ -19,4 +19,10 @@ public interface PaymentHistoryRepository {
    */
   void updateCancelAt(String merchantUid);
 
+  /**
+   * 최근 결제 기록에 대한 키값을 가져옵니다.
+   *
+   * @return 가장 최근 결제 기록 키값
+   */
+  int findOne();
 }

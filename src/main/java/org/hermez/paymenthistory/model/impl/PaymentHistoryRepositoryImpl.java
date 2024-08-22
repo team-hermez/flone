@@ -27,4 +27,9 @@ public class PaymentHistoryRepositoryImpl implements PaymentHistoryRepository {
   public void updateCancelAt(String merchantUid) {
     paymentHistoryMapper.updateCancelAt(merchantUid);
   }
+
+  @Override
+  public int findOne() {
+    return paymentHistoryMapper.findOne();
+  }
 }

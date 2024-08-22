@@ -23,18 +23,19 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
         <property name="configLocation" value="classpath:/mybatis-config.xml"/>
-    </bean>
+</bean>
 
-    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
-        <constructor-arg ref="hikariConfig"/>
-    </bean>
-    <mybatis-spring:scan base-package="org.hermez.member.mapper" />
-    <mybatis-spring:scan base-package="org.hermez.reservation.mapper" />
-    <mybatis-spring:scan base-package="org.hermez.paymenthistory.mapper" />
+<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+<constructor-arg ref="hikariConfig"/>
+</bean>
+<mybatis-spring:scan base-package="org.hermez.member.mapper" />
+<mybatis-spring:scan base-package="org.hermez.reservation.mapper" />
+<mybatis-spring:scan base-package="org.hermez.paymenthistory.mapper" />
     <mybatis-spring:scan base-package="org.hermez.classroom.classroom.mapper" />
     <mybatis-spring:scan base-package="org.hermez.classroom.board.mapper" />
     <mybatis-spring:scan base-package="org.hermez.classroom.reply.mapper" />
     <mybatis-spring:scan base-package="org.hermez.image.mapper" />
+    <mybatis-spring:scan base-package="org.hermez.course.mapper"/>
 
     <context:component-scan base-package="org.hermez"/>
     <context:annotation-config/>

@@ -39,6 +39,6 @@ public class CourseController {
     public String getCourseList(Model model) {
         List<CourseListResponse> courseList = courseService.courseListService();
         model.addAttribute("courses", courseList);
-        return "flone/list";
+        return "flone/course-list";
     }
 }

@@ -50,10 +50,11 @@ public class ReservationServiceImpl implements ReservationService {
   @Transactional
   @Override
   public void cancel(Reservation reservation) {
-    log.info("취소 시작");
+    log.info("cancel start");
+    log.info("resrvation.getMerchantUid = {}", reservation.getMerchantUid());
     String merchantUid = reservation.getMerchantUid();
     reservationRepository.updateReservationStatus(merchantUid);
     paymentHistoryRepository.updateCancelAt(merchantUid);
-    log.info("취소 끝");
+    log.info("cancel end");
   }
 }

@@ -82,9 +82,6 @@ public class ReservationController {
   @GetMapping("/list.hm")
   public String getReservationListForm(Model model) {
     List<ReservationListResponse> reservationList = reservationRepository.reservationList(1);
-    for (ReservationListResponse reservationListResponse : reservationList) {
-      System.out.println("reservationListResponse = " + reservationListResponse);
-    }
     model.addAttribute("reservationList", reservationList);
     return "/flone/reservation-list";
   }
@@ -94,7 +91,7 @@ public class ReservationController {
   @PostMapping("/verify-iamport")
   public  IamportResponse<Payment> postVerifyPayment(@RequestBody VerificationRequest verificationRequest)
       throws IamportResponseException, IOException {
-    Integer myCourseOne = reservationRepository.findMyCourseOne(1, 4);
+    Integer myCourseOne = reservationRepository.findMyCourseOne(1, 3);
     if (myCourseOne != null) {
       throw new IllegalStateException("이미 수강 중인 강의입니다.");
     }
@@ -103,19 +100,23 @@ public class ReservationController {
     int amount = Integer.parseInt(verificationRequest.getAmount());// 실제 유저가 결제한 금액
     String merchantUid = verificationRequest.getMerchant_uid(); //내가 만든 주문번호
     IamportResponse<Payment> iamportResponse   = iamportService.getIamportClient().paymentByImpUid(impUid);
-    iamportService.verifyPayment(iamportResponse, amount, 1);
+    iamportService.verifyPayment(iamportResponse, amount, 3);
     log.info("reservation validation start end");
-    reservationService.save(1, 4, (double) amount, impUid, merchantUid);
+    reservationService.save(1, 3, (double) amount, impUid, merchantUid);
     log.info("reservation success");
     return iamportResponse;
   }
 
+  @ResponseBody
   @PostMapping("/cancel-payment.hm")
   public IamportResponse<Payment> postCancelPayment(@RequestBody CancelDTO cancelDTO)
       throws IamportResponseException, IOException {
+    log.info("cancel payment start");
+    log.info("CancelDTO: {}", cancelDTO);
     Reservation findReservation = null;
-    if (cancelDTO.getImp_uid().isEmpty()) {
+    if (cancelDTO.getImp_uid()==null) {
       findReservation = reservationRepository.findById(cancelDTO.getMerchant_uid());
+      log.info("find reservation: {}", findReservation.getMerchantUid());
       reservationService.cancel(findReservation);
     }
     CancelData cancelData = iamportService.getCancelData(cancelDTO, findReservation);

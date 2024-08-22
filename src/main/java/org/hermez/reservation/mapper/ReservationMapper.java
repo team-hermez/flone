@@ -33,10 +33,7 @@ public interface ReservationMapper {
    * @param merchantUid hermez에서 생성한 주문번호
    * @return reservation 예약 정보
    */
-  @Select(
-      "select reservation_id ,member_id ,course_id,reservation_status_id ,payment_history_id, imp_uid,merchant_uid\n"
-          + " from reservation\n"
-          + " where merchant_uid=#{merchantUid}")
+  @Select("select reservation_id as reservationId,member_id as memberId,course_id as courseId,reservation_status_id as reservationStatusId,payment_history_id as paymentHistoryId, imp_uid as imp_uid, merchant_uid as merchantUid from reservation where merchant_uid=#{merchantUid}")
   Reservation findById(String merchantUid);
 
   /**
@@ -46,7 +43,7 @@ public interface ReservationMapper {
    * @param courseId 강의 키값
    * @return reservation_id 예약 정보 키값
    */
-  @Select("select reservation_id from reservation  where member_id=#{memberId} and course_id=#{courseId} and reservation.reservation_status_id = 1")
+  @Select("select reservation_id as reservationId from reservation  where member_id=#{memberId} and course_id=#{courseId} and reservation.reservation_status_id = 1")
   Integer findMyCourseOne(@Param("memberId") int memberId, @Param("courseId") int courseId);
 
   /**
@@ -55,7 +52,7 @@ public interface ReservationMapper {
    * @param merchantUid 취소/환불시 주문 조회할 hermez에서 생성한 주문번호
    * @return payment_amount hermez서버에 저장된 예약시 결제한 금액
    */
-  @Select("select payment_amount from reservation join payment_history using (payment_history_id) where merchant_uid=#{merchantUid}")
+  @Select("select payment_amount as paymentAmount from reservation join payment_history using (payment_history_id) where merchant_uid=#{merchantUid}")
   Double findPayAmount(String merchantUid);
 
   /**
@@ -68,4 +65,7 @@ public interface ReservationMapper {
 
   @Select("select reservation_status_id as reservationStatusId, merchant_uid as merchantUid,payment_amount as paymentAmount ,payment_history.created_at as createdAt,cancel_at as cancelAt,title,start_date as startDate,end_date as endDate from reservation join payment_history using (payment_history_id) join course using (course_id) where member_id=#{memberId} order by reservation_id desc")
   List<ReservationListResponse> reservationList(int memberId);
+
+  @Select("select imp_uid from reservation where merchant_uid=#{merchantUid}")
+  public String findImpUidByMerchantUid(String merchantUid);
 }

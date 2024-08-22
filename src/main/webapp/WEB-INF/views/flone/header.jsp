@@ -91,8 +91,8 @@
                                 <li><a href="about.html"> About </a></li>
                                 <li><a href="#">[강의 등록] <i class="fa fa-angle-down"></i></a>
                                     <ul class="submenu">
-                                        <li><a href="/flone/course-list.hm">내 강의</a></li>
-                                        <li><a href="/flone/course-register.hm">강의 등록</a></li>
+                                        <li><a href="/flone/course/list.hm">내 강의</a></li>
+                                        <li><a href="/flone/course/register.hm">강의 등록</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="contact.jsp"> [관리자]</a></li>

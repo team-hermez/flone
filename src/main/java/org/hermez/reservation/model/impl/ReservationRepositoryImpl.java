@@ -45,4 +45,12 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     return reservationMapper.findPayAmount(merchantUid);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void updateReservationStatus(String merchantUid) {
+    reservationMapper.updateReservationStatus(merchantUid);
+  }
+
 }

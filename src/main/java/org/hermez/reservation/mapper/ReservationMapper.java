@@ -4,10 +4,13 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.hermez.reservation.model.Reservation;
 
 /**
  * 예약 패키지의 마이티스 mapper 클래스입니다.
+ *
+ * @author 허상범
  */
 @Mapper
 public interface ReservationMapper {
@@ -47,10 +50,17 @@ public interface ReservationMapper {
   /**
    * hermez에서 생성한 주문번호로 예약한 강의의 예약할 때 결제한 금액을 hermez 서버에서 가져옵니다.
    *
-   * @param merchantUid hermez에서 생성한 주문번호
+   * @param merchantUid 취소/환불시 주문 조회할 hermez에서 생성한 주문번호
    * @return payment_amount hermez서버에 저장된 예약시 결제한 금액
    */
   @Select("select payment_amount from reservation join payment_history using (payment_history_id) where merchant_uid=#{merchantUid}")
   Double findPayAmount(String merchantUid);
 
+  /**
+   * 예약 상태를 취소로 변경합니다.
+   *
+   * @param merchantUid 취소/환불시 주문 조회할 hermez에서 생성한 주문번호
+   */
+  @Update("update reservation set reservation_status_id= 2 where merchant_uid = #{merchantUid}")
+  void updateReservationStatus(String merchantUid);
 }

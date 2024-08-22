@@ -29,6 +29,7 @@ public class ReservationServiceImpl implements ReservationService {
    * @param imp_uid     결제 API( 아임포트 ) 에서 생성한 주문번호
    * @param merchantUid hermez 서버에서 생성한 주문번호
    */
+  @Transactional
   @Override
   public void save(int memberId, int courseId, Double amount, String imp_uid, String merchantUid) {
     PaymentHistory paymentHistory = PaymentHistory.createPaymentHistory(amount);
@@ -39,9 +40,11 @@ public class ReservationServiceImpl implements ReservationService {
     reservationRepository.save(createdReservation);
   }
 
+  @Transactional
   @Override
   public void cancel(Reservation reservation) {
     String merchantUid = reservation.getMerchantUid();
+    reservationRepository.updateReservationStatus(merchantUid);
     paymentHistoryRepository.updateCancelAt(merchantUid);
   }
 }

@@ -59,8 +59,17 @@
                                             <a href="#"><i class="fa fa-pencil">예약취소</i></a>
                                         </c:if>
                                     </td>
-                                    <td><input type="checkbox" class="checkList"
-                                               th:value="${reservation.merchantUid}"></td>
+                                    <td>
+                                        <c:if test="${reservation.reservationStatusId eq 1}">
+                                            <input type="checkbox" class="checkList"
+                                                   value="${reservation.merchantUid}">
+                                        </c:if>
+                                        <c:if test="${reservation.reservationStatusId eq 2}">
+                                            <input type="checkbox" class="checkList"
+                                                   value="${reservation.merchantUid}" disabled>
+                                        </c:if>
+
+                                    </td>
                                 </tr>
                             </c:forEach>
 
@@ -81,13 +90,13 @@
                 </form>
                 <script>
                   const allSelectBtn = document.getElementById("selectAllBtn");
+                  const checkLists = document.querySelectorAll('.checkList');
+                  const printBtn = document.getElementById('printBtn');
                   allSelectBtn.addEventListener('click', () => {
                     checkLists.forEach((checkList) => {
                       checkList.checked = true;
                     })
                   });
-                  const checkLists = document.querySelectorAll('.checkList');
-                  const printBtn = document.getElementById('printBtn');
                   printBtn.addEventListener('click', () => {
                     checkLists.forEach((checkList) => {
                       if (checkList.checked) {
@@ -96,28 +105,27 @@
                           reason: "관리자 삭제",
                           refundHolder: 2
                         }
-                        console.log(checkList.value);
-                        // cancelPayments(selectData)
+                        cancelPayments(selectData)
                       }
                     })
                   })
 
-                  function cancelPayments() {
+                  function cancelPayments(rsp) {
                     let data = {
-                      merchant_uid: '[[${reservationDTO.merchantUid}]]'
+                      merchant_uid: rsp.merchant_uid
                     };
                     $.ajax({
                       type: 'POST',
-                      url: "cancelPayments",
+                      url: "cancel-payment.hm",
                       data: JSON.stringify(data),
                       contentType: 'application/json;charset=utf-8',
-                      success: (result) => {
+                      success: (res) => {
                         alert("결제금액 환불완료")
-                        location.href = '/cancelpage.hm';
+                        location.href = '/flone/reservation/cancel-payment.hm';
                         //결제취소 화면 이동
                       },
-                      error: (result) => {
-                        location.href = '/cancelpage.hm';
+                      error: (res) => {
+                        location.href = '/flone/reservation/cancel-payment.hm';
                         alert("환불 실패: " + result.responseText)
                       }
                     });

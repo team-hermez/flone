@@ -95,10 +95,9 @@ public class IamportService {
     if(cancelDTO.getImp_uid()!=null){
       cancelData = new CancelData(cancelResponse.getResponse().getImpUid(),true);
     }else {
+      log.info("merchantUid = {}",cancelDTO.getMerchant_uid());
       cancelData = new CancelData(cancelDTO.getMerchant_uid(),false);
     }
-    cancelData.setReason(cancelDTO.getReason());
-    cancelData.setRefund_holder(cancelDTO.getRefundHolder());
     return cancelData;
   }
 

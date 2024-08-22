@@ -63,4 +63,9 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     return reservationMapper.reservationList(memberId);
   }
 
+  @Override
+  public String findImpUidByMerchantUid(String merchantUid) {
+    return reservationMapper.findImpUidByMerchantUid(merchantUid);
+  }
+
 }

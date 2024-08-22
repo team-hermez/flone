@@ -30,6 +30,7 @@
     </bean>
     <mybatis-spring:scan base-package="org.hermez.member.mapper" />
     <mybatis-spring:scan base-package="org.hermez.reservation.mapper" />
+    <mybatis-spring:scan base-package="org.hermez.paymenthistory.mapper" />
     <mybatis-spring:scan base-package="org.hermez.classroom.classroom.mapper" />
     <mybatis-spring:scan base-package="org.hermez.classroom.board.mapper" />
     <mybatis-spring:scan base-package="org.hermez.classroom.reply.mapper" />

@@ -38,7 +38,7 @@
                                 <div class="blog-meta-2">
                                     <ul>
                                         <li> ${course.startDate}</li>
-                                        <li><a href="#">4 <i class="fa fa-comments-o"></i></a></li>
+                                        <li><a href="#">${course.instructorName}<i class="fa fa-comments-o"></i></a></li>
                                     </ul>
                                 </div>
                                 <h4><a href="/course-detail.hm?courseId=${course.courseId}">${course.title}</a></h4>

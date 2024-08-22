@@ -33,7 +33,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
    * {@inheritDoc}
    */
   @Override
-  public int findMyCourseOne(int memberId, int courseId) {
+  public Integer findMyCourseOne(int memberId, int courseId) {
     return reservationMapper.findMyCourseOne(memberId, courseId);
   }
 

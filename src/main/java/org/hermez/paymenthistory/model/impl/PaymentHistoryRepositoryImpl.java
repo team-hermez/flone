@@ -28,6 +28,9 @@ public class PaymentHistoryRepositoryImpl implements PaymentHistoryRepository {
     paymentHistoryMapper.updateCancelAt(merchantUid);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public int findOne() {
     return paymentHistoryMapper.findOne();

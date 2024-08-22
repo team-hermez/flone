@@ -1,32 +1,38 @@
 package org.hermez.member.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Member {
+    private int memberId;
+    private int roleId;
     private String email;
     private String password;
     private String password1;
     private String name;
-
     private String phone;
+    private LocalDateTime createdAt;
 
-    private int memberId;
-    private int role_Id;
-    private LocalDateTime createAt;
-
-    public Member(int role_Id, String email, String password, String name, String phone) {
-        this.role_Id = role_Id;
+    public Member(int roleId, String email, String password, String name, String phone, LocalDateTime createdAt) {
+        this.roleId = roleId;
         this.name = name;
         this.email = email;
         this.password = password;
         this.phone = phone;
+        this.createdAt = createdAt;
+    }
+    public Member(int memberId, int roleId, String email, String password, String name, String phone, LocalDateTime createdAt) {
+        this.memberId = memberId;
+        this.roleId = roleId;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.createdAt = createdAt;
     }
 
     public Member(String email, String password) {

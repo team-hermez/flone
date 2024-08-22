@@ -29,7 +29,7 @@ public interface ReservationRepository {
    * @param courseId 강의 키값
    * @return reservation_id 예약 정보 키값
    */
-  int findMyCourseOne(int memberId, int courseId);
+  Integer findMyCourseOne(int memberId, int courseId);
 
   /**
    * hermez에서 생성한 주문번호로 예약한 강의의 예약할 때 결제한 금액을 hermez 서버에서 가져옵니다.

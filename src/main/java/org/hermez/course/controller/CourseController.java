@@ -2,14 +2,14 @@ package org.hermez.course.controller;
 
 import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.course.dto.CourseListResponse;
+import org.hermez.course.dto.CourseRegisterRequest;
 import org.hermez.course.model.CourseTime;
 import org.hermez.course.service.CourseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -21,7 +21,8 @@ import java.util.List;
 @RequestMapping("flone/course")
 public class CourseController {
     private final CourseService courseService;
-
+    private CourseRegisterRequest courseRegisterRequest;
+    private CourseTime courseTime;
     /**
      * CourseController 생성자입니다.
      *
@@ -60,6 +61,32 @@ public class CourseController {
         model.addAttribute("courseTime", courseTimeList);
 
         return "flone/course-detail";
+    }
+
+    /**
+     * 강의 등록 페이지로 연결해주는 콘트롤러입니다.
+     * @param model 모델 객체
+     * @param request 세션
+     * @return 강의 등록 페이지 뷰 이름
+     */
+    @GetMapping(value = "register.hm")
+    public String getCourseRegisterPage(Model model, final HttpServletRequest request) {
+        String id = request.getSession().getId();
+        return "flone/course-register";
+    }
+
+    /**
+     * 새로운 강의를 등록합니다
+     * @param courseRegisterRequest 강의 등록 정보
+     * @param model 모델 객체
+     * @return 강의 리스트로 redirect
+     */
+    @PostMapping("regist.hm")
+    public String postCourseRegister(@ModelAttribute CourseRegisterRequest courseRegisterRequest, Model model) {
+        courseService.insertCourse(courseRegisterRequest,courseTime);
+        List<CourseListResponse> courseList = courseService.courseListService();
+        model.addAttribute("courses", courseList);
+        return "redirect:list.hm";
     }
 
 }

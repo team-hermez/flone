@@ -70,5 +70,5 @@ public interface ClassroomMapper {
      * @param classroomId 삭제할 클래스룸의 고유 키 값
      */
     @Delete("DELETE FROM classroom WHERE CLASSROOM_ID = #{classroomId}")
-    void deleteClassroomById(@Param("classroomId") int classroomId);
+    int deleteClassroomById(@Param("classroomId") int classroomId);
 }

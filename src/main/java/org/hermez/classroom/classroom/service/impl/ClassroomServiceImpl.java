@@ -2,9 +2,11 @@ package org.hermez.classroom.classroom.service.impl;
 
 import org.hermez.classroom.classroom.dto.ClassroomCardResponse;
 import org.hermez.classroom.classroom.dto.ClassroomRegisterRequest;
+import org.hermez.classroom.classroom.exception.ClassroomNotFoundException;
 import org.hermez.classroom.classroom.mapper.ClassroomMapper;
 import org.hermez.classroom.classroom.service.ClassroomService;
 import org.hermez.image.dto.RegisterImageRequest;
+import org.hermez.image.exception.ImageProcessingException;
 import org.hermez.image.service.ImageService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,11 +15,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 /**
  * {@inheritDoc}
- *
- * <p>이 클래스는 {@link ClassroomService}의 구현체로, 강의룸 관련 비즈니스 로직을 처리합니다.
- * 강의룸 목록 조회, 등록, 삭제 및 이미지 저장 기능을 제공합니다.</p>
  *
  * @author 김혁진
  */
@@ -45,6 +45,10 @@ public class ClassroomServiceImpl implements ClassroomService {
         int totalPages = total % 9 == 0 ? total / 9 : total / 9 + 1;
         List<ClassroomCardResponse> classrooms = classroomMapper.selectClassroomList(courseId, offset);
 
+        if (classrooms.isEmpty()) {
+            throw new ClassroomNotFoundException("해당 코스에 강의실이 존재하지 않습니다.");
+        }
+
         Map<String, Object> result = new HashMap<>();
         result.put("total", total);
         result.put("classrooms", classrooms);
@@ -66,10 +70,13 @@ public class ClassroomServiceImpl implements ClassroomService {
         registerImageRequest.setEntityId(classroomId);
         registerImageRequest.setMultipartFile(classroomRegisterRequest.getImageFile());
         registerImageRequest.setEntityType("classroom");
+
         try {
             imageService.saveImage(registerImageRequest);
         } catch (IOException e) {
-            throw new RuntimeException("Failed to save image", e);
+            throw new ImageProcessingException("이미지 저장에 실패했습니다.", e);
+        } catch (Exception e) {
+            throw new RuntimeException("강의실 등록 중 알 수 없는 오류가 발생했습니다.", e);
         }
     }
 
@@ -78,6 +85,9 @@ public class ClassroomServiceImpl implements ClassroomService {
      */
     @Override
     public void deleteClassroom(int classroomId) {
-        classroomMapper.deleteClassroomById(classroomId);
+        int deletedClassroom = classroomMapper.deleteClassroomById(classroomId);
+        if (deletedClassroom == 0) {
+            throw new ClassroomNotFoundException("삭제할 강의실이 존재하지 않습니다. ID: " + classroomId);
+        }
     }
 }

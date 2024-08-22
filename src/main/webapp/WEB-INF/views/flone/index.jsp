@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-6">
                         <div class="slider-single-img slider-animated-1">
-                            <img class="animated" src="assets/img/slider/single-slide-1.png" alt="">
+                            <img class="animated" src="/assets/img/slider/single-slide-1.png" alt="">
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-12 col-sm-6">
                         <div class="slider-single-img slider-animated-1">
-                            <img class="animated" src="assets/img/slider/single-slide-hm1-2.png" alt="">
+                            <img class="animated" src="/assets/img/slider/single-slide-hm1-2.png" alt="">
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="support-wrap mb-30 support-1">
                     <div class="support-icon">
-                        <img class="animated" src="assets/img/icon-img/support-1.png" alt="">
+                        <img class="animated" src="/assets/img/icon-img/support-1.png" alt="">
                     </div>
                     <div class="support-content">
                         <h5>Free Shipping</h5>
@@ -71,7 +71,7 @@
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="support-wrap mb-30 support-2">
                     <div class="support-icon">
-                        <img class="animated" src="assets/img/icon-img/support-2.png" alt="">
+                        <img class="animated" src="/assets/img/icon-img/support-2.png" alt="">
                     </div>
                     <div class="support-content">
                         <h5>Support 24/7</h5>
@@ -82,7 +82,7 @@
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="support-wrap mb-30 support-3">
                     <div class="support-icon">
-                        <img class="animated" src="assets/img/icon-img/support-3.png" alt="">
+                        <img class="animated" src="/assets/img/icon-img/support-3.png" alt="">
                     </div>
                     <div class="support-content">
                         <h5>Money Return</h5>
@@ -93,7 +93,7 @@
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="support-wrap mb-30 support-4">
                     <div class="support-icon">
-                        <img class="animated" src="assets/img/icon-img/support-4.png" alt="">
+                        <img class="animated" src="/assets/img/icon-img/support-4.png" alt="">
                     </div>
                     <div class="support-content">
                         <h5>Order Discount</h5>
@@ -127,8 +127,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-8.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-6.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-8.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-6.jpg" alt="">
                                 </a>
                                 <span class="pink">-10%</span>
                                 <div class="product-action">
@@ -163,8 +163,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-7.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-4-1.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-7.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-4-1.jpg" alt="">
                                 </a>
                                 <span class="purple">New</span>
                                 <div class="product-action">
@@ -198,8 +198,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-6.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-6-1.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-6.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-6-1.jpg" alt="">
                                 </a>
                                 <span class="pink">-10%</span>
                                 <div class="product-action">
@@ -234,8 +234,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-5.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-5-1.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-5.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-5-1.jpg" alt="">
                                 </a>
                                 <span class="purple">New</span>
                                 <div class="product-action">
@@ -269,8 +269,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-4.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-4-1.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-4.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-4-1.jpg" alt="">
                                 </a>
                                 <span class="pink">-10%</span>
                                 <div class="product-action">
@@ -305,8 +305,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-3.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-3-1.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-3.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-3-1.jpg" alt="">
                                 </a>
                                 <span class="purple">New</span>
                                 <div class="product-action">
@@ -340,8 +340,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-2.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-2-1.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-2.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-2-1.jpg" alt="">
                                 </a>
                                 <span class="pink">-10%</span>
                                 <div class="product-action">
@@ -376,8 +376,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-1.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-1-1.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-1.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-1-1.jpg" alt="">
                                 </a>
                                 <span class="purple">New</span>
                                 <div class="product-action">
@@ -415,8 +415,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-1.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-1-1.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-1.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-1-1.jpg" alt="">
                                 </a>
                                 <span class="pink">-10%</span>
                                 <div class="product-action">
@@ -451,8 +451,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-2.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-2-1.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-2.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-2-1.jpg" alt="">
                                 </a>
                                 <span class="purple">New</span>
                                 <div class="product-action">
@@ -486,8 +486,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-3.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-3-1.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-3.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-3-1.jpg" alt="">
                                 </a>
                                 <span class="pink">-10%</span>
                                 <div class="product-action">
@@ -522,8 +522,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-4.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-4-1.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-4.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-4-1.jpg" alt="">
                                 </a>
                                 <span class="purple">New</span>
                                 <div class="product-action">
@@ -557,8 +557,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-5.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-5-1.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-5.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-5-1.jpg" alt="">
                                 </a>
                                 <span class="pink">-10%</span>
                                 <div class="product-action">
@@ -593,8 +593,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-6.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-6-1.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-6.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-6-1.jpg" alt="">
                                 </a>
                                 <span class="purple">New</span>
                                 <div class="product-action">
@@ -628,8 +628,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-7.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-4-1.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-7.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-4-1.jpg" alt="">
                                 </a>
                                 <span class="pink">-10%</span>
                                 <div class="product-action">
@@ -664,8 +664,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-8.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-6.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-8.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-6.jpg" alt="">
                                 </a>
                                 <span class="purple">New</span>
                                 <div class="product-action">
@@ -703,8 +703,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-6.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-6-1.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-6.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-6-1.jpg" alt="">
                                 </a>
                                 <span class="pink">-10%</span>
                                 <div class="product-action">
@@ -739,8 +739,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-5.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-5-1.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-5.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-5-1.jpg" alt="">
                                 </a>
                                 <span class="purple">New</span>
                                 <div class="product-action">
@@ -774,8 +774,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-4.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-4-1.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-4.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-4-1.jpg" alt="">
                                 </a>
                                 <span class="pink">-10%</span>
                                 <div class="product-action">
@@ -810,8 +810,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-3.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-3-1.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-3.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-3-1.jpg" alt="">
                                 </a>
                                 <span class="purple">New</span>
                                 <div class="product-action">
@@ -845,8 +845,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-2.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-2-1.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-2.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-2-1.jpg" alt="">
                                 </a>
                                 <span class="pink">-10%</span>
                             </div>
@@ -870,8 +870,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-1.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-1-1.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-1.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-1-1.jpg" alt="">
                                 </a>
                                 <span class="purple">New</span>
                                 <div class="product-action">
@@ -905,8 +905,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-8.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-6.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-8.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-6.jpg" alt="">
                                 </a>
                                 <span class="pink">-10%</span>
                                 <div class="product-action">
@@ -941,8 +941,8 @@
                         <div class="product-wrap mb-25">
                             <div class="product-img">
                                 <a href="course-detail.jsp">
-                                    <img class="default-img" src="assets/img/product/pro-7.jpg" alt="">
-                                    <img class="hover-img" src="assets/img/product/pro-4-1.jpg" alt="">
+                                    <img class="default-img" src="/assets/img/product/pro-7.jpg" alt="">
+                                    <img class="hover-img" src="/assets/img/product/pro-4-1.jpg" alt="">
                                 </a>
                                 <span class="purple">New</span>
                                 <div class="product-action">
@@ -986,7 +986,7 @@
             <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="blog-wrap mb-30 scroll-zoom">
                     <div class="blog-img">
-                        <a href="blog-details.html"><img src="assets/img/blog/blog-1.jpg" alt=""></a>
+                        <a href="blog-details.html"><img src="/assets/img/blog/blog-1.jpg" alt=""></a>
                         <span class="purple">Lifestyle</span>
                     </div>
                     <div class="blog-content-wrap">
@@ -1000,7 +1000,7 @@
             <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="blog-wrap mb-30 scroll-zoom">
                     <div class="blog-img">
-                        <a href="blog-details.html"><img src="assets/img/blog/blog-2.jpg" alt=""></a>
+                        <a href="blog-details.html"><img src="/assets/img/blog/blog-2.jpg" alt=""></a>
                         <span class="pink">Lifestyle</span>
                     </div>
                     <div class="blog-content-wrap">
@@ -1014,7 +1014,7 @@
             <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="blog-wrap mb-30 scroll-zoom">
                     <div class="blog-img">
-                        <a href="blog-details.html"><img src="assets/img/blog/blog-3.jpg" alt=""></a>
+                        <a href="blog-details.html"><img src="/assets/img/blog/blog-3.jpg" alt=""></a>
                         <span class="purple">Lifestyle</span>
                     </div>
                     <div class="blog-content-wrap">

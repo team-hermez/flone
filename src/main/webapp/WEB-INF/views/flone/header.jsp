@@ -2,8 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!doctype html>
-<html class="no-js" lang="zxx">
 
+<html class="no-js" lang="zxx">
+<head>
+    <%@ include file="css.jsp"%>
+</head>
 <body>
 <header class="header-area header-in-container clearfix">
     <div class="header-top-area">
@@ -47,7 +50,7 @@
             <div class="row">
                 <div class="col-xl-2 col-lg-2 col-md-6 col-4">
                     <div class="logo">
-                        <a href="index.jsp">
+                        <a href="/flone/index.hm">
                             <img alt="" src="/assets/img/logo/logo.png">
                         </a>
                     </div>
@@ -58,16 +61,16 @@
                             <ul>
                                 <li><a href="/flone/index.hm">홈 <i class="fa fa-angle-down"></i></a>
                                 </li>
-                                <li><a href="/course-list.hm"> 강의 <i class="fa fa-angle-down"></i> </a>
+                                <li><a href="/flone/course/list.hm"> 강의 <i class="fa fa-angle-down"></i> </a>
                                     <ul class="mega-menu">
                                         <li>
                                             <ul>
-                                                <li class="mega-menu-title"><a href="/course-list.hm">카테고리</a></li>
-                                                <li><a href="/course-list.hm">국어</a></li>
-                                                <li><a href="/course-list.hm">영어</a></li>
-                                                <li><a href="/course-list.hm">수학</a></li>
-                                                <li><a href="/course-list.hm">과학</a></li>
-                                                <li><a href="/course-list.hm">사회</a></li>
+                                                <li class="mega-menu-title"><a href="/flone/course/list.hm">카테고리</a></li>
+                                                <li><a href="/flone/course/list.hm">국어</a></li>
+                                                <li><a href="/flone/course/list.hm">영어</a></li>
+                                                <li><a href="/flone/course/list.hm">수학</a></li>
+                                                <li><a href="/flone/course/list.hm">과학</a></li>
+                                                <li><a href="/flone/course/list.hm">사회</a></li>
                                             </ul>
                                         </li>
                                         <li>
@@ -78,17 +81,17 @@
                                     </ul>
                                 </li>
                                 <li><a href="contact.jsp">강사</a></li>
-                                <li><a href="/my-account.hm"> 마이페이지 <i class="fa fa-angle-down"></i></a>
+                                <li><a href="/flone/member/my-account.hm"> 마이페이지 <i class="fa fa-angle-down"></i></a>
                                     <ul class="submenu">
-                                        <li><a href="/my-account.hm">내 정보</a></li>
-                                        <li><a href="/reservation-list.hm">예약 및 결제</a></li>
+                                        <li><a href="/flone/member/my-account.hm">내 정보</a></li>
+                                        <li><a href="/flone/reservation-list.hm">예약 및 결제</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="about.html"> About </a></li>
                                 <li><a href="#">[강의 등록] <i class="fa fa-angle-down"></i></a>
                                     <ul class="submenu">
-                                        <li><a href="/course-list.hm">내 강의</a></li>
-                                        <li><a href="/course-register.hm">강의 등록</a></li>
+                                        <li><a href="/flone/course-list.hm">내 강의</a></li>
+                                        <li><a href="/flone/course-register.hm">강의 등록</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="contact.jsp"> [관리자]</a></li>

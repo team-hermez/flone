@@ -41,15 +41,15 @@ public class MemberController {
 
     @PostMapping("login.hm")
     public String postLogin(@Validated @ModelAttribute("member") MemberLoginRequest memberLoginRequest, HttpSession session) {
-
-        Member member = memberService.loginMember(memberLoginRequest);
         //TODO 로그인한 사람이 강사면 강사세션으로 로그인 되도록 Filter 만들기
+        System.out.println("postLogin member start.");
+        memberService.loginMember(memberLoginRequest);
+        Member member1 = (Member) session.getAttribute("MEMBER");
+        System.out.println("postLogin member1 session = " + member1.getName());
 
-        session.setAttribute("member", member);
-
-        System.out.println("postLogin member = " + member);
-        return "redirect:/main.hm";
+        return "redirect:/flone/index.hm";
     }
+
     @PostMapping("logout.hm")
     public String postLogout(HttpSession session) {
         session.invalidate();
@@ -72,7 +72,6 @@ public class MemberController {
     @PostMapping("register.hm")
         public String postMemberRegister(@Validated @ModelAttribute("member") MemberRegisterRequest memberRegisterRequest, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()){
-            log.info("bindingResult = {}",bindingResult);
             bindingResult.reject("member", "member");
             return "flone/register";
         } else if(!memberRegisterRequest.getPassword().equals((memberRegisterRequest.getPassword1()))){

@@ -1,7 +1,9 @@
 package org.hermez.course.service.impl;
 
+import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.course.dto.CourseListResponse;
 import org.hermez.course.mapper.CourseMapper;
+import org.hermez.course.model.CourseTime;
 import org.hermez.course.service.CourseService;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +35,25 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<CourseListResponse> courseListService() {
         return courseMapper.courseAllList();
+    }
+
+    /**
+     * 강의 상세 페이지를 조회합니다.
+     * @param courseId
+     * @return 상세 페이지
+     */
+    @Override
+    public CourseDetailResponse courseDetailService(int courseId) {
+        return courseMapper.courseDetailResponse(courseId);
+    }
+
+    /**
+     * 상세 페이지의 시간 정보를 조회합니다
+     * @param courseId
+     * @return 상세 페이지 시간 List
+     */
+    @Override
+    public List<CourseTime> courseDetailTime(int courseId) {
+        return courseMapper.courseDetailTime(courseId);
     }
 }

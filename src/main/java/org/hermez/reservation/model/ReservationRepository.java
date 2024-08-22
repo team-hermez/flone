@@ -2,6 +2,8 @@ package org.hermez.reservation.model;
 
 /**
  * hermez서버로 예약 정보를 입력하고 가져오기 위한 클래스입니다.
+ *
+ * @author 허상범
  */
 public interface ReservationRepository {
 
@@ -37,4 +39,5 @@ public interface ReservationRepository {
    */
   Double findPayAmount(String merchantUid);
 
+  void updateReservationStatus(String merchantUid);
 }

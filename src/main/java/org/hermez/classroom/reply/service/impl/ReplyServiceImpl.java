@@ -34,9 +34,6 @@ public class ReplyServiceImpl implements ReplyService {
     @Override
     public List<Reply> getRepliesByBoardId(int boardId) {
         List<Reply> replies = replyMapper.selectRepliesByBoardId(boardId);
-        if (replies == null || replies.isEmpty()) {
-            throw new ReplyNotFoundException("해당 게시판에 댓글이 존재하지 않습니다. Board ID: " + boardId);
-        }
         return replies;
     }
 

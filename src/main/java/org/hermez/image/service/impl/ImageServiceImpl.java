@@ -2,6 +2,7 @@ package org.hermez.image.service.impl;
 
 import org.hermez.image.dto.RegisterImageRequest;
 import org.hermez.image.mapper.ImageMapper;
+import org.hermez.image.model.Image;
 import org.hermez.image.service.ImageService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -47,8 +48,12 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public void saveImage(RegisterImageRequest registerImageRequest) throws IOException {
         MultipartFile file = registerImageRequest.getMultipartFile();
-
         if (file.isEmpty()) {
+            Image image = new Image(
+                    registerImageRequest.getEntityId(),
+                    registerImageRequest.getEntityType()
+            );
+            imageMapper.insertImage(image);
             return;
         }
 
@@ -63,7 +68,7 @@ public class ImageServiceImpl implements ImageService {
         String saveName = System.currentTimeMillis() + "_" + encodedOriginalName;
 
         String targetDir = new File(servletContext.getRealPath("/")).getParentFile().getParent()
-                + File.separator + "src" + File.separator + "main" + File.separator + "webapp"
+                + File.separator + "src" + File.separator + "main" + File.separator + "webapp" + File.separator + "resources"
                 + File.separator + "images";
         File directory = new File(targetDir);
         if (!directory.exists()) {
@@ -74,13 +79,15 @@ public class ImageServiceImpl implements ImageService {
         File destinationFile = new File(filePath);
         file.transferTo(destinationFile);
 
-        imageMapper.insertImage(
+        Image image = new Image(
                 registerImageRequest.getEntityId(),
                 registerImageRequest.getEntityType(),
                 originalName,
                 saveName,
                 filePath
         );
+        imageMapper.insertImage(image);
+
     }
 
     /**

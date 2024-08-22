@@ -52,7 +52,7 @@ public class ReplyController {
     @PostMapping("reply-register.hm")
     public String postRegisterReply(@ModelAttribute ReplyRegisterRequest replyRequest) {
         replyService.registerReply(replyRequest);
-        return "redirect:../board/board-detail.hm?boardId=" + replyRequest.getBoardId();
+        return "redirect:/flone/board/board-detail.hm?boardId=" + replyRequest.getBoardId() + "&classroomId=" + replyRequest.getClassroomId();
     }
 
     /**

@@ -35,8 +35,8 @@
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="blog-wrap-2 mb-30">
                                 <div class="blog-img-2">
-                                    <img src="../../../images/${classroom.classroomImage}" width="300px" height="300px"
-                                         onerror="this.onerror=null; this.src='../../../images/image.png';">
+                                    <img src="../../../../images/${classroom.classroomImage}" width="300px" height="300px"
+                                         onerror="this.onerror=null; this.src='../../../../images/image.png';">
                                 </div>
                                 <div class="blog-content-2">
                                     <div class="blog-meta-2">

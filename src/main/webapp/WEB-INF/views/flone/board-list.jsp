@@ -27,8 +27,15 @@
         <div class="section-title text-center mb-sm-5">
             <h2>강의 룸</h2>
         </div>
-        <div class="section-title text-center mb-sm-5">
-            <h2>${boardListResponse.videoLink}</h2>
+        <div class="container my-5">
+            <div class="card mx-auto align-content-center" style="max-width: 720px;">
+                <div class="card-body text-center">
+                    <h5 class="card-title">강의 링크</h5>
+                    <p class="card-text">
+                        <a href="${boardListResponse.videoLink}" target="_blank" class="btn btn-primary">강의 보기</a>
+                    </p>
+                </div>
+            </div>
         </div>
         <div class="text-center mb-30">
             <a href="board-register-form.hm?classroomId=${boardListResponse.classroomId}" class="btn btn-primary">글 등록하기</a>

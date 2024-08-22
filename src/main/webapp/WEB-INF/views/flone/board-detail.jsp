@@ -44,11 +44,11 @@
         <div class="description-review-wrapper">
             <div class="description-review-topbar nav">
                 <a data-bs-toggle="tab" href="#">-</a>
-                <a class="active"data-bs-toggle="tab" href="#">-</a>
-                <a data-bs-toggle="tab" href="#des-details3">질문</a>
+                <a class="active" data-bs-toggle="tab" href="#des-details3">질문</a>
+                <a data-bs-toggle="tab" href="#des-details2">-</a>
             </div>
             <div class="tab-content description-review-bottom">
-                <div id="des-details2" class="tab-pane active">
+                <div id="des-details2" class="tab-pane">
                     <div class="product-description-wrapper">
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
                         <p>ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commo consequat. Duis aute irure dolor in reprehend in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt </p>
@@ -64,7 +64,7 @@
                         </ul>
                     </div>
                 </div>
-                <div id="des-details3" class="tab-pane">
+                <div id="des-details3" class="tab-pane active">
                     <div class="row">
                         <div class="col-lg-7">
                             <div class="review-wrapper">
@@ -105,6 +105,7 @@
                                 <div class="ratting-form">
                                     <form action="/flone/reply/reply-register.hm" method="post">
                                         <input type="hidden" name="boardId" value="${board.boardId}">
+                                        <input type="hidden" name="classroomId" value="${board.classroomId}">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="rating-form-style form-submit">

@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hermez.course.dto.CourseDetailResponse;
+import org.hermez.course.model.CourseTime;
+import org.hermez.course.service.CourseService;
 import org.hermez.member.model.Member;
 import org.hermez.paymenthistory.dto.CancelDTO;
 import org.hermez.paymenthistory.service.payapi.IamportService;
@@ -25,6 +28,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,26 +44,30 @@ public class ReservationController {
   private final ReservationRepository reservationRepository;
   private final ReservationService reservationService;
   private final IamportService iamportService;
+  private final CourseService courseService;
 
 
-  @GetMapping("/detail.hm")
-  public String getReservationForm(@ModelAttribute ReservationFormRequest reservationFormRequest,
-      Model model) {
+  @GetMapping("/{courseId}/detail.hm")
+  public String getReservationForm(@PathVariable int courseId, Model model) {
 //    System.out.println("reservationDTO = " + reservationDTO);
 //    model.addAttribute("reservationDTO", reservationDTO);
 
+    CourseDetailResponse courseDetailList = courseService.courseDetailService(courseId);
+    List<CourseTime> courseTimeList = courseService.courseDetailTime(courseId);
     Member member = new Member();
     member.setName("홍길동");
     member.setEmail("me@gmail.com");
     member.setPhone("123456789");
+    model.addAttribute("courseDetailList", courseDetailList);
+    model.addAttribute("courseTimeList", courseTimeList);
     ReservationFormResponse reserveForm = ReservationFormResponse.builder()
-        .courseId(reservationFormRequest.getCourseId())
-        .title(reservationFormRequest.getTitle())
-        .coursePrice(reservationFormRequest.getCoursePrice())
-        .description(reservationFormRequest.getDescription())
-        .startDate(reservationFormRequest.getStartDate())
-        .endDate(reservationFormRequest.getEndDate())
-        .instructorName(reservationFormRequest.getInstructorName())
+        .courseId(courseDetailList.getCourseId())
+        .title(courseDetailList.getTitle())
+        .coursePrice(courseDetailList.getCoursePrice())
+        .description(courseDetailList.getDescription())
+        .startDate(courseDetailList.getStartDate())
+        .endDate(courseDetailList.getEndDate())
+        .instructorName(courseDetailList.getInstructorName())
         .merchantUid(createMerchantUid())
         .memberEmail(member.getEmail())
         .memberName(member.getName())

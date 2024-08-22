@@ -22,7 +22,7 @@
           pay_method: "card",
           merchant_uid: "${reserveForm.merchantUid}",
           name: '자바의 정석',
-          amount: 100,
+          amount: ${reserveForm.coursePrice},
           buyer_email: "${reserveForm.memberEmail}",
           buyer_name: "${reserveForm.memberName}",
           buyer_tel: "${reserveForm.memberPhone}"
@@ -32,12 +32,12 @@
             alert(msg);
             let data = {
               imp_uid: rsp.imp_uid,
-              amount: 100,
-              merchant_uid: "${reserveForm.merchantUid}"
+              amount: rsp.amount,
+              merchant_uid: rsp.merchant_uid
             };
             $.ajax({
               type:'POST',
-              url: '/flone/reservation/verify-iamport',
+              url: '/flone/reservation/'+'${reserveFome.courseId}'+'verify-iamport.hm',
               data:JSON.stringify(data),
               contentType:"application/json;charset=utf-8",
               dataType:'json',
@@ -84,10 +84,6 @@
             alert("환불 실패: " + result.responseText)
           }
         });
-      }
-
-      function pay(){
-        alert("zz")
       }
     </script>
 </head>
@@ -157,13 +153,13 @@
                                         <div class="panel-heading" id="method-one">
                                             <h4 class="panel-title">
                                                 <a data-bs-toggle="collapse" href="#method1">
-                                                    Direct bank transfer
+                                                    강의내용
                                                 </a>
                                             </h4>
                                         </div>
                                         <div id="method1" class="panel-collapse collapse show" data-bs-parent="#accordion">
                                             <div class="panel-body">
-                                                <p>Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
+                                                <p>${reserveForm.description}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -191,7 +187,7 @@
                                         </div>
                                         <div id="method3" class="panel-collapse collapse" data-bs-parent="#accordion">
                                             <div class="panel-body">
-                                                <p>Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
+                                                <p><div></div></p>
                                             </div>
                                         </div>
                                     </div>

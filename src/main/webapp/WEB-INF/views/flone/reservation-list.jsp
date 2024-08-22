@@ -65,8 +65,7 @@
                                                    value="${reservation.merchantUid}">
                                         </c:if>
                                         <c:if test="${reservation.reservationStatusId eq 2}">
-                                            <input type="checkbox" class="checkList"
-                                                   value="${reservation.merchantUid}" disabled>
+                                            <input type="checkbox" value="${reservation.merchantUid}" disabled>
                                         </c:if>
 
                                     </td>

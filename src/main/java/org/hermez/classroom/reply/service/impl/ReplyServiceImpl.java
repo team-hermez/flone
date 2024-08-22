@@ -1,6 +1,7 @@
 package org.hermez.classroom.reply.service.impl;
 
 import org.hermez.classroom.reply.dto.ReplyRegisterRequest;
+import org.hermez.classroom.reply.exception.ReplyNotFoundException;
 import org.hermez.classroom.reply.mapper.ReplyMapper;
 import org.hermez.classroom.reply.model.Reply;
 import org.hermez.classroom.reply.service.ReplyService;
@@ -32,7 +33,11 @@ public class ReplyServiceImpl implements ReplyService {
      */
     @Override
     public List<Reply> getRepliesByBoardId(int boardId) {
-        return replyMapper.selectRepliesByBoardId(boardId);
+        List<Reply> replies = replyMapper.selectRepliesByBoardId(boardId);
+        if (replies == null || replies.isEmpty()) {
+            throw new ReplyNotFoundException("해당 게시판에 댓글이 존재하지 않습니다. Board ID: " + boardId);
+        }
+        return replies;
     }
 
     /**
@@ -40,7 +45,11 @@ public class ReplyServiceImpl implements ReplyService {
      */
     @Override
     public void registerReply(ReplyRegisterRequest request) {
-        replyMapper.insertReply(request);
+        try {
+            replyMapper.insertReply(request);
+        } catch (Exception e) {
+            throw new RuntimeException("댓글 등록 중 오류가 발생했습니다.", e);
+        }
     }
 
     /**
@@ -48,6 +57,9 @@ public class ReplyServiceImpl implements ReplyService {
      */
     @Override
     public void deleteReply(int replyId) {
-        replyMapper.deleteReply(replyId);
+        int deletedRows = replyMapper.deleteReply(replyId);
+        if (deletedRows == 0) {
+            throw new ReplyNotFoundException("삭제할 댓글이 존재하지 않습니다. Reply ID: " + replyId);
+        }
     }
 }

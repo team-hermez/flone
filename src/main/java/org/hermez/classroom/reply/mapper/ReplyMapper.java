@@ -44,7 +44,8 @@ public interface ReplyMapper {
      * 특정 댓글을 데이터베이스에서 삭제합니다.
      *
      * @param replyId 삭제할 댓글의 ID
+     * @return
      */
     @Delete("DELETE FROM reply WHERE reply_id = #{replyId}")
-    void deleteReply(int replyId);
+    int deleteReply(int replyId);
 }

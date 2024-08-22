@@ -66,6 +66,4 @@ public interface ReservationMapper {
   @Select("select reservation_status_id as reservationStatusId, merchant_uid as merchantUid,payment_amount as paymentAmount ,payment_history.created_at as createdAt,cancel_at as cancelAt,title,start_date as startDate,end_date as endDate from reservation join payment_history using (payment_history_id) join course using (course_id) where member_id=#{memberId} order by reservation_id desc")
   List<ReservationListResponse> reservationList(int memberId);
 
-  @Select("select imp_uid from reservation where merchant_uid=#{merchantUid}")
-  public String findImpUidByMerchantUid(String merchantUid);
 }

@@ -15,7 +15,7 @@
         <div class="breadcrumb-content text-center">
             <ul>
                 <li>
-                    <a href="../../index.jsp">Home</a>
+                    <a href="../index.hm">Home</a>
                 </li>
                 <li class="active">${courseDetail.title}</li>
             </ul>

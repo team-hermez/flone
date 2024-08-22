@@ -46,5 +46,4 @@ public interface ReservationRepository {
 
   List<ReservationListResponse> reservationList(int memberId);
 
-  public String findImpUidByMerchantUid(String merchantUid);
 }

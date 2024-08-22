@@ -6,11 +6,13 @@ import com.siot.IamportRestClient.request.CancelData;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 import java.io.IOException;
+import javax.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.hermez.paymenthistory.dto.CancelDTO;
 import org.hermez.reservation.model.Reservation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
 /**
  * 결제 API( 아임포트 ) 사용과 관련된 클래스입니다.
@@ -20,6 +22,7 @@ import org.springframework.context.annotation.PropertySource;
  */
 @Slf4j
 @PropertySource("classpath:apikey.properties")
+@Component
 public class IamportService {
 
   @Value("${IAM_PORT_APIKEY}")
@@ -28,7 +31,7 @@ public class IamportService {
   @Value("${IAM_PORT_APISECRET}")
   private String IAM_PORT_APISECRET;
 
-  private final IamportClient iamportClient = new IamportClient(IAM_PORT_APIKEY,IAM_PORT_APISECRET);
+  private IamportClient iamportClient;
 
   public IamportClient getIamportClient() {return iamportClient;}
 
@@ -97,5 +100,10 @@ public class IamportService {
     cancelData.setReason(cancelDTO.getReason());
     cancelData.setRefund_holder(cancelDTO.getRefundHolder());
     return cancelData;
+  }
+
+  @PostConstruct
+  public void init() {
+    this.iamportClient = new IamportClient(IAM_PORT_APIKEY,IAM_PORT_APISECRET);
   }
 }

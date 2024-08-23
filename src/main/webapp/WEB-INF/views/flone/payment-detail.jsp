@@ -37,7 +37,7 @@
             };
             $.ajax({
               type:'POST',
-              url: '/flone/reservation/'+'${reserveFome.courseId}'+'verify-iamport.hm',
+              url: '/flone/reservation/${reserveFome.courseId}/verify-iamport.hm',
               data:JSON.stringify(data),
               contentType:"application/json;charset=utf-8",
               dataType:'json',

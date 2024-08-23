@@ -10,6 +10,8 @@ import javax.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.hermez.paymenthistory.dto.CancelDTO;
 import org.hermez.reservation.model.Reservation;
+import org.hermez.reservation.model.ReservationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -33,6 +35,13 @@ public class IamportService {
 
   private IamportClient iamportClient;
 
+  private final ReservationRepository reservationRepository;
+
+  @Autowired
+  public IamportService(ReservationRepository reservationRepository) {
+    this.reservationRepository = reservationRepository;
+  }
+
   public IamportClient getIamportClient() {return iamportClient;}
 
   /**
@@ -43,16 +52,15 @@ public class IamportService {
    * @param courseId 클라이언트가 예약한 강의 키값
    * @throws IllegalArgumentException 클라이언트가 요청한 강의 가격이 결제 API( 아임포트 ) 서버와 hermez 서버에 저장된 가격과 다를 경우 발생
    */
-  public void verifyPayment(IamportResponse<Payment> payResponse, int amount, int courseId) {
-    log.info("[결제 검증 시작] 강의 금액 = {}, 강의 키값 ={}",amount ,courseId);
+  public void verifyPayment(IamportResponse<Payment> payResponse, int amount, String merchantUid) {
+    log.info("[결제 검증 시작]");
     int iamportAmount = payResponse.getResponse().getAmount().intValue();
     //결제금액과 아임포트 서버 금액 대조
     if (iamportAmount != amount) {
       log.info("[아임포트 서버(실결제 금액)과 강의 가격이 다릅니다] 아임포트 서버 금액 = {} , 클라이언트가 보낸 강의 가격 = {} ",iamportAmount ,amount);
       throw new IllegalStateException("클라이언트가 보낸 강의 가격이 아임포트 서버 결제 금액과 다릅니다.");
     }
-    // Double payAmount = reservationRepository.findPayAmount(courseId);//강의에서 가져와야함
-    Integer payAmount = 100;
+    Double payAmount = reservationRepository.findPayAmount(merchantUid);//강의에서 가져와야함
     //db에서 강의 가격과 결제금액 같은지 확인
     if (amount != payAmount) {
       log.info("[결제시 hermez 서버에 저장된 금액과 클라이언트가 보낸 강의 가격이 다릅니다] hermez 서버 금액 = {} , 클라이언트가 보낸 강의 가격 = {}",payAmount,amount);

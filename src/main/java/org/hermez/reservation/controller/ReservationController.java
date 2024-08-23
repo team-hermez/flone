@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
@@ -47,11 +48,8 @@ public class ReservationController {
   private final CourseService courseService;
 
 
-  @GetMapping("/{courseId}/detail.hm")
-  public String getReservationForm(@PathVariable int courseId, Model model) {
-//    System.out.println("reservationDTO = " + reservationDTO);
-//    model.addAttribute("reservationDTO", reservationDTO);
-
+  @GetMapping("/detail.hm")
+  public String getReservationForm(@RequestParam int courseId, Model model) {
     CourseDetailResponse courseDetailList = courseService.courseDetailService(courseId);
     List<CourseTime> courseTimeList = courseService.courseDetailTime(courseId);
     Member member = new Member();
@@ -96,10 +94,10 @@ public class ReservationController {
 
 
   @ResponseBody
-  @PostMapping("/verify-iamport")
-  public  IamportResponse<Payment> postVerifyPayment(@RequestBody VerificationRequest verificationRequest)
+  @PostMapping("/courseId/verify-iamport")
+  public  IamportResponse<Payment> postVerifyPayment(@RequestBody VerificationRequest verificationRequest,@PathVariable int courseId)
       throws IamportResponseException, IOException {
-    Integer myCourseOne = reservationRepository.findMyCourseOne(1, 3);
+    Integer myCourseOne = reservationRepository.findMyCourseOne(1, courseId);
     if (myCourseOne != null) {
       throw new IllegalStateException("이미 수강 중인 강의입니다.");
     }
@@ -107,10 +105,10 @@ public class ReservationController {
     String impUid = verificationRequest.getImp_uid();//실 결제 금액 확인을 위한 아임포트 쪽에서 주는 아이디
     int amount = Integer.parseInt(verificationRequest.getAmount());// 실제 유저가 결제한 금액
     String merchantUid = verificationRequest.getMerchant_uid(); //내가 만든 주문번호
-    IamportResponse<Payment> iamportResponse   = iamportService.getIamportClient().paymentByImpUid(impUid);
-    iamportService.verifyPayment(iamportResponse, amount, 3);
+    IamportResponse<Payment> iamportResponse = iamportService.getIamportClient().paymentByImpUid(impUid);
+    iamportService.verifyPayment(iamportResponse, amount, merchantUid);
     log.info("reservation validation start end");
-    reservationService.save(1, 3, (double) amount, impUid, merchantUid);
+    reservationService.save(1, courseId, (double) amount, impUid, merchantUid);
     log.info("reservation success");
     return iamportResponse;
   }

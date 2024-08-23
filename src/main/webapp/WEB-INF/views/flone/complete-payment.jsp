@@ -28,25 +28,20 @@
                 <div class="login-register-wrapper">
                     <div class="login-register-tab-list nav">
                         <a class="active" data-bs-toggle="tab" href="#lg1">
-                            <h4> login </h4>
+                            <h4> Reservation </h4>
                         </a>
                         <a data-bs-toggle="tab" href="#lg2">
-                            <h4> register </h4>
+                            <h4> Success </h4>
                         </a>
                     </div>
                     <div class="tab-content">
                         <div id="lg1" class="tab-pane active">
                             <div class="login-form-container">
                                 <div class="login-register-form">
-                                    <form action="#" method="post">
-                                        <p><h1>결제 완료 :)</h1></p>
+                                    <form action="reservation-detail.hm?courseId=${courseId}" method="post">
+                                        <h1>결제 완료 :)</h1>
                                         <div class="button-box">
-                                            <div class="login-toggle-btn">
-                                                <input type="checkbox">
-                                                <label>Remember me</label>
-                                                <a href="#">Forgot Password?</a>
-                                            </div>
-                                            <button type="submit"><span>Login</span></button>
+                                            <button type="submit"><span>예약 상세페이지</span></button>
                                         </div>
                                     </form>
                                 </div>

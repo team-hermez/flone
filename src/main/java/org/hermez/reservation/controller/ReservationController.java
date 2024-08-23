@@ -82,7 +82,8 @@ public class ReservationController {
   }
 
   @GetMapping("/success-page.hm")
-  public String getCompletePage() {
+  public String getCompletePage(@RequestParam int courseId, Model model) {
+   model.addAttribute("courseId", courseId);
     return "/flone/complete-payment";
   }
 
@@ -93,6 +94,14 @@ public class ReservationController {
     return "/flone/reservation-list";
   }
 
+  @GetMapping("/reservation-detail.hm")
+  public String getReservationDetailPage(@RequestParam int courseId, Model model) {
+model.addAttribute("courseId", courseId);
+   // ReservationDetailResponse reservationDetail = new ReservationDetailResponse();
+    //model.addAttribute("reservationDetail", reservationDetail);
+
+    return "flone/reservation-detail";
+  }
 
   @ResponseBody
   @PostMapping("/verify-iamport.hm")

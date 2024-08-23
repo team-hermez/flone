@@ -45,7 +45,7 @@
               dataType: 'json',
               success: (result) => {
                 alert('결제검증 완료')
-                location.href = '/flone/reservation/success-page.hm';
+                location.href = 'success-page.hm?courseId=${reserveForm.courseId}';
               },
               error: (result) => {
                 alert(result.responseText);

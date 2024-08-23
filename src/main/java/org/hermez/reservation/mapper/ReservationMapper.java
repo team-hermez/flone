@@ -64,7 +64,12 @@ public interface ReservationMapper {
   @Update("update reservation set reservation_status_id= 2 where merchant_uid = #{merchantUid}")
   void updateReservationStatus(String merchantUid);
 
-  @Select("select reservation_status_id as reservationStatusId, merchant_uid as merchantUid,payment_amount as paymentAmount ,payment_history.created_at as createdAt,cancel_at as cancelAt,title,start_date as startDate,end_date as endDate from reservation join payment_history using (payment_history_id) join course using (course_id) where member_id=#{memberId} order by reservation_id desc")
+  @Select("select course_id as courseId,reservation_status_id as reservationStatusId, merchant_uid as merchantUid,payment_amount as paymentAmount ,payment_history.created_at as createdAt,cancel_at as cancelAt,title,start_date as startDate,end_date as endDate \n"
+      + "from reservation \n"
+      + "join payment_history using (payment_history_id) \n"
+      + "join course using (course_id) \n"
+      + "where member_id=#{memberId} \n"
+      + "order by reservation_id desc")
   List<ReservationListResponse> reservationList(int memberId);
 
   @Select("select course_id as courseId ,start_date as startDate, end_date as endDate,day_of_week as DayOfWeek, start_time as startTime, end_time as endTime \n"
@@ -74,6 +79,7 @@ public interface ReservationMapper {
       + " where reservation_status_id=1 and now()<=end_date and member_id=#{memberId}")
   List<MyReservationDTO> findMyReservationList(int memberId);
 
-  @Select("select course_id as courseId ,start_date as startDate, end_date as endDate,day_of_week as DayOfWeek, start_time as startTime, end_time as endTime from course join course_schedule using (course_id) where course_id=#{courseId}")
+  @Select("select course_id as courseId ,start_date as startDate, end_date as endDate,day_of_week as DayOfWeek, start_time as startTime, end_time as endTime \n"
+      + " from course join course_schedule using (course_id) where course_id=#{courseId}")
   List<MyReservationDTO> findReservationCourseSchedule(int courseId);
 }

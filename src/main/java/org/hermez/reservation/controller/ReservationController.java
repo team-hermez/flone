@@ -99,22 +99,17 @@ public class ReservationController {
   public  IamportResponse<Payment> postVerifyPayment(@RequestBody VerificationRequest verificationRequest)
       throws IamportResponseException, IOException {
     int courseId = verificationRequest.getCourseId();
-    log.info("courseId = {} " , courseId);
-    log.info("verificationRequest = {} " , verificationRequest);
     Integer myCourseOne = reservationRepository.findMyCourseOne(1, courseId);
     if (myCourseOne != null) {
       throw new IllegalStateException("이미 수강 중인 강의입니다.");
     }
-    log.info("reservation validation start");
     reservationService.verifyCourseSchedule(courseId);
     String impUid = verificationRequest.getImp_uid();//실 결제 금액 확인을 위한 아임포트 쪽에서 주는 아이디
     int amount = verificationRequest.getAmount();// 실제 유저가 결제한 금액
     String merchantUid = verificationRequest.getMerchant_uid(); //내가 만든 주문번호
     IamportResponse<Payment> iamportResponse = iamportService.getIamportClient().paymentByImpUid(impUid);
-    log.info("reservation validation start end");
     reservationService.save(1, courseId, amount, impUid, merchantUid);
     iamportService.verifyPayment(iamportResponse, amount, merchantUid);
-    log.info("reservation success");
     return iamportResponse;
   }
 
@@ -122,16 +117,12 @@ public class ReservationController {
   @PostMapping("/cancel-payment.hm")
   public IamportResponse<Payment> postCancelPayment(@RequestBody CancelDTO cancelDTO)
       throws IamportResponseException, IOException {
-    log.info("cancel payment start");
-    log.info("CancelDTO: {}", cancelDTO);
     Reservation findReservation = null;
     if (cancelDTO.getImp_uid()==null) {
       findReservation = reservationRepository.findById(cancelDTO.getMerchant_uid());
-      log.info("find reservation: {}", findReservation.getMerchantUid());
       reservationService.cancel(findReservation);
     }
     CancelData cancelData = iamportService.getCancelData(cancelDTO, findReservation);
-    log.info("cancel success");
     return iamportService.getIamportClient().cancelPaymentByImpUid(cancelData);
   }
 
@@ -140,7 +131,7 @@ public class ReservationController {
     LocalDateTime now = LocalDateTime.now();
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     String formattedDay = now.format(dateTimeFormatter).replace("-", "");
-    return formattedDay + uuid;
+    return formattedDay +"-"+ uuid;
   }
 
 

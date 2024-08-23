@@ -47,36 +47,28 @@ public class ReservationServiceImpl implements ReservationService {
   @Transactional
   @Override
   public void save(int memberId, int courseId, int amount, String imp_uid, String merchantUid) {
-    log.info("예약 시작");
     PaymentHistory paymentHistory = PaymentHistory.createPaymentHistory(amount);
     paymentHistoryRepository.save(paymentHistory);
     int findPaymentHistoryId = paymentHistoryRepository.findOne();
     Reservation createdReservation = Reservation.createReservation(memberId, courseId,
         findPaymentHistoryId, imp_uid, merchantUid);
     reservationRepository.save(createdReservation);
-    log.info("예약 완료");
   }
 
   @Transactional
   @Override
   public void cancel(Reservation reservation) {
-    log.info("cancel start");
-    log.info("resrvation.getMerchantUid = {}", reservation.getMerchantUid());
     String merchantUid = reservation.getMerchantUid();
     reservationRepository.updateReservationStatus(merchantUid);
     paymentHistoryRepository.updateCancelAt(merchantUid);
-    log.info("cancel end");
   }
 
   @Transactional
   @Override
   public void verifyCourseSchedule(int courseId) {
-    log.info("time validation start");
     List<MyReservationDTO> myReservationList = reservationRepository.findMyReservationList(1);
     List<MyReservationDTO> reservationCourseScheduleList = reservationRepository.findReservationCourseSchedule(
         courseId);
-    log.info("myReservationList = {}",myReservationList.toString());
-    log.info("reservationCourseScheduleList = {}",reservationCourseScheduleList.toString());
     Multimap<List<LocalDateTime[]>, List<LocalDateTime[]>> multimap = ArrayListMultimap.create();
     for (MyReservationDTO reservationCourseSchedule : reservationCourseScheduleList) {
       for (MyReservationDTO myReservation : myReservationList) {
@@ -90,8 +82,7 @@ public class ReservationServiceImpl implements ReservationService {
       List<LocalDateTime[]> myCourseSchedule = entry.getValue();
       try {
         checkScheduleOverlap(courseSchedule, myCourseSchedule);
-      } catch (IllegalArgumentException e) {
-        log.info("exception", e);
+      } catch (IllegalArgumentException e) {;
         throw new NoSuchUniqueCourseTimeException(e);
       }
     }

@@ -27,7 +27,7 @@
             <div class="col-md-12">
                 <div class="billing-info-wrap">
                     <h1>강의 등록</h1>
-                    <form action="regist.hm" method="post" accept-charset="UTF-8">
+                    <form action="regist.hm" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-lg-6 col-md-6">
                                 <div class="billing-info mb-20">
@@ -136,14 +136,14 @@
                                     </select>
                                 </div>
                             </div>
-                            <%--                        <div class="col-lg-12">--%>
-                            <%--                            <div class="billing-info mt-15">--%>
-                            <%--&lt;%&ndash;                                <label>이미지 등록</label>&ndash;%&gt;--%>
-                            <%--&lt;%&ndash;                                <input type="file">&ndash;%&gt;--%>
-                            <%--                                <label for="formFile" class="form-label">사진 등록</label>--%>
-                            <%--                                <input class="form-control" type="file" id="formFile">--%>
-                            <%--                            </div>--%>
-                            <%--                        </div>--%>
+                            <div class="col-lg-12">
+                                <div class="billing-info mt-15">
+<%--                                    <label>이미지 등록</label>--%>
+<%--                                    <input type="file">--%>
+                                    <label for="formFile" class="form-label">사진 등록</label>
+                                    <input class="form-control" type="file" id="formFile" name="imageFile" accept=".jpg, .jpeg, .png">
+                                </div>
+                            </div>
                             <div class="col-lg-6 col-md-6">
                                 <div class="billing-info mb-20">
                                     <label>수강 시작일</label>

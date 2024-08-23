@@ -3,6 +3,7 @@ package org.hermez.course.dto;
 import lombok.Getter;
 import lombok.Setter;
 import org.hermez.course.model.CourseTime;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Date;
 import java.util.List;
@@ -20,19 +21,21 @@ public class CourseRegisterRequest {
     private int instructorId;
     private int gradeId;
     private String description;
-    private Double coursePrice;
+    private MultipartFile imageFile;
+    private int coursePrice;
     private Date startDate;
     private Date endDate;
     private List<CourseTime> courseTimes;
 
     CourseRegisterRequest(){}
 
-    public CourseRegisterRequest(int courseId, String title, int instructorId, int gradeId,String description, Double coursePrice, Date startDate, Date endDate, List<CourseTime> courseTimes) {
+    public CourseRegisterRequest(int courseId, String title, int instructorId, int gradeId,String description,MultipartFile imageFile, int coursePrice, Date startDate, Date endDate, List<CourseTime> courseTimes) {
         this.courseId = courseId;
         this.title = title;
         this.instructorId = instructorId;
         this.gradeId = gradeId;
         this.description = description;
+        this.imageFile = imageFile;
         this.coursePrice = coursePrice;
         this.startDate = startDate;
         this.endDate = endDate;

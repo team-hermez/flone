@@ -27,9 +27,11 @@ public interface CourseMapper {
             "start_date as startDate, " +
             "c.end_date as endDate, " +
             "title, description, " +
-            "m.name as instructorName "+
-            "from course c left join instructor i on (c.instructor_id = i.instructor_id) "+
-            "left join member m on (i.member_id = m.member_id) "+
+            "m.name as instructorName, " +
+            "img.save_name as courseImage "+
+            "from course c left join instructor i on (i.instructor_id = c.instructor_id) \n"+
+            "left join member m on (i.member_id = m.member_id) \n" +
+            "left join image img on (img.entity_id = c.course_id) \n"+
             "order by c.start_date desc " +
             "limit #{offset}, #{itemsPerPage}")
     List<CourseListResponse> courseAllList(@Param("offset") int offset, @Param("itemsPerPage") int itemsPerPage);
@@ -43,11 +45,20 @@ public interface CourseMapper {
      * @param courseId
      * @return 강의 상세 정보
      */
-    @Select("select c.course_id as courseId, title,m.name as instructorName,course_Price as coursePrice, description, start_date as startDate, end_date as endDate, i.instructor_id as instructorId, s.subject_name as subject, grade_name as grade\n" +
+    @Select("select c.course_id as courseId, " +
+            "title,m.name as instructorName, " +
+            "course_Price as coursePrice, " +
+            "description, start_date as startDate, " +
+            "end_date as endDate, " +
+            "i.instructor_id as instructorId, " +
+            "s.subject_name as subject, " +
+            "g.grade_name as grade, " +
+            "img.save_name as courseImage " +
             "from course c left join instructor i on (c.instructor_id=i.instructor_id)\n" +
             "left join member m on (i.member_id=m.member_id)\n" +
             "left join subject s on (i.subject_id = s.subject_id)\n" +
             "left join grade g on (c.grade_id = g.grade_id)\n" +
+            "left join image img on (img.entity_id = c.course_id)\n" +
             "where c.course_id = #{courseId}")
     CourseDetailResponse courseDetailResponse(int courseId);
 
@@ -78,4 +89,5 @@ public interface CourseMapper {
     @Insert("insert into course_schedule (course_id, day_of_week, start_time, end_time) " +
             "values (#{courseId},#{dayOfWeek}, #{startTime},#{endTime})")
     void insertCourseSchedule(CourseTime courseTime);
+
 }

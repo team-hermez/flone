@@ -9,6 +9,7 @@ import org.hermez.course.service.CourseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -82,11 +83,10 @@ public class CourseController {
     /**
      * 새로운 강의를 등록합니다
      * @param courseRegisterRequest 강의 등록 정보
-     * @param model 모델 객체
      * @return 강의 리스트로 redirect
      */
     @PostMapping("regist.hm")
-    public String postCourseRegister(@ModelAttribute CourseRegisterRequest courseRegisterRequest,Model model) {
+    public String postCourseRegister(@ModelAttribute CourseRegisterRequest courseRegisterRequest) {
         courseService.insertCourse(courseRegisterRequest,courseTime);
         return "redirect:list.hm";
     }

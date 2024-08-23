@@ -30,25 +30,59 @@
                     <div class="product-details-img">
                         <div class="tab-content jump"> 
                             <div id="shop-details-1" class="tab-pane large-img-style">
-                                <img src="/assets/img/product-details/large-1.jpg" alt="">
-                                <span class="dec-price">-10%</span>
-                                <div class="img-popup-wrap">
-                                    <a class="img-popup" href="/assets/img/product-details/b-large-1.jpg"><i class="pe-7s-expand1"></i></a>
-                                </div>
+                                <c:choose>
+                                    <c:when test="${empty courseDetail.courseImage}">
+                                        <img src="/assets/img/product-details/large-1.jpg" alt="">
+                                        <span class="dec-price">-10%</span>
+                                        <div class="img-popup-wrap">
+                                            <a class="img-popup" href="/assets/img/product-details/b-large-1.jpg"><i class="pe-7s-expand1"></i></a>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="../../../../images/${courseDetail.courseImage}" alt="">
+                                        <span class="dec-price">-10%</span>
+                                        <div class="img-popup-wrap">
+                                            <a class="img-popup" href="../../../../images/${courseDetail.courseImage}"><i class="pe-7s-expand1"></i></a>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                             <div id="shop-details-2" class="tab-pane active large-img-style">
-                                <img src="/assets/img/product-details/large-2.jpg" alt="">
-                                <span class="dec-price">-10%</span>
-                                <div class="img-popup-wrap">
-                                    <a class="img-popup" href="/assets/img/product-details/b-large-2.jpg"><i class="pe-7s-expand1"></i></a>
-                                </div>
+                                <c:choose>
+                                    <c:when test="${empty courseDetail.courseImage}">
+                                        <img src="/assets/img/product-details/large-2.jpg" alt="">
+                                        <span class="dec-price">-10%</span>
+                                        <div class="img-popup-wrap">
+                                            <a class="img-popup" href="/assets/img/product-details/b-large-2.jpg"><i class="pe-7s-expand1"></i></a>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="../../../../images/${courseDetail.courseImage}" alt="">
+                                        <span class="dec-price">-10%</span>
+                                        <div class="img-popup-wrap">
+                                            <a class="img-popup" href="../../../../images/${courseDetail.courseImage}"><i class="pe-7s-expand1"></i></a>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+
                             </div>
                             <div id="shop-details-3" class="tab-pane large-img-style">
-                                <img src="/assets/img/product-details/large-3.jpg" alt="">
-                                <span class="dec-price">-10%</span>
-                                <div class="img-popup-wrap">
-                                    <a class="img-popup" href="/assets/img/product-details/b-large-3.jpg"><i class="pe-7s-expand1"></i></a>
-                                </div>
+                                <c:choose>
+                                    <c:when test="${empty courseDetail.courseImage}">
+                                        <img src="/assets/img/product-details/large-3.jpg" alt="">
+                                        <span class="dec-price">-10%</span>
+                                        <div class="img-popup-wrap">
+                                            <a class="img-popup" href="/assets/img/product-details/b-large-3.jpg"><i class="pe-7s-expand1"></i></a>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="../../../../images/${courseDetail.courseImage}" alt="">
+                                        <span class="dec-price">-10%</span>
+                                        <div class="img-popup-wrap">
+                                            <a class="img-popup" href="../../../../images/${courseDetail.courseImage}"><i class="pe-7s-expand1"></i></a>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </div>
 <%--                        이미지 관련--%>

@@ -14,28 +14,31 @@ import java.sql.Date;
 @Builder
 @Getter
 public class CourseListResponse {
-    private int courseId;          // 강의 ID
-    private Date startDate;        // 수강일
-    private String title;          // 강의 제목
-    private String description;    // 강의 설명
-    private String instructorName; // 강사 이름
+    private int courseId;
+    private Date startDate;
+    private String title;
+    private String description;
+    private String instructorName;
+    private String courseImage;
 
     private CourseListResponse(){}
 
     /**
      * CourseListResponse 생성자 입니다.
-     * @param courseId
-     * @param startDate
-     * @param title
-     * @param description
-     * @param instructorName
+     * @param courseId          강의 고유 코드
+     * @param startDate         강의 시작일
+     * @param title             강의 제목
+     * @param description       강의 설명
+     * @param instructorName    강사 이름
+     * @param courseImage       강의 사진
      */
-    private CourseListResponse(int courseId, Date startDate, String title, String description, String instructorName) {
+    private CourseListResponse(int courseId, Date startDate, String title, String description, String instructorName, String courseImage) {
         this.courseId = courseId;
         this.startDate = startDate;
         this.title = title;
         this.description = description;
         this.instructorName = instructorName;
+        this.courseImage = courseImage;
     }
 
     /**
@@ -49,6 +52,7 @@ public class CourseListResponse {
         this.title = getTitle();
         this.description = getDescription();
         this.instructorName = getInstructorName();
+        this.courseImage = getCourseImage();
     }
 
     /*

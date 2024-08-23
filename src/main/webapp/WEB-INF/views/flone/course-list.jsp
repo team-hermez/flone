@@ -95,7 +95,7 @@
                         </c:forEach>
 <%--                        Next Page--%>
                         <c:choose>
-                            <c:when test="${courses.currentPage<courses.totalPages}">
+                            <c:when test="${courses.currentPage < courses.totalPages}">
                                 <li><a class="next" href="?page=${courses.currentPage + 1}"><i class="fa fa-angle-double-right"></i></a></li>
                             </c:when>
                             <c:otherwise>

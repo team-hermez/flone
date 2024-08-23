@@ -87,7 +87,7 @@ public class CourseController {
      */
     @PostMapping("regist.hm")
     public String postCourseRegister(@ModelAttribute CourseRegisterRequest courseRegisterRequest) {
-        courseService.insertCourse(courseRegisterRequest,courseTime);
+        courseService.insertCourse(courseRegisterRequest);
         return "redirect:list.hm";
     }
 

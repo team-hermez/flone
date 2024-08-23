@@ -2,6 +2,7 @@ package org.hermez.course.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 /**
  * 강의 상세 페이지 Request DTO입니다.
@@ -9,7 +10,7 @@ import lombok.Getter;
  * @author 엄진수
  */
 @Getter
-@Builder
+@ToString
 public class CourseDetailResponse {
     private int courseId;            // 강좌 ID
     private int instructorId;        // 강사 ID
@@ -24,16 +25,7 @@ public class CourseDetailResponse {
 
     private CourseDetailResponse() {}
 
-    /**
-     * 상세 페이지 생성자입니다.
-     * @param courseId
-     * course의 pk를 참조합니다.
-     */
-    private CourseDetailResponse(int courseId) {
-        this.courseId = courseId;
-    }
-
-    /**
+     /**
      * 상세 페이지의 생성자입니다.
      *
      * @param courseId
@@ -60,5 +52,14 @@ public class CourseDetailResponse {
         this.instructorName = instructorName;
         this.subject = subject;
         this.grade = grade;
+    }
+
+    /**
+     * 생성자 Builder
+     * @param courseId
+     */
+    @Builder
+    public CourseDetailResponse(int courseId){
+        this.courseId = courseId;
     }
 }

@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,8 +19,6 @@ import org.hermez.reservation.exception.NoSuchUniqueCourseTimeException;
 import org.hermez.reservation.model.Reservation;
 import org.hermez.reservation.model.ReservationRepository;
 import org.hermez.reservation.service.ReservationService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,7 +46,7 @@ public class ReservationServiceImpl implements ReservationService {
 
   @Transactional
   @Override
-  public void save(int memberId, int courseId, Double amount, String imp_uid, String merchantUid) {
+  public void save(int memberId, int courseId, int amount, String imp_uid, String merchantUid) {
     log.info("예약 시작");
     PaymentHistory paymentHistory = PaymentHistory.createPaymentHistory(amount);
     paymentHistoryRepository.save(paymentHistory);
@@ -71,10 +68,15 @@ public class ReservationServiceImpl implements ReservationService {
     log.info("cancel end");
   }
 
+  @Transactional
+  @Override
   public void verifyCourseSchedule(int courseId) {
+    log.info("time validation start");
     List<MyReservationDTO> myReservationList = reservationRepository.findMyReservationList(1);
     List<MyReservationDTO> reservationCourseScheduleList = reservationRepository.findReservationCourseSchedule(
         courseId);
+    log.info("myReservationList = {}",myReservationList.toString());
+    log.info("reservationCourseScheduleList = {}",reservationCourseScheduleList.toString());
     Multimap<List<LocalDateTime[]>, List<LocalDateTime[]>> multimap = ArrayListMultimap.create();
     for (MyReservationDTO reservationCourseSchedule : reservationCourseScheduleList) {
       for (MyReservationDTO myReservation : myReservationList) {
@@ -89,6 +91,7 @@ public class ReservationServiceImpl implements ReservationService {
       try {
         checkScheduleOverlap(courseSchedule, myCourseSchedule);
       } catch (IllegalArgumentException e) {
+        log.info("exception", e);
         throw new NoSuchUniqueCourseTimeException(e);
       }
     }
@@ -102,12 +105,6 @@ public class ReservationServiceImpl implements ReservationService {
     weeklySchedule.put(DayOfWeek.valueOf(myReservationDTO.getDayOfWeek()),
         new LocalTime[]{myReservationDTO.getStartTime(), myReservationDTO.getEndTime()});
     return createCourseSchedule(startDate, endDate, weeklySchedule);
-
-
-    /*LocalDate startDate = myReservationDTO.getStartDate();
-    LocalDate endDate = myReservationDTO.getEndDate();
-    Map<DayOfWeek,LocalTime[]> weeklySchedule = new HashMap<>();*/
-
   }
 
   //==스케쥴 생성==//
@@ -135,8 +132,8 @@ public class ReservationServiceImpl implements ReservationService {
       for (LocalDateTime[] timeSlot2 : schedule2) {
         if (isOverlapping(timeSlot1, timeSlot2)) {
           throw new IllegalStateException("고객님의 예약이 학습중인 강의와 스케쥴이 겹칩니다: " +
-              "예약 하실 강의 스케쥴: " + timeSlot1[0] + " ~ " + timeSlot1[1] + "/n"
-              + "기존 강의 스케쥴: " + timeSlot2[0] + " ~ " + timeSlot2[1]);
+              "\n 예약 하실 강의 스케쥴: " + timeSlot1[0] + " ~ " + timeSlot1[1]
+              + "\n 기존 강의 스케쥴: " + timeSlot2[0] + " ~ " + timeSlot2[1]);
         }
       }
     }

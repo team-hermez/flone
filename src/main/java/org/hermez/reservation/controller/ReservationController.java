@@ -50,6 +50,7 @@ public class ReservationController {
 
   @GetMapping("/detail.hm")
   public String getReservationForm(@RequestParam int courseId, Model model) {
+    log.info("corseId = {} " , courseId);
     CourseDetailResponse courseDetailList = courseService.courseDetailService(courseId);
     List<CourseTime> courseTimeList = courseService.courseDetailTime(courseId);
     Member member = new Member();
@@ -58,19 +59,19 @@ public class ReservationController {
     member.setPhone("123456789");
     model.addAttribute("courseDetailList", courseDetailList);
     model.addAttribute("courseTimeList", courseTimeList);
-    ReservationFormResponse reserveForm = ReservationFormResponse.builder()
-        .courseId(courseDetailList.getCourseId())
-        .title(courseDetailList.getTitle())
-        .coursePrice(courseDetailList.getCoursePrice())
-        .description(courseDetailList.getDescription())
-        .startDate(courseDetailList.getStartDate())
-        .endDate(courseDetailList.getEndDate())
-        .instructorName(courseDetailList.getInstructorName())
-        .merchantUid(createMerchantUid())
-        .memberEmail(member.getEmail())
-        .memberName(member.getName())
-        .memberPhone(member.getPhone()).build();
-
+    ReservationFormResponse reserveForm = new ReservationFormResponse();
+    reserveForm.setCourseId(courseDetailList.getCourseId());
+    reserveForm.setTitle(courseDetailList.getTitle());
+    reserveForm.setCoursePrice(courseDetailList.getCoursePrice());
+    reserveForm.setDescription(courseDetailList.getDescription());
+    reserveForm.setStartDate(courseDetailList.getStartDate());
+    reserveForm.setEndDate(courseDetailList.getEndDate());
+    reserveForm.setInstructorName(courseDetailList.getInstructorName());
+    reserveForm.setMerchantUid(createMerchantUid());
+    reserveForm.setMemberEmail(member.getEmail());
+    reserveForm.setMemberName(member.getName());
+    reserveForm.setMemberPhone(member.getPhone());
+    model.addAttribute("courseTime", courseTimeList);
     model.addAttribute("reserveForm", reserveForm);
     return "/flone/payment-detail";
   }
@@ -94,22 +95,25 @@ public class ReservationController {
 
 
   @ResponseBody
-  @PostMapping("/{courseId}/verify-iamport")
-  public  IamportResponse<Payment> postVerifyPayment(@RequestBody VerificationRequest verificationRequest,@PathVariable int courseId)
+  @PostMapping("/verify-iamport.hm")
+  public  IamportResponse<Payment> postVerifyPayment(@RequestBody VerificationRequest verificationRequest)
       throws IamportResponseException, IOException {
+    int courseId = verificationRequest.getCourseId();
+    log.info("courseId = {} " , courseId);
+    log.info("verificationRequest = {} " , verificationRequest);
     Integer myCourseOne = reservationRepository.findMyCourseOne(1, courseId);
     if (myCourseOne != null) {
       throw new IllegalStateException("이미 수강 중인 강의입니다.");
     }
-    reservationService.verifyCourseSchedule(courseId);
     log.info("reservation validation start");
+    reservationService.verifyCourseSchedule(courseId);
     String impUid = verificationRequest.getImp_uid();//실 결제 금액 확인을 위한 아임포트 쪽에서 주는 아이디
-    int amount = Integer.parseInt(verificationRequest.getAmount());// 실제 유저가 결제한 금액
+    int amount = verificationRequest.getAmount();// 실제 유저가 결제한 금액
     String merchantUid = verificationRequest.getMerchant_uid(); //내가 만든 주문번호
     IamportResponse<Payment> iamportResponse = iamportService.getIamportClient().paymentByImpUid(impUid);
-    iamportService.verifyPayment(iamportResponse, amount, merchantUid);
     log.info("reservation validation start end");
-    reservationService.save(1, courseId, (double) amount, impUid, merchantUid);
+    reservationService.save(1, courseId, amount, impUid, merchantUid);
+    iamportService.verifyPayment(iamportResponse, amount, merchantUid);
     log.info("reservation success");
     return iamportResponse;
   }

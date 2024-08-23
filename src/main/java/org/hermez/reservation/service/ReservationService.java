@@ -16,7 +16,7 @@ public interface ReservationService {
    * @param imp_uid     결제 API( 아임포트 ) 에서 생성한 주문번호
    * @param merchantUid hermez 서버에서 생성한 주문번호
    */
-  void save(int memberId, int courseId, Double amount, String imp_uid, String merchantUid);
+  void save(int memberId, int courseId, int amount, String imp_uid, String merchantUid);
 
   /**
    * 결제 취소/환불시 사용되는 메서드입니다.

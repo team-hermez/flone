@@ -54,7 +54,7 @@ public interface ReservationMapper {
    * @return payment_amount hermez서버에 저장된 예약시 결제한 금액
    */
   @Select("select payment_amount as paymentAmount from reservation join payment_history using (payment_history_id) where merchant_uid=#{merchantUid}")
-  Double findPayAmount(String merchantUid);
+  Integer findPayAmount(String merchantUid);
 
   /**
    * 예약 상태를 취소로 변경합니다.

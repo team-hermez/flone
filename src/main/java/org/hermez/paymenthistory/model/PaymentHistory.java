@@ -18,7 +18,7 @@ public class PaymentHistory {
 
   private Long paymentHistoryId;
 
-  private Double paymentAmount;
+  private int paymentAmount;
 
   private LocalDateTime createdAt;
 
@@ -29,7 +29,7 @@ public class PaymentHistory {
    * @param paymentAmount 강의 결제 금액
    * @return 강의 결제 기록 정보
    */
-  public static PaymentHistory createPaymentHistory(Double paymentAmount) {
+  public static PaymentHistory createPaymentHistory(int paymentAmount) {
     PaymentHistory paymentHistory = new PaymentHistory();
     paymentHistory.setPaymentAmount(paymentAmount);
     paymentHistory.setCreatedAt(LocalDateTime.now());

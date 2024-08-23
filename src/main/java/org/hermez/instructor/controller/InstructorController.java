@@ -1,5 +1,7 @@
 package org.hermez.instructor.controller;
 
+import org.hermez.common.page.Page;
+import org.hermez.course.dto.CourseListResponse;
 import org.hermez.instructor.dto.InstructorListResponse;
 import org.hermez.instructor.dto.InstructorRegisterRequest;
 import org.hermez.instructor.mapper.InstructorMapper;
@@ -24,9 +26,10 @@ public class InstructorController {
     }
 
     @GetMapping("list.hm")
-    public String getInstructorList(Model model) {
-        ArrayList<InstructorListResponse> instructorList = instructorService.selectInstructorList();
-
+    public String getInstructorList(
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            Model model) {
+        Page<InstructorListResponse> instructorList = instructorService.selectInstructorList(page);
         model.addAttribute("instructors", instructorList);
         return "flone/instructor-list";
     }

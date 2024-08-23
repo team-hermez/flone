@@ -50,7 +50,7 @@
             <p>완전 짱짱 강사진들</p>
         </div>
         <div class="row">
-            <c:forEach items="${instructors}" var ="instructors">
+            <c:forEach var ="instructors" items="${instructors.contents}">
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="team-wrapper mb-30">
                     <div class="team-img">
@@ -81,6 +81,39 @@
                     </div>
                 </div>
             </c:forEach>
+        </div>
+        <div class="pro-pagination-style text-center mt-20">
+            <ul>
+                <%--                        Prev Page--%>
+                <c:choose>
+                    <c:when test="${instructors.currentPage > 1}">
+                        <li><a class="prev" href="?page=${instructors.currentPage - 1}"><i class="fa fa-angle-double-left"></i></a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a class="prev" href="#"><i class="fa fa-angle-double-left"></i></a></li>
+                    </c:otherwise>
+                </c:choose>
+                <%--                        Current Page--%>
+                <c:forEach begin="1" end="${instructors.totalPages}" var="pageNum">
+                    <c:choose>
+                        <c:when test="${pageNum == instructors.currentPage}">
+                            <li><a class="active" href="#">${pageNum}</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="?page=${pageNum}">${pageNum}</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+                <%--                        Next Page--%>
+                <c:choose>
+                    <c:when test="${instructors.currentPage<instructors.totalPages}">
+                        <li><a class="next" href="?page=${instructors.currentPage + 1}"><i class="fa fa-angle-double-right"></i></a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a class="next" href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                    </c:otherwise>
+                </c:choose>
+            </ul>
         </div>
     </div>
 </div>

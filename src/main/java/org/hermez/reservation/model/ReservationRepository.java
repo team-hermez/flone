@@ -1,6 +1,7 @@
 package org.hermez.reservation.model;
 
 import java.util.List;
+import org.hermez.common.page.Page;
 import org.hermez.reservation.dto.MyReservationDTO;
 import org.hermez.reservation.dto.ReservationListResponse;
 
@@ -50,4 +51,6 @@ public interface ReservationRepository {
   List<MyReservationDTO> findMyReservationList(int memberId);
 
   List<MyReservationDTO> findReservationCourseSchedule(int courseId);
+
+  Page<ReservationListResponse> getReservationList(int memberId,int page);
 }

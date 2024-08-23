@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hermez.common.page.Page;
 import org.hermez.paymenthistory.model.PaymentHistory;
 import org.hermez.paymenthistory.model.PaymentHistoryRepository;
 import org.hermez.reservation.dto.MyReservationDTO;
@@ -88,6 +89,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
   }
+
 
   private List<LocalDateTime[]> getCourseSchedule(MyReservationDTO myReservationDTO) {
     LocalDate startDate = myReservationDTO.getStartDate();

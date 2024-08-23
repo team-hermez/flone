@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hermez.common.page.Page;
+import org.hermez.common.page.PaginationUtil;
 import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.course.model.CourseTime;
 import org.hermez.course.service.CourseService;
@@ -50,7 +52,6 @@ public class ReservationController {
 
   @GetMapping("/detail.hm")
   public String getReservationForm(@RequestParam int courseId, Model model) {
-    log.info("corseId = {} " , courseId);
     CourseDetailResponse courseDetailList = courseService.courseDetailService(courseId);
     List<CourseTime> courseTimeList = courseService.courseDetailTime(courseId);
     Member member = new Member();
@@ -83,21 +84,29 @@ public class ReservationController {
 
   @GetMapping("/success-page.hm")
   public String getCompletePage(@RequestParam int courseId, Model model) {
-   model.addAttribute("courseId", courseId);
+    model.addAttribute("courseId", courseId);
     return "/flone/complete-payment";
   }
 
   @GetMapping("/list.hm")
-  public String getReservationListForm(Model model) {
-    List<ReservationListResponse> reservationList = reservationRepository.reservationList(1);
-    model.addAttribute("reservationList", reservationList);
+  public String getReservationListForm(@RequestParam(value = "page", defaultValue = "1") int page,
+      Model model) {
+
+  //  List<ReservationListResponse> reservationList = reservationRepository.reservationList(1);
+    Page<ReservationListResponse> reservationPage = reservationRepository.getReservationList(1,
+        page);
+    log.info("reservationPage = {}", reservationPage.getContents());
+    Member member = new Member();
+    model.addAttribute("memberId", 1);
+    model.addAttribute("reservationPage", reservationPage);
+   // model.addAttribute("reservationList", reservationList);
     return "/flone/reservation-list";
   }
 
   @GetMapping("/reservation-detail.hm")
   public String getReservationDetailPage(@RequestParam int courseId, Model model) {
-model.addAttribute("courseId", courseId);
-   // ReservationDetailResponse reservationDetail = new ReservationDetailResponse();
+    model.addAttribute("courseId", courseId);
+    // ReservationDetailResponse reservationDetail = new ReservationDetailResponse();
     //model.addAttribute("reservationDetail", reservationDetail);
 
     return "flone/reservation-detail";
@@ -105,7 +114,8 @@ model.addAttribute("courseId", courseId);
 
   @ResponseBody
   @PostMapping("/verify-iamport.hm")
-  public  IamportResponse<Payment> postVerifyPayment(@RequestBody VerificationRequest verificationRequest)
+  public IamportResponse<Payment> postVerifyPayment(
+      @RequestBody VerificationRequest verificationRequest)
       throws IamportResponseException, IOException {
     int courseId = verificationRequest.getCourseId();
     Integer myCourseOne = reservationRepository.findMyCourseOne(1, courseId);
@@ -116,7 +126,8 @@ model.addAttribute("courseId", courseId);
     String impUid = verificationRequest.getImp_uid();//실 결제 금액 확인을 위한 아임포트 쪽에서 주는 아이디
     int amount = verificationRequest.getAmount();// 실제 유저가 결제한 금액
     String merchantUid = verificationRequest.getMerchant_uid(); //내가 만든 주문번호
-    IamportResponse<Payment> iamportResponse = iamportService.getIamportClient().paymentByImpUid(impUid);
+    IamportResponse<Payment> iamportResponse = iamportService.getIamportClient()
+        .paymentByImpUid(impUid);
     reservationService.save(1, courseId, amount, impUid, merchantUid);
     iamportService.verifyPayment(iamportResponse, amount, merchantUid);
     return iamportResponse;
@@ -127,7 +138,7 @@ model.addAttribute("courseId", courseId);
   public IamportResponse<Payment> postCancelPayment(@RequestBody CancelDTO cancelDTO)
       throws IamportResponseException, IOException {
     Reservation findReservation = null;
-    if (cancelDTO.getImp_uid()==null) {
+    if (cancelDTO.getImp_uid() == null) {
       findReservation = reservationRepository.findById(cancelDTO.getMerchant_uid());
       reservationService.cancel(findReservation);
     }
@@ -140,7 +151,7 @@ model.addAttribute("courseId", courseId);
     LocalDateTime now = LocalDateTime.now();
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     String formattedDay = now.format(dateTimeFormatter).replace("-", "");
-    return formattedDay +"-"+ uuid;
+    return formattedDay + "-" + uuid;
   }
 
 

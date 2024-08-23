@@ -5,6 +5,8 @@ import org.hermez.classroom.classroom.dto.ClassroomRegisterRequest;
 import org.hermez.classroom.classroom.exception.ClassroomNotFoundException;
 import org.hermez.classroom.classroom.mapper.ClassroomMapper;
 import org.hermez.classroom.classroom.service.ClassroomService;
+import org.hermez.common.page.Page;
+import org.hermez.common.page.PaginationUtil;
 import org.hermez.image.dto.RegisterImageRequest;
 import org.hermez.image.exception.ImageProcessingException;
 import org.hermez.image.service.ImageService;
@@ -39,23 +41,11 @@ public class ClassroomServiceImpl implements ClassroomService {
      * {@inheritDoc}
      */
     @Override
-    public Map<String, Object> getClassroomList(int courseId, int page) {
-        int offset = (page - 1) * 9;
+    public Page<ClassroomCardResponse> getClassroomList(int courseId, int page) {
         int total = classroomMapper.countClassrooms(courseId);
-        int totalPages = total % 9 == 0 ? total / 9 : total / 9 + 1;
-        List<ClassroomCardResponse> classrooms = classroomMapper.selectClassroomList(courseId, offset);
-
-        if (classrooms.isEmpty()) {
-            throw new ClassroomNotFoundException("해당 코스에 강의실이 존재하지 않습니다.");
-        }
-
-        Map<String, Object> result = new HashMap<>();
-        result.put("total", total);
-        result.put("classrooms", classrooms);
-        result.put("currentPage", page);
-        result.put("totalPages", totalPages);
-
-        return result;
+        PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total, 9, page);
+        List<ClassroomCardResponse> classrooms = classroomMapper.selectClassroomList(courseId, pageInfo.getOffset(), pageInfo.getItemsPerPage());
+        return new Page<>(classrooms, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
     }
 
     /**

@@ -1,13 +1,12 @@
 package org.hermez.classroom.classroom.controller;
 
+import org.hermez.classroom.classroom.dto.ClassroomCardResponse;
 import org.hermez.classroom.classroom.dto.ClassroomRegisterRequest;
 import org.hermez.classroom.classroom.service.ClassroomService;
+import org.hermez.common.page.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.Map;
 
 /**
  * 강의룸 컨트롤러 클래스입니다.
@@ -45,11 +44,8 @@ public class ClassroomController {
             @RequestParam(value = "page", defaultValue = "1") int page,
             Model model) {
 
-        Map<String, Object> classroomData = classroomService.getClassroomList(courseId, page);
-        model.addAttribute("classrooms", classroomData.get("classrooms"));
-        model.addAttribute("total", classroomData.get("total"));
-        model.addAttribute("currentPage", classroomData.get("currentPage"));
-        model.addAttribute("totalPages", classroomData.get("totalPages"));
+        Page<ClassroomCardResponse> classroomPage = classroomService.getClassroomList(courseId, page);
+        model.addAttribute("classroomPage", classroomPage);
         model.addAttribute("courseId", courseId);
         return "flone/class-room-list";
     }

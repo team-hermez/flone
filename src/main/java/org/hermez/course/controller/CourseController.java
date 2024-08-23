@@ -1,5 +1,6 @@
 package org.hermez.course.controller;
 
+import org.hermez.common.page.Page;
 import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.course.dto.CourseListResponse;
 import org.hermez.course.dto.CourseRegisterRequest;
@@ -36,11 +37,14 @@ public class CourseController {
      * 전체 강의 목록을 조회합니다.
      *
      * @param model 모델 객체
+     * @param page  현재 page
      * @return 게시판 목록 페이지 뷰 이름
      */
     @GetMapping(value = "list.hm")
-    public String getCourseList(Model model) {
-        List<CourseListResponse> courseList = courseService.courseListService();
+    public String getCourseList(
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            Model model) {
+        Page<CourseListResponse> courseList = courseService.getCourseList(page);
         model.addAttribute("courses", courseList);
         return "flone/course-list";
     }
@@ -82,10 +86,8 @@ public class CourseController {
      * @return 강의 리스트로 redirect
      */
     @PostMapping("regist.hm")
-    public String postCourseRegister(@ModelAttribute CourseRegisterRequest courseRegisterRequest, Model model) {
+    public String postCourseRegister(@ModelAttribute CourseRegisterRequest courseRegisterRequest,Model model) {
         courseService.insertCourse(courseRegisterRequest,courseTime);
-        List<CourseListResponse> courseList = courseService.courseListService();
-        model.addAttribute("courses", courseList);
         return "redirect:list.hm";
     }
 

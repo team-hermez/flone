@@ -16,7 +16,7 @@
                 <li>
                     <a href="../index.hm">Home</a>
                 </li>
-                <li class="active">Blog No sidebar </li>
+                <li class="active">강의 목록</li>
             </ul>
         </div>
     </div>
@@ -27,7 +27,7 @@
             <div class="col-lg-12">
                 <div class="row">
 
-                    <c:forEach var="course" items="${courses}">
+                    <c:forEach var="course" items="${courses.contents}">
 
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="blog-wrap-2 mb-30">
@@ -63,12 +63,38 @@
                     </div>
                     </c:forEach>
                 </div>
+
                 <div class="pro-pagination-style text-center mt-20">
                     <ul>
-                        <li><a class="prev" href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                        <li><a class="active" href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a class="next" href="#"><i class="fa fa-angle-double-right"></i></a></li>
+<%--                        Prev Page--%>
+                        <c:choose>
+                            <c:when test="${courses.currentPage > 1}">
+                                <li><a class="prev" href="?page=${courses.currentPage - 1}"><i class="fa fa-angle-double-left"></i></a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li><a class="prev" href="#"><i class="fa fa-angle-double-left"></i></a></li>
+                            </c:otherwise>
+                        </c:choose>
+<%--                        Current Page--%>
+                        <c:forEach begin="1" end="${courses.totalPages}" var="pageNum">
+                            <c:choose>
+                                <c:when test="${pageNum == courses.currentPage}">
+                                    <li><a class="active" href="#">${pageNum}</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a href="?page=${pageNum}">${pageNum}</a></li>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+<%--                        Next Page--%>
+                        <c:choose>
+                            <c:when test="${courses.currentPage<courses.totalPages}">
+                                <li><a class="next" href="?page=${courses.currentPage + 1}"><i class="fa fa-angle-double-right"></i></a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li><a class="next" href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                            </c:otherwise>
+                        </c:choose>
                     </ul>
                 </div>
             </div>

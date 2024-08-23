@@ -1,6 +1,8 @@
 package org.hermez.course.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.hermez.common.page.Page;
+import org.hermez.common.page.PaginationUtil;
 import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.course.dto.CourseListResponse;
 import org.hermez.course.dto.CourseRegisterRequest;
@@ -13,38 +15,35 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * 강의 관련 Service 구현체 class입니다.
+ * {@inheritDoc}
  *
  * @author 엄진수
  */
-
 @Slf4j
 @Service
 public class CourseServiceImpl implements CourseService {
     private final CourseMapper courseMapper;
 
     /**
-     * 서비스 구현체의 생성자입니다.
-     *
-     * @param courseMapper
+     * {@inheritDoc}
      */
     public CourseServiceImpl(CourseMapper courseMapper) {
         this.courseMapper = courseMapper;
     }
 
     /**
-     * 전체 강의 목록을 조회합니다.
-     * @return 전체 강의 게시판 목록
+     * {@inheritDoc}
      */
     @Override
-    public List<CourseListResponse> courseListService() {
-        return courseMapper.courseAllList();
+    public Page<CourseListResponse> getCourseList(int page) {
+        int total = courseMapper.courseCount();
+        PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total, 9,page);
+        List<CourseListResponse> courses = courseMapper.courseAllList(pageInfo.getOffset(), pageInfo.getItemsPerPage());
+        return new Page<>(courses, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
     }
 
     /**
-     * 강의 상세 페이지를 조회합니다.
-     * @param courseId course의 pk값
-     * @return 상세 페이지
+     * {@inheritDoc}
      */
     @Override
     public CourseDetailResponse courseDetailService(int courseId) {
@@ -52,9 +51,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     /**
-     * 상세 페이지의 시간 정보를 조회합니다
-     * @param courseId course의 pk값
-     * @return 상세 페이지 시간 List
+     * {@inheritDoc}
      */
     @Override
     public List<CourseTime> courseDetailTime(int courseId) {
@@ -62,8 +59,6 @@ public class CourseServiceImpl implements CourseService {
     }
 
     /**
-     * 신규 강의를 등록합니다.
-     * @param courseRegisterRequest 강의의 상세 정보
      * @param courseTime 강의 시간
      */
     @Transactional

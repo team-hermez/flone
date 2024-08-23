@@ -1,5 +1,6 @@
 package org.hermez.course.service;
 
+import org.hermez.common.page.Page;
 import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.course.dto.CourseListResponse;
 import org.hermez.course.dto.CourseRegisterRequest;
@@ -15,9 +16,10 @@ import java.util.List;
 public interface CourseService {
     /**
      * 전체 강의 목록을 조회합니다.
-     * @return 전체 강의 목록 List
+     * @param page 조회할 페이지 번호
+     * @return 강의 목록과 페이지 정보를 담고 있는 Map 객체
      */
-    List<CourseListResponse> courseListService();
+    Page<CourseListResponse> getCourseList(int page);
 
     /**
      * 상세 페이지를 조회합니다
@@ -38,6 +40,5 @@ public interface CourseService {
      * @param courseRegisterRequest 강의의 상세 정보
      * @param courseTime 강의 시간
      */
-
     void insertCourse(CourseRegisterRequest courseRegisterRequest, CourseTime courseTime);
 }

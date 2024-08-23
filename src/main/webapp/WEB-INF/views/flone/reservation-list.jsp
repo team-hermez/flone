@@ -41,8 +41,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="reservation" items="${reservationList}"
-                                       varStatus="status">
+                            <c:forEach var="reservation" items="${reservationPage.contents}">
                                 <tr>
                                     <td class="product-thumbnail">
                                         <a href="reservation-detail.hm?courseId=${reservation.courseId}">${reservation.merchantUid}</a>
@@ -86,6 +85,36 @@
                             </div>
                         </div>
                     </div>
+                    <div class="pro-pagination-style text-center mt-20">
+                    <div>
+                        <c:choose>
+                            <c:when test="${reservationPage.currentPage > 1}">
+                                <a href="?page=${reservationPage.currentPage - 1}">Previous</a>
+                            </c:when>
+                            <c:otherwise>
+                                <span>Previous</span>
+                            </c:otherwise>
+                        </c:choose>
+                        <c:forEach begin="1" end="${reservationPage.totalPages}" var="pageNum">
+                            <c:choose>
+                                <c:when test="${pageNum == reservationPage.currentPage}">
+                                    <span>${pageNum}</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="?page=${pageNum}">${pageNum}</a>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                        <c:choose>
+                            <c:when test="${reservationPage.currentPage < reservationPage.totalPages}">
+                                <a href="?page=${reservationPage.currentPage + 1}">Next</a>
+                            </c:when>
+                            <c:otherwise>
+                                <span>Next</span>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                </div>
                 </form>
                 <script>
                   const allSelectBtn = document.getElementById("selectAllBtn");

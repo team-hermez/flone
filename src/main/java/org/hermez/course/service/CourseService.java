@@ -5,6 +5,7 @@ import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.course.dto.CourseListResponse;
 import org.hermez.course.dto.CourseRegisterRequest;
 import org.hermez.course.model.CourseTime;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 

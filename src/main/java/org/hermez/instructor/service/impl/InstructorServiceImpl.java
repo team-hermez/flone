@@ -2,6 +2,7 @@ package org.hermez.instructor.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.hermez.instructor.dto.InstructorListResponse;
+import org.hermez.instructor.dto.InstructorRegisterRequest;
 import org.hermez.instructor.mapper.InstructorMapper;
 
 import org.hermez.instructor.service.InstructorService;
@@ -19,5 +20,10 @@ public class InstructorServiceImpl implements InstructorService {
     public ArrayList<InstructorListResponse> selectInstructorList() {
         ArrayList<InstructorListResponse> instructors = instructorMapper.selectInstructorList();
         return instructors;
+    }
+
+    @Override
+    public void insertInstructor(InstructorRegisterRequest instructorRegisterRequest) {
+        instructorMapper.insertInstructor(instructorRegisterRequest);
     }
 }

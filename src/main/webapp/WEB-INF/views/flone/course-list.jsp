@@ -32,7 +32,14 @@
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="blog-wrap-2 mb-30">
                             <div class="blog-img-2">
-                                <a href="/flone/course/detail.hm?courseId=${course.courseId}"><img src="/assets/img/blog/blog-9.jpg" alt=""></a>
+                                <c:choose>
+                                    <c:when test="${empty course.courseImage}">
+                                        <a href="/flone/course/detail.hm?courseId=${course.courseId}"><img src="/assets/img/blog/blog-9.jpg" alt=""></a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="/flone/course/detail.hm?courseId=${course.courseId}"><img src="../../../../images/${course.courseImage}" alt=""></a>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                             <div class="blog-content-2">
                                 <div class="blog-meta-2">

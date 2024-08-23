@@ -1,16 +1,18 @@
 package org.hermez.instructor.controller;
 
 import org.hermez.instructor.dto.InstructorListResponse;
+import org.hermez.instructor.dto.InstructorRegisterRequest;
 import org.hermez.instructor.mapper.InstructorMapper;
+import org.hermez.instructor.model.Instructor;
 import org.hermez.instructor.service.InstructorService;
+import org.hermez.member.model.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
-//TODO Controller 못 찾는거, 강사 등록페이지, 강사 상세페이지, 강사 권한 관리자한테 요청
+//TODO 강사 등록페이지, 강사 권한 관리자한테 요청
 
 @Controller
 @RequestMapping("flone/instructor")
@@ -22,9 +24,28 @@ public class InstructorController {
     }
 
     @GetMapping("list.hm")
-    public String getInstructor_list(Model model) {
+    public String getInstructorList(Model model) {
         ArrayList<InstructorListResponse> instructorList = instructorService.selectInstructorList();
+
         model.addAttribute("instructors", instructorList);
         return "flone/instructor-list";
+    }
+
+    @GetMapping("register.hm")
+    public String getInstructorRegisterPage(Model model) {
+        return "flone/instructor-register";
+    }
+
+    @GetMapping("detail.hm")
+    public String getInstructorDetailPage(@RequestParam int instructorId) {
+        return "flone/instructor-detail";
+    }
+
+    @PostMapping("regist.hm")
+    public String PostInstructorRegister(@SessionAttribute("MEMBER") Member member, @RequestParam int subjectId, InstructorRegisterRequest instructorRegisterRequest, Model model) {
+        instructorRegisterRequest.setMemberId(member.getMemberId());
+        instructorRegisterRequest.setSubjectId(subjectId);
+        instructorService.insertInstructor(instructorRegisterRequest);
+        return "redirect:/flone/instructor/list.hm";
     }
 }

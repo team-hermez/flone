@@ -6,6 +6,25 @@
 
 <head>
     <%@ include file="css.jsp"%>
+    <style>
+        .row .billing-info-wrap {
+            flex-shrink: 0;
+            width: 7.7%;
+            bottom: 33.5px;
+            max-width: 100%;
+            padding-right: calc(var(--bs-gutter-x)* .5);
+            padding-left: calc(var(--bs-gutter-x)* .5);
+            margin-top: var(--bs-gutter-y);
+        }
+
+        .billing-info-wrap {
+            position: fixed;
+            bottom: 33px;
+            right: 65px;
+            z-index: 1000;
+            max-width: 100%; /* 필요 시 max-width 추가 */
+        }
+    </style>
 </head>
 <body>
 <%@ include file="header.jsp" %>
@@ -36,7 +55,7 @@
                 <div class="team-wrapper mb-30">
                     <div class="team-img">
                         <a href="#">
-                            <img src="/assets/img/team/team-1.jpg" alt="">
+                            <img src="/assets/img/team/team-1.jpg" href="/flone/instructors/detail.hm?instructorsId=${instructors.instructorId}">
                         </a>
                         <div class="team-action">
                             <a class="facebook" href="#">
@@ -51,11 +70,16 @@
                         </div>
                     </div>
                     <div class="team-content text-center">
-                        <h4>${instructors.instructorId}</h4>
+                        <h4>${instructors.name}</h4>
                         <span>${instructors.instructorDescription} </span>
                     </div>
                 </div>
             </div>
+                <div class = "billing-info-wrap">
+                    <div class="checkout-account-toggle open-toggle2 mb-30">
+                        <button class="btn-hover checkout-btn" type="button" onclick="location.href = '/flone/instructor/register.hm'"><span>register</span></button>
+                    </div>
+                </div>
             </c:forEach>
         </div>
     </div>

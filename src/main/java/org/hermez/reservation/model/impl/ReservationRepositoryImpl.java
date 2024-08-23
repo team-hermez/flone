@@ -44,7 +44,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
    * {@inheritDoc}
    */
   @Override
-  public Double findPayAmount(String merchantUid) {
+  public Integer findPayAmount(String merchantUid) {
     return reservationMapper.findPayAmount(merchantUid);
   }
 

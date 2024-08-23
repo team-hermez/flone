@@ -8,7 +8,7 @@ import lombok.Setter;
 public class ReservationListResponse {
 private String reservationStatusId;
 private String merchantUid;
-private double paymentAmount;
+private int paymentAmount;
 private LocalDate createdAt;
 private LocalDate cancelAt;
 private String title;

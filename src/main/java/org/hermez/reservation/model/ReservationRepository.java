@@ -41,7 +41,7 @@ public interface ReservationRepository {
    * @param merchantUid hermez에서 생성한 주문번호
    * @return payment_amount hermez서버에 저장된 예약시 결제한 금액
    */
-  Double findPayAmount(String merchantUid);
+  Integer findPayAmount(String merchantUid);
 
   void updateReservationStatus(String merchantUid);
 

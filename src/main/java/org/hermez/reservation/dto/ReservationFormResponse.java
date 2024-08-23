@@ -2,9 +2,9 @@ package org.hermez.reservation.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
-@Builder
-@Getter
+@Getter @Setter
 public class ReservationFormResponse {
 
   private int courseId;           // 강좌 ID

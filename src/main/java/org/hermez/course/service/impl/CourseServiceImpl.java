@@ -9,9 +9,15 @@ import org.hermez.course.dto.CourseRegisterRequest;
 import org.hermez.course.mapper.CourseMapper;
 import org.hermez.course.model.CourseTime;
 import org.hermez.course.service.CourseService;
+import org.hermez.image.dto.RegisterImageRequest;
+import org.hermez.image.exception.ImageProcessingException;
+import org.hermez.image.mapper.ImageMapper;
+import org.hermez.image.service.ImageService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -23,12 +29,14 @@ import java.util.List;
 @Service
 public class CourseServiceImpl implements CourseService {
     private final CourseMapper courseMapper;
+    private final ImageService imageService;
 
     /**
      * {@inheritDoc}
      */
-    public CourseServiceImpl(CourseMapper courseMapper) {
+    public CourseServiceImpl(CourseMapper courseMapper, ImageService imageService) {
         this.courseMapper = courseMapper;
+        this.imageService = imageService;
     }
 
     /**
@@ -65,6 +73,17 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void insertCourse(CourseRegisterRequest courseRegisterRequest, CourseTime courseTime) {
         courseMapper.insertCourse(courseRegisterRequest);
+        RegisterImageRequest imageRequest = new RegisterImageRequest();
+        imageRequest.setEntityId(courseRegisterRequest.getCourseId());
+        imageRequest.setEntityType("COURSE");
+        imageRequest.setMultipartFile(courseRegisterRequest.getImageFile());
+        try {
+            imageService.saveImage(imageRequest);
+        } catch (IOException e) {
+            throw new ImageProcessingException("이미지 저장에 실패했습니다.", e);
+        } catch (Exception e) {
+            throw new RuntimeException("강의 등록 중 알 수 없는 오류가 발생했습니다.", e);
+        }
         int courseId = courseRegisterRequest.getCourseId();
         List<CourseTime> courseTimes = courseRegisterRequest.getCourseTimes();
         for (CourseTime item : courseTimes) {

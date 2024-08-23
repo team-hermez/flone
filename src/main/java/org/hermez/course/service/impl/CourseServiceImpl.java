@@ -67,12 +67,11 @@ public class CourseServiceImpl implements CourseService {
     }
 
     /**
-     * @param courseTime 강의 시간
+     * {@inheritDoc}
      */
     @Transactional
     @Override
-    public void insertCourse(CourseRegisterRequest courseRegisterRequest, CourseTime courseTime) {
-        courseMapper.insertCourse(courseRegisterRequest);
+    public void insertCourse(CourseRegisterRequest courseRegisterRequest) {
         RegisterImageRequest imageRequest = new RegisterImageRequest();
         imageRequest.setEntityId(courseRegisterRequest.getCourseId());
         imageRequest.setEntityType("COURSE");
@@ -84,6 +83,7 @@ public class CourseServiceImpl implements CourseService {
         } catch (Exception e) {
             throw new RuntimeException("강의 등록 중 알 수 없는 오류가 발생했습니다.", e);
         }
+        courseMapper.insertCourse(courseRegisterRequest);
         int courseId = courseRegisterRequest.getCourseId();
         List<CourseTime> courseTimes = courseRegisterRequest.getCourseTimes();
         for (CourseTime item : courseTimes) {

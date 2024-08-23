@@ -41,5 +41,5 @@ public interface CourseService {
      * @param courseRegisterRequest 강의의 상세 정보
      * @param courseTime 강의 시간
      */
-    void insertCourse(CourseRegisterRequest courseRegisterRequest, CourseTime courseTime);
+    void insertCourse(CourseRegisterRequest courseRegisterRequest);
 }

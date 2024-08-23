@@ -45,7 +45,7 @@
                                        varStatus="status">
                                 <tr>
                                     <td class="product-thumbnail">
-                                        <a href="#">${reservation.merchantUid}</a>
+                                        <a href="reservation-detail.hm?courseId=${reservation.courseId}">${reservation.merchantUid}</a>
                                     </td>
                                     <td class="product-name"><a href="#">${reservation.title}</a>
                                     </td>

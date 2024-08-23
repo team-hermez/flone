@@ -13,8 +13,11 @@ import java.util.ArrayList;
 @Mapper
 public interface InstructorMapper {
     @Select("select m.name, instructor_id as instructorId, i.member_id as memberID, subject_id as subjectID, instructor_description as instructorDescription, instructor_status as instructorStatus " +
-            "from instructor i, member m where m.member_id = i.member_id and i.instructor_status = 1")
-    ArrayList<InstructorListResponse> selectInstructorList();
+            "from instructor i, member m where m.member_id = i.member_id and i.instructor_status = 1 limit #{offset}, #{itemsPerPage}")
+    ArrayList<InstructorListResponse> selectInstructorList(@Param("offset") int offset, @Param("itemsPerPage") int itemPerPage);
+
+    @Select("select COUNT(*) from instructor where instructor_status = 1")
+    int instructorCount();
 
     @Insert("insert into INSTRUCTOR (subject_id, member_id, instructor_title, instructor_description, instructor_status) " +
             "values (#{subjectId}, #{memberId},#{instructorTitle}, #{instructorDescription}, #{instructorStatus})")

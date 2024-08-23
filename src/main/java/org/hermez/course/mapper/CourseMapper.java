@@ -1,9 +1,6 @@
 package org.hermez.course.mapper;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.course.dto.CourseListResponse;
 import org.hermez.course.dto.CourseRegisterRequest;
@@ -25,11 +22,20 @@ public interface CourseMapper {
      * @return 강의 전체 목록
      * List 형식으로 반환합니다
      */
-    @Select("select c.course_id as courseId,start_date as startDate, c.end_date as endDate, title, description, m.name as instructorName\n" +
-            "from course c left join instructor i on (c.instructor_id = i.instructor_id)\n" +
-            "left join member m on (i.member_id = m.member_id)\n" +
-            "order by start_date desc")
-    List<CourseListResponse> courseAllList();
+    @Select("select " +
+            "c.course_id as courseId," +
+            "start_date as startDate, " +
+            "c.end_date as endDate, " +
+            "title, description, " +
+            "m.name as instructorName "+
+            "from course c left join instructor i on (c.instructor_id = i.instructor_id) "+
+            "left join member m on (i.member_id = m.member_id) "+
+            "order by c.start_date desc " +
+            "limit #{offset}, #{itemsPerPage}")
+    List<CourseListResponse> courseAllList(@Param("offset") int offset, @Param("itemsPerPage") int itemsPerPage);
+
+    @Select("select COUNT(*) from course")
+    int courseCount();
 
     /**
      * 강의 상세 정보를 가져오는 Mapper입니다.

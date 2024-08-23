@@ -2,6 +2,7 @@ package org.hermez.reservation.model.impl;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.hermez.reservation.dto.MyReservationDTO;
 import org.hermez.reservation.dto.ReservationListResponse;
 import org.hermez.reservation.mapper.ReservationMapper;
 import org.hermez.reservation.model.Reservation;
@@ -61,6 +62,16 @@ public class ReservationRepositoryImpl implements ReservationRepository {
   @Override
   public List<ReservationListResponse> reservationList(int memberId) {
     return reservationMapper.reservationList(memberId);
+  }
+
+  @Override
+  public List<MyReservationDTO> findMyReservationList(int memberId) {
+    return reservationMapper.findMyReservationList(memberId);
+  }
+
+  @Override
+  public List<MyReservationDTO> findReservationCourseSchedule(int courseId) {
+    return reservationMapper.findReservationCourseSchedule(courseId);
   }
 
 }

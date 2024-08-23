@@ -1,6 +1,7 @@
 package org.hermez.reservation.model;
 
 import java.util.List;
+import org.hermez.reservation.dto.MyReservationDTO;
 import org.hermez.reservation.dto.ReservationListResponse;
 
 /**
@@ -46,4 +47,7 @@ public interface ReservationRepository {
 
   List<ReservationListResponse> reservationList(int memberId);
 
+  List<MyReservationDTO> findMyReservationList(int memberId);
+
+  List<MyReservationDTO> findReservationCourseSchedule(int courseId);
 }

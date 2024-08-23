@@ -94,13 +94,14 @@ public class ReservationController {
 
 
   @ResponseBody
-  @PostMapping("/courseId/verify-iamport")
+  @PostMapping("/{courseId}/verify-iamport")
   public  IamportResponse<Payment> postVerifyPayment(@RequestBody VerificationRequest verificationRequest,@PathVariable int courseId)
       throws IamportResponseException, IOException {
     Integer myCourseOne = reservationRepository.findMyCourseOne(1, courseId);
     if (myCourseOne != null) {
       throw new IllegalStateException("이미 수강 중인 강의입니다.");
     }
+    reservationService.verifyCourseSchedule(courseId);
     log.info("reservation validation start");
     String impUid = verificationRequest.getImp_uid();//실 결제 금액 확인을 위한 아임포트 쪽에서 주는 아이디
     int amount = Integer.parseInt(verificationRequest.getAmount());// 실제 유저가 결제한 금액

@@ -1,9 +1,22 @@
 package org.hermez.reservation.service.impl;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hermez.paymenthistory.model.PaymentHistory;
 import org.hermez.paymenthistory.model.PaymentHistoryRepository;
+import org.hermez.reservation.dto.MyReservationDTO;
+import org.hermez.reservation.exception.NoSuchUniqueCourseTimeException;
 import org.hermez.reservation.model.Reservation;
 import org.hermez.reservation.model.ReservationRepository;
 import org.hermez.reservation.service.ReservationService;
@@ -37,7 +50,7 @@ public class ReservationServiceImpl implements ReservationService {
   @Transactional
   @Override
   public void save(int memberId, int courseId, Double amount, String imp_uid, String merchantUid) {
-   log.info("예약 시작");
+    log.info("예약 시작");
     PaymentHistory paymentHistory = PaymentHistory.createPaymentHistory(amount);
     paymentHistoryRepository.save(paymentHistory);
     int findPaymentHistoryId = paymentHistoryRepository.findOne();
@@ -56,5 +69,85 @@ public class ReservationServiceImpl implements ReservationService {
     reservationRepository.updateReservationStatus(merchantUid);
     paymentHistoryRepository.updateCancelAt(merchantUid);
     log.info("cancel end");
+  }
+
+  public void verifyCourseSchedule(int courseId) {
+    List<MyReservationDTO> myReservationList = reservationRepository.findMyReservationList(1);
+    List<MyReservationDTO> reservationCourseScheduleList = reservationRepository.findReservationCourseSchedule(
+        courseId);
+    Multimap<List<LocalDateTime[]>, List<LocalDateTime[]>> multimap = ArrayListMultimap.create();
+    for (MyReservationDTO reservationCourseSchedule : reservationCourseScheduleList) {
+      for (MyReservationDTO myReservation : myReservationList) {
+        List<LocalDateTime[]> courseSchedule = getCourseSchedule(reservationCourseSchedule);
+        List<LocalDateTime[]> myCourseSchedule = getCourseSchedule(myReservation);
+        multimap.put(courseSchedule, myCourseSchedule);
+      }
+    }
+    for (Map.Entry<List<LocalDateTime[]>, List<LocalDateTime[]>> entry : multimap.entries()) {
+      List<LocalDateTime[]> courseSchedule = entry.getKey();
+      List<LocalDateTime[]> myCourseSchedule = entry.getValue();
+      try {
+        checkScheduleOverlap(courseSchedule, myCourseSchedule);
+      } catch (IllegalArgumentException e) {
+        throw new NoSuchUniqueCourseTimeException(e);
+      }
+    }
+
+  }
+
+  private List<LocalDateTime[]> getCourseSchedule(MyReservationDTO myReservationDTO) {
+    LocalDate startDate = myReservationDTO.getStartDate();
+    LocalDate endDate = myReservationDTO.getEndDate();
+    Map<DayOfWeek, LocalTime[]> weeklySchedule = new HashMap<>();
+    weeklySchedule.put(DayOfWeek.valueOf(myReservationDTO.getDayOfWeek()),
+        new LocalTime[]{myReservationDTO.getStartTime(), myReservationDTO.getEndTime()});
+    return createCourseSchedule(startDate, endDate, weeklySchedule);
+
+
+    /*LocalDate startDate = myReservationDTO.getStartDate();
+    LocalDate endDate = myReservationDTO.getEndDate();
+    Map<DayOfWeek,LocalTime[]> weeklySchedule = new HashMap<>();*/
+
+  }
+
+  //==스케쥴 생성==//
+  private List<LocalDateTime[]> createCourseSchedule(LocalDate startDate, LocalDate endDate,
+      Map<DayOfWeek, LocalTime[]> weeklySchedule) {
+    List<LocalDateTime[]> schedules = new ArrayList<>();
+    LocalDate current = startDate;
+    while (!current.isAfter(endDate)) {
+      DayOfWeek currentDay = current.getDayOfWeek();
+      if (weeklySchedule.containsKey(currentDay)) {
+        LocalTime[] times = weeklySchedule.get(currentDay);
+        LocalDateTime startDateTime = LocalDateTime.of(current, times[0]);
+        LocalDateTime endDateTime = LocalDateTime.of(current, times[1]);
+        schedules.add(new LocalDateTime[]{startDateTime, endDateTime});
+      }
+      current = current.plusDays(1);
+    }
+    return schedules;
+  }
+
+  //==비즈니스 로직==//
+  private void checkScheduleOverlap(List<LocalDateTime[]> schedule1,
+      List<LocalDateTime[]> schedule2) {
+    for (LocalDateTime[] timeSlot1 : schedule1) {
+      for (LocalDateTime[] timeSlot2 : schedule2) {
+        if (isOverlapping(timeSlot1, timeSlot2)) {
+          throw new IllegalStateException("고객님의 예약이 학습중인 강의와 스케쥴이 겹칩니다: " +
+              "예약 하실 강의 스케쥴: " + timeSlot1[0] + " ~ " + timeSlot1[1] + "/n"
+              + "기존 강의 스케쥴: " + timeSlot2[0] + " ~ " + timeSlot2[1]);
+        }
+      }
+    }
+  }
+
+  //==오버랩 확인==//
+  private boolean isOverlapping(LocalDateTime[] timeSlot1, LocalDateTime[] timeSlot2) {
+    LocalDateTime start1 = timeSlot1[0];
+    LocalDateTime end1 = timeSlot1[1];
+    LocalDateTime start2 = timeSlot2[0];
+    LocalDateTime end2 = timeSlot2[1];
+    return start1.isBefore(end2) && end1.isAfter(start2);
   }
 }

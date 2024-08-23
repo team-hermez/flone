@@ -24,4 +24,6 @@ public interface ReservationService {
    * @param reservation 환불 요청 예약 정보
    */
   void cancel(Reservation reservation);
+
+  void verifyCourseSchedule(int courseId);
 }

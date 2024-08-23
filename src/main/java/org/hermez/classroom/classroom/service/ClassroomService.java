@@ -1,6 +1,8 @@
 package org.hermez.classroom.classroom.service;
 
+import org.hermez.classroom.classroom.dto.ClassroomCardResponse;
 import org.hermez.classroom.classroom.dto.ClassroomRegisterRequest;
+import org.hermez.common.page.Page;
 
 import java.util.Map;
 
@@ -18,7 +20,7 @@ public interface ClassroomService {
      * @param page 조회할 페이지 번호
      * @return 강의룸 목록과 페이징 정보를 담고 있는 Map 객체
      */
-    Map<String, Object> getClassroomList(int courseId, int page);
+    Page<ClassroomCardResponse> getClassroomList(int courseId, int page);
 
     /**
      * 새로운 강의룸을 등록합니다.

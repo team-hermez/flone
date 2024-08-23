@@ -32,11 +32,13 @@ public interface ClassroomMapper {
             "WHERE c.course_id = #{courseId} " +
             "AND i.entity_type = 'classroom' " +
             "ORDER BY c.created_at DESC " +
-            "LIMIT #{offset}, 9")
-    List<ClassroomCardResponse> selectClassroomList(@Param("courseId") int courseId, @Param("offset") int offset);
+            "LIMIT #{offset}, #{itemsPerPage}")
+    List<ClassroomCardResponse> selectClassroomList(@Param("courseId") int courseId, @Param("offset") int offset, @Param("itemsPerPage") int itemPerPage);
 
     /**
      * 클래스룸의 영상링크를 가져오는 메서드입니다.
+     *'
+     *
      *
      * @param classroomId
      * @return 등록된 영상 링크

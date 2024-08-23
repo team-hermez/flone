@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ClassroomNotFoundException.class)
-    public String handleClassroomServiceException(BoardServiceException ex, Model model) {
+    public String handleClassroomServiceException(ClassroomNotFoundException ex, Model model) {
         model.addAttribute("errorMessage", ex.getMessage());
         return "error";
     }
@@ -42,7 +42,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ReplyNotFoundException.class)
-    public String handleReplyServiceException(BoardServiceException ex, Model model) {
+    public String handleReplyServiceException(ReplyNotFoundException ex, Model model) {
         model.addAttribute("errorMessage", ex.getMessage());
         return "error";
     }

@@ -3,13 +3,12 @@
 
 <!doctype html>
 <html class="no-js" lang="zxx">
-
 <head>
     <%@ include file="css.jsp"%>
 </head>
-
 <body>
 <%@ include file="header.jsp"%>
+
 <div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
     <div class="container">
         <div class="breadcrumb-content text-center">
@@ -20,6 +19,7 @@
         </div>
     </div>
 </div>
+
 <div class="Blog-area pt-100 pb-100 blog-no-sidebar">
     <div class="container">
         <div class="section-title text-center mb-sm-5">
@@ -31,7 +31,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="row">
-                    <c:forEach var="classroom" items="${classrooms}">
+                    <c:forEach var="classroom" items="${classroomPage.contents}">
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="blog-wrap-2 mb-30">
                                 <div class="blog-img-2">
@@ -62,7 +62,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Delete Button -->
                                     <div class="text-center mt-3">
                                         <form action="classroom-delete.hm" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
                                             <input type="hidden" name="classroomId" value="${classroom.classroomId}">
@@ -75,21 +74,20 @@
                         </div>
                     </c:forEach>
                 </div>
+
                 <div class="pro-pagination-style text-center mt-20">
                     <div>
-                        <!-- Previous Page Link -->
                         <c:choose>
-                            <c:when test="${currentPage > 1}">
-                                <a href="?courseId=${courseId}&page=${currentPage - 1}&size=${pageSize}">Previous</a>
+                            <c:when test="${classroomPage.currentPage > 1}">
+                                <a href="?courseId=${courseId}&page=${classroomPage.currentPage - 1}">Previous</a>
                             </c:when>
                             <c:otherwise>
                                 <span>Previous</span>
                             </c:otherwise>
                         </c:choose>
-
-                        <c:forEach begin="1" end="${totalPages}" var="pageNum">
+                        <c:forEach begin="1" end="${classroomPage.totalPages}" var="pageNum">
                             <c:choose>
-                                <c:when test="${pageNum == currentPage}">
+                                <c:when test="${pageNum == classroomPage.currentPage}">
                                     <span>${pageNum}</span>
                                 </c:when>
                                 <c:otherwise>
@@ -97,11 +95,9 @@
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
-
-                        <!-- Next Page Link -->
                         <c:choose>
-                            <c:when test="${currentPage < totalPages}">
-                                <a href="?courseId=${courseId}&page=${currentPage + 1}">Next</a>
+                            <c:when test="${classroomPage.currentPage < classroomPage.totalPages}">
+                                <a href="?courseId=${courseId}&page=${classroomPage.currentPage + 1}">Next</a>
                             </c:when>
                             <c:otherwise>
                                 <span>Next</span>
@@ -113,9 +109,8 @@
         </div>
     </div>
 </div>
+
 <%@ include file="footer.jsp" %>
 <%@ include file="script.jsp"%>
-
 </body>
-
 </html>

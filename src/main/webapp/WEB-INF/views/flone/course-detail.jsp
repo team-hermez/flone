@@ -96,7 +96,7 @@
 
                     <div class="pro-details-quality">
                         <div class="pro-details-cart btn-hover">
-                            <a href="/flone/reservation/detail.hm">예약하기</a>
+                            <a href="/flone/reservation/detail.hm?courseId=${courseDetail.courseId}">예약하기</a>
                         </div>
                         <div class="pro-details-wishlist">
                             <a href="#"><i class="fa fa-heart-o"></i></a>

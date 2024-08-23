@@ -37,7 +37,7 @@ public interface CourseMapper {
      * @param courseId
      * @return 강의 상세 정보
      */
-    @Select("select title,m.name as instructorName,course_Price as coursePrice, description, start_date as startDate, end_date as endDate, i.instructor_id as instructorId, s.subject_name as subject, grade_name as grade\n" +
+    @Select("select c.course_id as courseId, title,m.name as instructorName,course_Price as coursePrice, description, start_date as startDate, end_date as endDate, i.instructor_id as instructorId, s.subject_name as subject, grade_name as grade\n" +
             "from course c left join instructor i on (c.instructor_id=i.instructor_id)\n" +
             "left join member m on (i.member_id=m.member_id)\n" +
             "left join subject s on (i.subject_id = s.subject_id)\n" +

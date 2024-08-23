@@ -1,5 +1,6 @@
 package org.hermez.course.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.course.dto.CourseListResponse;
 import org.hermez.course.dto.CourseRegisterRequest;
@@ -17,6 +18,7 @@ import java.util.List;
  * @author 엄진수
  */
 
+@Slf4j
 @Service
 public class CourseServiceImpl implements CourseService {
     private final CourseMapper courseMapper;

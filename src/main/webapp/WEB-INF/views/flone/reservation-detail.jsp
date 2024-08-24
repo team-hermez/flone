@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -7,16 +7,16 @@
 </head>
 
 <body>
-<%@ include file="header.jsp"%>
+<%@ include file="header.jsp" %>
 
 <div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
     <div class="container">
         <div class="breadcrumb-content text-center">
             <ul>
                 <li>
-                    <a href="/index.html">Home</a>
+                    <a href="/flone/index.hm">Home</a>
                 </li>
-                <li class="active">수강 예약 강의 상세 </li>
+                <li class="active">수강 예약 강의 상세</li>
             </ul>
         </div>
     </div>
@@ -34,12 +34,21 @@
                             <div class="blog-meta-2">
                                 <ul>
                                     <li>강의 날짜</li>
+                                    <li>${courseDetailList.startDate}
+                                        - ${courseDetailList.endDate}</li>
+                                </ul>
+                                <ul>
                                     <li><a href="#">강의 시간 <i class="fa fa-comments-o"></i></a></li>
                                 </ul>
+                                <c:forEach items="${courseTimeList}" var="time">
+                                    <ul>
+                                        <li>${time.dayOfWeek}</li>
+                                        <li>${time.startTime} - ${time.endTime}</li>
+                                    </ul>
+                                </c:forEach>
                             </div>
-                            <h3>과목명</h3>
-                            <h3>강의 제목</h3>
-                            <p>강의 설명 </p>
+                            <h3>${courseDetailList.title}</h3>
+                            <p>${courseDetailList.description}</p>
                         </div>
                     </div>
                 </div>
@@ -51,7 +60,8 @@
                         <div class="sidebar-project-wrap mt-30">
                             <div class="single-sidebar-blog">
                                 <div class="sidebar-blog-img">
-                                    <a href="#"><img src="/assets/img/blog/sidebar-1.jpg" alt=""></a>
+                                    <a href="#"><img src="/assets/img/blog/sidebar-1.jpg"
+                                                     alt=""></a>
                                 </div>
                                 <div class="sidebar-blog-content">
                                     <span>Photography</span>
@@ -60,7 +70,8 @@
                             </div>
                             <div class="single-sidebar-blog">
                                 <div class="sidebar-blog-img">
-                                    <a href="#"><img src="/assets/img/blog/sidebar-2.jpg" alt=""></a>
+                                    <a href="#"><img src="/assets/img/blog/sidebar-2.jpg"
+                                                     alt=""></a>
                                 </div>
                                 <div class="sidebar-blog-content">
                                     <span>Branding</span>
@@ -69,7 +80,8 @@
                             </div>
                             <div class="single-sidebar-blog">
                                 <div class="sidebar-blog-img">
-                                    <a href="#"><img src="/assets/img/blog/sidebar-3.jpg" alt=""></a>
+                                    <a href="#"><img src="/assets/img/blog/sidebar-3.jpg"
+                                                     alt=""></a>
                                 </div>
                                 <div class="sidebar-blog-content">
                                     <span>Design</span>
@@ -78,7 +90,8 @@
                             </div>
                             <div class="single-sidebar-blog">
                                 <div class="sidebar-blog-img">
-                                    <a href="#"><img src="/assets/img/blog/sidebar-1.jpg" alt=""></a>
+                                    <a href="#"><img src="/assets/img/blog/sidebar-1.jpg"
+                                                     alt=""></a>
                                 </div>
                                 <div class="sidebar-blog-content">
                                     <span>Photography</span>
@@ -87,7 +100,8 @@
                             </div>
                             <div class="single-sidebar-blog">
                                 <div class="sidebar-blog-content">
-                                    <button type="button" class="btn btn-outline-danger">강의 룸</button>
+                                    <button type="button" class="btn btn-outline-danger">강의 룸
+                                    </button>
                                 </div>
                             </div>
                             <div class="single-sidebar-blog">

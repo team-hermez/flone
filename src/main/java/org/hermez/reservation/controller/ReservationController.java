@@ -91,24 +91,22 @@ public class ReservationController {
   @GetMapping("/list.hm")
   public String getReservationListForm(@RequestParam(value = "page", defaultValue = "1") int page,
       Model model) {
-
-  //  List<ReservationListResponse> reservationList = reservationRepository.reservationList(1);
     Page<ReservationListResponse> reservationPage = reservationRepository.getReservationList(1,
         page);
     log.info("reservationPage = {}", reservationPage.getContents());
     Member member = new Member();
     model.addAttribute("memberId", 1);
     model.addAttribute("reservationPage", reservationPage);
-   // model.addAttribute("reservationList", reservationList);
     return "/flone/reservation-list";
   }
 
   @GetMapping("/reservation-detail.hm")
   public String getReservationDetailPage(@RequestParam int courseId, Model model) {
-    model.addAttribute("courseId", courseId);
-    // ReservationDetailResponse reservationDetail = new ReservationDetailResponse();
-    //model.addAttribute("reservationDetail", reservationDetail);
-
+    CourseDetailResponse courseDetailList = courseService.courseDetailService(courseId);
+    System.out.println("courseDetailList = " + courseDetailList.getStartDate());
+    List<CourseTime> courseTimeList = courseService.courseDetailTime(courseId);
+    model.addAttribute("courseDetailList", courseDetailList);
+    model.addAttribute("courseTimeList", courseTimeList);
     return "flone/reservation-detail";
   }
 

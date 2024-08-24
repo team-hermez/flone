@@ -3,13 +3,13 @@ package org.hermez.instructor.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.hermez.common.page.Page;
 import org.hermez.common.page.PaginationUtil;
-import org.hermez.course.dto.CourseListResponse;
 import org.hermez.image.service.ImageService;
 import org.hermez.instructor.dto.InstructorDetailResponse;
 import org.hermez.instructor.dto.InstructorListResponse;
 import org.hermez.instructor.dto.InstructorRegisterRequest;
 import org.hermez.instructor.mapper.InstructorMapper;
 
+import org.hermez.instructor.model.Instructor;
 import org.hermez.instructor.service.InstructorService;
 import org.springframework.stereotype.Service;
 
@@ -41,5 +41,10 @@ public class InstructorServiceImpl implements InstructorService {
     @Override
     public void insertInstructor(InstructorRegisterRequest instructorRegisterRequest) {
         instructorMapper.insertInstructor(instructorRegisterRequest);
+    }
+
+    @Override
+    public Instructor findByMemberId(int memberId) {
+        return instructorMapper.findByMemberId(memberId);
     }
 }

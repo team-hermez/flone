@@ -12,7 +12,7 @@ public class Member {
     private int roleId;
     private String email;
     private String password;
-    private String password1;
+    private String passwordNot;
     private String name;
     private String phone;
     private LocalDateTime createdAt;

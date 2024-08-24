@@ -54,8 +54,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NoHandlerFoundException.class)
     @ResponseStatus(NOT_FOUND)
-    public String handleNoHandlerFoundException(NoHandlerFoundException ex, Model model) {
-        model.addAttribute("errorMessage", ex.getMessage());
+    public String handleNoHandlerFoundException() {
         return "/flone/error/404";
     }
 

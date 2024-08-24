@@ -61,6 +61,7 @@ public class MemberController {
         return "flone/index";
     }
 
+    //TODO 마이페이지 로그인 한 사용자 데이터 뿌려주기, 회원탈퇴, 비번변경
     @GetMapping("my-account.hm")
     public String getMyAccountPage(HttpSession session, Model model) {
         MyAccountResponse myAccount = new MyAccountResponse(
@@ -74,6 +75,7 @@ public class MemberController {
         return "flone/my-account";
     }
 
+    //TODO 회원가입 유효성 비밀번호 서비스에서 처리 및 버튼? 하나 만들어서 누르면 비번 보이도록 ex) **** -> 1234
     @PostMapping("register.hm")
     public String postMemberRegister(@Validated @ModelAttribute("member") MemberRegisterRequest memberRegisterRequest, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -83,14 +85,36 @@ public class MemberController {
             bindingResult.rejectValue("password", "passwordNot", "패스워드가 일치하지 않습니다.");
             return "flone/register";
         }
-
         memberService.registerMember(memberRegisterRequest);
         return "flone/login";
     }
 
+    //TODO 로그인 유효성 이메일, 비밀번호
+//    @PostMapping("login1.hm")
+//    public String postLogin(@Validated @ModelAttribute("member") MemberLoginRequest memberLoginRequest,
+//                            BindingResult bindingResult, HttpSession session, Model model) {
+//        // 로그인 시 아이디가 존재하는지 확인
+//        Member member = memberService.findMemberByEmail(memberLoginRequest.getEmail());
+//        if (member == null) {
+//            bindingResult.rejectValue("email", "email.notfound", "아이디가 없습니다.");
+//            return "flone/login";
+//        }
+//
+//        // 비밀번호 확인
+//        boolean isPasswordValid = memberService.checkPassword(memberLoginRequest.getEmail(), memberLoginRequest.getPassword());
+//        if (!isPasswordValid) {
+//            bindingResult.rejectValue("password", "password.incorrect", "비밀번호가 틀립니다.");
+//            return "flone/login";
+//        }
+//
+//        // 로그인 성공
+//        session.setAttribute("MEMBER", member);
+//        return "redirect:/flone/index.hm";
+//    }
+//}
+
     @PostMapping("login.hm")
     public String postLogin(@Validated @ModelAttribute("member") MemberLoginRequest memberLoginRequest, HttpSession session) {
-        //TODO 로그인한 사람이 강사면 강사세션으로 로그인 되도록 Filter 만들기
         System.out.println("postLogin member start.");
         memberService.loginMember(memberLoginRequest);
         Member member1 = (Member) session.getAttribute("MEMBER");
@@ -98,6 +122,82 @@ public class MemberController {
 
         return "redirect:/flone/index.hm";
     }
+
+    @GetMapping("naverlogin.hm")
+    public String naverLogin(HttpSession session) {
+        try {
+            String redirectURI = URLEncoder.encode("http://localhost:8080/flone/member/naverAuth.hm", "UTF-8");
+
+            SecureRandom random = new SecureRandom();
+            String state = new BigInteger(130, random).toString(); // CSRF 방지를 위한 state 값
+
+            String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
+                    + "&client_id=" + NAVER_CLIENTID
+                    + "&redirect_uri=" + redirectURI
+                    + "&state=" + state;
+
+            session.setAttribute("state1", state);
+
+            return "redirect:" + apiURL; // 네이버 로그인 페이지로 리다이렉트
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error"; // 에러 발생 시 에러 페이지로 이동
+        }
+    }
+    @GetMapping("naverAuth.hm")
+    public String naverAuth(@RequestParam("code") String code,
+                            @RequestParam("state") String state,
+                            HttpSession session) {
+        try {
+            String sessionState = (String) session.getAttribute("state1");
+            if (sessionState.equals(state)) {
+                String redirectURI = URLEncoder.encode("http://localhost:8080/flone/member/naverAuth.hm", "UTF-8");
+
+                String apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code"
+                        + "&client_id=" + NAVER_CLIENTID
+                        + "&client_secret=" + NAVER_SECRET
+                        + "&redirect_uri=" + redirectURI
+                        + "&code=" + code
+                        + "&state=" + state;
+
+                StringBuilder res = new StringBuilder();
+                URL url = new URL(apiURL);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                con.setRequestMethod("GET");
+
+                int responseCode = con.getResponseCode();
+                BufferedReader br;
+                if (responseCode == 200) {
+                    br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                } else {
+                    br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+                }
+                String inputLine;
+                while ((inputLine = br.readLine()) != null) {
+                    res.append(inputLine);
+                }
+                br.close();
+
+                JSONObject jsonObj = new JSONObject(res.toString());
+                String accessToken = jsonObj.getString("access_token");
+                String refreshToken = jsonObj.getString("refresh_token");
+
+                session.setAttribute("accessToken", accessToken);
+                session.setAttribute("refreshToken", refreshToken);
+
+                return "redirect:/flone/아직 구현 중입니다.hm";
+
+            } else {
+                return "error";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
+    }
+
+
 
 
 }

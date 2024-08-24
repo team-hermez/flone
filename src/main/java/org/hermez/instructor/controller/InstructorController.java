@@ -2,6 +2,7 @@ package org.hermez.instructor.controller;
 
 import org.hermez.common.page.Page;
 import org.hermez.course.dto.CourseListResponse;
+import org.hermez.instructor.dto.InstructorDetailResponse;
 import org.hermez.instructor.dto.InstructorListResponse;
 import org.hermez.instructor.dto.InstructorRegisterRequest;
 import org.hermez.instructor.mapper.InstructorMapper;
@@ -40,7 +41,9 @@ public class InstructorController {
     }
 
     @GetMapping("detail.hm")
-    public String getInstructorDetailPage(@RequestParam int instructorId) {
+    public String getInstructorDetailPage(@RequestParam int instructorId, Model model) {
+        ArrayList<InstructorDetailResponse> instructorDetailResponses = instructorService.selectInstructorDetail(instructorId);
+        model.addAttribute("instructorDetail", instructorDetailResponses);
         return "flone/instructor-detail";
     }
 

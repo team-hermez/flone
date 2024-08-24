@@ -10,7 +10,6 @@ public class InstructorListResponse {
     private int memberId;
     private int subjectId;
     private String name;
-    private String instructorDescription;
     private String instructorStatus;
-
+    private String instructorTitle;
 }

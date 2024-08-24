@@ -5,6 +5,7 @@ import org.hermez.common.page.Page;
 import org.hermez.common.page.PaginationUtil;
 import org.hermez.course.dto.CourseListResponse;
 import org.hermez.image.service.ImageService;
+import org.hermez.instructor.dto.InstructorDetailResponse;
 import org.hermez.instructor.dto.InstructorListResponse;
 import org.hermez.instructor.dto.InstructorRegisterRequest;
 import org.hermez.instructor.mapper.InstructorMapper;
@@ -28,6 +29,12 @@ public class InstructorServiceImpl implements InstructorService {
         PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total, 4, page);
         List<InstructorListResponse> instructors = instructorMapper.selectInstructorList(pageInfo.getOffset(), pageInfo.getItemsPerPage());
         return new Page<>(instructors, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
+    }
+
+    @Override
+    public ArrayList<InstructorDetailResponse> selectInstructorDetail(int instructorsID) {
+        ArrayList<InstructorDetailResponse> instructorDetails = instructorMapper.selectInstructorDetail(instructorsID);
+        return instructorDetails;
     }
 
 

@@ -54,24 +54,13 @@
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="team-wrapper mb-30">
                     <div class="team-img">
-                        <a href="#">
-                            <img src="/assets/img/team/team-1.jpg" href="/flone/instructors/detail.hm?instructorsId=${instructors.instructorId}">
+                        <a href="/flone/instructor/detail.hm?instructorId=${instructors.instructorId}">
+                            <img src="/assets/img/team/team-1.jpg" href="/flone/instructor/detail.hm?instructorId=${instructors.instructorId}">
                         </a>
-                        <div class="team-action">
-                            <a class="facebook" href="#">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-                            <a class="twitter" title="Wishlist" href="#">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-                            <a class="instagram" href="#">
-                                <i class="fa fa-instagram"></i>
-                            </a>
-                        </div>
                     </div>
                     <div class="team-content text-center">
                         <h4>${instructors.name}</h4>
-                        <span>${instructors.instructorDescription} </span>
+                        <span>${instructors.instructorTitle} </span>
                     </div>
                 </div>
             </div>

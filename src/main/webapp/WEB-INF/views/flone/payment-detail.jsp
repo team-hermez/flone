@@ -13,82 +13,13 @@
     </style>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+    <script src="/resources/assets/js/reservation.js"></script>
     <script>
-      var IMP = window.IMP;
-      IMP.init("imp81023706");
-
-      function requestPay() {
-        IMP.request_pay({
-          pg: "html5_inicis",
-          pay_method: "card",
-          merchant_uid: "${reserveForm.merchantUid}",
-          name: '${reserveForm.title}',
-          amount: ${reserveForm.coursePrice},
-          buyer_email: "${reserveForm.memberEmail}",
-          buyer_name: "${reserveForm.memberName}",
-          buyer_tel: "${reserveForm.memberPhone}"
-        }, function (rsp) {
-          if (rsp.success) {
-            var msg = '결제가 완료되었습니다.';
-            alert(msg);
-            let data = {
-              imp_uid: rsp.imp_uid,
-              courseId: ${reserveForm.courseId},
-              amount: ${reserveForm.coursePrice},
-              merchant_uid: rsp.merchant_uid
-            };
-            $.ajax({
-              type: 'POST',
-              url: '/flone/reservation/verify-iamport.hm',
-              data: JSON.stringify(data),
-              contentType: "application/json;charset=utf-8",
-              dataType: 'json',
-              success: (result) => {
-                alert('결제검증 완료')
-                location.href = 'success-page.hm?courseId=${reserveForm.courseId}';
-              },
-              error: (result) => {
-                alert(result.responseText);
-                cancelPayments(rsp);
-              }
-            });
-          } else {
-            var msg = '결제에 실패하였습니다.';
-            msg += '에러내용 : ' + rsp.error_msg;
-            alert(msg);
-          }
-        });
-      }
-
-      function cancelPayments(temp) {
-        let data = null;
-        if (temp != null) {//결제금액이 달라졌을때 결제취소
-          data = {
-            imp_uid: temp.imp_uid,
-            reason: "결제 금액 위/변조, 결제 금액이 다름",
-            refundHolder: temp.buyer_name,
-            merchant_uid: temp.merchant_uid
-          };
-        } else {//유저가 환불을 요청했을때 데이터
-
-        }
-        $.ajax({
-          type: 'POST',
-          url: "/flone/reservation/cancel-payment.hm",
-          data: JSON.stringify(data),
-          contentType: 'application/json;charset=utf-8',
-          success: (result) => {
-            alert("결제금액 환불완료")
-            location.href = '/flone/reservation/cancel-payment.hm';
-            //결제취소 화면 이동
-          },
-          error: (result) => {
-            location.href = '/flone/reservation/cancel-payment.hm';
-            alert("환불 실패: " + result.responseText)
-          }
-        });
+      function clickPay(){
+requestPay("${reserveForm.merchantUid}","${reserveForm.title}",${reserveForm.coursePrice},"${reserveForm.memberEmail}","${reserveForm.memberName}","${reserveForm.memberPhone}","${reserveForm.courseId}")
       }
     </script>
+
 </head>
 <body>
 <%@ include file="header.jsp" %>
@@ -146,8 +77,6 @@
                                     <li>${reserveForm.startDate} ~ ${reserveForm.endDate}</li>
                                 </ul>
                             </div>
-
-
                             <div class="product-details-content ml-70">
                                 <ul>
                                     <li class="your-order-shipping">강의시간</li>
@@ -177,18 +106,15 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                             <div class="Place-order mt-25">
-                                <a class="btn-hover" href="#" onclick="requestPay()">결제</a>
+                                <a class="btn-hover" id="pay-course" onclick="clickPay()" >결제</a>
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>

@@ -4,10 +4,10 @@
 <html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
 <head>
     <%@ include file="css.jsp" %>
+    <script src="/resources/assets/js/reservation.js"></script>
 </head>
-
 <body>
-<!--<%@ include file="header.jsp"%>-->
+<%@ include file="header.jsp" %>
 <div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
     <div class="container">
         <div class="breadcrumb-content text-center">
@@ -22,7 +22,7 @@
 </div>
 <div class="cart-main-area pt-90 pb-100">
     <div class="container">
-        <h3 class="cart-page-title">Your cart items</h3>
+        <h3 class="cart-page-title">강의 예약 목록</h3>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                 <form action="#">
@@ -64,9 +64,9 @@
                                                    value="${reservation.merchantUid}">
                                         </c:if>
                                         <c:if test="${reservation.reservationStatusId eq 2}">
-                                            <input type="checkbox" value="${reservation.merchantUid}" disabled>
+                                            <input type="checkbox"
+                                                   value="${reservation.merchantUid}" disabled>
                                         </c:if>
-
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -86,84 +86,49 @@
                         </div>
                     </div>
                     <div class="pro-pagination-style text-center mt-20">
-                    <div>
-                    <ul>
-<%--                        Prev Page--%>
-                        <c:choose>
-                            <c:when test="${reservationPage.currentPage > 1}">
-                                <li><a class="prev" href="?page=${reservationPage.currentPage - 1}"><i class="fa fa-angle-double-left"></i></a></li>
-                            </c:when>
-                            <c:otherwise>
-                                <li><a class="prev" href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                            </c:otherwise>
-                        </c:choose>
-<%--                        Current Page--%>
-                        <c:forEach begin="1" end="${reservationPage.totalPages}" var="pageNum">
-                            <c:choose>
-                                <c:when test="${pageNum == reservationPage.currentPage}">
-                                    <li><a class="active" href="#">${pageNum}</a></li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li><a href="?page=${pageNum}">${pageNum}</a></li>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
-<%--                        Next Page--%>
-                        <c:choose>
-                            <c:when test="${reservationPage.currentPage < reservationPage.totalPages}">
-                                <li><a class="next" href="?page=${reservationPage.currentPage + 1}"><i class="fa fa-angle-double-right"></i></a></li>
-                            </c:when>
-                            <c:otherwise>
-                                <li><a class="next" href="#"><i class="fa fa-angle-double-right"></i></a></li>
-                            </c:otherwise>
-                        </c:choose>
-                    </ul>
+                        <div>
+                            <ul>
+                                <%--                        Prev Page--%>
+                                <c:choose>
+                                    <c:when test="${reservationPage.currentPage > 1}">
+                                        <li><a class="prev"
+                                               href="?page=${reservationPage.currentPage - 1}"><i
+                                                class="fa fa-angle-double-left"></i></a></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li><a class="prev" href="#"><i
+                                                class="fa fa-angle-double-left"></i></a></li>
+                                    </c:otherwise>
+                                </c:choose>
+                                <%--                        Current Page--%>
+                                <c:forEach begin="1" end="${reservationPage.totalPages}"
+                                           var="pageNum">
+                                    <c:choose>
+                                        <c:when test="${pageNum == reservationPage.currentPage}">
+                                            <li><a class="active" href="#">${pageNum}</a></li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li><a href="?page=${pageNum}">${pageNum}</a></li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                                <%--                        Next Page--%>
+                                <c:choose>
+                                    <c:when test="${reservationPage.currentPage < reservationPage.totalPages}">
+                                        <li><a class="next"
+                                               href="?page=${reservationPage.currentPage + 1}"><i
+                                                class="fa fa-angle-double-right"></i></a></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li><a class="next" href="#"><i
+                                                class="fa fa-angle-double-right"></i></a></li>
+                                    </c:otherwise>
+                                </c:choose>
+                            </ul>
+                        </div>
                     </div>
-                </div>
                 </form>
-                <script>
-                  const allSelectBtn = document.getElementById("selectAllBtn");
-                  const checkLists = document.querySelectorAll('.checkList');
-                  const printBtn = document.getElementById('printBtn');
-                  allSelectBtn.addEventListener('click', () => {
-                    checkLists.forEach((checkList) => {
-                      checkList.checked = true;
-                    })
-                  });
-                  printBtn.addEventListener('click', () => {
-                    checkLists.forEach((checkList) => {
-                      if (checkList.checked) {
-                        let selectData = {
-                          merchant_uid: checkList.value,
-                          reason: "관리자 삭제",
-                          refundHolder: 2
-                        }
-                        cancelPayments(selectData)
-                      }
-                    })
-                  })
-
-                  function cancelPayments(rsp) {
-                    let data = {
-                      merchant_uid: rsp.merchant_uid
-                    };
-                    $.ajax({
-                      type: 'POST',
-                      url: "cancel-payment.hm",
-                      data: JSON.stringify(data),
-                      contentType: 'application/json;charset=utf-8',
-                      success: (res) => {
-                        alert("결제금액 환불완료")
-                        location.href = '/flone/reservation/cancel-payment.hm';
-                        //결제취소 화면 이동
-                      },
-                      error: (res) => {
-                        location.href = '/flone/reservation/cancel-payment.hm';
-                        alert("환불 실패: " + result.responseText)
-                      }
-                    });
-                  }
-                </script>
+                <script src="/resources/assets/js/cancelpay.js"></script>
             </div>
         </div>
     </div>

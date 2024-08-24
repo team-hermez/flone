@@ -4,22 +4,20 @@
 <html class="no-js" lang="zxx">
 
 <head>
-    <%@ include file="css.jsp" %>
     <style>
       #reservation-course-img {
         width: 100%;
         height: 100%;
       }
     </style>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-    <script src="/resources/assets/js/reservation.js"></script>
+    <%@ include file="refund-payment.jsp" %>
     <script>
-      function clickPay(){
-requestPay("${reserveForm.merchantUid}","${reserveForm.title}",${reserveForm.coursePrice},"${reserveForm.memberEmail}","${reserveForm.memberName}","${reserveForm.memberPhone}","${reserveForm.courseId}")
+      function clickPay() {
+        requestPay("${reserveForm.merchantUid}", "${reserveForm.title}", ${reserveForm.coursePrice},
+            "${reserveForm.memberEmail}", "${reserveForm.memberName}", "${reserveForm.memberPhone}",
+            "${reserveForm.courseId}")
       }
     </script>
-
 </head>
 <body>
 <%@ include file="header.jsp" %>
@@ -110,7 +108,7 @@ requestPay("${reserveForm.merchantUid}","${reserveForm.title}",${reserveForm.cou
                                 </div>
                             </div>
                             <div class="Place-order mt-25">
-                                <a class="btn-hover" id="pay-course" onclick="clickPay()" >결제</a>
+                                <a class="btn-hover" id="pay-course" onclick="clickPay()">결제</a>
                             </div>
                         </div>
                     </div>
@@ -118,7 +116,6 @@ requestPay("${reserveForm.merchantUid}","${reserveForm.title}",${reserveForm.cou
             </div>
         </div>
     </div>
-</div>
 </div>
 <%@ include file="footer.jsp" %>
 <%@ include file="script.jsp" %>

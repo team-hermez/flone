@@ -1,12 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
-<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <%@ include file="css.jsp" %>
-    <script src="/resources/assets/js/reservation.js"></script>
-</head>
+<html class="no-js" lang="zxx">
 <body>
+<%@ include file="refund-payment.jsp" %>
 <%@ include file="header.jsp" %>
 <div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
     <div class="container">
@@ -80,7 +77,7 @@
                                 <div class="cart-shiping-update">
                                 </div>
                                 <div class="cart-clear">
-                                    <a href="#" id="printBtn">취소</a>
+                                    <a href="#" id="cancel-btn">취소</a>
                                 </div>
                             </div>
                         </div>
@@ -128,11 +125,11 @@
                         </div>
                     </div>
                 </form>
-                <script src="/resources/assets/js/cancelpay.js"></script>
             </div>
         </div>
     </div>
 </div>
+<%@ include file="refund-list-payment.jsp" %>
 <%@ include file="footer.jsp" %>
 <%@ include file="script.jsp" %>
 </body>

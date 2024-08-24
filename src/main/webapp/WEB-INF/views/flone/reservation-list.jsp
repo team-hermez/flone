@@ -87,32 +87,37 @@
                     </div>
                     <div class="pro-pagination-style text-center mt-20">
                     <div>
+                    <ul>
+<%--                        Prev Page--%>
                         <c:choose>
                             <c:when test="${reservationPage.currentPage > 1}">
-                                <a href="?page=${reservationPage.currentPage - 1}">Previous</a>
+                                <li><a class="prev" href="?page=${reservationPage.currentPage - 1}"><i class="fa fa-angle-double-left"></i></a></li>
                             </c:when>
                             <c:otherwise>
-                                <span>Previous</span>
+                                <li><a class="prev" href="#"><i class="fa fa-angle-double-left"></i></a></li>
                             </c:otherwise>
                         </c:choose>
+<%--                        Current Page--%>
                         <c:forEach begin="1" end="${reservationPage.totalPages}" var="pageNum">
                             <c:choose>
                                 <c:when test="${pageNum == reservationPage.currentPage}">
-                                    <span>${pageNum}</span>
+                                    <li><a class="active" href="#">${pageNum}</a></li>
                                 </c:when>
                                 <c:otherwise>
-                                    <a href="?page=${pageNum}">${pageNum}</a>
+                                    <li><a href="?page=${pageNum}">${pageNum}</a></li>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
+<%--                        Next Page--%>
                         <c:choose>
                             <c:when test="${reservationPage.currentPage < reservationPage.totalPages}">
-                                <a href="?page=${reservationPage.currentPage + 1}">Next</a>
+                                <li><a class="next" href="?page=${reservationPage.currentPage + 1}"><i class="fa fa-angle-double-right"></i></a></li>
                             </c:when>
                             <c:otherwise>
-                                <span>Next</span>
+                                <li><a class="next" href="#"><i class="fa fa-angle-double-right"></i></a></li>
                             </c:otherwise>
                         </c:choose>
+                    </ul>
                     </div>
                 </div>
                 </form>

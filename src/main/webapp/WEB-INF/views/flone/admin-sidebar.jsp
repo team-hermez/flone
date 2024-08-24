@@ -78,11 +78,11 @@
     <div class="sidebar-menu">
         <nav>
             <ul>
-                <li><a href="admin-main.hm"> MAIN </a></li>
-                <li><a href="contact.html"> 회원관리</a></li>
-                <li><a href="contact.html"> 강사관리</a></li>
-                <li><a href="contact.html"> 강의관리</a></li>
-                <li><a href="blog.html">결제관리 <span><i class="fa fa-angle-right"></i></span></a>
+                <li><a href="/flone/admin/main.hm"> MAIN </a></li>
+                <li><a href="/flone/admin/manage-member.hm"> 회원관리</a></li>
+                <li><a href="/flone/admin/manage-instructor.hm"> 강사관리</a></li>
+                <li><a href="/flone/admin/manage-course.hm"> 강의관리</a></li>
+                <li><a href="/flone/admin/manage-payment.hm">결제관리 <span><i class="fa fa-angle-right"></i></span></a>
                     <ul class="submenu">
                         <li><a href="blog.html">결제 수익</a></li>
                         <li><a href="blog-no-sidebar.html">환불 내역</a></li>

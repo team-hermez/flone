@@ -17,40 +17,35 @@
 
     <!-- MAIN WRAPPER
     ================================================== -->
-    <div class="main-wrapper">
-
-        <!-- PAGE TITLE
-        ================================================== -->
-        <section class="page-title-section bg-img cover-background top-position1 left-overlay-dark" data-overlay-dark="9" data-background="img/bg/bg-04.jpg">
-            <div class="container">
-                <div class="row text-center">
-                    <div class="col-md-12">
-                        <h1>Instructors Details</h1>
-                    </div>
-                    <div class="col-md-12">
-                        <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="#!">Instructors Details</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <%@ include file="header.jsp" %>
         <!-- INSTRUCTORS DETAILS
         ================================================== -->
+    <div class="main-wrapper">
+        <div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
+            <div class="container">
+                <div class="breadcrumb-content text-center">
+                    <ul>
+                        <li>
+                            <a href="../index.hm">Home</a>
+                        </li>
+                        <li class="active">instructor-detail</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <section>
             <div class="container">
-                <div class="row mb-1-9 mb-xl-2-9">
+            <c:forEach var ="instructorDetail" items="${instructorDetail}">
+                <div style="margin-top: 50px" class="row mb-1-9 mb-xl-2-9">
                     <div class="col-lg-5 mb-1-9 mb-md-2-5 mb-lg-0">
                         <div class="instructor-img-wrapper mb-50 md-mb-0">
                             <div class="mb-1-6 mb-xl-1-9">
                                 <img class="border-radius-5" src="/assets/img/team/team-02.jpg" alt="...">
                             </div>
                             <div class="text-center">
-                                <h3 class="font-weight-800 display-26 display-md-25 display-xl-24 text-primary">Balsam Samira</h3>
-                                <p class="alt-font text-secondary font-weight-700 mb-2">Chief Instructor</p>
+                                <h3 class="font-weight-800 display-26 display-md-25 display-xl-24 text-primary">${instructorDetail.name}</h3>
+                                <p class="alt-font text-secondary font-weight-700 mb-2">${instructorDetail.subjectName}</p>
                                 <ul class="personal-info">
                                     <li>
                                         <i class="ti-email"></i>
@@ -62,45 +57,19 @@
                                     </li>
                                 </ul>
                             </div>
-                            <ul class="social-box">
-                                <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-youtube"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-linkedin-in"></i></a></li>
-                            </ul>
                         </div>
                     </div>
                     <div class="col-lg-7">
                         <div class="ps-lg-1-9 ps-xl-6">
                             <div class="row mb-1-9 mb-xl-2-9">
                                 <div class="col-lg-12">
-                                    <h4 class="teacher-name">Eliena Rose</h4>
-                                    <p class="lead text-secondary font-weight-700">A certified instructor From eLearn</p>
+                                    <p class="lead text-secondary font-weight-700">${instructorDetail.instructorTitle}</p>
                                     <h4 class="text-dark">About Me:</h4>
-                                    <p class="alt-font text-color font-weight-500">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat.</p>
-                                    <p class="alt-font text-color mb-0 font-weight-500">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.
+                                    <p class="alt-font text-color font-weight-500">${instructorDetail.instructorDescription}</p>
                                     </p>
                                 </div>
                             </div>
-                            <div class="row mb-1-9 mb-xl-2-9">
-                                <div class="col-lg-12">
-                                    <ul class="course-info-list">
-                                        <li>
-                                            <h2 class="countup text-secondary font-weight-800 display-18">12</h2>
-                                            <p class="alt-font font-weight-700 text-color display-30 mb-0">Courses</p>
-                                        </li>
-                                        <li>
-                                            <h2 class="countup text-secondary font-weight-800 display-18">120</h2>
-                                            <p class="alt-font font-weight-700 text-color display-30 mb-0">Students</p>
-                                        </li>
-                                        <li>
-                                            <h2 class="countup text-secondary font-weight-800 display-18">4.5</h2>
-                                            <p class="alt-font font-weight-700 text-color display-30 mb-0">Ratings</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+
                             <div class="row">
                                 <div class="col-md-6 mb-1-6 mb-md-0 mb-lg-1-9 mb-lg-0">
                                     <h4 class="text-dark">Education:</h4>
@@ -137,195 +106,378 @@
                     </div>
                 </div>
                 <div class="row mb-1-9 mb-xl-2-9">
-                    <h4 class="text-dark mb-3">Our Instructor Skill:</h4>
-                    <p class="alt-font font-weight-500 text-color">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in finibus neque. Vivamus in ipsum quis elit vehicula tempus vitae quis lacus. Vestibulum interdum diam non mi cursus venenatis. Morbi lacinia libero et elementum vulputate. Vivamus et facilisis mauris. Maecenas nec massa auctor, ultricies massa eu, tristique erat. Vivamus in ipsum quis elit vehicula tempus vitae quis lacus. Eu pellentesque, accumsan tellus leo, ultrices mi dui lectus sem nulla eu.Eu pellentesque, accumsan tellus leo, ultrices mi dui.</p>
-                    <div class="col-md-6 mb-1-6">
-                        <div class="progress-text">
-                            <div class="row">
-                                <div class="col-7">Accounting</div>
-                                <div class="col-5 text-end">95%</div>
-                            </div>
+                <div class="related-product-area pb-95">
+                    <div class="container">
+                        <div style="margin-top: 50px" class="section-title text-center mb-50">
+                            <h2>교사테스트님의 다른 강의</h2>
                         </div>
-                        <div class="progress progress-medium">
-                            <div class="animated custom-bar progress-bar slideInLeft" style="width: 95%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="10" role="progressbar"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-1-6">
-                        <div class="progress-text">
-                            <div class="row">
-                                <div class="col-7">Writing</div>
-                                <div class="col-5 text-end">80%</div>
-                            </div>
-                        </div>
-                        <div class="progress progress-medium">
-                            <div class="animated custom-bar progress-bar slideInLeft" style="width: 95%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="10" role="progressbar"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-1-6 mb-md-0">
-                        <div class="progress-text">
-                            <div class="row">
-                                <div class="col-7">Reading</div>
-                                <div class="col-5 text-end">75%</div>
-                            </div>
-                        </div>
-                        <div class="progress progress-medium">
-                            <div class="animated custom-bar progress-bar slideInLeft" style="width: 95%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="10" role="progressbar"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="progress-text">
-                            <div class="row">
-                                <div class="col-7">Speaking</div>
-                                <div class="col-5 text-end">90%</div>
-                            </div>
-                        </div>
-                        <div class="progress progress-medium">
-                            <div class="animated custom-bar progress-bar slideInLeft" style="width: 95%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="10" role="progressbar"></div>
-                        </div>
+                        <div class="related-product-active owl-carousel owl-dot-none owl-loaded owl-drag">
+                            <div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(-961px, 0px, 0px); transition: all; width: 3525px;"><div class="owl-item cloned" style="width: 290.406px; margin-right: 30px;"><div class="product-wrap">
+                                <div class="product-img">
+                                    <a href="product-details.html">
+                                        <img class="default-img" src="/assets/img/product/pro-3.jpg" alt="">
+                                        <img class="hover-img" src="/assets/img/product/pro-3-1.jpg" alt="">
+                                    </a>
+                                    <span class="pink">-10%</span>
+                                    <div class="product-action">
+                                        <div class="pro-same-action pro-wishlist">
+                                            <a title="Wishlist" href="#"><i class="pe-7s-like"></i></a>
+                                        </div>
+                                        <div class="pro-same-action pro-cart">
+                                            <a title="Add To Cart" href="#"><i class="pe-7s-cart"></i> Add to cart</a>
+                                        </div>
+                                        <div class="pro-same-action pro-quickview">
+                                            <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-content text-center">
+                                    <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <div class="product-price">
+                                        <span>$ 60.00</span>
+                                        <span class="old">$ 60.00</span>
+                                    </div>
+                                </div>
+                            </div></div><div class="owl-item cloned" style="width: 290.406px; margin-right: 30px;"><div class="product-wrap">
+                                <div class="product-img">
+                                    <a href="product-details.html">
+                                        <img class="default-img" src="/assets/img/product/pro-4.jpg" alt="">
+                                        <img class="hover-img" src="/assets/img/product/pro-4-1.jpg" alt="">
+                                    </a>
+                                    <span class="purple">New</span>
+                                    <div class="product-action">
+                                        <div class="pro-same-action pro-wishlist">
+                                            <a title="Wishlist" href="#"><i class="pe-7s-like"></i></a>
+                                        </div>
+                                        <div class="pro-same-action pro-cart">
+                                            <a title="Add To Cart" href="#"><i class="pe-7s-cart"></i> Add to cart</a>
+                                        </div>
+                                        <div class="pro-same-action pro-quickview">
+                                            <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-content text-center">
+                                    <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <div class="product-price">
+                                        <span>$ 60.00</span>
+                                    </div>
+                                </div>
+                            </div></div><div class="owl-item cloned" style="width: 290.406px; margin-right: 30px;"><div class="product-wrap">
+                                <div class="product-img">
+                                    <a href="product-details.html">
+                                        <img class="default-img" src="/assets/img/product/pro-5.jpg" alt="">
+                                        <img class="hover-img" src="/assets/img/product/pro-5-1.jpg" alt="">
+                                    </a>
+                                    <span class="pink">-10%</span>
+                                    <div class="product-action">
+                                        <div class="pro-same-action pro-wishlist">
+                                            <a title="Wishlist" href="#"><i class="pe-7s-like"></i></a>
+                                        </div>
+                                        <div class="pro-same-action pro-cart">
+                                            <a title="Add To Cart" href="#"><i class="pe-7s-cart"></i> Add to cart</a>
+                                        </div>
+                                        <div class="pro-same-action pro-quickview">
+                                            <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-content text-center">
+                                    <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <div class="product-price">
+                                        <span>$ 60.00</span>
+                                        <span class="old">$ 60.00</span>
+                                    </div>
+                                </div>
+                            </div></div><div class="owl-item active" style="width: 290.406px; margin-right: 30px;"><div class="product-wrap">
+                                <div class="product-img">
+                                    <a href="product-details.html">
+                                        <img class="default-img" src="/assets/img/product/pro-1.jpg" alt="">
+                                        <img class="hover-img" src="/assets/img/product/pro-1-1.jpg" alt="">
+                                    </a>
+                                    <span class="pink">-10%</span>
+                                    <div class="product-action">
+                                        <div class="pro-same-action pro-wishlist">
+                                            <a title="Wishlist" href="#"><i class="pe-7s-like"></i></a>
+                                        </div>
+                                        <div class="pro-same-action pro-cart">
+                                            <a title="Add To Cart" href="#"><i class="pe-7s-cart"></i> Add to cart</a>
+                                        </div>
+                                        <div class="pro-same-action pro-quickview">
+                                            <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-content text-center">
+                                    <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <div class="product-price">
+                                        <span>$ 60.00</span>
+                                        <span class="old">$ 60.00</span>
+                                    </div>
+                                </div>
+                            </div></div><div class="owl-item active" style="width: 290.406px; margin-right: 30px;"><div class="product-wrap">
+                                <div class="product-img">
+                                    <a href="product-details.html">
+                                        <img class="default-img" src="/assets/img/product/pro-2.jpg" alt="">
+                                        <img class="hover-img" src="/assets/img/product/pro-2-1.jpg" alt="">
+                                    </a>
+                                    <span class="purple">New</span>
+                                    <div class="product-action">
+                                        <div class="pro-same-action pro-wishlist">
+                                            <a title="Wishlist" href="#"><i class="pe-7s-like"></i></a>
+                                        </div>
+                                        <div class="pro-same-action pro-cart">
+                                            <a title="Add To Cart" href="#"><i class="pe-7s-cart"></i> Add to cart</a>
+                                        </div>
+                                        <div class="pro-same-action pro-quickview">
+                                            <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-content text-center">
+                                    <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <div class="product-price">
+                                        <span>$ 60.00</span>
+                                    </div>
+                                </div>
+                            </div></div><div class="owl-item active" style="width: 290.406px; margin-right: 30px;"><div class="product-wrap">
+                                <div class="product-img">
+                                    <a href="product-details.html">
+                                        <img class="default-img" src="/assets/img/product/pro-3.jpg" alt="">
+                                        <img class="hover-img" src="/assets/img/product/pro-3-1.jpg" alt="">
+                                    </a>
+                                    <span class="pink">-10%</span>
+                                    <div class="product-action">
+                                        <div class="pro-same-action pro-wishlist">
+                                            <a title="Wishlist" href="#"><i class="pe-7s-like"></i></a>
+                                        </div>
+                                        <div class="pro-same-action pro-cart">
+                                            <a title="Add To Cart" href="#"><i class="pe-7s-cart"></i> Add to cart</a>
+                                        </div>
+                                        <div class="pro-same-action pro-quickview">
+                                            <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-content text-center">
+                                    <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <div class="product-price">
+                                        <span>$ 60.00</span>
+                                        <span class="old">$ 60.00</span>
+                                    </div>
+                                </div>
+                            </div></div><div class="owl-item" style="width: 290.406px; margin-right: 30px;"><div class="product-wrap">
+                                <div class="product-img">
+                                    <a href="product-details.html">
+                                        <img class="default-img" src="/assets/img/product/pro-4.jpg" alt="">
+                                        <img class="hover-img" src="/assets/img/product/pro-4-1.jpg" alt="">
+                                    </a>
+                                    <span class="purple">New</span>
+                                    <div class="product-action">
+                                        <div class="pro-same-action pro-wishlist">
+                                            <a title="Wishlist" href="#"><i class="pe-7s-like"></i></a>
+                                        </div>
+                                        <div class="pro-same-action pro-cart">
+                                            <a title="Add To Cart" href="#"><i class="pe-7s-cart"></i> Add to cart</a>
+                                        </div>
+                                        <div class="pro-same-action pro-quickview">
+                                            <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-content text-center">
+                                    <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <div class="product-price">
+                                        <span>$ 60.00</span>
+                                    </div>
+                                </div>
+                            </div></div><div class="owl-item" style="width: 290.406px; margin-right: 30px;"><div class="product-wrap">
+                                <div class="product-img">
+                                    <a href="product-details.html">
+                                        <img class="default-img" src="/assets/img/product/pro-5.jpg" alt="">
+                                        <img class="hover-img" src="/assets/img/product/pro-5-1.jpg" alt="">
+                                    </a>
+                                    <span class="pink">-10%</span>
+                                    <div class="product-action">
+                                        <div class="pro-same-action pro-wishlist">
+                                            <a title="Wishlist" href="#"><i class="pe-7s-like"></i></a>
+                                        </div>
+                                        <div class="pro-same-action pro-cart">
+                                            <a title="Add To Cart" href="#"><i class="pe-7s-cart"></i> Add to cart</a>
+                                        </div>
+                                        <div class="pro-same-action pro-quickview">
+                                            <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-content text-center">
+                                    <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <div class="product-price">
+                                        <span>$ 60.00</span>
+                                        <span class="old">$ 60.00</span>
+                                    </div>
+                                </div>
+                            </div></div><div class="owl-item cloned" style="width: 290.406px; margin-right: 30px;"><div class="product-wrap">
+                                <div class="product-img">
+                                    <a href="product-details.html">
+                                        <img class="default-img" src="/assets/img/product/pro-1.jpg" alt="">
+                                        <img class="hover-img" src="/assets/img/product/pro-1-1.jpg" alt="">
+                                    </a>
+                                    <span class="pink">-10%</span>
+                                    <div class="product-action">
+                                        <div class="pro-same-action pro-wishlist">
+                                            <a title="Wishlist" href="#"><i class="pe-7s-like"></i></a>
+                                        </div>
+                                        <div class="pro-same-action pro-cart">
+                                            <a title="Add To Cart" href="#"><i class="pe-7s-cart"></i> Add to cart</a>
+                                        </div>
+                                        <div class="pro-same-action pro-quickview">
+                                            <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-content text-center">
+                                    <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <div class="product-price">
+                                        <span>$ 60.00</span>
+                                        <span class="old">$ 60.00</span>
+                                    </div>
+                                </div>
+                            </div></div><div class="owl-item cloned" style="width: 290.406px; margin-right: 30px;"><div class="product-wrap">
+                                <div class="product-img">
+                                    <a href="product-details.html">
+                                        <img class="default-img" src="/assets/img/product/pro-2.jpg" alt="">
+                                        <img class="hover-img" src="/assets/img/product/pro-2-1.jpg" alt="">
+                                    </a>
+                                    <span class="purple">New</span>
+                                    <div class="product-action">
+                                        <div class="pro-same-action pro-wishlist">
+                                            <a title="Wishlist" href="#"><i class="pe-7s-like"></i></a>
+                                        </div>
+                                        <div class="pro-same-action pro-cart">
+                                            <a title="Add To Cart" href="#"><i class="pe-7s-cart"></i> Add to cart</a>
+                                        </div>
+                                        <div class="pro-same-action pro-quickview">
+                                            <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-content text-center">
+                                    <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <div class="product-price">
+                                        <span>$ 60.00</span>
+                                    </div>
+                                </div>
+                            </div></div><div class="owl-item cloned" style="width: 290.406px; margin-right: 30px;"><div class="product-wrap">
+                                <div class="product-img">
+                                    <a href="product-details.html">
+                                        <img class="default-img" src="/assets/img/product/pro-3.jpg" alt="">
+                                        <img class="hover-img" src="/assets/img/product/pro-3-1.jpg" alt="">
+                                    </a>
+                                    <span class="pink">-10%</span>
+                                    <div class="product-action">
+                                        <div class="pro-same-action pro-wishlist">
+                                            <a title="Wishlist" href="#"><i class="pe-7s-like"></i></a>
+                                        </div>
+                                        <div class="pro-same-action pro-cart">
+                                            <a title="Add To Cart" href="#"><i class="pe-7s-cart"></i> Add to cart</a>
+                                        </div>
+                                        <div class="pro-same-action pro-quickview">
+                                            <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-content text-center">
+                                    <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <div class="product-price">
+                                        <span>$ 60.00</span>
+                                        <span class="old">$ 60.00</span>
+                                    </div>
+                                </div>
+                            </div></div></div></div><div class="owl-nav disabled">
+                            <button type="button" role="presentation" class="owl-prev"><span aria-label="Previous">‹</span></button><button type="button" role="presentation" class="owl-next"><span aria-label="Next">›</span></button></div><div class="owl-dots"><button role="button" class="owl-dot active"><span></span></button><button role="button" class="owl-dot"><span></span></button></div></div>
                     </div>
                 </div>
-                <div class="row mb-1-9 mb-xl-2-9">
-                    <div class="col-md-6 mb-1-6 mb-md-1-9 mb-lg-0">
-                        <h4 class="text-dark mb-3">Achievements:</h4>
-                        <div class="row">
-                            <div class="col-md-6 mb-1-6 mb-md-1-9">
-                                <div class="mb-2 text-center text-md-left">
-                                    <img src="/assets/img/content/award-01.jpg" alt="...">
-                                </div>
-                                <p class="mb-0 alt-font text-primary font-weight-800 alt-font text-center text-md-left">Award 2020</p>
-                            </div>
-                            <div class="col-md-6 mb-1-6 mb-md-1-9">
-                                <div class="mb-2 text-center text-md-left">
-                                    <img src="/assets/img/content/award-01.jpg" alt="...">
-                                </div>
-                                <p class="mb-0 alt-font text-primary font-weight-800 alt-font text-center text-md-left">Award 2021</p>
-                            </div>
-                            <div class="col-md-6 mb-1-6 mb-md-1-9 mb-lg-0">
-                                <div class="mb-2 text-center text-md-left">
-                                    <img src="/assets/img/content/award-01.jpg" alt="...">
-                                </div>
-                                <p class="mb-0 alt-font text-primary font-weight-800 alt-font text-center text-md-left">Award 2022</p>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-2 text-center text-md-left">
-                                    <img src="/assets/img/content/award-01.jpg" alt="">
-                                </div>
-                                <p class="mb-0 alt-font text-primary font-weight-800 alt-font text-center text-md-left">Award 2023</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div>
-                            <h4 class="text-dark mb-3">My Schedule:</h4>
-                            <ul class="instructor-schedule-list">
-                                <li>Monday <span>9AM - 3PM</span></li>
-                                <li>Tuesday <span>9AM - 3PM</span></li>
-                                <li>Wednesday <span>9AM - 3PM</span></li>
-                                <li>Thursday <span>9AM - 3PM</span></li>
-                                <li>Friday <span>9AM - 3PM</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-              
-                <h4 class="text-primary mb-3">Courses By Eliena Rose:</h4>
-                <div class="row g-xxl-5 mt-n2-6">
-                <div class="col-md-6 col-xl-4 mt-2-6">
-                    <div class="card card-style1 p-0 h-100">
-                        <div class="card-img rounded-0">
-                            <div class="image-hover">
-                                <img class="rounded-top" src="/assets/img/content/courses-01.jpg" alt="...">
-                            </div>
-                            <a href="courses-list.html" class="course-tag">Business</a>
-                            <a href="#!"><i class="far fa-heart"></i></a>
-                        </div>
-                        <div class="card-body position-relative pt-0 px-1-9 pb-1-9">
-                            <div class="card-author d-flex">
-                                <div class="avatar">
-                                    <img class="rounded-circle" src="/assets/img/avatar/avatar-01.jpg" alt="...">
-                                </div>
-                                <h4 class="mb-0 h6">Elijah Lions</h4>
-                            </div>
-                            <div class="pt-6">
-                                <h3 class="h4 mb-4"><a href="course-details.html">Figuring out how to compose as an expert creator</a></h3>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="display-30"><i class="ti-agenda me-2"></i>10 Lessons</div>
-                                    <div class="display-30"><i class="ti-user me-2"></i>23</div>
-                                    <div class="display-30"><i class="fas fa-star me-1 display-32 text-warning"></i>5.00(1)</div>
-                                </div>
-                                <div class="dotted-seprator pt-4 mt-4 d-flex justify-content-between align-items-center">
-                                    <span class="badge-soft">all levels</span>
-                                    <h5 class="text-primary mb-0">$55.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-4 mt-2-6">
-                    <div class="card card-style1 p-0 h-100">
-                        <div class="card-img rounded-0 border-color-secondary">
-                            <div class="image-hover">
-                                <img class="rounded-top" src="/assets/img/content/courses-02.jpg" alt="...">
-                            </div>    
-                            <a href="courses-list.html" class="course-tag secondary">Design</a>
-                            <a href="#!"><i class="far fa-heart"></i></a>
-                        </div>
-                        <div class="card-body position-relative pt-0 px-1-9 pb-1-9">
-                            <div class="card-author d-flex">
-                                <div class="avatar">
-                                    <img class="rounded-circle" src="/assets/img/avatar/avatar-02.jpg" alt="...">
-                                </div>
-                                <h4 class="mb-0 h6">Georgia Train</h4>
-                            </div>
-                            <div class="pt-6">
-                                <h3 class="h4 mb-4"><a href="course-details.html">Configuration instruments for communication</a></h3>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="display-30"><i class="ti-agenda me-2"></i>09 Lessons</div>
-                                    <div class="display-30"><i class="ti-user me-2"></i>15</div>
-                                    <div class="display-30"><i class="fas fa-star me-1 display-32 text-warning"></i>4.00(2)</div>
-                                </div>
-                                <div class="dotted-seprator pt-4 mt-4 d-flex justify-content-between align-items-center">
-                                    <span class="badge-soft secondary">beginner</span>
-                                    <h5 class="text-secondary mb-0">$35.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-4 mt-2-6">
-                    <div class="card card-style1 p-0 h-100">
-                        <div class="card-img rounded-0">
-                            <div class="image-hover">
-                                <img class="rounded-top" src="/assets/img/content/courses-03.jpg" alt="...">
-                            </div>    
-                            <a href="courses-list.html" class="course-tag">Network</a>
-                            <a href="#!"><i class="far fa-heart"></i></a>
-                        </div>
-                        <div class="card-body position-relative pt-0 px-1-9 pb-1-9">
-                            <div class="card-author d-flex">
-                                <div class="avatar">
-                                    <img class="rounded-circle" src="/assets/img/avatar/avatar-03.jpg" alt="...">
-                                </div>
-                                <h4 class="mb-0 h6">Christian Hope</h4>
-                            </div>
-                            <div class="pt-6">
-                                <h3 class="h4 mb-4"><a href="course-details.html">Introduction to community training course</a></h3>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="display-30"><i class="ti-agenda me-2"></i>20 Lessons</div>
-                                    <div class="display-30"><i class="ti-user me-2"></i>20</div>
-                                    <div class="display-30"><i class="fas fa-star me-1 display-32 text-warning"></i>5.00(3)</div>
-                                </div>
-                                <div class="dotted-seprator pt-4 mt-4 d-flex justify-content-between align-items-center">
-                                    <span class="badge-soft">Expert</span>
-                                    <h5 class="text-primary mb-0">$99.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-               
             </div>
+            </div>
+           </c:forEach>
         </section>
 
         <!-- FOOTER

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 @Mapper
 public interface InstructorMapper {
-    @Select("select m.name, instructor_id as instructorId, i.member_id as memberID, subject_id as subjectID, instructor_description as instructorDescription, instructor_status as instructorStatus " +
+    @Select("select m.name, instructor_id as instructorId, i.member_id as memberID, subject_id as subjectID, instructor_title as instructorTitle, instructor_status as instructorStatus " +
             "from instructor i, member m where m.member_id = i.member_id and i.instructor_status = 1 limit #{offset}, #{itemsPerPage}")
     ArrayList<InstructorListResponse> selectInstructorList(@Param("offset") int offset, @Param("itemsPerPage") int itemPerPage);
 
@@ -23,7 +23,8 @@ public interface InstructorMapper {
             "values (#{subjectId}, #{memberId},#{instructorTitle}, #{instructorDescription}, #{instructorStatus})")
     void insertInstructor(InstructorRegisterRequest instructorRegisterRequest);
 
-    @Select("select * from instructor where instructor_id = #{instructorsID}")
+    @Select("select m.name, instructor_id as instructorId, s.subject_name as subjectName, i.member_id as memberID, s.subject_id as subjectID, instructor_title as instructorTitle, instructor_description as instructorDescription, instructor_status as instructorStatus " +
+            "from instructor i, member m, subject s where m.member_id = i.member_id and s.subject_id = i.subject_id and i.instructor_id = #{instructorID}")
     ArrayList<InstructorDetailResponse> selectInstructorDetail(int instructorsID);
 
 }

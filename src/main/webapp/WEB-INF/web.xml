@@ -54,15 +54,6 @@
     <servlet-name>appServlet</servlet-name>
   </filter-mapping>
 
-  <error-page>
-    <error-code>404</error-code>
-    <location>/WEB-INF/views/flone/error-page/404</location>
-  </error-page>
-<!--  <error-page>-->
-<!--    <error-code>500</error-code>-->
-<!--    <location>/WEB-INF/views/error/500.jsp</location>-->
-<!--  </error-page>-->
-
 
   <!--  <filter>-->
 <!--    <filter-name>RoleFilter</filter-name>-->

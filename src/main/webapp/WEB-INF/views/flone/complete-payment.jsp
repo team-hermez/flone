@@ -5,8 +5,12 @@
 
 <head>
     <%@ include file="css.jsp"%>
+    <style>
+        #my-reservation-detail:hover{
+          color: #6f42c1;
+        }
+    </style>
 </head>
-
 <body>
 <%@ include file="header.jsp"%>
 <div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
@@ -30,18 +34,18 @@
                         <a class="active" data-bs-toggle="tab" href="#lg1">
                             <h4> Reservation </h4>
                         </a>
-                        <a data-bs-toggle="tab" href="#lg2">
-                            <h4> Success </h4>
+                        <a  href="reservation-detail.hm?courseId=${courseId}">
+                            <h4 id="my-reservation-detail"> 예약한 강의 상세페이지 가기</h4>
                         </a>
                     </div>
                     <div class="tab-content">
                         <div id="lg1" class="tab-pane active">
                             <div class="login-form-container">
                                 <div class="login-register-form">
-                                    <form action="reservation-detail.hm?courseId=${courseId}" method="post">
+                                    <form action="reservation-detail.hm" method="GET">
                                         <h1>결제 완료 :)</h1>
                                         <div class="button-box">
-                                            <button type="submit"><span>예약 상세페이지</span></button>
+                                            <input type="hidden" name="courseId" value="${courseId}">
                                         </div>
                                     </form>
                                 </div>

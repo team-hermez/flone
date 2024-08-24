@@ -5,8 +5,12 @@
 
 <head>
     <%@ include file="css.jsp"%>
+    <style>
+      #other-course:hover{
+        color: #6f42c1;
+      }
+    </style>
 </head>
-
 <body>
 <%@ include file="header.jsp"%>
 <div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
@@ -28,35 +32,18 @@
                 <div class="login-register-wrapper">
                     <div class="login-register-tab-list nav">
                         <a class="active" data-bs-toggle="tab" href="#lg1">
-                            <h4> login </h4>
+                            <h4> Reservation </h4>
                         </a>
-                        <a data-bs-toggle="tab" href="#lg2">
-                            <h4> register </h4>
+                        <a id="other-course" href="/flone/course/list.hm">
+                            <h4> 다른 강의 보러가기 </h4>
                         </a>
                     </div>
                     <div class="tab-content">
                         <div id="lg1" class="tab-pane active">
                             <div class="login-form-container">
                                 <div class="login-register-form">
-                                    <form action="#" method="post">
+                                    <form action="" method="GET">
                                         <p><h1>결제 취소되었습니다 :)</h1></p>
-                                        <div class="button-box">
-                                            <button type="submit"><span>돌아가기</span></button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="lg2" class="tab-pane">
-                            <div class="login-form-container">
-                                <div class="login-register-form">
-                                    <form action="#" method="post">
-                                        <input type="text" name="user-name" placeholder="Username">
-                                        <input type="password" name="user-password" placeholder="Password">
-                                        <input name="user-email" placeholder="Email" type="email">
-                                        <div class="button-box">
-                                            <button type="submit"><span>Register</span></button>
-                                        </div>
                                     </form>
                                 </div>
                             </div>

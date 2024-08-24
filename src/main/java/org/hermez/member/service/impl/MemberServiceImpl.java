@@ -1,6 +1,10 @@
 package org.hermez.member.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.hermez.admin.model.Admin;
+import org.hermez.admin.service.AdminService;
+import org.hermez.instructor.model.Instructor;
+import org.hermez.instructor.service.InstructorService;
 import org.hermez.member.dto.MemberLoginRequest;
 import org.hermez.member.dto.MemberRegisterRequest;
 import org.hermez.member.mapper.MemberMapper;
@@ -16,6 +20,7 @@ import javax.servlet.http.HttpSession;
 public class MemberServiceImpl implements MemberService {
     private final MemberMapper memberMapper;
     private final HttpSession session;
+    private final InstructorService instructorService;
 
     @Override
     public void registerMember(MemberRegisterRequest memberRegisterRequest) {
@@ -33,24 +38,25 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void loginMember(MemberLoginRequest memberLoginRequest) {
         Member member = memberMapper.loginMember(memberLoginRequest);
+        Instructor instructor = instructorService.findByMemberId(member.getMemberId());
+        //TODO admin 정보 받아오기
+        Admin admin = new Admin();
 
-        if(member.getRoleId() == 1){
+        if (member.getRoleId() == 1) {
             session.setAttribute("MEMBER", member);
-        } else if(member.getRoleId() == 2){
-            // 강사 = 강사 서비스 select 강사정보 가져옴 (member.getMemberId)
-//                session.setAttribute("INSTRUCTOR", instructor);
-        } else if(member.getRoleId() == 3){
-            session.setAttribute("MEMBER", member);
-//                session.setAttribute("INSTRUCTOR", instructor);
-//                session.setAttribute("ADMIN", admin);
         }
-        return ;
+        if (member.getRoleId() == 2) {
+            session.setAttribute("MEMBER", member);
+            session.setAttribute("INSTRUCTOR", instructor);
+        } else if (member.getRoleId() == 3) {
+            session.setAttribute("MEMBER", member);
+            session.setAttribute("INSTRUCTOR", instructor);
+            session.setAttribute("Admin", admin);
+        }
     }
 
     @Override
     public void save(Member member) {
         memberMapper.registerMember(member);
     }
-
-
 }

@@ -50,7 +50,7 @@
                 <li>
                     <a href="index.jsp">Home</a>
                 </li>
-                <li class="active">login/Register </li>
+                <li class="active">회원가입 </li>
             </ul>
         </div>
     </div>
@@ -61,9 +61,9 @@
             <div class="col-lg-7 col-md-12 ms-auto me-auto">
                 <div class="login-register-wrapper">
                     <div class="login-register-tab-list nav">
-                        <a class="active" href = "login.hm"> login </a>
+                        <a class="active" href = "login.hm"> 로그인 </a>
                         |
-                        <a class="active" href = "register.hm"> register </a>
+                        <a class="active" href = "register.hm"> 회원가입 </a>
                     </div>
                         <div id="lg2" class="tab-pane">
                             <div class="login-form-container">
@@ -78,8 +78,8 @@
                                         <form:errors path="password" cssClass="error"/>
                                         <form:input type="password" path="password" placeholder="Password"/>
 
-                                        <form:errors path="password1" cssClass="error"/>
-                                        <form:input type="password" path="password1" placeholder="Confirm Password"/>
+                                        <form:errors path="passwordNot" cssClass="error"/>
+                                        <form:input type="password" path="passwordNot" placeholder="Confirm Password"/>
 
                                         <form:errors path="email" cssClass="error"/>
                                         <form:input type="email" path="email" placeholder="Email"/>
@@ -102,7 +102,7 @@
 </div>
 
 <%@include file="footer.jsp"%>
-
+<%@ include file="script.jsp"%>
 
 
 
@@ -113,18 +113,6 @@
 
 <!-- All JS is here
 ============================================ -->
-
-<script src="/assets/js/vendor/modernizr-3.11.7.min.js"></script>
-<script src="/assets/js/vendor/jquery-v3.6.0.min.js"></script>
-<script src="/assets/js/vendor/jquery-migrate-v3.3.2.min.js"></script>
-<script src="/assets/js/vendor/popper.min.js"></script>
-<script src="/assets/js/vendor/bootstrap.min.js"></script>
-<script src="/assets/js/plugins.js"></script>
-<%--<script src="assets/js/Validation.js"></script>--%>
-<!-- Ajax Mail -->
-<script src="/assets/js/ajax-mail.js"></script>
-<!-- Main JS -->
-<script src="/assets/js/main.js"></script>
 
 </body>
 

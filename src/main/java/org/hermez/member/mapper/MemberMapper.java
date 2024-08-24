@@ -14,5 +14,4 @@ public interface MemberMapper {
 
     @Select("select member_id as memberId, role_id as roleId, email, password, name, phone, created_at as createdAt from member where email=#{email} and password=#{password}")
     Member loginMember(MemberLoginRequest memberLoginRequest);
-
 }

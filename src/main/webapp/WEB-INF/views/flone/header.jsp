@@ -81,21 +81,36 @@
                                     </ul>
                                 </li>
                                 <li><a href="/flone/instructor/list.hm">강사</a></li>
-                                <li><a href="/flone/member/my-account.hm"> 마이페이지 <i class="fa fa-angle-down"></i></a>
-                                    <ul class="submenu">
-                                        <li><a href="/flone/member/my-account.hm">내 정보</a></li>
-                                        <li><a href="/flone/reservation/list.hm">예약 및 결제</a></li>
+                                <c:choose>
+                                <c:when test="${not empty sessionScope.MEMBER}">
+                                    <li>
+                                        <a href="#">내 정보 <i class="fa fa-angle-down"></i></a>
+                                        <ul class="submenu">
+                                            <li><a href="/flone/member/my-account.hm">마이페이지</a></li>
+                                            <li><a href="/flone/reservation/list.hm">예약 및 결제</a></li>
+                                        </ul>
+                                    </li>
+                                </c:when>
+                            </c:choose>
 
-                                    </ul>
-                                </li>
-                                <li><a href="about.html"> About </a></li>
-                                <li><a href="#">[강의 등록] <i class="fa fa-angle-down"></i></a>
-                                    <ul class="submenu">
-                                        <li><a href="/flone/course/list.hm">내 강의</a></li>
-                                        <li><a href="/flone/course/register.hm">강의 등록</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.jsp"> [관리자]</a></li>
+                            <c:choose>
+                                <c:when test="${not empty sessionScope.INSTRUCTOR}">
+                                    <li>
+                                        <a href="#">강의 등록 <i class="fa fa-angle-down"></i></a>
+                                        <ul class="submenu">
+                                            <li><a href="/flone/course/list.hm">내 강의</a></li>
+                                            <li><a href="/flone/course/register.hm">강의 등록</a></li>
+                                        </ul>
+                                    </li>
+                                </c:when>
+                            </c:choose>
+                                <li>
+                            <c:choose>
+                                <c:when test="${not empty sessionScope.ADMIN}">
+                                    <a href="admin.jsp">[관리자]</a>
+                                </c:when>
+                            </c:choose>
+                        </li>
                             </ul>
                         </nav>
                     </div>
@@ -115,9 +130,16 @@
                             <a class="account-satting-active" href="#"><i class="pe-7s-user-female"></i></a>
                             <div class="account-dropdown">
                                 <ul>
-                                    <li><a href="/flone/member/login.hm">Login</a></li>
-                                    <li><a href="/flone/member/register.hm">Register</a></li>
-                                    <li><a href="/flone/member/my-account.hm">my account</a></li>
+                                    <c:choose>
+                                        <c:when test="${not empty sessionScope.MEMBER}">
+                                            <li><a href="/flone/member/my-account.hm">마이페이지</a></li>
+                                            <li><a href="/flone/member/logout.hm">로그아웃</a></li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li><a href="/flone/member/login.hm">로그인</a></li>
+                                            <li><a href="/flone/member/register.hm">회원가입</a></li>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </ul>
                             </div>
                         </div>
@@ -260,8 +282,8 @@
                                     <li><a href="reservation-list.jsp">cart page</a></li>
                                     <li><a href="payment-detail.jsp">checkout </a></li>
                                     <li><a href="wishlist.html">wishlist </a></li>
-                                    <li><a href="my-account.hm">my account</a></li>
-                                    <li><a href="login.hm">login / register </a></li>
+                                    <li><a href="my-account.hm">마이페이지</a></li>
+                                    <li><a href="login.hm">로그인 / 회원가입 </a></li>
                                     <li><a href="contact.jsp">contact us </a></li>
                                     <li><a href="404.html">404 page </a></li>
                                 </ul>

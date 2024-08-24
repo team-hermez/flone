@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.hermez.instructor.dto.InstructorDetailResponse;
 import org.hermez.instructor.dto.InstructorListResponse;
 import org.hermez.instructor.dto.InstructorRegisterRequest;
+import org.hermez.instructor.model.Instructor;
 
 import java.util.ArrayList;
 
@@ -27,4 +28,9 @@ public interface InstructorMapper {
             "from instructor i, member m, subject s where m.member_id = i.member_id and s.subject_id = i.subject_id and i.instructor_id = #{instructorID}")
     ArrayList<InstructorDetailResponse> selectInstructorDetail(int instructorsID);
 
+    @Select("SELECT DISTINCT m.role_id as roleId, m.email as email, m.name as name, m.password as password, m.phone as phone, m.created_at as createdAt " +
+            "FROM instructor i " +
+            "JOIN member m ON m.member_id = i.member_id " +
+            "WHERE m.member_id = #{memberId}")
+    Instructor findByMemberId(int memberId);
 }

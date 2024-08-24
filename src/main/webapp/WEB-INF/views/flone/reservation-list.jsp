@@ -10,9 +10,9 @@
         <div class="breadcrumb-content text-center">
             <ul>
                 <li>
-                    <a href="index.jsp">Home</a>
+                    <a href="/flone/index.hm">Home</a>
                 </li>
-                <li class="active">Cart Page</li>
+                <li class="active">My reservation</li>
             </ul>
         </div>
     </div>
@@ -43,7 +43,7 @@
                                     <td class="product-thumbnail">
                                         <a href="reservation-detail.hm?courseId=${reservation.courseId}">${reservation.merchantUid}</a>
                                     </td>
-                                    <td class="product-name"><a href="#">${reservation.title}</a>
+                                    <td class="product-name"><a href="/flone/course/detail.hm?courseId=${reservation.courseId}">${reservation.title}</a>
                                     </td>
                                     <td class="product-price-cart">${reservation.startDate}</td>
                                     <td class="product-subtotal">${reservation.paymentAmount}</td>

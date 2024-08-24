@@ -26,7 +26,7 @@
         <div class="breadcrumb-content text-center">
             <ul>
                 <li>
-                    <a href="index.jsp">Home</a>
+                    <a href="/flone/index.hm">Home</a>
                 </li>
                 <li class="active">Checkout</li>
             </ul>
@@ -70,11 +70,6 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="your-order-bottom">
-                                <ul>
-                                    <li>${reserveForm.startDate} ~ ${reserveForm.endDate}</li>
-                                </ul>
-                            </div>
                             <div class="product-details-content ml-70">
                                 <ul>
                                     <li class="your-order-shipping">강의시간</li>
@@ -83,7 +78,7 @@
                                         <li>${time.dayOfWeek}</li>
                                         <li>${time.startTime} - ${time.endTime}</li>
                                     </c:forEach>
-                                    <li>${courseDetail.startDate} - ${courseDetail.endDate}</li>
+                                    <li>${reserveForm.startDate} - ${reserveForm.endDate}</li>
                                 </ul>
                             </div>
                             <div class="payment-method">

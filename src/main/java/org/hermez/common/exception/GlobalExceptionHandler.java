@@ -1,12 +1,17 @@
 package org.hermez.common.exception;
 
+import static org.springframework.http.HttpStatus.*;
+
 import org.hermez.classroom.board.exception.BoardServiceException;
 import org.hermez.classroom.classroom.exception.ClassroomNotFoundException;
 import org.hermez.classroom.reply.exception.ReplyNotFoundException;
 import org.hermez.image.exception.ImageProcessingException;
+import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -46,4 +51,12 @@ public class GlobalExceptionHandler {
         model.addAttribute("errorMessage", ex.getMessage());
         return "error";
     }
+
+    @ExceptionHandler(NoHandlerFoundException.class)
+    @ResponseStatus(NOT_FOUND)
+    public String handleNoHandlerFoundException(NoHandlerFoundException ex, Model model) {
+        model.addAttribute("errorMessage", ex.getMessage());
+        return "/flone/error/404";
+    }
+
 }

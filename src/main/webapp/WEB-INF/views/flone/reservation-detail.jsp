@@ -4,7 +4,6 @@
 <html class="no-js" lang="zxx">
 
 <head>
-    <%@ include file="css.jsp" %>
 </head>
 
 <body>

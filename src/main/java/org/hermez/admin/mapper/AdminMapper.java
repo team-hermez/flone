@@ -6,6 +6,7 @@ import org.hermez.admin.dto.CourseReservationRankResponse;
 import org.hermez.admin.dto.MonthlyPaymentHistoryResponse;
 import org.hermez.admin.dto.MonthlySignupResponse;
 import org.hermez.admin.dto.SubjectCourseCountResponse;
+import org.hermez.member.model.Member;
 
 import java.util.List;
 
@@ -47,4 +48,16 @@ public interface AdminMapper {
             "ORDER BY reservationCount DESC " +
             "LIMIT 5")
     List<CourseReservationRankResponse> getTop5CoursesByReservations();
+
+    @Select("SELECT " +
+            "member_id AS memberId, " +
+            "role_id AS roleId, " +
+            "email, " +
+            "name, " +
+            "password, " +
+            "phone, " +
+            "DATE_FORMAT(created_at, '%Y-%m-%d') AS createdAt " +
+            "FROM member")
+    List<Member> getAllMembers();
+
 }

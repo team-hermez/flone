@@ -7,6 +7,7 @@ import org.hermez.admin.dto.MonthlySignupResponse;
 import org.hermez.admin.dto.SubjectCourseCountResponse;
 import org.hermez.admin.mapper.AdminMapper;
 import org.hermez.admin.service.AdminService;
+import org.hermez.member.model.Member;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,6 +44,10 @@ public class AdminServiceImpl implements AdminService {
     public String getTop5CoursesByReservations() {
         List<CourseReservationRankResponse> topCourses = adminMapper.getTop5CoursesByReservations();
         return new Gson().toJson(topCourses);
+    }
+
+    public List<Member> getAllMembers() {
+        return adminMapper.getAllMembers();
     }
 
 }

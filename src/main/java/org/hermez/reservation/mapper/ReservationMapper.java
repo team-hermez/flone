@@ -82,6 +82,12 @@ public interface ReservationMapper {
   @Select("select count(reservation_id) from reservation where member_id=#{memberId}")
   int countReservations(int memberId);
 
+  @Select("select count(reservation_id) from reservation")
+  int countReservationsAll();
+
+  @Select("select count(reservation_id) from reservation where reservation_status_id=2")
+  int countRefundAll();
+
   @Select("select count(reservation_id) from reservation\n"
       + " join course using (course_id)\n"
       + " where reservation_status_id=1 and now()<=end_date and member_id =#{memberId};")
@@ -98,10 +104,32 @@ public interface ReservationMapper {
   List<ReservationListResponse> selectReservationList(@Param("memberId") int memberId,
       @Param("offset") int offset, @Param("itemsPerPage") int itemsPerPage);
 
-  @Select("select merchant_uid as merchantUid,course_id as courseId, title, start_date as startDate, end_date as endDate \n"
-      + " from reservation\n"
-      + " join course using (course_id)\n"
-      + " where reservation_status_id=1 and member_id=#{memberId} and now()<= end_date order by reservation_id desc")
+  @Select(
+      "select course_id as courseId,reservation_status_id as reservationStatusId, merchant_uid as merchantUid,payment_amount as paymentAmount ,payment_history.created_at as createdAt,cancel_at as cancelAt,title,start_date as startDate,end_date as endDate \n"
+          + "from reservation \n"
+          + "join payment_history using (payment_history_id) \n"
+          + "join course using (course_id) \n"
+          + "order by reservation_id desc \n"
+          + "limit #{offset}, #{itemsPerPage}")
+  List<ReservationListResponse> selectReservationListAll(@Param("offset") int offset,
+      @Param("itemsPerPage") int itemsPerPage);
+
+  @Select(
+      "select course_id as courseId,reservation_status_id as reservationStatusId, merchant_uid as merchantUid,payment_amount as paymentAmount ,payment_history.created_at as createdAt,cancel_at as cancelAt,title,start_date as startDate,end_date as endDate \n"
+          + "from reservation \n"
+          + "join payment_history using (payment_history_id) \n"
+          + "join course using (course_id) \n"
+          + "where reservation_status_id=2 \n"
+          + "order by reservation_id desc \n"
+          + "limit #{offset}, #{itemsPerPage}")
+  List<ReservationListResponse> selectRefundListAll(@Param("offset") int offset,
+      @Param("itemsPerPage") int itemsPerPage);
+
+  @Select(
+      "select merchant_uid as merchantUid,course_id as courseId, title, start_date as startDate, end_date as endDate \n"
+          + " from reservation\n"
+          + " join course using (course_id)\n"
+          + " where reservation_status_id=1 and member_id=#{memberId} and now()<= end_date order by reservation_id desc")
   List<MyReservedReservationDTO> findMyReservedReservationList(@Param("memberId") int memberId,
       @Param("offset") int offset, @Param("itemsPerPage") int itemsPerPage);
 }

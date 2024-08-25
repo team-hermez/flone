@@ -53,5 +53,11 @@ public interface ReservationRepository {
 
   Page<ReservationListResponse> getReservationList(int memberId, int page);
 
+  Page<ReservationListResponse> getReservationListAll(int page);
+
+  Page<ReservationListResponse> getRefundListAll(int page);
+
   Page<MyReservedReservationDTO> findMyReservedReservationList(int memberId, int page);
+
+
 }

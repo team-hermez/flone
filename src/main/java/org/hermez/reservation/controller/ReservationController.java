@@ -13,14 +13,14 @@ import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hermez.common.page.Page;
-import org.hermez.common.page.PaginationUtil;
 import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.course.model.CourseTime;
 import org.hermez.course.service.CourseService;
 import org.hermez.member.model.Member;
 import org.hermez.paymenthistory.dto.CancelDTO;
 import org.hermez.paymenthistory.service.payapi.IamportService;
-import org.hermez.reservation.dto.ReservationFormRequest;
+import org.hermez.reservation.dto.MyReservationDTO;
+import org.hermez.reservation.dto.MyReservedReservationDTO;
 import org.hermez.reservation.dto.ReservationFormResponse;
 import org.hermez.reservation.dto.ReservationListResponse;
 import org.hermez.reservation.dto.VerificationRequest;
@@ -30,8 +30,6 @@ import org.hermez.reservation.service.ReservationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -112,6 +110,16 @@ public class ReservationController {
     model.addAttribute("courseDetailList", courseDetailList);
     model.addAttribute("courseTimeList", courseTimeList);
     return "flone/reservation-detail";
+  }
+
+  @GetMapping("/reseved-course-list.hm")
+  public String getReservationList(@RequestParam(value = "page",defaultValue = "1") int page,HttpSession session, Model model) {
+    Member member = (Member) session.getAttribute("MEMBER");
+    int memberId = member.getMemberId();
+    Page<MyReservedReservationDTO> myReservationPage = reservationRepository.findMyReservedReservationList(memberId, page);
+    System.out.println("myReservationPage.getContents() = " + myReservationPage.getContents());
+    model.addAttribute("myReservationPage", myReservationPage);
+    return "/flone/my-reservation-list";
   }
 
   @ResponseBody

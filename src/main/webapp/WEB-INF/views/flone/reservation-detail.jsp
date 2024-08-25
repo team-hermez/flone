@@ -105,9 +105,11 @@
                                 </div>
                             </div>
                             <div class="single-sidebar-blog">
+                                <form action="reseved-course-list.hm" method="get">
                                 <div class="sidebar-blog-content">
-                                    <button type="button" class="btn btn-secondary">환불하기</button>
+                                    <button type="submit" class="btn btn-secondary">나의 수강 목록 가기</button>
                                 </div>
+                                </form>
                             </div>
                         </div>
                     </div>

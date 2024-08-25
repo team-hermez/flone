@@ -18,9 +18,9 @@
         <div class="breadcrumb-content text-center">
             <ul>
                 <li>
-                    <a href="index.jsp">Home</a>
+                    <a href="/flone/index.hm">Home</a>
                 </li>
-                <li class="active">login/Register </li>
+                <li class="active">결제완료 </li>
             </ul>
         </div>
     </div>

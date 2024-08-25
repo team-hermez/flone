@@ -15,4 +15,15 @@ public class MyReservationDTO {
   private LocalTime startTime;
   private LocalTime endTime;
 
+  @Override
+  public String toString() {
+    return "MyReservationDTO{" +
+        "courseId=" + courseId +
+        ", startDate=" + startDate +
+        ", endDate=" + endDate +
+        ", DayOfWeek='" + DayOfWeek + '\'' +
+        ", startTime=" + startTime +
+        ", endTime=" + endTime +
+        '}';
+  }
 }

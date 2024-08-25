@@ -16,6 +16,7 @@ import lombok.Setter;
 @NoArgsConstructor(access = PRIVATE)
 public class Reservation {
 
+  public static final int RESERVED = 1;
   private int reservationId;
 
   private int memberId;
@@ -31,20 +32,20 @@ public class Reservation {
   private String imp_uid;
 
   /**
-   *
-   * @param memberId 강의 예약자의 키값
-   * @param courseId 예약할 강의의 키값
+   * @param memberId         강의 예약자의 키값
+   * @param courseId         예약할 강의의 키값
    * @param paymentHistoryId 결제 기록 키값
-   * @param imp_uid 아엠포트API 서버에 저장되는 주문번호
-   * @param merchantUid hermez에서 만든 주문번호
+   * @param imp_uid          아엠포트API 서버에 저장되는 주문번호
+   * @param merchantUid      hermez에서 만든 주문번호
    * @return 예약정보
    */
-  public static Reservation createReservation(int memberId, int courseId, int paymentHistoryId, String imp_uid, String merchantUid) {
+  public static Reservation createReservation(int memberId, int courseId, int paymentHistoryId,
+      String imp_uid, String merchantUid) {
     Reservation reservation = new Reservation();
     reservation.setMemberId(memberId);
     reservation.setCourseId(courseId);
     reservation.setPaymentHistoryId(paymentHistoryId);
-    reservation.setReservationStatusId(1);
+    reservation.setReservationStatusId(RESERVED);
     reservation.setMerchantUid(merchantUid);
     reservation.setImp_uid(imp_uid);
     return reservation;

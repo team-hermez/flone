@@ -1,6 +1,7 @@
 package org.hermez.reservation.service;
 
 import org.hermez.common.page.Page;
+import org.hermez.reservation.dto.ReservationListResponse;
 import org.hermez.reservation.model.Reservation;
 
 /**
@@ -27,6 +28,10 @@ public interface ReservationService {
   void cancel(Reservation reservation);
 
   void verifyCourseSchedule(int courseId);
+
+  Page<ReservationListResponse> getReservationListAll(int page);
+
+  Page<ReservationListResponse> getRefundListAll(int page);
 
 
 }

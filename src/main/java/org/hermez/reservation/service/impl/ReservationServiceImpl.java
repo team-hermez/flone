@@ -16,6 +16,7 @@ import org.hermez.common.page.Page;
 import org.hermez.paymenthistory.model.PaymentHistory;
 import org.hermez.paymenthistory.model.PaymentHistoryRepository;
 import org.hermez.reservation.dto.MyReservationDTO;
+import org.hermez.reservation.dto.ReservationListResponse;
 import org.hermez.reservation.exception.NoSuchUniqueCourseTimeException;
 import org.hermez.reservation.model.Reservation;
 import org.hermez.reservation.model.ReservationRepository;
@@ -64,6 +65,8 @@ public class ReservationServiceImpl implements ReservationService {
     paymentHistoryRepository.updateCancelAt(merchantUid);
   }
 
+
+
   @Transactional
   @Override
   public void verifyCourseSchedule(int courseId) {
@@ -88,6 +91,16 @@ public class ReservationServiceImpl implements ReservationService {
       }
     }
 
+  }
+
+  @Override
+  public Page<ReservationListResponse> getReservationListAll(int page) {
+    return reservationRepository.getReservationListAll(page);
+  }
+
+  @Override
+  public Page<ReservationListResponse> getRefundListAll(int page) {
+    return reservationRepository.getRefundListAll(page);
   }
 
 

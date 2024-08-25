@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
+import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hermez.common.page.Page;
@@ -51,27 +52,27 @@ public class ReservationController {
 
 
   @GetMapping("/detail.hm")
-  public String getReservationForm(@RequestParam int courseId, Model model) {
+  public String getReservationForm(
+      @RequestParam int courseId,
+      HttpSession session
+      , Model model) {
+    Member member = (Member) session.getAttribute("MEMBER");
     CourseDetailResponse courseDetailList = courseService.courseDetailService(courseId);
     List<CourseTime> courseTimeList = courseService.courseDetailTime(courseId);
-    Member member = new Member();
-    member.setName("홍길동");
-    member.setEmail("me@gmail.com");
-    member.setPhone("123456789");
     model.addAttribute("courseDetailList", courseDetailList);
     model.addAttribute("courseTimeList", courseTimeList);
-    ReservationFormResponse reserveForm = new ReservationFormResponse();
-    reserveForm.setCourseId(courseDetailList.getCourseId());
-    reserveForm.setTitle(courseDetailList.getTitle());
-    reserveForm.setCoursePrice(courseDetailList.getCoursePrice());
-    reserveForm.setDescription(courseDetailList.getDescription());
-    reserveForm.setStartDate(courseDetailList.getStartDate());
-    reserveForm.setEndDate(courseDetailList.getEndDate());
-    reserveForm.setInstructorName(courseDetailList.getInstructorName());
-    reserveForm.setMerchantUid(createMerchantUid());
-    reserveForm.setMemberEmail(member.getEmail());
-    reserveForm.setMemberName(member.getName());
-    reserveForm.setMemberPhone(member.getPhone());
+    ReservationFormResponse reserveForm = ReservationFormResponse.builder()
+        .courseId(courseDetailList.getCourseId())
+        .title(courseDetailList.getTitle())
+        .coursePrice(courseDetailList.getCoursePrice())
+        .description(courseDetailList.getDescription())
+        .startDate(courseDetailList.getStartDate())
+        .endDate(courseDetailList.getEndDate())
+        .instructorName(courseDetailList.getInstructorName())
+        .merchantUid(createMerchantUid())
+        .memberName(member.getName())
+        .memberEmail(member.getEmail())
+        .memberPhone(member.getPhone()).build();
     model.addAttribute("courseTime", courseTimeList);
     model.addAttribute("reserveForm", reserveForm);
     return "/flone/payment-detail";
@@ -89,13 +90,16 @@ public class ReservationController {
   }
 
   @GetMapping("/list.hm")
-  public String getReservationListForm(@RequestParam(value = "page", defaultValue = "1") int page,
+  public String getReservationListForm(
+      @RequestParam(value = "page", defaultValue = "1") int page,
+      HttpSession session,
       Model model) {
-    Page<ReservationListResponse> reservationPage = reservationRepository.getReservationList(1,
+    Member member = (Member) session.getAttribute("MEMBER");
+    int memberId = member.getMemberId();
+    Page<ReservationListResponse> reservationPage = reservationRepository.getReservationList(memberId,
         page);
     log.info("reservationPage = {}", reservationPage.getContents());
-    Member member = new Member();
-    model.addAttribute("memberId", 1);
+    model.addAttribute("memberId", memberId);
     model.addAttribute("reservationPage", reservationPage);
     return "/flone/reservation-list";
   }
@@ -113,10 +117,13 @@ public class ReservationController {
   @ResponseBody
   @PostMapping("/verify-iamport.hm")
   public IamportResponse<Payment> postVerifyPayment(
-      @RequestBody VerificationRequest verificationRequest)
+      @RequestBody VerificationRequest verificationRequest,
+      HttpSession session
+      )
       throws IamportResponseException, IOException {
     int courseId = verificationRequest.getCourseId();
-    Integer myCourseOne = reservationRepository.findMyCourseOne(1, courseId);
+    Member member = (Member) session.getAttribute("MEMBER");
+    Integer myCourseOne = reservationRepository.findMyCourseOne(member.getMemberId(), courseId);
     if (myCourseOne != null) {
       throw new IllegalStateException("이미 수강 중인 강의입니다.");
     }
@@ -126,7 +133,7 @@ public class ReservationController {
     String merchantUid = verificationRequest.getMerchant_uid(); //내가 만든 주문번호
     IamportResponse<Payment> iamportResponse = iamportService.getIamportClient()
         .paymentByImpUid(impUid);
-    reservationService.save(1, courseId, amount, impUid, merchantUid);
+    reservationService.save(member.getMemberId(), courseId, amount, impUid, merchantUid);
     iamportService.verifyPayment(iamportResponse, amount, merchantUid);
     return iamportResponse;
   }

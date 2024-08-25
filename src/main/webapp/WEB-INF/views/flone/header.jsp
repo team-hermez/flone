@@ -100,6 +100,7 @@
                                         <a href="#">내 정보 <i class="fa fa-angle-down"></i></a>
                                         <ul class="submenu">
                                             <li><a href="/flone/member/my-account.hm">마이페이지</a></li>
+                                            <li><a href="/flone/reservation/reserved-course-list.hm">나의 수강 목록</a></li>
                                             <li><a href="/flone/reservation/list.hm">예약 및 결제</a></li>
                                         </ul>
                                     </li>

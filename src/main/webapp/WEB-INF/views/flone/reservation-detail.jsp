@@ -28,7 +28,7 @@
                 <div class="blog-details-wrapper ml-20">
                     <div class="blog-details-top">
                         <div class="blog-details-img">
-                            <img alt="" src="/assets/img/blog/blog-5.jpg">
+                            <img alt="" src="/resources/images/image.png">
                         </div>
                         <div class="blog-details-content">
                             <div class="blog-meta-2">
@@ -60,7 +60,7 @@
                         <div class="sidebar-project-wrap mt-30">
                             <div class="single-sidebar-blog">
                                 <div class="sidebar-blog-img">
-                                    <a href="#"><img src="/assets/img/blog/sidebar-1.jpg"
+                                    <a href="#"><img src="/resources/images/image.png"
                                                      alt=""></a>
                                 </div>
                                 <div class="sidebar-blog-content">
@@ -70,7 +70,7 @@
                             </div>
                             <div class="single-sidebar-blog">
                                 <div class="sidebar-blog-img">
-                                    <a href="#"><img src="/assets/img/blog/sidebar-2.jpg"
+                                    <a href="#"><img src="/resources/images/image.png"
                                                      alt=""></a>
                                 </div>
                                 <div class="sidebar-blog-content">
@@ -80,7 +80,7 @@
                             </div>
                             <div class="single-sidebar-blog">
                                 <div class="sidebar-blog-img">
-                                    <a href="#"><img src="/assets/img/blog/sidebar-3.jpg"
+                                    <a href="#"><img src="/resources/images/image.png"
                                                      alt=""></a>
                                 </div>
                                 <div class="sidebar-blog-content">
@@ -90,7 +90,7 @@
                             </div>
                             <div class="single-sidebar-blog">
                                 <div class="sidebar-blog-img">
-                                    <a href="#"><img src="/assets/img/blog/sidebar-1.jpg"
+                                    <a href="#"><img src="/resources/images/image.png"
                                                      alt=""></a>
                                 </div>
                                 <div class="sidebar-blog-content">
@@ -100,14 +100,14 @@
                             </div>
                             <div class="single-sidebar-blog">
                                 <div class="sidebar-blog-content">
-                                    <button type="button" class="btn btn-outline-danger">강의 룸
+                                    <button type="button" class="btn btn-outline-danger">나의 강의 룸
                                     </button>
                                 </div>
                             </div>
                             <div class="single-sidebar-blog">
-                                <form action="reseved-course-list.hm" method="get">
+                                <form action="reserved-course-list.hm" method="get">
                                 <div class="sidebar-blog-content">
-                                    <button type="submit" class="btn btn-secondary">나의 수강 목록 가기</button>
+                                    <button type="submit" class="btn btn-secondary">나의 수강 목록</button>
                                 </div>
                                 </form>
                             </div>

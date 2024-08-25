@@ -37,7 +37,9 @@
                             <c:choose>
                                 <c:when test="${empty myReservationPage.contents}">
                                     <tr>
-                                        <td colspan="5">아직 수강하고 있는 강의가 없습니다. 좋은 강의를 많이 준비했으니 둘러봐주세요 :).</td>
+                                        <td colspan="5">아직 수강하고 있는 강의가 없습니다. 좋은 강의를 많이 준비했으니 둘러봐주세요
+                                            :).
+                                        </td>
                                     </tr>
                                 </c:when>
                                 <c:otherwise>

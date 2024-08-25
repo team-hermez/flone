@@ -36,8 +36,87 @@ public interface CourseMapper {
             "limit #{offset}, #{itemsPerPage}")
     List<CourseListResponse> courseAllList(@Param("offset") int offset, @Param("itemsPerPage") int itemsPerPage);
 
+    /**
+     * 전체 강의의 수를 가져오는 Mapper입니다.
+     * @return 전체 강의 수
+     */
     @Select("select COUNT(*) from course")
     int courseCount();
+
+    @Select("select " +
+            "c.course_id as courseId," +
+            "start_date as startDate, " +
+            "c.end_date as endDate, " +
+            "title, description, " +
+            "m.name as instructorName, " +
+            "img.save_name as courseImage "+
+            "from course c left join instructor i on (i.instructor_id = c.instructor_id) \n"+
+            "left join member m on (i.member_id = m.member_id) \n" +
+            "left join image img on (img.entity_id = c.course_id) \n" +
+            "left join subject s on (i.subject_id = s.subject_id) " +
+            "where s.subject_name = #{subject} "+
+            "order by c.start_date desc " +
+            "limit #{offset}, #{itemsPerPage}")
+    List<CourseListResponse> getCourseListBySubject(@Param("subject") String subject,
+                                                    @Param("offset") int offset,
+                                                    @Param("itemsPerPage") int itemsPerPage);
+
+    @Select("select count(*) " +
+            "from course c left join instructor i on (i.instructor_id = c.instructor_id) \n"+
+            "left join member m on (i.member_id = m.member_id) \n" +
+            "left join image img on (img.entity_id = c.course_id) \n" +
+            "left join subject s on (i.subject_id = s.subject_id) " +
+            "where s.subject_name like #{subject} ")
+    int getCourseCountBySubject(@Param("subject") String subject);
+
+    @Select("select " +
+            "c.course_id as courseId," +
+            "start_date as startDate, " +
+            "c.end_date as endDate, " +
+            "title, description, " +
+            "m.name as instructorName, " +
+            "img.save_name as courseImage "+
+            "from course c left join instructor i on (i.instructor_id = c.instructor_id) \n"+
+            "left join member m on (i.member_id = m.member_id) \n" +
+            "left join image img on (img.entity_id = c.course_id) \n" +
+            "where m.name like #{instructorName} "+
+            "order by c.start_date desc " +
+            "limit #{offset}, #{itemsPerPage}")
+    List<CourseListResponse> getCourseListByName(@Param("instructorName") String instructorName,
+                                                 @Param("offset") int offset,
+                                                 @Param("itemsPerPage") int itemsPerPage);
+
+    @Select("select count(*) from course c " +
+            "left join instructor i on (c.instructor_id = i.instructor_id) \n" +
+            "left join member m on (i.member_id = m.member_id) \n" +
+            "where m.name like #{instructorName}")
+    int getCourseCountByName(@Param("instructorName") String instructorName);
+
+    @Select("select " +
+            "c.course_id as courseId," +
+            "start_date as startDate, " +
+            "c.end_date as endDate, " +
+            "title, description, " +
+            "m.name as instructorName, " +
+            "img.save_name as courseImage "+
+            "from course c left join instructor i on (i.instructor_id = c.instructor_id) \n"+
+            "left join member m on (i.member_id = m.member_id) \n" +
+            "left join image img on (img.entity_id = c.course_id) \n" +
+            "left join grade g on (c.grade_id = g.grade_id) \n" +
+            "where g.grade_name like #{grade} "+
+            "order by c.start_date desc " +
+            "limit #{offset}, #{itemsPerPage}")
+    List<CourseListResponse> getCourseListByGrade(@Param("grade") String grade,
+                                                  @Param("offset") int offset,
+                                                  @Param("itemsPerPage") int itemsPerPage);
+
+    @Select("select count(*) " +
+            "from course c left join instructor i on (i.instructor_id = c.instructor_id) \n"+
+            "left join member m on (i.member_id = m.member_id) \n" +
+            "left join image img on (img.entity_id = c.course_id) \n" +
+            "left join grade g on (c.grade_id = g.grade_id) \n" +
+            "where g.grade_name like #{grade}")
+    int getCourseCountByGrade(@Param("grade") String grade);
 
     /**
      * 강의 상세 정보를 가져오는 Mapper입니다.
@@ -61,6 +140,22 @@ public interface CourseMapper {
             "left join image img on (img.entity_id = c.course_id)\n" +
             "where c.course_id = #{courseId}")
     CourseDetailResponse courseDetailResponse(int courseId);
+
+    @Select("select " +
+            "c.course_id as courseId," +
+            "c.course_price as coursePrice," +
+            "start_date as startDate, " +
+            "c.end_date as endDate, " +
+            "title, description, " +
+            "m.name as instructorName, " +
+            "img.save_name as courseImage "+
+            "from course c left join instructor i on (i.instructor_id = c.instructor_id) \n"+
+            "left join member m on (i.member_id = m.member_id) \n" +
+            "left join image img on (img.entity_id = c.course_id) \n" +
+            "where m.name = #{instructorName} "+
+            "order by c.start_date desc " +
+            "limit 0, 4")
+    List<CourseListResponse> courseListByInstructor(@Param("instructorName") String instructorName);
 
     /**
      * 강의 상세 정보의 시간 관련된 정보를 가져오는 Mapper입니다.

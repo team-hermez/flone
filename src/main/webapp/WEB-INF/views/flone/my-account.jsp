@@ -5,7 +5,11 @@
 
 <head>
     <%@ include file="css.jsp"%>
-    <!-- Font Awesome for icons -->
+    <style>
+        .single-my-account .myaccount-info-wrapper .account-info-wrapper {
+            padding-bottom: 0 !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -30,13 +34,13 @@
                     <div id="faq" class="panel-group">
                         <div class="panel panel-default single-my-account">
                             <div class="panel-heading my-account-title">
-                                <h3 class="panel-title"><span>1 .</span> <a data-bs-toggle="collapse" href="#my-account-1">계정 정보를 편집하세요</a></h3>
+                                <h3 class="panel-title"><span>1 .</span> <a data-bs-toggle="collapse" href="#my-account-1">나의 프로필</a></h3>
                             </div>
                             <div id="my-account-1" class="panel-collapse collapse show" data-bs-parent="#faq">
                                 <div class="panel-body">
                                     <div class="myaccount-info-wrapper">
                                         <div class="account-info-wrapper">
-                                            <h4>내 정보</h4>
+                                            <h3>내 정보</h3>
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-3 col-md-3">
@@ -44,25 +48,17 @@
                                             </div>
                                             <div class="col-lg-9 col-md-9">
                                                 <div class="billing-info">
-                                                    <h5>이름</h5>
+                                                    <h4>이름</h4>
                                                     <p>${myAccount.name}</p>
                                                 </div>
                                                 <div class="billing-info">
-                                                    <h5>이메일 주소</h5>
+                                                    <h4>이메일 주소</h4>
                                                     <p>${myAccount.email}</p>
                                                 </div>
                                                 <div class="billing-info">
-                                                    <h5>전화</h5>
+                                                    <h4>전화</h4>
                                                     <p>${myAccount.phone}</p>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="billing-back-btn">
-                                            <div class="billing-back">
-                                                <a href="#"><i class="fa fa-arrow-up"></i> back</a>
-                                            </div>
-                                            <div class="billing-btn">
-                                                <button type="submit">Continue</button>
                                             </div>
                                         </div>
                                     </div>
@@ -78,8 +74,7 @@
                                     <div class="panel-body">
                                         <div class="myaccount-info-wrapper">
                                             <div class="account-info-wrapper">
-                                                <h4>내 정보 변경</h4>
-                                                <h5>귀하의 비밀번호</h5>
+                                                <h3>내 정보</h3>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-12 col-md-12">
@@ -128,7 +123,6 @@
                                                 <div class="col-lg-12 col-md-12">
                                                     <div class="billing-back-btn">
                                                         <div class="billing-back">
-                                                            <a href="#"><i class="fa fa-arrow-up"></i> back</a>
                                                         </div>
                                                         <div class="billing-btn">
                                                             <button type="submit">Continue</button>
@@ -153,32 +147,21 @@
                     <div id="my-account-3" class="panel-collapse collapse" data-bs-parent="#faq">
                         <div class="panel-body">
                             <div class="myaccount-info-wrapper">
-                                <div class="account-info-wrapper">
-                                    <h4>Address Book Entries</h4>
-                                </div>
                                 <div class="entries-wrapper">
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
                                             <div class="entries-info text-center">
-                                                <p>Keith L. Castro </p>
-                                                <p>  559 Pratt Avenue </p>
-                                                <p> Orchards, WA 98662 </p>
+                                                <p>회원 탈퇴 기능입니다.</p>
+                                                <p>버튼을 누르면 비회원으로 전환되며</p>
+                                                <p>철회는 불가능하니 신중하게 부탁드립니다.</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
                                             <div class="entries-edit-delete text-center">
-                                                <a class="edit" href="#">Edit</a>
-                                                <a href="#">Delete</a>
+                                                <a class="edit" href="#">홈으로</a>
+                                                <a href="#">회원 탈퇴</a>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="billing-back-btn">
-                                    <div class="billing-back">
-                                        <a href="#"><i class="fa fa-arrow-up"></i> back</a>
-                                    </div>
-                                    <div class="billing-btn">
-                                        <button type="submit">Continue</button>
                                     </div>
                                 </div>
                             </div>
@@ -327,38 +310,6 @@
 </div>
 <%@include file="footer.jsp"%>
 <%@include file="script.jsp"%>
-<script>
-    function togglePasswordVisibility(passwordFieldId, iconId) {
-        var passwordField = document.getElementById(passwordFieldId);
-        var icon = document.getElementById(iconId);
-
-        if (passwordField.type === 'password') {
-            passwordField.type = 'text';
-            icon.classList.remove('fa-eye-slash');
-            icon.classList.add('fa-eye');
-            icon.style.color = '#6c757d';
-        } else {
-            passwordField.type = 'password';
-            icon.classList.remove('fa-eye');
-            icon.classList.add('fa-eye-slash');
-            icon.style.color = '#6c757d';
-        }
-    }
-
-    function formatPhoneNumber(input) {
-        let value = input.value.replace(/\D/g, ''); // 모든 비숫자 문자를 제거
-
-        // 하이픈 추가
-        if (value.length <= 3) {
-            value = value;
-        } else if (value.length <= 7) {
-            value = value.slice(0, 3) + '-' + value.slice(3);
-        } else {
-            value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7, 11);
-        }
-
-        input.value = value; // 포맷된 값을 입력 필드에 다시 설정
-    }
 </script>
 </body>
 

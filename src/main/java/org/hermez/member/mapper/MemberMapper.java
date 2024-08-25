@@ -12,8 +12,8 @@ import org.hermez.member.model.*;
 public interface MemberMapper {
     @Insert("insert into member(role_id, name, email, password, encoded_password, phone, created_at) values (1, #{name}, #{email}, #{password}, #{encodedPassword}, #{phone}, NOW())")
     void registerMember(Member member);
-
-    @Select("select member_id as memberId, role_id as roleId, email, encoded_password as encodedPassword, name, phone, created_at as createdAt from member where email=#{email}")
+    @Select("select member_id as memberId, role_id as roleId, email, password, name, phone, created_at as createdAt from member where email=#{email} and password=#{password}")
+//    @Select("select member_id as memberId, role_id as roleId, email, encoded_password as encodedPassword, name, phone, created_at as createdAt from member where email=#{email}")
     MemberLoginResponse loginMember(MemberLoginRequest memberLoginRequest);
 
     @Select("SELECT COUNT(1) > 0 FROM member WHERE email = #{email}")

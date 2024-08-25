@@ -2,16 +2,19 @@ package org.hermez.member.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.hermez.admin.model.Admin;
-import org.hermez.admin.service.AdminService;
 import org.hermez.instructor.model.Instructor;
 import org.hermez.instructor.service.InstructorService;
 import org.hermez.member.dto.MemberLoginRequest;
 import org.hermez.member.dto.MemberRegisterRequest;
+import org.hermez.member.dto.MyAccountEditRequest;
+import org.hermez.member.dto.MyAccountResponse;
+import org.hermez.member.exception.MemberServiceException;
 import org.hermez.member.mapper.MemberMapper;
 import org.hermez.member.model.Member;
 
 import org.hermez.member.service.MemberService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 
@@ -58,5 +61,25 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void save(Member member) {
         memberMapper.registerMember(member);
+    }
+
+    @Override
+    public MyAccountResponse getMyAccount(int memberId) {
+        MyAccountResponse myAccountResponse = memberMapper.getMyAccount(memberId);
+        return myAccountResponse;
+    }
+
+    @Override
+    public void updateMyAccount(MyAccountEditRequest myAccountEditRequest) {
+
+        int selectPhoneExists = memberMapper.selectPhoneExists(myAccountEditRequest);
+        try {
+            if(selectPhoneExists == 0) {
+                memberMapper.updateMyAccountPhone(myAccountEditRequest);
+                memberMapper.updateMyAccountPassword(myAccountEditRequest);
+            }
+        } catch (Exception e) {
+            throw new MemberServiceException("이미 존재하는 핸드폰 번호입니다.", e);
+        }
     }
 }

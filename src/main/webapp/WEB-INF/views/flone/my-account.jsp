@@ -5,6 +5,7 @@
 
 <head>
     <%@ include file="css.jsp"%>
+    <!-- Font Awesome for icons -->
 </head>
 
 <body>
@@ -35,31 +36,24 @@
                                 <div class="panel-body">
                                     <div class="myaccount-info-wrapper">
                                         <div class="account-info-wrapper">
-                                            <h4>나의 계정 정보</h4>
+                                            <h4>내 정보</h4>
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-6 col-md-6">
+                                            <div class="col-lg-3 col-md-3">
+                                                <h1>이미지 들어갈 곳</h1>
+                                            </div>
+                                            <div class="col-lg-9 col-md-9">
                                                 <div class="billing-info">
                                                     <h5>이름</h5>
-                                                    <p>${account.name}</p>
+                                                    <p>${myAccount.name}</p>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12">
                                                 <div class="billing-info">
                                                     <h5>이메일 주소</h5>
-                                                    <p> ${account.email}</p>
+                                                    <p>${myAccount.email}</p>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6">
                                                 <div class="billing-info">
                                                     <h5>전화</h5>
-                                                    <p> ${account.phoneNumber}</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="billing-info">
-                                                    <h5>생년월일</h5>
-                                                    <p> ${account.birthDate}</p>
+                                                    <p>${myAccount.phone}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -77,83 +71,116 @@
                         </div>
                         <div class="panel panel-default single-my-account">
                             <div class="panel-heading my-account-title">
-                                <h3 class="panel-title"><span>2 .</span> <a data-bs-toggle="collapse" href="#my-account-2">비밀번호를 변경하세요 </a></h3>
+                                <h3 class="panel-title"><span>2 .</span> <a data-bs-toggle="collapse" href="#my-account-2">내 정보 변경</a></h3>
                             </div>
                             <div id="my-account-2" class="panel-collapse collapse" data-bs-parent="#faq">
-                                <div class="panel-body">
-                                    <div class="myaccount-info-wrapper">
-                                        <div class="account-info-wrapper">
-                                            <h4>비밀번호 변경</h4>
-                                            <h5>귀하의 비밀번호</h5>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="billing-info">
-                                                    <label>비밀번호</label>
-                                                    <input type="password">
-                                                </div>
+                                <form action="/flone/member/my-account-edit.hm?memberId=${sessionScope.MEMBER.memberId}" method="post">
+                                    <div class="panel-body">
+                                        <div class="myaccount-info-wrapper">
+                                            <div class="account-info-wrapper">
+                                                <h4>내 정보 변경</h4>
+                                                <h5>귀하의 비밀번호</h5>
                                             </div>
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="billing-info">
-                                                    <label>비밀번호 확인</label>
-                                                    <input type="password">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="billing-back-btn">
-                                            <div class="billing-back">
-                                                <a href="#"><i class="fa fa-arrow-up"></i> back</a>
-                                            </div>
-                                            <div class="billing-btn">
-                                                <button type="submit">Continue</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default single-my-account">
-                            <div class="panel-heading my-account-title">
-                                <h3 class="panel-title"><span>3 .</span> <a data-bs-toggle="collapse" href="#my-account-3">Modify your address book entries   </a></h3>
-                            </div>
-                            <div id="my-account-3" class="panel-collapse collapse" data-bs-parent="#faq">
-                                <div class="panel-body">
-                                    <div class="myaccount-info-wrapper">
-                                        <div class="account-info-wrapper">
-                                            <h4>Address Book Entries</h4>
-                                        </div>
-                                        <div class="entries-wrapper">
                                             <div class="row">
-                                                <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
-                                                    <div class="entries-info text-center">
-                                                        <p>Keith L. Castro </p>
-                                                        <p>  559 Pratt Avenue </p>
-                                                        <p> Orchards, WA 98662 </p>
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="billing-info" style="position: relative; display: flex; align-items: center;">
+                                                        <label for="passwordField" style="margin-right: 10px;">현재 비밀번호</label>
+                                                        <input id="passwordField" name="password" value ="${myAccount.password}" type="password" readonly
+                                                               style="flex: 1; padding-right: 40px; border: 1px solid #ced4da; border-radius: 4px;">
+
+                                                        <button type="button" onclick="togglePasswordVisibility('passwordField', 'icon')"
+                                                                style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; padding: 0; font-size: 16px;">
+                                                            <i id="icon" class="fa fa-eye-slash" style="font-size: 18px; color: #6c757d;"></i>
+                                                            <span class="blind" style="display: none;">비밀번호 보기</span>
+                                                        </button>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
-                                                    <div class="entries-edit-delete text-center">
-                                                        <a class="edit" href="#">Edit</a>
-                                                        <a href="#">Delete</a>
+
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="billing-info" style="position: relative; display: flex; align-items: center;">
+                                                        <label for="passwordConfirm" style="margin-right: 10px;">비밀번호 확인</label>
+                                                        <input id="passwordConfirm" name="passwordConfirm" type="password" placeholder="변경하실 비밀번호를 입력해주세요."
+                                                               style="flex: 1; padding-right: 40px; border: 1px solid #ced4da; border-radius: 4px;">
+                                                        <button type="button" onclick="togglePasswordVisibility('passwordConfirm', 'iconConfirm')"
+                                                                style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; padding: 0; font-size: 16px;">
+                                                            <i id="iconConfirm" class="fa fa-eye-slash" style="font-size: 18px; color: #6c757d;"></i>
+                                                        </button>
                                                     </div>
                                                 </div>
+
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="billing-info" style="position: relative; display: flex; align-items: center;">
+                                                        <label style="margin-right: 10px">전화번호</label>
+                                                        <input name = "phone" id="phone" type="text" placeholder="${myAccount.phone}" readonly
+                                                               style="flex: 1; padding-right: 40px; border: 1px solid #ced4da; border-radius: 4px;">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="billing-info" style="position: relative; display: flex; align-items: center;">
+                                                        <label style="margin-right: 10px;">전화번호 확인</label>
+                                                        <input name="phoneConfirm" id="phoneConfirm"  type="text" placeholder="변경하실 핸드폰 번호를 입력해주세요."
+                                                               style="flex: 1; padding-right: 40px; border: 1px solid #ced4da; border-radius: 4px;"
+                                                               oninput="formatPhoneNumber(this)">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="billing-back-btn">
+                                                        <div class="billing-back">
+                                                            <a href="#"><i class="fa fa-arrow-up"></i> back</a>
+                                                        </div>
+                                                        <div class="billing-btn">
+                                                            <button type="submit">Continue</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
-                                        <div class="billing-back-btn">
-                                            <div class="billing-back">
-                                                <a href="#"><i class="fa fa-arrow-up"></i> back</a>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default single-my-account">
+                    <div class="panel-heading my-account-title">
+                        <h3 class="panel-title"><span>3 .</span> <a data-bs-toggle="collapse" href="#my-account-3">회원 탈퇴</a></h3>
+                    </div>
+                    <div id="my-account-3" class="panel-collapse collapse" data-bs-parent="#faq">
+                        <div class="panel-body">
+                            <div class="myaccount-info-wrapper">
+                                <div class="account-info-wrapper">
+                                    <h4>Address Book Entries</h4>
+                                </div>
+                                <div class="entries-wrapper">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
+                                            <div class="entries-info text-center">
+                                                <p>Keith L. Castro </p>
+                                                <p>  559 Pratt Avenue </p>
+                                                <p> Orchards, WA 98662 </p>
                                             </div>
-                                            <div class="billing-btn">
-                                                <button type="submit">Continue</button>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
+                                            <div class="entries-edit-delete text-center">
+                                                <a class="edit" href="#">Edit</a>
+                                                <a href="#">Delete</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default single-my-account">
-                            <div class="panel-heading my-account-title">
-                                <h3 class="panel-title"><span>4 .</span> <a href="wishlist.html">Modify your wish list   </a></h3>
+                                <div class="billing-back-btn">
+                                    <div class="billing-back">
+                                        <a href="#"><i class="fa fa-arrow-up"></i> back</a>
+                                    </div>
+                                    <div class="billing-btn">
+                                        <button type="submit">Continue</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -161,6 +188,8 @@
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 
 <!-- Modal -->
@@ -297,7 +326,40 @@
     </div>
 </div>
 <%@include file="footer.jsp"%>
-<%@ include file="script.jsp"%>
+<%@include file="script.jsp"%>
+<script>
+    function togglePasswordVisibility(passwordFieldId, iconId) {
+        var passwordField = document.getElementById(passwordFieldId);
+        var icon = document.getElementById(iconId);
+
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+            icon.style.color = '#6c757d';
+        } else {
+            passwordField.type = 'password';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+            icon.style.color = '#6c757d';
+        }
+    }
+
+    function formatPhoneNumber(input) {
+        let value = input.value.replace(/\D/g, ''); // 모든 비숫자 문자를 제거
+
+        // 하이픈 추가
+        if (value.length <= 3) {
+            value = value;
+        } else if (value.length <= 7) {
+            value = value.slice(0, 3) + '-' + value.slice(3);
+        } else {
+            value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7, 11);
+        }
+
+        input.value = value; // 포맷된 값을 입력 필드에 다시 설정
+    }
+</script>
 </body>
 
 </html>

@@ -3,6 +3,7 @@ package org.hermez.member.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.hermez.member.dto.MemberLoginRequest;
 import org.hermez.member.dto.MemberRegisterRequest;
+import org.hermez.member.dto.MyAccountEditRequest;
 import org.hermez.member.dto.MyAccountResponse;
 import org.hermez.member.model.Member;
 import org.hermez.member.service.MemberService;
@@ -61,18 +62,18 @@ public class MemberController {
         return "flone/index";
     }
 
-    //TODO 마이페이지 로그인 한 사용자 데이터 뿌려주기, 회원탈퇴, 비번변경
     @GetMapping("my-account.hm")
-    public String getMyAccountPage(HttpSession session, Model model) {
-        MyAccountResponse myAccount = new MyAccountResponse(
-                "example@example.com",
-                "아쉬운거지",
-                "password123",
-                "010-1234-5678",
-                "1990-01-01"
-        );
-        model.addAttribute("account", myAccount);
+    public String getMyAccountPage(@RequestParam int memberId, Model model) {
+        MyAccountResponse myAccountResponse = memberService.getMyAccount(memberId);
+        model.addAttribute("myAccount", myAccountResponse);
         return "flone/my-account";
+    }
+
+    @PostMapping("my-account-edit.hm")
+    public String postMyAccountEdit(@RequestParam int memberId, MyAccountEditRequest myAccountEditRequest) {
+        myAccountEditRequest.setMemberId(memberId);
+        memberService.updateMyAccount(myAccountEditRequest);
+        return "redirect:my-account.hm?memberId=" + memberId;
     }
 
     //TODO 회원가입 유효성 비밀번호 서비스에서 처리 및 버튼? 하나 만들어서 누르면 비번 보이도록 ex) **** -> 1234

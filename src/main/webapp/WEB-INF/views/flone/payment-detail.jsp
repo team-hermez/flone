@@ -35,22 +35,7 @@
 </div>
 <div class="checkout-area pt-95 pb-100">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-7">
-                <div class="billing-info-wrap">
-                    <h3>Billing Details</h3>
-                    <div class="row">
-                        <div class="your-order-wrap gray-bg-4">
-                            <div id="img-div">
-                                <img id="reservation-course-img"
-                                     src="https://www.sputnik.kr/article_img/202203/article_1648201686.jpg"
-                                     alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-5">
+            <div class="col-lg-12">
                 <div class="your-order-area">
                     <h3>Your order</h3>
                     <div class="your-order-wrap gray-bg-4">
@@ -108,7 +93,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </div>

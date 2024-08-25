@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.hermez.course.dto.CourseListResponse;
+import org.hermez.reservation.dto.MyPaymentDetailResponse;
 import org.hermez.reservation.dto.MyReservationDTO;
 import org.hermez.reservation.dto.MyReservedReservationDTO;
 import org.hermez.reservation.dto.ReservationListResponse;
@@ -132,4 +133,12 @@ public interface ReservationMapper {
           + " where reservation_status_id=1 and member_id=#{memberId} and now()<= end_date order by reservation_id desc")
   List<MyReservedReservationDTO> findMyReservedReservationList(@Param("memberId") int memberId,
       @Param("offset") int offset, @Param("itemsPerPage") int itemsPerPage);
+
+  @Select("select merchant_uid as merchantUid ,title , course_id as courseId,description ,  start_date as startDate, end_date as endDate,payment_amount as paymentAmount ,payment_history.created_at as createdAt,\n"
+      + " cancel_at as cancelAt\n"
+      + " from reservation\n"
+      + " join course using (course_id)\n"
+      + " join payment_history using (payment_history_id)\n"
+      + " where merchant_uid =#{merchantUid} and member_id =#{memberId}")
+  MyPaymentDetailResponse findMyPaymentDetail(@Param("merchantUid") String merchantUid, @Param("memberId") Integer memberId);
 }

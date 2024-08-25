@@ -3,6 +3,7 @@ package org.hermez.image.mapper;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.hermez.image.model.Image;
 
 /**
@@ -23,4 +24,7 @@ public interface ImageMapper {
     @Insert("INSERT INTO image (entity_id, entity_type, original_name, save_name, file_path) " +
             "VALUES (#{entityId}, #{entityType}, #{originalName}, #{saveName}, #{filePath})")
     void insertImage(Image image);
+
+    @Select("SELECT save_name FROM image WHERE entity_id = #{entityId} AND entity_type = #{entityType}")
+    String selectImageById(@Param("entityId") int entityId, @Param("entityType") String entityType);
 }

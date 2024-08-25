@@ -19,4 +19,6 @@ public interface ImageService {
      * @throws IOException 이미지 저장 중 오류가 발생한 경우
      */
     void saveImage(RegisterImageRequest registerImageRequest) throws IOException;
+
+    String getSaveImage(int entityId, String entityType);
 }

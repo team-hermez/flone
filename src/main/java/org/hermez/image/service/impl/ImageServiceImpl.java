@@ -105,4 +105,8 @@ public class ImageServiceImpl implements ImageService {
         String extension = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
         return extension.equals("jpg") || extension.equals("jpeg") || extension.equals("png");
     }
+
+    public String getSaveImage(int entityId, String entityType) {
+        return imageMapper.selectImageById(entityId,entityType);
+    }
 }

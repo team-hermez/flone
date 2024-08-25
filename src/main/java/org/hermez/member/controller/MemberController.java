@@ -76,14 +76,10 @@ public class MemberController {
         return "redirect:my-account.hm?memberId=" + memberId;
     }
 
-    //TODO 회원가입 유효성 비밀번호 서비스에서 처리 및 버튼? 하나 만들어서 누르면 비번 보이도록 ex) **** -> 1234
     @PostMapping("register.hm")
     public String postMemberRegister(@Validated @ModelAttribute("member") MemberRegisterRequest memberRegisterRequest, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             bindingResult.reject("member", "member");
-            return "flone/register";
-        } else if (!memberRegisterRequest.getPassword().equals((memberRegisterRequest.getPasswordNot()))) {
-            bindingResult.rejectValue("password", "passwordNot", "패스워드가 일치하지 않습니다.");
             return "flone/register";
         }
         memberService.registerMember(memberRegisterRequest);

@@ -24,15 +24,34 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void registerMember(MemberRegisterRequest memberRegisterRequest) {
-        Member member = new Member(
-                memberRegisterRequest.getRoleId(),
-                memberRegisterRequest.getEmail(),
-                memberRegisterRequest.getPassword(),
-                memberRegisterRequest.getName(),
-                memberRegisterRequest.getPhone(),
-                memberRegisterRequest.getCreatedAt()
-        );
-        save(member);
+        boolean emailExist = false;
+        boolean phoneExist = false;
+        try {
+            emailExist = memberMapper.selectMemberRegisterEmailExist(memberRegisterRequest);
+            phoneExist = memberMapper.selectMemberPhoneExist(memberRegisterRequest);
+            if (emailExist) {
+                throw new MemberServiceException("중복된 이메일이 존재합니다.");
+            }
+
+            if (phoneExist) {
+                throw new MemberServiceException("중복된 전화번호가 존재합니다.");
+            }
+
+            Member member = new Member(
+                    memberRegisterRequest.getRoleId(),
+                    memberRegisterRequest.getEmail(),
+                    memberRegisterRequest.getPassword(),
+                    memberRegisterRequest.getName(),
+                    memberRegisterRequest.getPhone(),
+                    memberRegisterRequest.getCreatedAt()
+            );
+            save(member);
+
+        } catch (MemberServiceException e) {
+            throw new MemberServiceException(e.getMessage());
+        } catch (Exception e) {
+            throw new MemberServiceException("회원가입 중 오류가 발생했습니다.", e);
+        }
     }
 
     @Override

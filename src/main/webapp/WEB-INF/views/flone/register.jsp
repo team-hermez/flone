@@ -15,14 +15,14 @@
     <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.png">
 
     <!-- CSS
-	============================================ -->
+    ============================================ -->
     <style>
         .login-register-wrapper .login-register-form form input {
             margin-bottom: 0 !important;
         }
 
         .login-register-wrapper .login-form-container {
-            padding: 50px 80px 50px 80px !important
+            padding: 50px 80px 50px 80px !important;
         }
 
         .form-group {
@@ -45,7 +45,7 @@
         }
 
         .error-container {
-            min-height: 20px; 
+            min-height: 20px;
             margin-bottom: 5px;
         }
 
@@ -68,6 +68,18 @@
 
         h5 {
             margin-top: 20px !important;
+        }
+
+        .password-check-result {
+            font-size: 14px;
+            font-weight: bold;
+            color: green;
+        }
+
+        .password-check-error {
+            font-size: 14px;
+            font-weight: bold;
+            color: red;
         }
     </style>
 
@@ -101,7 +113,7 @@
                     <div id="lg2" class="tab-pane">
                         <div class="login-form-container">
                             <div class="login-register-form">
-                                <%--@elvariable id="member" type="org.hm.member.model.Member"--%>
+                            <%--@elvariable id="member" type="org.hm.member.model.Member"--%>
                                 <form:form action="register.hm" id="registerForm" method="post" modelAttribute="member">
                                     <fieldset>
                                         <h5>이름</h5>
@@ -124,23 +136,6 @@
                                             </button>
                                             <div class="error-container">
                                                 <form:errors path="password" cssClass="error"/>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <h5>비밀번호 확인</h5>
-                                    <div class="form-group">
-                                        <div style="position: relative;">
-                                            <form:input type="password" id="passwordNot" path="passwordNot"
-                                                        placeholder="비밀번호 확인" style="padding-right: 40px;"/>
-                                            <button type="button"
-                                                    onclick="toggleVisibilitySelectorPassword('#passwordNot', '#iconPasswordNot')"
-                                                    style="position: absolute; right: 10px; top: 35%; transform: translateY(-50%); background: none; border: none; cursor: pointer; padding: 0; font-size: 16px;">
-                                                <i id="iconPasswordNot" class="fa fa-eye-slash"
-                                                   style="font-size: 18px; color: #6c757d;"></i>
-                                            </button>
-                                            <div class="error-container">
-                                                <form:errors path="passwordNot" cssClass="error"/>
                                             </div>
                                         </div>
                                     </div>
@@ -170,12 +165,10 @@
         </div>
     </div>
 </div>
-</div>
 
 <%@include file="footer.jsp" %>
 <%@ include file="script.jsp" %>
 <script src="/resources/assets/js/toggleVisibility.js"></script>
-
 
 <!-- All JS is here
 ============================================ -->

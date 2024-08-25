@@ -17,6 +17,17 @@ public class ReservationListResponse {
   private String title;
   private LocalDate startDate;
   private LocalDate endDate;
+  private boolean isBefore;
+  private boolean isAfter;
+
+  public boolean getIsBefore() {
+    return LocalDate.now().isBefore(startDate);
+  }
+
+  public boolean getIsAfter() {
+    return (LocalDate.now()).isAfter(startDate);
+  }
+
 
   @Override
   public String toString() {

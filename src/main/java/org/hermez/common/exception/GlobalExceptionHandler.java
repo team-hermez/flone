@@ -6,6 +6,7 @@ import org.hermez.classroom.board.exception.BoardServiceException;
 import org.hermez.classroom.classroom.exception.ClassroomNotFoundException;
 import org.hermez.classroom.reply.exception.ReplyNotFoundException;
 import org.hermez.image.exception.ImageProcessingException;
+import org.hermez.reservation.exception.NotActiveClassException;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -56,6 +57,12 @@ public class GlobalExceptionHandler {
     @ResponseStatus(NOT_FOUND)
     public String handleNoHandlerFoundException() {
         return "/flone/error/404";
+    }
+
+    @ExceptionHandler(NotActiveClassException.class)
+    public String handleNotActiveClassException(NotActiveClassException ex, Model model) {
+        model.addAttribute("errorMessage", ex.getMessage());
+        return "error";
     }
 
 }

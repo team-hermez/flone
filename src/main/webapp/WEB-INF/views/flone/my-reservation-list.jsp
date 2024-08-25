@@ -34,26 +34,36 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="reservation" items="${myReservationPage.contents}">
-                                <tr>
-                                    <td class="product-thumbnail">
-                                        <a href="reservation-detail.hm?courseId=${reservation.courseId}">${reservation.merchantUid}</a>
-                                    </td>
-                                    <td class="product-name"><a
-                                            href="/flone/course/detail.hm?courseId=${reservation.courseId}">${reservation.title}</a>
-                                    </td>
-                                    <td class="product-price-cart">${reservation.startDate}</td>
-                                    <td class="product-subtotal">${reservation.endDate}</td>
-                                    <c:choose>
-                                        <c:when test="${reservation.isBefore}">
-                                            <td>시작 전</td>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <td class="product-remove">강의 중</td>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </tr>
-                            </c:forEach>
+                            <c:choose>
+                                <c:when test="${empty myReservationPage.contents}">
+                                    <tr>
+                                        <td colspan="5">아직 수강하고 있는 강의가 없습니다. 좋은 강의를 많이 준비했으니 둘러봐주세요 :).</td>
+                                    </tr>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:forEach var="reservation"
+                                               items="${myReservationPage.contents}">
+                                        <tr>
+                                            <td class="product-thumbnail">
+                                                <a href="reservation-detail.hm?courseId=${reservation.courseId}">${reservation.merchantUid}</a>
+                                            </td>
+                                            <td class="product-name"><a
+                                                    href="/flone/course/detail.hm?courseId=${reservation.courseId}">${reservation.title}</a>
+                                            </td>
+                                            <td class="product-price-cart">${reservation.startDate}</td>
+                                            <td class="product-subtotal">${reservation.endDate}</td>
+                                            <c:choose>
+                                                <c:when test="${reservation.isBefore}">
+                                                    <td>시작 전</td>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <td class="product-remove">강의 중</td>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </tr>
+                                    </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
 
                             </tbody>
                         </table>
@@ -64,7 +74,7 @@
                                 <div class="cart-shiping-update">
                                 </div>
                                 <div class="cart-clear">
-                                    <a href="/flone/reservation/list.hm" >결제 목록 가기</a>
+                                    <a href="/flone/reservation/list.hm">결제 목록 가기</a>
                                 </div>
                             </div>
                         </div>

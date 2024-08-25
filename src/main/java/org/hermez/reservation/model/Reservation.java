@@ -51,4 +51,16 @@ public class Reservation {
     return reservation;
   }
 
+  @Override
+  public String toString() {
+    return "Reservation{" +
+        "reservationId=" + reservationId +
+        ", memberId=" + memberId +
+        ", courseId=" + courseId +
+        ", paymentHistoryId=" + paymentHistoryId +
+        ", reservationStatusId=" + reservationStatusId +
+        ", merchantUid='" + merchantUid + '\'' +
+        ", imp_uid='" + imp_uid + '\'' +
+        '}';
+  }
 }

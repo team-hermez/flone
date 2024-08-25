@@ -18,12 +18,12 @@ public class AdminMainController {
 
     @GetMapping("main.hm")
     public String getAdminMainPage(Model model) {
+        model.addAttribute("adminMainResponse", adminService.getAdminMain());
         model.addAttribute("monthlySignupChartData", adminService.getMonthlySignupStatistics());
         model.addAttribute("monthlyPaymentChartData", adminService.getMonthlyPaymentStatistics());
-        model.addAttribute("courseCountBySubjectChartData", adminService.getCourseCountBySubject());
+        model.addAttribute("courseCountBySubjectChartData", adminService.getCourseCountBySubjectStatistics());
         model.addAttribute("classroomCreationData", adminService.getMonthlyClassroomCreationStatistics());
-        model.addAttribute("monthlyCourseCountChartData", adminService.getMonthlyCourseCount());
-        model.addAttribute("adminMainResponse", adminService.getAdminMain());
+        model.addAttribute("monthlyCourseCountChartData", adminService.getMonthlyCourseCountStatistics());
         return "flone/admin-main";
     }
 }

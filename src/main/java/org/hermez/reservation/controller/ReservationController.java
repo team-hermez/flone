@@ -123,7 +123,7 @@ public class ReservationController {
     return "flone/reservation-detail";
   }
 
-  @GetMapping("/reseved-course-list.hm")
+  @GetMapping("/reserved-course-list.hm")
   public String getReservationList(@RequestParam(value = "page", defaultValue = "1") int page,
       HttpSession session, Model model) {
     Member member = (Member) session.getAttribute("MEMBER");

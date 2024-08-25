@@ -53,7 +53,7 @@
                                             <a href="#"><i class="fa fa-pencil">예약완료</i></a>
                                         </c:if>
                                         <c:if test="${reservation.reservationStatusId == 1 and reservation.isAfter}">
-                                            <a href="#"><i class="fa fa-pencil">수강중</i></a>
+                                            <a href="#"><i class="fa fa-pencil">예약확정</i></a>
                                         </c:if>
                                         <c:if test="${reservation.reservationStatusId == 2}">
                                             <a href="#"><i class="fa fa-pencil">예약취소</i></a>

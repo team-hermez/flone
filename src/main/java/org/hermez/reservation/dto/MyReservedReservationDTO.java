@@ -22,9 +22,11 @@ public class MyReservedReservationDTO {
     return currentDate;
   }
 
+
   public boolean getIsBefore() {
     return (LocalDate.now()).isBefore(startDate);
   }
+
 
   @Override
   public String toString() {

@@ -16,12 +16,18 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
 
 @Service
-@RequiredArgsConstructor
+
 public class MemberServiceImpl implements MemberService {
     private final MemberMapper memberMapper;
     private final HttpSession session;
     private final InstructorService instructorService;
     private BCryptPasswordEncoder passwordEncoder;
+
+    public MemberServiceImpl(MemberMapper memberMapper, HttpSession session, InstructorService instructorService) {
+        this.memberMapper = memberMapper;
+        this.session = session;
+        this.instructorService = instructorService;
+    }
 
     public void registerMember(MemberRegisterRequest memberRegisterRequest) {
         boolean emailExist = false;
@@ -77,7 +83,6 @@ public class MemberServiceImpl implements MemberService {
             // TODO: admin 정보 받아오기
             Admin admin = new Admin();
 
-            // 역할에 따른 세션 설정
             if (memberLoginResponse.getRoleId() == 1) {
                 session.setAttribute("MEMBER", memberLoginResponse);
             } else if (memberLoginResponse.getRoleId() == 2) {

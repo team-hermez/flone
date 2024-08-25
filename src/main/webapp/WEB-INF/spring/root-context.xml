@@ -37,6 +37,7 @@
     <mybatis-spring:scan base-package="org.hermez.image.mapper" />
     <mybatis-spring:scan base-package="org.hermez.course.mapper"/>
     <mybatis-spring:scan base-package="org.hermez.instructor.mapper"/>
+    <mybatis-spring:scan base-package="org.hermez.oauth.mapper"/>
     <mybatis-spring:scan base-package="org.hermez.admin.mapper"/>
 
     <context:component-scan base-package="org.hermez"/>

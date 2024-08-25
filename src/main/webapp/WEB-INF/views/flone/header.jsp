@@ -61,6 +61,7 @@
                             <ul>
                                 <li><a href="/flone/index.hm">홈 <i class="fa fa-angle-down"></i></a>
                                 </li>
+                                <li><a href="about.jsp">about</a></li>
                                 <li><a href="/flone/course/list.hm"> 강의 <i class="fa fa-angle-down"></i> </a>
                                     <ul class="mega-menu">
                                         <li>
@@ -80,7 +81,19 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <c:choose>
+                                <c:when test="${not empty sessionScope.INSTRUCTOR}">
+                                    <li>
+                                        <a href="#">강의 등록 <i class="fa fa-angle-down"></i></a>
+                                        <ul class="submenu">
+                                            <li><a href="/flone/course/list.hm">내 강의</a></li>
+                                            <li><a href="/flone/course/register.hm">강의 등록</a></li>
+                                        </ul>
+                                    </li>
+                                </c:when>
+                            </c:choose>
                                 <li><a href="/flone/instructor/list.hm">강사</a></li>
+                                <li><a href="contact.jsp">contact</a></li>
                                 <c:choose>
                                 <c:when test="${not empty sessionScope.MEMBER}">
                                     <li>
@@ -93,17 +106,6 @@
                                 </c:when>
                             </c:choose>
 
-                            <c:choose>
-                                <c:when test="${not empty sessionScope.INSTRUCTOR}">
-                                    <li>
-                                        <a href="#">강의 등록 <i class="fa fa-angle-down"></i></a>
-                                        <ul class="submenu">
-                                            <li><a href="/flone/course/list.hm">내 강의</a></li>
-                                            <li><a href="/flone/course/register.hm">강의 등록</a></li>
-                                        </ul>
-                                    </li>
-                                </c:when>
-                            </c:choose>
                                 <li>
                             <c:choose>
                                 <c:when test="${not empty sessionScope.ADMIN}">

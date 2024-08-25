@@ -17,6 +17,7 @@ import org.hermez.common.page.Page;
 import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.course.model.CourseTime;
 import org.hermez.course.service.CourseService;
+import org.hermez.member.dto.MemberLoginResponse;
 import org.hermez.member.model.Member;
 import org.hermez.paymenthistory.dto.CancelDTO;
 import org.hermez.paymenthistory.service.payapi.IamportService;
@@ -98,8 +99,8 @@ public class ReservationController {
       @RequestParam(value = "page", defaultValue = "1") int page,
       HttpSession session,
       Model model) {
-    Member member = (Member) session.getAttribute("MEMBER");
-    int memberId = member.getMemberId();
+    MemberLoginResponse memberLoginResponse = (MemberLoginResponse) session.getAttribute("MEMBER");
+    int memberId = memberLoginResponse.getMemberId();
     Page<ReservationListResponse> reservationPage = reservationRepository.getReservationList(
         memberId,
         page);
@@ -126,8 +127,8 @@ public class ReservationController {
   @GetMapping("/reserved-course-list.hm")
   public String getReservationList(@RequestParam(value = "page", defaultValue = "1") int page,
       HttpSession session, Model model) {
-    Member member = (Member) session.getAttribute("MEMBER");
-    int memberId = member.getMemberId();
+    MemberLoginResponse memberLoginResponse = (MemberLoginResponse) session.getAttribute("MEMBER");
+    int memberId = memberLoginResponse.getMemberId();
     Page<MyReservedReservationDTO> myReservationPage = reservationRepository.findMyReservedReservationList(
         memberId, page);
     model.addAttribute("myReservationPage", myReservationPage);
@@ -139,8 +140,8 @@ public class ReservationController {
       @RequestParam String merchantUid,
       HttpSession session,
       Model model) {
-    Member member = (Member)session.getAttribute("MEMBER");
-    int memberId = member.getMemberId();
+    MemberLoginResponse memberLoginResponse = (MemberLoginResponse) session.getAttribute("MEMBER");
+    int memberId = memberLoginResponse.getMemberId();
     MyPaymentDetailResponse myPaymentDetail = reservationRepository.findMyPaymentDetail(merchantUid, memberId);
     int courseId = myPaymentDetail.getCourseId();
     CourseDetailResponse courseDetailList = courseService.courseDetailService(courseId);
@@ -159,8 +160,8 @@ public class ReservationController {
   )
       throws IamportResponseException, IOException {
     int courseId = verificationRequest.getCourseId();
-    Member member = (Member) session.getAttribute("MEMBER");
-    Integer myCourseOne = reservationRepository.findMyCourseOne(member.getMemberId(), courseId);
+    MemberLoginResponse memberLoginResponse = (MemberLoginResponse) session.getAttribute("MEMBER");
+    Integer myCourseOne = reservationRepository.findMyCourseOne(memberLoginResponse.getMemberId(), courseId);
     CourseDetailResponse courseDetailResponse = courseService.courseDetailService(courseId);
     LocalDate courseStartDate = LocalDate.parse(courseDetailResponse.getStartDate());
     if (LocalDate.now().isAfter(courseStartDate)) {
@@ -175,7 +176,7 @@ public class ReservationController {
     String merchantUid = verificationRequest.getMerchant_uid(); //내가 만든 주문번호
     IamportResponse<Payment> iamportResponse = iamportService.getIamportClient()
         .paymentByImpUid(impUid);
-    reservationService.save(member.getMemberId(), courseId, amount, impUid, merchantUid);
+    reservationService.save(memberLoginResponse.getMemberId(), courseId, amount, impUid, merchantUid);
     iamportService.verifyPayment(iamportResponse, amount, merchantUid);
     return iamportResponse;
   }

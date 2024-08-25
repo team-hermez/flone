@@ -10,8 +10,8 @@ import org.hermez.member.mapper.MemberMapper;
 import org.hermez.member.model.Member;
 
 import org.hermez.member.service.MemberService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,14 +21,16 @@ public class MemberServiceImpl implements MemberService {
     private final MemberMapper memberMapper;
     private final HttpSession session;
     private final InstructorService instructorService;
+    private BCryptPasswordEncoder passwordEncoder;
 
-    @Override
     public void registerMember(MemberRegisterRequest memberRegisterRequest) {
         boolean emailExist = false;
         boolean phoneExist = false;
+
         try {
             emailExist = memberMapper.selectMemberRegisterEmailExist(memberRegisterRequest);
             phoneExist = memberMapper.selectMemberPhoneExist(memberRegisterRequest);
+
             if (emailExist) {
                 throw new MemberServiceException("중복된 이메일이 존재합니다.");
             }
@@ -37,10 +39,14 @@ public class MemberServiceImpl implements MemberService {
                 throw new MemberServiceException("중복된 전화번호가 존재합니다.");
             }
 
+            passwordEncoder = new BCryptPasswordEncoder();
+            String encodedPassword = passwordEncoder.encode(memberRegisterRequest.getPassword());
+
             Member member = new Member(
                     memberRegisterRequest.getRoleId(),
                     memberRegisterRequest.getEmail(),
                     memberRegisterRequest.getPassword(),
+                    encodedPassword,
                     memberRegisterRequest.getName(),
                     memberRegisterRequest.getPhone(),
                     memberRegisterRequest.getCreatedAt()
@@ -56,18 +62,25 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void loginMember(MemberLoginRequest memberLoginRequest) {
-        MemberLoginResponse memberLoginResponse = null;
+
         boolean exist = false;
         try {
             exist = memberMapper.selectMemberEmailExist(memberLoginRequest);
             if (!exist) {
                 throw new MemberServiceException("등록된 이메일이 없습니다.");
             }
-            memberLoginResponse = memberMapper.loginMember(memberLoginRequest);
+
+            MemberLoginResponse memberLoginResponse = memberMapper.loginMember(memberLoginRequest);
 
             if (memberLoginResponse == null) {
                 throw new MemberServiceException("비밀번호가 맞지 않습니다.");
             }
+
+            boolean passwordsMatch = passwordEncoder.matches(memberLoginRequest.getPassword(), memberLoginResponse.getEncodedPassword());
+            if (!passwordsMatch) {
+                throw new MemberServiceException("비밀번호가 맞지 않습니다.");
+            }
+
             Instructor instructor = instructorService.findByMemberLoginResponseId(memberLoginResponse);
             // TODO: admin 정보 받아오기
             Admin admin = new Admin();
@@ -105,12 +118,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void updateMyAccount(MyAccountEditRequest myAccountEditRequest) {
         int selectPhoneExists = memberMapper.selectPhoneExists(myAccountEditRequest);
-        System.out.println("@@@@@@@@@@@@@@ = " + selectPhoneExists);
         try {
-            if(selectPhoneExists == 0) {
+            if (selectPhoneExists == 0) {
                 memberMapper.updateMyAccountPhone(myAccountEditRequest);
                 memberMapper.updateMyAccountPassword(myAccountEditRequest);
-            }else if (selectPhoneExists == 1) {
+            } else if (selectPhoneExists == 1) {
                 throw new MemberServiceException("이미 존재하는 핸드폰 번호입니다.");
             }
         } catch (MemberServiceException e) {

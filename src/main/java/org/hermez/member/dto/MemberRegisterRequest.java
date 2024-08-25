@@ -20,7 +20,7 @@ public class MemberRegisterRequest {
 
     @NotEmpty(message = "{NotEmpty.member.password}")
     private String password;
-    private String passwordNot;
+    private String encoded_password;
 
     @Pattern(regexp ="^[가-힣]*$", message = "")
     @NotEmpty(message = "{NotEmpty.member.name}")

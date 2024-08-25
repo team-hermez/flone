@@ -79,6 +79,22 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     return new Page<>(reservations, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
   }
 
+  @Override
+  public Page<ReservationListResponse> getReservationListAll(int page) {
+    int total = reservationMapper.countReservationsAll();
+    PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total,5,page);
+    List<ReservationListResponse> reservationAll = reservationMapper.selectReservationListAll(pageInfo.getOffset(),pageInfo.getItemsPerPage());
+    return new Page<>(reservationAll, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
+  }
+
+  @Override
+  public Page<ReservationListResponse> getRefundListAll(int page) {
+    int total = reservationMapper.countRefundAll();
+    PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total,5,page);
+    List<ReservationListResponse> refundListAll = reservationMapper.selectRefundListAll(pageInfo.getOffset(),pageInfo.getItemsPerPage());
+    return new Page<>(refundListAll, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
+  }
+
 
   @Override
   public Page<MyReservedReservationDTO> findMyReservedReservationList(int memberId, int page) {
@@ -88,5 +104,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
         memberId, pageInfo.getOffset(), pageInfo.getItemsPerPage());
     return new Page<>(myReservations, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
   }
+
+
 
 }

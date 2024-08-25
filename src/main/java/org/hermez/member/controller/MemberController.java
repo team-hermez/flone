@@ -90,37 +90,9 @@ public class MemberController {
         return "flone/login";
     }
 
-    //TODO 로그인 유효성 이메일, 비밀번호
-//    @PostMapping("login1.hm")
-//    public String postLogin(@Validated @ModelAttribute("member") MemberLoginRequest memberLoginRequest,
-//                            BindingResult bindingResult, HttpSession session, Model model) {
-//        // 로그인 시 아이디가 존재하는지 확인
-//        Member member = memberService.findMemberByEmail(memberLoginRequest.getEmail());
-//        if (member == null) {
-//            bindingResult.rejectValue("email", "email.notfound", "아이디가 없습니다.");
-//            return "flone/login";
-//        }
-//
-//        // 비밀번호 확인
-//        boolean isPasswordValid = memberService.checkPassword(memberLoginRequest.getEmail(), memberLoginRequest.getPassword());
-//        if (!isPasswordValid) {
-//            bindingResult.rejectValue("password", "password.incorrect", "비밀번호가 틀립니다.");
-//            return "flone/login";
-//        }
-//
-//        // 로그인 성공
-//        session.setAttribute("MEMBER", member);
-//        return "redirect:/flone/index.hm";
-//    }
-//}
-
     @PostMapping("login.hm")
     public String postLogin(@Validated @ModelAttribute("member") MemberLoginRequest memberLoginRequest, HttpSession session) {
-        System.out.println("postLogin member start.");
         memberService.loginMember(memberLoginRequest);
-        Member member1 = (Member) session.getAttribute("MEMBER");
-        System.out.println("postLogin member1 session = " + member1.getName());
-
         return "redirect:/flone/index.hm";
     }
 

@@ -8,6 +8,7 @@ import org.hermez.instructor.dto.InstructorDetailResponse;
 import org.hermez.instructor.dto.InstructorListResponse;
 import org.hermez.instructor.dto.InstructorRegisterRequest;
 import org.hermez.instructor.model.Instructor;
+import org.hermez.member.dto.MemberLoginResponse;
 
 import java.util.ArrayList;
 
@@ -32,5 +33,5 @@ public interface InstructorMapper {
             "FROM instructor i " +
             "JOIN member m ON m.member_id = i.member_id " +
             "WHERE m.member_id = #{memberId}")
-    Instructor findByMemberId(int memberId);
+    Instructor findByMemberId(MemberLoginResponse memberLoginResponse);
 }

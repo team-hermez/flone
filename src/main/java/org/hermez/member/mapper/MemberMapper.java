@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.hermez.member.dto.MemberLoginRequest;
+import org.hermez.member.dto.MemberLoginResponse;
 import org.hermez.member.dto.MyAccountEditRequest;
 import org.hermez.member.dto.MyAccountResponse;
 import org.hermez.member.model.*;
@@ -16,7 +17,10 @@ public interface MemberMapper {
     void registerMember(Member member);
 
     @Select("select member_id as memberId, role_id as roleId, email, password, name, phone, created_at as createdAt from member where email=#{email} and password=#{password}")
-    Member loginMember(MemberLoginRequest memberLoginRequest);
+    MemberLoginResponse loginMember(MemberLoginRequest memberLoginRequest);
+
+    @Select("SELECT COUNT(1) > 0 FROM member WHERE email = #{email}")
+    boolean selectMemberEmailExist(MemberLoginRequest memberLoginRequest);
 
     @Select("select member_id as memberId, email, name, password, phone from member where member_id = #{memberId};")
     MyAccountResponse getMyAccount(int memberId);

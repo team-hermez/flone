@@ -3,10 +3,10 @@ package org.hermez.admin.service;
 import org.hermez.admin.dto.AdminMainResponse;
 import org.hermez.admin.dto.CourseManageListResponse;
 import org.hermez.admin.dto.InstructorManageListResponse;
+import org.hermez.common.page.Page;
 import org.hermez.member.model.Member;
 
 import java.util.List;
-import java.util.Map;
 
 public interface AdminService {
 
@@ -22,7 +22,7 @@ public interface AdminService {
 
     String getMonthlyCourseCountStatistics();
 
-    List<Member> getAllMembers();
+    Page<Member> getMemberList(int page);
 
     List<InstructorManageListResponse> getInstructorManageList();
 

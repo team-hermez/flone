@@ -35,64 +35,44 @@
 </div>
 <div class="checkout-area pt-95 pb-100">
     <div class="container">
-            <div class="col-lg-12">
-                <div class="your-order-area">
-                    <h3>Your order</h3>
-                    <div class="your-order-wrap gray-bg-4">
-                        <div class="your-order-product-info">
-                            <div class="your-order-top">
+        <div class="col-lg-12">
+            <div class="your-order-area">
+                <h3>Your order</h3>
+                <div class="your-order-wrap gray-bg-4">
+                    <div class="your-order-product-info">
+                        <div class="your-order-top">
+                            <ul>
+                                <li>강의명: ${reserveForm.title}</li>
+                                <li>가격: ${reserveForm.coursePrice} 원</li>
+                            </ul>
+                        </div>
+                        <div class="your-order-middle">
+                            <ul>
+                                <li class="your-order-shipping">강사님: ${courseDetailList.instructorName}</li>
+                            </ul>
+                            <ul>
+                                <li class="your-order-shipping">강의설명: ${courseDetailList.description}</li>
+                            </ul>
+                        </div>
+                        <div class="your-order-bottom">
+                            <ul>
+                                <li class="your-order-shipping">강의시간</li>
+                            </ul>
+                            <ul>
+                            <li>${reserveForm.startDate} - ${reserveForm.endDate}</li>
+                            </ul>
+                            <c:forEach items="${courseTime}" var="time">
                                 <ul>
-                                    <li>강의명</li>
-                                    <li>가격</li>
+                                    <li>${time.dayOfWeek} ${time.startTime} - ${time.endTime}</li>
                                 </ul>
-                            </div>
-                            <div class="your-order-middle">
-                                <ul>
-                                    <li><span class="order-middle-left"></span> <span
-                                            class="order-price"></span></li>
-                                    <li><span class="order-middle-left">${reserveForm.title}</span>
-                                        <span class="order-price">${reserveForm.coursePrice} 원 </span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="product-details-content ml-70">
-                                <ul>
-                                    <li class="your-order-shipping">강의시간</li>
-                                    <li>${reserveForm.instructorName}</li>
-                                    <c:forEach items="${courseTime}" var="time">
-                                        <li>${time.dayOfWeek}</li>
-                                        <li>${time.startTime} - ${time.endTime}</li>
-                                    </c:forEach>
-                                    <li>${reserveForm.startDate} - ${reserveForm.endDate}</li>
-                                </ul>
-                            </div>
-                            <div class="payment-method">
-                                <div class="payment-accordion element-mrg">
-                                    <div class="panel-group" id="accordion">
-                                        <div class="panel payment-accordion">
-                                            <div class="panel-heading" id="method-one">
-                                                <h4 class="panel-title">
-                                                    <a data-bs-toggle="collapse" href="#method1">
-                                                        강의내용
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="method1" class="panel-collapse collapse show"
-                                                 data-bs-parent="#accordion">
-                                                <div class="panel-body">
-                                                    <p>${reserveForm.description}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="Place-order mt-25">
-                                <a class="btn-hover" id="pay-course" onclick="clickPay()">결제</a>
-                            </div>
+                            </c:forEach>
+                        </div>
+                        <div class="Place-order mt-25">
+                            <a class="btn-hover" id="pay-course" onclick="clickPay()">결제</a>
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </div>

@@ -61,7 +61,7 @@ public class ReservationController {
       @RequestParam int courseId,
       HttpSession session
       , Model model) {
-    Member member = (Member) session.getAttribute("MEMBER");
+    MemberLoginResponse memberLoginResponse = (MemberLoginResponse) session.getAttribute("MEMBER");
     CourseDetailResponse courseDetailList = courseService.courseDetailService(courseId);
     List<CourseTime> courseTimeList = courseService.courseDetailTime(courseId);
     model.addAttribute("courseDetailList", courseDetailList);
@@ -75,9 +75,9 @@ public class ReservationController {
         .endDate(courseDetailList.getEndDate())
         .instructorName(courseDetailList.getInstructorName())
         .merchantUid(createMerchantUid())
-        .memberName(member.getName())
-        .memberEmail(member.getEmail())
-        .memberPhone(member.getPhone()).build();
+        .memberName(memberLoginResponse.getName())
+        .memberEmail(memberLoginResponse.getEmail())
+        .memberPhone(memberLoginResponse.getPhone()).build();
     model.addAttribute("courseTime", courseTimeList);
     model.addAttribute("reserveForm", reserveForm);
     return "/flone/payment-detail";

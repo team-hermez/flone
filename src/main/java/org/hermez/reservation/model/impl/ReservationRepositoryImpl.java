@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.hermez.common.page.Page;
 import org.hermez.common.page.PaginationUtil;
 import org.hermez.reservation.dto.MyReservationDTO;
+import org.hermez.reservation.dto.MyReservedReservationDTO;
 import org.hermez.reservation.dto.ReservationListResponse;
 import org.hermez.reservation.mapper.ReservationMapper;
 import org.hermez.reservation.model.Reservation;
@@ -60,14 +61,6 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     reservationMapper.updateReservationStatus(merchantUid);
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public List<ReservationListResponse> reservationList(int memberId) {
-    return reservationMapper.reservationList(memberId);
-  }
-
   @Override
   public List<MyReservationDTO> findMyReservationList(int memberId) {
     return reservationMapper.findMyReservationList(memberId);
@@ -82,10 +75,18 @@ public class ReservationRepositoryImpl implements ReservationRepository {
   public Page<ReservationListResponse> getReservationList(int memberId, int page) {
     int total = reservationMapper.countReservations(memberId);
     PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total,5,page);
-    log.info("Total reservations: {}", pageInfo);
-    log.info("page={}",pageInfo.getOffset());
      List<ReservationListResponse> reservations = reservationMapper.selectReservationList(memberId,pageInfo.getOffset(),pageInfo.getItemsPerPage());
     return new Page<>(reservations, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
+  }
+
+
+  @Override
+  public Page<MyReservedReservationDTO> findMyReservedReservationList(int memberId, int page) {
+    int total = reservationMapper.countMyReservedCourse(memberId);
+    PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total,5,page);
+    List<MyReservedReservationDTO> myReservations = reservationMapper.findMyReservedReservationList(
+        memberId, pageInfo.getOffset(), pageInfo.getItemsPerPage());
+    return new Page<>(myReservations, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
   }
 
 }

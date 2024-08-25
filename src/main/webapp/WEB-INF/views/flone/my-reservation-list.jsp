@@ -3,7 +3,6 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
 <body>
-<%@ include file="refund-payment.jsp" %>
 <%@ include file="header.jsp" %>
 <div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
     <div class="container">
@@ -12,14 +11,14 @@
                 <li>
                     <a href="/flone/index.hm">Home</a>
                 </li>
-                <li class="active">결제 목록</li>
+                <li class="active">나의 강의 목록</li>
             </ul>
         </div>
     </div>
 </div>
 <div class="cart-main-area pt-90 pb-100">
     <div class="container">
-        <h3 class="cart-page-title">결제 목록</h3>
+        <h3 class="cart-page-title">나의 강의 목록</h3>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                 <form action="#">
@@ -27,44 +26,32 @@
                         <table>
                             <thead>
                             <tr>
-                                <th>예약 번호</th>
+                                <th>주문 번호</th>
                                 <th>강의 명</th>
                                 <th>강의 시작일</th>
-                                <th>가격</th>
-                                <th>결제상태</th>
-                                <th>
-                                    <button type="button" id="selectAllBtn">모두선택</button>
-                                </th>
+                                <th>강의 종료일</th>
+                                <th>강의 상태</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="reservation" items="${reservationPage.contents}">
+                            <c:forEach var="reservation" items="${myReservationPage.contents}">
                                 <tr>
                                     <td class="product-thumbnail">
                                         <a href="reservation-detail.hm?courseId=${reservation.courseId}">${reservation.merchantUid}</a>
                                     </td>
-                                    <td class="product-name"><a href="/flone/course/detail.hm?courseId=${reservation.courseId}">${reservation.title}</a>
+                                    <td class="product-name"><a
+                                            href="/flone/course/detail.hm?courseId=${reservation.courseId}">${reservation.title}</a>
                                     </td>
                                     <td class="product-price-cart">${reservation.startDate}</td>
-                                    <td class="product-subtotal">${reservation.paymentAmount}</td>
-                                    <td class="product-remove">
-                                        <c:if test="${reservation.reservationStatusId eq 1}">
-                                            <a href="#"><i class="fa fa-pencil">예약완료</i></a>
-                                        </c:if>
-                                        <c:if test="${reservation.reservationStatusId eq 2}">
-                                            <a href="#"><i class="fa fa-pencil">예약취소</i></a>
-                                        </c:if>
-                                    </td>
-                                    <td>
-                                        <c:if test="${reservation.reservationStatusId eq 1}">
-                                            <input type="checkbox" class="checkList"
-                                                   value="${reservation.merchantUid}">
-                                        </c:if>
-                                        <c:if test="${reservation.reservationStatusId eq 2}">
-                                            <input type="checkbox"
-                                                   value="${reservation.merchantUid}" disabled>
-                                        </c:if>
-                                    </td>
+                                    <td class="product-subtotal">${reservation.endDate}</td>
+                                    <c:choose>
+                                        <c:when test="${reservation.isBefore}">
+                                            <td>시작 전</td>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td class="product-remove">강의 중</td>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </tr>
                             </c:forEach>
 
@@ -77,7 +64,7 @@
                                 <div class="cart-shiping-update">
                                 </div>
                                 <div class="cart-clear">
-                                    <a href="#" id="cancel-btn">취소</a>
+                                    <a href="/flone/reservation/list.hm" >결제 목록 가기</a>
                                 </div>
                             </div>
                         </div>
@@ -87,9 +74,9 @@
                             <ul>
                                 <%--                        Prev Page--%>
                                 <c:choose>
-                                    <c:when test="${reservationPage.currentPage > 1}">
+                                    <c:when test="${myReservationPage.currentPage > 1}">
                                         <li><a class="prev"
-                                               href="?page=${reservationPage.currentPage - 1}"><i
+                                               href="?page=${myReservationPage.currentPage - 1}"><i
                                                 class="fa fa-angle-double-left"></i></a></li>
                                     </c:when>
                                     <c:otherwise>
@@ -98,10 +85,10 @@
                                     </c:otherwise>
                                 </c:choose>
                                 <%--                        Current Page--%>
-                                <c:forEach begin="1" end="${reservationPage.totalPages}"
+                                <c:forEach begin="1" end="${myReservationPage.totalPages}"
                                            var="pageNum">
                                     <c:choose>
-                                        <c:when test="${pageNum == reservationPage.currentPage}">
+                                        <c:when test="${pageNum == myReservationPage.currentPage}">
                                             <li><a class="active" href="#">${pageNum}</a></li>
                                         </c:when>
                                         <c:otherwise>
@@ -111,9 +98,9 @@
                                 </c:forEach>
                                 <%--                        Next Page--%>
                                 <c:choose>
-                                    <c:when test="${reservationPage.currentPage < reservationPage.totalPages}">
+                                    <c:when test="${myReservationPage.currentPage < myReservationPage.totalPages}">
                                         <li><a class="next"
-                                               href="?page=${reservationPage.currentPage + 1}"><i
+                                               href="?page=${myReservationPage.currentPage + 1}"><i
                                                 class="fa fa-angle-double-right"></i></a></li>
                                     </c:when>
                                     <c:otherwise>
@@ -129,7 +116,6 @@
         </div>
     </div>
 </div>
-<%@ include file="refund-list-payment.jsp" %>
 <%@ include file="footer.jsp" %>
 <%@ include file="script.jsp" %>
 </body>

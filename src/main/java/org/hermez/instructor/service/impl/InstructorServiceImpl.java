@@ -11,6 +11,7 @@ import org.hermez.instructor.mapper.InstructorMapper;
 
 import org.hermez.instructor.model.Instructor;
 import org.hermez.instructor.service.InstructorService;
+import org.hermez.member.dto.MemberLoginResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class InstructorServiceImpl implements InstructorService {
     }
 
     @Override
-    public Instructor findByMemberId(int memberId) {
-        return instructorMapper.findByMemberId(memberId);
+    public Instructor findByMemberLoginResponseId(MemberLoginResponse memberLoginResponse) {
+        return instructorMapper.findByMemberId(memberLoginResponse);
     }
 }

@@ -4,7 +4,7 @@
 <html class="no-js" lang="zxx">
 
 <head>
-    <%@ include file="css.jsp"%>
+    <%@ include file="css.jsp" %>
     <style>
         .single-my-account .myaccount-info-wrapper .account-info-wrapper {
             padding-bottom: 0 !important;
@@ -34,7 +34,8 @@
                     <div id="faq" class="panel-group">
                         <div class="panel panel-default single-my-account">
                             <div class="panel-heading my-account-title">
-                                <h3 class="panel-title"><span>1 .</span> <a data-bs-toggle="collapse" href="#my-account-1">나의 프로필</a></h3>
+                                <h3 class="panel-title"><span>1 .</span> <a data-bs-toggle="collapse"
+                                                                            href="#my-account-1">나의 프로필</a></h3>
                             </div>
                             <div id="my-account-1" class="panel-collapse collapse show" data-bs-parent="#faq">
                                 <div class="panel-body">
@@ -67,10 +68,12 @@
                         </div>
                         <div class="panel panel-default single-my-account">
                             <div class="panel-heading my-account-title">
-                                <h3 class="panel-title"><span>2 .</span> <a data-bs-toggle="collapse" href="#my-account-2">내 정보 변경</a></h3>
+                                <h3 class="panel-title"><span>2 .</span> <a data-bs-toggle="collapse"
+                                                                            href="#my-account-2">내 정보 변경</a></h3>
                             </div>
                             <div id="my-account-2" class="panel-collapse collapse" data-bs-parent="#faq">
-                                <form action="/flone/member/my-account-edit.hm?memberId=${sessionScope.MEMBER.memberId}" method="post">
+                                <form action="/flone/member/my-account-edit.hm?memberId=${sessionScope.MEMBER.memberId}"
+                                      method="post">
                                     <div class="panel-body">
                                         <div class="myaccount-info-wrapper">
                                             <div class="account-info-wrapper">
@@ -78,43 +81,57 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-12 col-md-12">
-                                                    <div class="billing-info" style="position: relative; display: flex; align-items: center;">
-                                                        <label for="passwordField" style="margin-right: 10px;">현재 비밀번호</label>
-                                                        <input id="passwordField" name="password" value ="${myAccount.password}" type="password" readonly
+                                                    <div class="billing-info"
+                                                         style="position: relative; display: flex; align-items: center;">
+                                                        <label for="passwordField" style="margin-right: 10px;">현재
+                                                            비밀번호</label>
+                                                        <input id="passwordField" name="password"
+                                                               value="${myAccount.password}" type="password" readonly
                                                                style="flex: 1; padding-right: 40px; border: 1px solid #ced4da; border-radius: 4px;">
 
-                                                        <button type="button" onclick="togglePasswordVisibility('passwordField', 'icon')"
+                                                        <button type="button"
+                                                                onclick="toggleVisibilityPassword('passwordField', 'icon')"
                                                                 style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; padding: 0; font-size: 16px;">
-                                                            <i id="icon" class="fa fa-eye-slash" style="font-size: 18px; color: #6c757d;"></i>
+                                                            <i id="icon" class="fa fa-eye-slash"
+                                                               style="font-size: 18px; color: #6c757d;"></i>
                                                             <span class="blind" style="display: none;">비밀번호 보기</span>
                                                         </button>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-lg-12 col-md-12">
-                                                    <div class="billing-info" style="position: relative; display: flex; align-items: center;">
-                                                        <label for="passwordConfirm" style="margin-right: 10px;">비밀번호 확인</label>
-                                                        <input id="passwordConfirm" name="passwordConfirm" type="password" placeholder="변경하실 비밀번호를 입력해주세요."
+                                                    <div class="billing-info"
+                                                         style="position: relative; display: flex; align-items: center;">
+                                                        <label for="passwordConfirm" style="margin-right: 10px;">비밀번호
+                                                            확인</label>
+                                                        <input id="passwordConfirm" name="passwordConfirm"
+                                                               type="password" placeholder="변경하실 비밀번호를 입력해주세요."
                                                                style="flex: 1; padding-right: 40px; border: 1px solid #ced4da; border-radius: 4px;">
-                                                        <button type="button" onclick="togglePasswordVisibility('passwordConfirm', 'iconConfirm')"
+                                                        <button type="button"
+                                                                onclick="toggleVisibilityPassword('passwordConfirm', 'iconConfirm')"
                                                                 style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; padding: 0; font-size: 16px;">
-                                                            <i id="iconConfirm" class="fa fa-eye-slash" style="font-size: 18px; color: #6c757d;"></i>
+                                                            <i id="iconConfirm" class="fa fa-eye-slash"
+                                                               style="font-size: 18px; color: #6c757d;"></i>
                                                         </button>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-lg-12 col-md-12">
-                                                    <div class="billing-info" style="position: relative; display: flex; align-items: center;">
+                                                    <div class="billing-info"
+                                                         style="position: relative; display: flex; align-items: center;">
                                                         <label style="margin-right: 10px">전화번호</label>
-                                                        <input name = "phone" id="phone" type="text" placeholder="${myAccount.phone}" readonly
+                                                        <input name="phone" id="phone" type="text"
+                                                               placeholder="${myAccount.phone}" readonly
                                                                style="flex: 1; padding-right: 40px; border: 1px solid #ced4da; border-radius: 4px;">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-lg-12 col-md-12">
-                                                    <div class="billing-info" style="position: relative; display: flex; align-items: center;">
+                                                    <div class="billing-info"
+                                                         style="position: relative; display: flex; align-items: center;">
                                                         <label style="margin-right: 10px;">전화번호 확인</label>
-                                                        <input name="phoneConfirm" id="phoneConfirm"  type="text" placeholder="변경하실 핸드폰 번호를 입력해주세요."
+                                                        <input name="phoneConfirm" id="phoneConfirm" type="text"
+                                                               placeholder="변경하실 핸드폰 번호를 입력해주세요."
                                                                style="flex: 1; padding-right: 40px; border: 1px solid #ced4da; border-radius: 4px;"
                                                                oninput="formatPhoneNumber(this)">
                                                     </div>
@@ -142,7 +159,8 @@
 
                 <div class="panel panel-default single-my-account">
                     <div class="panel-heading my-account-title">
-                        <h3 class="panel-title"><span>3 .</span> <a data-bs-toggle="collapse" href="#my-account-3">회원 탈퇴</a></h3>
+                        <h3 class="panel-title"><span>3 .</span> <a data-bs-toggle="collapse" href="#my-account-3">회원
+                            탈퇴</a></h3>
                     </div>
                     <div id="my-account-3" class="panel-collapse collapse" data-bs-parent="#faq">
                         <div class="panel-body">
@@ -203,10 +221,14 @@
                         <!-- Thumbnail Image End -->
                         <div class="quickview-wrap mt-15">
                             <div class="quickview-slide-active owl-carousel nav nav-style-1" role="tablist">
-                                <a class="active" data-bs-toggle="tab" href="#pro-1"><img src="assets/img/product/quickview-s1.jpg" alt=""></a>
-                                <a data-bs-toggle="tab" href="#pro-2"><img src="assets/img/product/quickview-s2.jpg" alt=""></a>
-                                <a data-bs-toggle="tab" href="#pro-3"><img src="assets/img/product/quickview-s3.jpg" alt=""></a>
-                                <a data-bs-toggle="tab" href="#pro-4"><img src="assets/img/product/quickview-s2.jpg" alt=""></a>
+                                <a class="active" data-bs-toggle="tab" href="#pro-1"><img
+                                        src="assets/img/product/quickview-s1.jpg" alt=""></a>
+                                <a data-bs-toggle="tab" href="#pro-2"><img src="assets/img/product/quickview-s2.jpg"
+                                                                           alt=""></a>
+                                <a data-bs-toggle="tab" href="#pro-3"><img src="assets/img/product/quickview-s3.jpg"
+                                                                           alt=""></a>
+                                <a data-bs-toggle="tab" href="#pro-4"><img src="assets/img/product/quickview-s2.jpg"
+                                                                           alt=""></a>
                             </div>
                         </div>
                     </div>
@@ -227,12 +249,13 @@
                                 </div>
                                 <span>3 Reviews</span>
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisic elit eiusm tempor incidid ut labore et dolore magna aliqua. Ut enim ad minim venialo quis nostrud exercitation ullamco</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisic elit eiusm tempor incidid ut labore et
+                                dolore magna aliqua. Ut enim ad minim venialo quis nostrud exercitation ullamco</p>
                             <div class="pro-details-list">
                                 <ul>
                                     <li>- 0.5 mm Dail</li>
                                     <li>- Inspired vector icons</li>
-                                    <li>- Very modern style  </li>
+                                    <li>- Very modern style</li>
                                 </ul>
                             </div>
                             <div class="pro-details-size-color">
@@ -308,8 +331,24 @@
         </div>
     </div>
 </div>
-<%@include file="footer.jsp"%>
-<%@include file="script.jsp"%>
+<%@include file="footer.jsp" %>
+<%@include file="script.jsp" %>
+<script src="/resources/assets/js/toggleVisibility.js"></script>
+<script>
+    function formatPhoneNumber(input) {
+        let value = input.value.replace(/\D/g, ''); // 모든 비숫자 문자를 제거
+
+        // 하이픈 추가
+        if (value.length <= 3) {
+            value = value;
+        } else if (value.length <= 7) {
+            value = value.slice(0, 3) + '-' + value.slice(3);
+        } else {
+            value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7, 11);
+        }
+
+        input.value = value; // 포맷된 값을 입력 필드에 다시 설정
+    }
 </script>
 </body>
 

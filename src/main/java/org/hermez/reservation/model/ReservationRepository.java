@@ -2,6 +2,7 @@ package org.hermez.reservation.model;
 
 import java.util.List;
 import org.hermez.common.page.Page;
+import org.hermez.reservation.dto.MyPaymentDetailResponse;
 import org.hermez.reservation.dto.MyReservationDTO;
 import org.hermez.reservation.dto.MyReservedReservationDTO;
 import org.hermez.reservation.dto.ReservationListResponse;
@@ -58,6 +59,8 @@ public interface ReservationRepository {
   Page<ReservationListResponse> getRefundListAll(int page);
 
   Page<MyReservedReservationDTO> findMyReservedReservationList(int memberId, int page);
+
+  MyPaymentDetailResponse findMyPaymentDetail(String merchantUid, int memberId);
 
 
 }

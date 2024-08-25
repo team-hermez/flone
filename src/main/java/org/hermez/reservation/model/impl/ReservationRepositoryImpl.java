@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hermez.common.page.Page;
 import org.hermez.common.page.PaginationUtil;
+import org.hermez.reservation.dto.MyPaymentDetailResponse;
 import org.hermez.reservation.dto.MyReservationDTO;
 import org.hermez.reservation.dto.MyReservedReservationDTO;
 import org.hermez.reservation.dto.ReservationListResponse;
@@ -105,6 +106,10 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     return new Page<>(myReservations, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
   }
 
+  @Override
+  public MyPaymentDetailResponse findMyPaymentDetail(String merchantUid, int memberId) {
+   return reservationMapper.findMyPaymentDetail(merchantUid, memberId);
+  }
 
 
 }

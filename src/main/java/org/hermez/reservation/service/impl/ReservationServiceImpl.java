@@ -66,7 +66,6 @@ public class ReservationServiceImpl implements ReservationService {
   }
 
 
-
   @Transactional
   @Override
   public void verifyCourseSchedule(int courseId) {
@@ -86,7 +85,8 @@ public class ReservationServiceImpl implements ReservationService {
       List<LocalDateTime[]> myCourseSchedule = entry.getValue();
       try {
         checkScheduleOverlap(courseSchedule, myCourseSchedule);
-      } catch (IllegalStateException e) {;
+      } catch (IllegalStateException e) {
+        ;
         throw new NoSuchUniqueCourseTimeException(e);
       }
     }

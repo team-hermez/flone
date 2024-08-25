@@ -20,6 +20,7 @@ import org.hermez.course.service.CourseService;
 import org.hermez.member.model.Member;
 import org.hermez.paymenthistory.dto.CancelDTO;
 import org.hermez.paymenthistory.service.payapi.IamportService;
+import org.hermez.reservation.dto.MyPaymentDetailResponse;
 import org.hermez.reservation.dto.MyReservationDTO;
 import org.hermez.reservation.dto.MyReservedReservationDTO;
 import org.hermez.reservation.dto.ReservationFormResponse;
@@ -116,7 +117,6 @@ public class ReservationController {
   @GetMapping("/reservation-detail.hm")
   public String getReservationDetailPage(@RequestParam int courseId, Model model) {
     CourseDetailResponse courseDetailList = courseService.courseDetailService(courseId);
-    System.out.println("courseDetailList = " + courseDetailList.getStartDate());
     List<CourseTime> courseTimeList = courseService.courseDetailTime(courseId);
     model.addAttribute("courseDetailList", courseDetailList);
     model.addAttribute("courseTimeList", courseTimeList);
@@ -130,9 +130,25 @@ public class ReservationController {
     int memberId = member.getMemberId();
     Page<MyReservedReservationDTO> myReservationPage = reservationRepository.findMyReservedReservationList(
         memberId, page);
-    System.out.println("myReservationPage.getContents() = " + myReservationPage.getContents());
     model.addAttribute("myReservationPage", myReservationPage);
     return "/flone/my-reservation-list";
+  }
+
+  @GetMapping("/my-payment-detail.hm")
+  public String getMyPaymentDetailPage(
+      @RequestParam String merchantUid,
+      HttpSession session,
+      Model model) {
+    Member member = (Member)session.getAttribute("MEMBER");
+    int memberId = member.getMemberId();
+    MyPaymentDetailResponse myPaymentDetail = reservationRepository.findMyPaymentDetail(merchantUid, memberId);
+    int courseId = myPaymentDetail.getCourseId();
+    CourseDetailResponse courseDetailList = courseService.courseDetailService(courseId);
+    List<CourseTime> courseTimeList = courseService.courseDetailTime(courseId);
+    model.addAttribute("courseDetailList", courseDetailList);
+    model.addAttribute("courseTimeList", courseTimeList);
+    model.addAttribute("myPaymentDetail", myPaymentDetail);
+    return "/flone/my-payment-detail";
   }
 
   @ResponseBody

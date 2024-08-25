@@ -41,7 +41,7 @@
                             <c:forEach var="reservation" items="${reservationPage.contents}">
                                 <tr>
                                     <td class="product-thumbnail">
-                                        <a href="reservation-detail.hm?courseId=${reservation.courseId}">${reservation.merchantUid}</a>
+                                        <a href="my-payment-detail.hm?merchantUid=${reservation.merchantUid}">${reservation.merchantUid}</a>
                                     </td>
                                     <td class="product-name"><a
                                             href="/flone/course/detail.hm?courseId=${reservation.courseId}">${reservation.title}</a>

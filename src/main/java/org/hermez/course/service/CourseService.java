@@ -22,6 +22,8 @@ public interface CourseService {
      */
     Page<CourseListResponse> getCourseList(int page);
 
+    Page<CourseListResponse> getCourseListByCategory(String category,String subject,String instructorName, String grade, int page);
+
     /**
      * 상세 페이지를 조회합니다
      * @param courseId course의 pk값
@@ -37,9 +39,15 @@ public interface CourseService {
     List<CourseTime> courseDetailTime(int courseId);
 
     /**
+     * instructorName과 일치하는 강의 정보를 조회합니다.
+     * @param instructorName
+     * @return
+     */
+    List<CourseListResponse> getCourseListByInstructor(String instructorName);
+
+    /**
      * 강의를 등록합니다
      * @param courseRegisterRequest 강의의 상세 정보
-     * @param courseTime 강의 시간
      */
     void insertCourse(CourseRegisterRequest courseRegisterRequest);
 }

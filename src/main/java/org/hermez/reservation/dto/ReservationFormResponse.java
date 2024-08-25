@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
+@Builder
 public class ReservationFormResponse {
 
   private int courseId;           // 강좌 ID

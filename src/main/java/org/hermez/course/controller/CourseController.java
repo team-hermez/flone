@@ -6,11 +6,13 @@ import org.hermez.course.dto.CourseListResponse;
 import org.hermez.course.dto.CourseRegisterRequest;
 import org.hermez.course.model.CourseTime;
 import org.hermez.course.service.CourseService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -23,6 +25,7 @@ import java.util.List;
 @RequestMapping("flone/course")
 public class CourseController {
     private final CourseService courseService;
+    private final ServletRequest httpServletRequest;
     private CourseRegisterRequest courseRegisterRequest;
     private CourseTime courseTime;
     /**
@@ -30,8 +33,9 @@ public class CourseController {
      *
      * @param courseService
      */
-    public CourseController(CourseService courseService) {
+    public CourseController(CourseService courseService, @Qualifier("httpServletRequest") ServletRequest httpServletRequest) {
         this.courseService = courseService;
+        this.httpServletRequest = httpServletRequest;
     }
 
     /**
@@ -41,13 +45,34 @@ public class CourseController {
      * @param page  현재 page
      * @return 게시판 목록 페이지 뷰 이름
      */
+//    @GetMapping(value = "list.hm")
+//    public String getCourseList(
+//            @RequestParam(value = "page", defaultValue = "1") int page,
+//            Model model) {
+//        Page<CourseListResponse> courseList = courseService.getCourseList(page);
+//        model.addAttribute("courses", courseList);
+//        return "flone/course-list";
+//    }
+
     @GetMapping(value = "list.hm")
-    public String getCourseList(
-            @RequestParam(value = "page", defaultValue = "1") int page,
-            Model model) {
-        Page<CourseListResponse> courseList = courseService.getCourseList(page);
-        model.addAttribute("courses", courseList);
-        return "flone/course-list";
+    public String getCourseListByCategory(@RequestParam (name ="category", defaultValue = "default") String category,
+                                          @RequestParam(name ="subject", required = false) String subject,
+                                          @RequestParam (name ="name", required = false) String instructorName,
+                                          @RequestParam (name ="grade", required = false) String grade,
+                                          @RequestParam (value = "page", defaultValue = "1") int page,
+                                          Model model){
+        System.out.println("category check: " + category);
+
+        if (category.equals("default")) {
+            Page<CourseListResponse> courseList = courseService.getCourseList(page);
+            model.addAttribute("courses", courseList);
+            return "flone/course-list";
+        }else {
+            Page<CourseListResponse> courseList
+                    = courseService.getCourseListByCategory(category, subject, instructorName, grade, page);
+            model.addAttribute("courses", courseList);
+            return "flone/course-list";
+        }
     }
 
     /**
@@ -61,9 +86,11 @@ public class CourseController {
     public String getCourseDetailPage(Model model, @RequestParam int courseId) {
         CourseDetailResponse courseDetailList = courseService.courseDetailService(courseId);
         List<CourseTime> courseTimeList = courseService.courseDetailTime(courseId);
+        List<CourseListResponse> courseListByInstructorName = courseService.getCourseListByInstructor(courseDetailList.getInstructorName());
 
         model.addAttribute("courseDetail", courseDetailList);
         model.addAttribute("courseTime", courseTimeList);
+        model.addAttribute("courseByInstructor", courseListByInstructorName);
 
         return "flone/course-detail";
     }
@@ -77,6 +104,7 @@ public class CourseController {
     @GetMapping(value = "register.hm")
     public String getCourseRegisterPage(Model model, final HttpServletRequest request) {
         String id = request.getSession().getId();
+        System.out.println("idvalue: "+id);
         return "flone/course-register";
     }
 
@@ -87,6 +115,7 @@ public class CourseController {
      */
     @PostMapping("regist.hm")
     public String postCourseRegister(@ModelAttribute CourseRegisterRequest courseRegisterRequest) {
+//        courseRegisterRequest.setInstructorId();
         courseService.insertCourse(courseRegisterRequest);
         return "redirect:list.hm";
     }

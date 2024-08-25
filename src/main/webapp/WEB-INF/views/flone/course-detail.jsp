@@ -142,9 +142,9 @@
                     <div class="pro-details-meta">
                         <span>Categories :</span>
                         <ul>
-                            <li><a href="#">${courseDetail.subject},</a></li>
-                            <li><a href="#">${courseDetail.instructorName},</a></li>
-                            <li><a href="#">${courseDetail.grade}</a></li>
+                            <li><a href="/flone/course/list.hm?category=subject&subject=${courseDetail.subject}">${courseDetail.subject},</a></li>
+                            <li><a href="/flone/course/list.hm?category=instructorName&name=${courseDetail.instructorName}">${courseDetail.instructorName},</a></li>
+                            <li><a href="/flone/course/list.hm?category=grade&grade=${courseDetail.grade}">${courseDetail.grade}</a></li>
                         </ul>
                     </div>
                     <div class="pro-details-meta">
@@ -165,312 +165,204 @@
         </div>
     </div>
 </div>
-<div class="description-review-area pb-90">
-    <div class="container">
-        <div class="description-review-wrapper">
-            <div class="description-review-topbar nav">
-                <a data-bs-toggle="tab" href="#des-details1">Additional information</a>
-                <a class="active" data-bs-toggle="tab" href="#des-details2">Description</a>
-                <a data-bs-toggle="tab" href="#des-details3">Reviews (2)</a>
-            </div>
-            <div class="tab-content description-review-bottom">
-                <div id="des-details2" class="tab-pane active">
-                    <div class="product-description-wrapper">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
-                        <p>ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commo consequat. Duis aute irure dolor in reprehend in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt </p>
-                    </div>
-                </div>
-                <div id="des-details1" class="tab-pane ">
-                    <div class="product-anotherinfo-wrapper">
-                        <ul>
-                            <li><span>Weight</span> 400 g</li>
-                            <li><span>Dimensions</span>10 x 10 x 15 cm </li>
-                            <li><span>Materials</span> 60% cotton, 40% polyester</li>
-                            <li><span>Other Info</span> American heirloom jean shorts pug seitan letterpress</li>
-                        </ul>
-                    </div>
-                </div>
-                <div id="des-details3" class="tab-pane">
-                    <div class="row">
-                        <div class="col-lg-7">
-                            <div class="review-wrapper">
-                                <div class="single-review">
-                                    <div class="review-img">
-                                        <img src="/assets/img/testimonial/1.jpg" alt="">
-                                    </div>
-                                    <div class="review-content">
-                                        <div class="review-top-wrap">
-                                            <div class="review-left">
-                                                <div class="review-name">
-                                                    <h4>White Lewis</h4>
-                                                </div>
-                                                <div class="review-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                            </div>
-                                            <div class="review-left">
-                                                <a href="#">Reply</a>
-                                            </div>
-                                        </div>
-                                        <div class="review-bottom">
-                                            <p>Vestibulum ante ipsum primis aucibus orci luctustrices posuere cubilia Curae Suspendisse viverra ed viverra. Mauris ullarper euismod vehicula. Phasellus quam nisi, congue id nulla.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="single-review child-review">
-                                    <div class="review-img">
-                                        <img src="/assets/img/testimonial/2.jpg" alt="">
-                                    </div>
-                                    <div class="review-content">
-                                        <div class="review-top-wrap">
-                                            <div class="review-left">
-                                                <div class="review-name">
-                                                    <h4>White Lewis</h4>
-                                                </div>
-                                                <div class="review-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                            </div>
-                                            <div class="review-left">
-                                                <a href="#">Reply</a>
-                                            </div>
-                                        </div>
-                                        <div class="review-bottom">
-                                            <p>Vestibulum ante ipsum primis aucibus orci luctustrices posuere cubilia Curae Sus pen disse viverra ed viverra. Mauris ullarper euismod vehicula. </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="ratting-form-wrapper pl-50">
-                                <h3>Add a Review</h3>
-                                <div class="ratting-form">
-                                    <form action="#">
-                                        <div class="star-box">
-                                            <span>Your rating:</span>
-                                            <div class="ratting-star">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="rating-form-style mb-10">
-                                                    <input placeholder="Name" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="rating-form-style mb-10">
-                                                    <input placeholder="Email" type="email">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="rating-form-style form-submit">
-                                                    <textarea name="Your Review" placeholder="Message"></textarea>
-                                                    <input type="submit" value="Submit">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<%--소개, 리뷰 페이지--%>
+<%--<div class="description-review-area pb-90">--%>
+<%--    <div class="container">--%>
+<%--        <div class="description-review-wrapper">--%>
+<%--            <div class="description-review-topbar nav">--%>
+<%--                <a data-bs-toggle="tab" href="#des-details1">Additional information</a>--%>
+<%--                <a class="active" data-bs-toggle="tab" href="#des-details2">Description</a>--%>
+<%--                <a data-bs-toggle="tab" href="#des-details3">Reviews (2)</a>--%>
+<%--            </div>--%>
+<%--            <div class="tab-content description-review-bottom">--%>
+<%--                <div id="des-details2" class="tab-pane active">--%>
+<%--                    <div class="product-description-wrapper">--%>
+<%--                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>--%>
+<%--                        <p>ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commo consequat. Duis aute irure dolor in reprehend in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt </p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div id="des-details1" class="tab-pane ">--%>
+<%--                    <div class="product-anotherinfo-wrapper">--%>
+<%--                        <ul>--%>
+<%--                            <li><span>Weight</span> 400 g</li>--%>
+<%--                            <li><span>Dimensions</span>10 x 10 x 15 cm </li>--%>
+<%--                            <li><span>Materials</span> 60% cotton, 40% polyester</li>--%>
+<%--                            <li><span>Other Info</span> American heirloom jean shorts pug seitan letterpress</li>--%>
+<%--                        </ul>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div id="des-details3" class="tab-pane">--%>
+<%--                    <div class="row">--%>
+<%--                        <div class="col-lg-7">--%>
+<%--                            <div class="review-wrapper">--%>
+<%--                                <div class="single-review">--%>
+<%--                                    <div class="review-img">--%>
+<%--                                        <img src="/assets/img/testimonial/1.jpg" alt="">--%>
+<%--                                    </div>--%>
+<%--                                    <div class="review-content">--%>
+<%--                                        <div class="review-top-wrap">--%>
+<%--                                            <div class="review-left">--%>
+<%--                                                <div class="review-name">--%>
+<%--                                                    <h4>White Lewis</h4>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="review-rating">--%>
+<%--                                                    <i class="fa fa-star"></i>--%>
+<%--                                                    <i class="fa fa-star"></i>--%>
+<%--                                                    <i class="fa fa-star"></i>--%>
+<%--                                                    <i class="fa fa-star"></i>--%>
+<%--                                                    <i class="fa fa-star"></i>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="review-left">--%>
+<%--                                                <a href="#">Reply</a>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="review-bottom">--%>
+<%--                                            <p>Vestibulum ante ipsum primis aucibus orci luctustrices posuere cubilia Curae Suspendisse viverra ed viverra. Mauris ullarper euismod vehicula. Phasellus quam nisi, congue id nulla.</p>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="single-review child-review">--%>
+<%--                                    <div class="review-img">--%>
+<%--                                        <img src="/assets/img/testimonial/2.jpg" alt="">--%>
+<%--                                    </div>--%>
+<%--                                    <div class="review-content">--%>
+<%--                                        <div class="review-top-wrap">--%>
+<%--                                            <div class="review-left">--%>
+<%--                                                <div class="review-name">--%>
+<%--                                                    <h4>White Lewis</h4>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="review-rating">--%>
+<%--                                                    <i class="fa fa-star"></i>--%>
+<%--                                                    <i class="fa fa-star"></i>--%>
+<%--                                                    <i class="fa fa-star"></i>--%>
+<%--                                                    <i class="fa fa-star"></i>--%>
+<%--                                                    <i class="fa fa-star"></i>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="review-left">--%>
+<%--                                                <a href="#">Reply</a>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="review-bottom">--%>
+<%--                                            <p>Vestibulum ante ipsum primis aucibus orci luctustrices posuere cubilia Curae Sus pen disse viverra ed viverra. Mauris ullarper euismod vehicula. </p>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <div class="col-lg-5">--%>
+<%--                            <div class="ratting-form-wrapper pl-50">--%>
+<%--                                <h3>Add a Review</h3>--%>
+<%--                                <div class="ratting-form">--%>
+<%--                                    <form action="#">--%>
+<%--                                        <div class="star-box">--%>
+<%--                                            <span>Your rating:</span>--%>
+<%--                                            <div class="ratting-star">--%>
+<%--                                                <i class="fa fa-star"></i>--%>
+<%--                                                <i class="fa fa-star"></i>--%>
+<%--                                                <i class="fa fa-star"></i>--%>
+<%--                                                <i class="fa fa-star"></i>--%>
+<%--                                                <i class="fa fa-star"></i>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="row">--%>
+<%--                                            <div class="col-md-6">--%>
+<%--                                                <div class="rating-form-style mb-10">--%>
+<%--                                                    <input placeholder="Name" type="text">--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="col-md-6">--%>
+<%--                                                <div class="rating-form-style mb-10">--%>
+<%--                                                    <input placeholder="Email" type="email">--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="col-md-12">--%>
+<%--                                                <div class="rating-form-style form-submit">--%>
+<%--                                                    <textarea name="Your Review" placeholder="Message"></textarea>--%>
+<%--                                                    <input type="submit" value="Submit">--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </form>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
 <div class="related-product-area pb-95">
     <div class="container">
         <div class="section-title text-center mb-50">
             <h2>${courseDetail.instructorName}님의 다른 강의</h2>
         </div>
         <div class="related-product-active owl-carousel owl-dot-none">
-            <div class="product-wrap">
-                <div class="product-img">
-                    <a href="product-details.html">
-                        <img class="default-img" src="/assets/img/product/pro-1.jpg" alt="">
-                        <img class="hover-img" src="/assets/img/product/pro-1-1.jpg" alt="">
-                    </a>
-                    <span class="pink">-10%</span>
-                    <div class="product-action">
-                        <div class="pro-same-action pro-wishlist">
-                            <a title="Wishlist" href="#"><i class="pe-7s-like"></i></a>
+            <c:choose>
+                <c:when test="${empty courseByInstructor}">
+                    교사의 다른 강의가 없습니다
+                </c:when>
+                <c:otherwise>
+                    <c:forEach var="anotherCourse" items="${courseByInstructor}">
+                        <div class="product-wrap">
+                            <div class="product-img">
+                                <a href="/flone/course/detail.hm?courseId=${anotherCourse.courseId}">
+                                    <c:choose>
+                                        <c:when test="${empty anotherCourse.courseImage}">
+                                            <img class="default-img" src="/assets/img/product/pro-1.jpg" alt="">
+                                            <img class="hover-img" src="/assets/img/product/pro-1-1.jpg" alt="">
+                                            <div class="product-action">
+                                                <div class="pro-same-action pro-wishlist">
+                                                    <a title="Wishlist" href="#"><i class="pe-7s-like"></i></a>
+                                                </div>
+                                                <div class="pro-same-action pro-cart">
+                                                    <a title="Add To Cart" href="#"><i class="pe-7s-cart"></i> Add to cart</a>
+                                                </div>
+                                                <div class="pro-same-action pro-quickview">
+                                                    <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                                                            class="pe-7s-look"></i></a>
+                                                </div>
+                                            </div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img class="default-img" src="../../../../images/${anotherCourse.courseImage}" alt="">
+                                            <img class="hover-img" src="../../../../images/${anotherCourse.courseImage}" alt="">
+                                            <div class="product-action">
+                                            <div class="pro-same-action pro-wishlist">
+                                                <a title="Wishlist" href="#"><i class="pe-7s-like"></i></a>
+                                            </div>
+                                            <div class="pro-same-action pro-cart">
+                                                <a title="Add To Cart" href="#"><i class="pe-7s-cart"></i> Add to cart</a>
+                                            </div>
+                                            <div class="pro-same-action pro-quickview">
+                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                <i class="pe-7s-look"></i></a>
+                                            </div>
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </a>
+                            </div>
+<%--                    <span class="pink">-10%</span>--%>
+
+                            <div class="product-content text-center">
+                                <h3>
+                                    <a href="/flone/course/detail.hm?courseId=${anotherCourse.courseId}">${anotherCourse.title}</a>
+                                </h3>
+                                <div class="product-rating"></div>
+                                <div class="product-price">
+                                    <span>${anotherCourse.coursePrice}</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="pro-same-action pro-cart">
-                            <a title="Add To Cart" href="#"><i class="pe-7s-cart"></i> Add to cart</a>
-                        </div>
-                        <div class="pro-same-action pro-quickview">
-                            <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-content text-center">
-                    <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
-                    <div class="product-rating">
-                        <i class="fa fa-star-o yellow"></i>
-                        <i class="fa fa-star-o yellow"></i>
-                        <i class="fa fa-star-o yellow"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
-                    </div>
-                    <div class="product-price">
-                        <span>$ 60.00</span>
-                        <span class="old">$ 60.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="product-wrap">
-                <div class="product-img">
-                    <a href="product-details.html">
-                        <img class="default-img" src="/assets/img/product/pro-2.jpg" alt="">
-                        <img class="hover-img" src="/assets/img/product/pro-2-1.jpg" alt="">
-                    </a>
-                    <span class="purple">New</span>
-                    <div class="product-action">
-                        <div class="pro-same-action pro-wishlist">
-                            <a title="Wishlist" href="#"><i class="pe-7s-like"></i></a>
-                        </div>
-                        <div class="pro-same-action pro-cart">
-                            <a title="Add To Cart" href="#"><i class="pe-7s-cart"></i> Add to cart</a>
-                        </div>
-                        <div class="pro-same-action pro-quickview">
-                            <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-content text-center">
-                    <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
-                    <div class="product-rating">
-                        <i class="fa fa-star-o yellow"></i>
-                        <i class="fa fa-star-o yellow"></i>
-                        <i class="fa fa-star-o yellow"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
-                    </div>
-                    <div class="product-price">
-                        <span>$ 60.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="product-wrap">
-                <div class="product-img">
-                    <a href="product-details.html">
-                        <img class="default-img" src="/assets/img/product/pro-3.jpg" alt="">
-                        <img class="hover-img" src="/assets/img/product/pro-3-1.jpg" alt="">
-                    </a>
-                    <span class="pink">-10%</span>
-                    <div class="product-action">
-                        <div class="pro-same-action pro-wishlist">
-                            <a title="Wishlist" href="#"><i class="pe-7s-like"></i></a>
-                        </div>
-                        <div class="pro-same-action pro-cart">
-                            <a title="Add To Cart" href="#"><i class="pe-7s-cart"></i> Add to cart</a>
-                        </div>
-                        <div class="pro-same-action pro-quickview">
-                            <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-content text-center">
-                    <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
-                    <div class="product-rating">
-                        <i class="fa fa-star-o yellow"></i>
-                        <i class="fa fa-star-o yellow"></i>
-                        <i class="fa fa-star-o yellow"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
-                    </div>
-                    <div class="product-price">
-                        <span>$ 60.00</span>
-                        <span class="old">$ 60.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="product-wrap">
-                <div class="product-img">
-                    <a href="product-details.html">
-                        <img class="default-img" src="/assets/img/product/pro-4.jpg" alt="">
-                        <img class="hover-img" src="/assets/img/product/pro-4-1.jpg" alt="">
-                    </a>
-                    <span class="purple">New</span>
-                    <div class="product-action">
-                        <div class="pro-same-action pro-wishlist">
-                            <a title="Wishlist" href="#"><i class="pe-7s-like"></i></a>
-                        </div>
-                        <div class="pro-same-action pro-cart">
-                            <a title="Add To Cart" href="#"><i class="pe-7s-cart"></i> Add to cart</a>
-                        </div>
-                        <div class="pro-same-action pro-quickview">
-                            <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-content text-center">
-                    <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
-                    <div class="product-rating">
-                        <i class="fa fa-star-o yellow"></i>
-                        <i class="fa fa-star-o yellow"></i>
-                        <i class="fa fa-star-o yellow"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
-                    </div>
-                    <div class="product-price">
-                        <span>$ 60.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="product-wrap">
-                <div class="product-img">
-                    <a href="product-details.html">
-                        <img class="default-img" src="/assets/img/product/pro-5.jpg" alt="">
-                        <img class="hover-img" src="/assets/img/product/pro-5-1.jpg" alt="">
-                    </a>
-                    <span class="pink">-10%</span>
-                    <div class="product-action">
-                        <div class="pro-same-action pro-wishlist">
-                            <a title="Wishlist" href="#"><i class="pe-7s-like"></i></a>
-                        </div>
-                        <div class="pro-same-action pro-cart">
-                            <a title="Add To Cart" href="#"><i class="pe-7s-cart"></i> Add to cart</a>
-                        </div>
-                        <div class="pro-same-action pro-quickview">
-                            <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-content text-center">
-                    <h3><a href="product-details.html">T- Shirt And Jeans</a></h3>
-                    <div class="product-rating">
-                        <i class="fa fa-star-o yellow"></i>
-                        <i class="fa fa-star-o yellow"></i>
-                        <i class="fa fa-star-o yellow"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
-                    </div>
-                    <div class="product-price">
-                        <span>$ 60.00</span>
-                        <span class="old">$ 60.00</span>
-                    </div>
-                </div>
-            </div>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
 </div>
-
 <%@ include file="footer.jsp"%>
 <%@ include file="script.jsp"%>
 

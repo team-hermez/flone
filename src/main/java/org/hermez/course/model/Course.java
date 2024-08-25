@@ -7,7 +7,8 @@ package org.hermez.course.model;
 public class Course {
     private int courseId;
     private int instructorId;
-    private Long imageId;
+    private int coursePrice;
+    private int imageId;
     private String title;
     private String createAt;
     private String updateAt;
@@ -30,9 +31,10 @@ public class Course {
      * @param startDate
      * @param endDate
      */
-    public Course(int courseId, int instructorId, Long imageId, String title, String createAt, String updateAt, String description, String startDate, String endDate) {
+    public Course(int courseId, int instructorId, int coursePrice,int imageId, String title, String createAt, String updateAt, String description, String startDate, String endDate) {
         this.courseId = courseId;
         this.instructorId = instructorId;
+        this.coursePrice = coursePrice;
         this.imageId = imageId;
         this.title = title;
         this.createAt = createAt;

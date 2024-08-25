@@ -15,11 +15,12 @@ import java.sql.Date;
 @Getter
 public class CourseListResponse {
     private int courseId;
-    private Date startDate;
+    private int coursePrice;
     private String title;
     private String description;
     private String instructorName;
     private String courseImage;
+    private Date startDate;
 
     private CourseListResponse(){}
 
@@ -32,13 +33,14 @@ public class CourseListResponse {
      * @param instructorName    강사 이름
      * @param courseImage       강의 사진
      */
-    private CourseListResponse(int courseId, Date startDate, String title, String description, String instructorName, String courseImage) {
+    public CourseListResponse(int courseId, int coursePrice, String title, String description, String instructorName, String courseImage, Date startDate) {
         this.courseId = courseId;
-        this.startDate = startDate;
+        this.coursePrice = coursePrice;
         this.title = title;
         this.description = description;
         this.instructorName = instructorName;
         this.courseImage = courseImage;
+        this.startDate = startDate;
     }
 
     /**
@@ -46,7 +48,7 @@ public class CourseListResponse {
      * @param course
      */
 
-    private CourseListResponse(Course course) {
+    public CourseListResponse(Course course) {
         this.courseId = getCourseId();
         this.startDate = getStartDate();
         this.title = getTitle();

@@ -49,6 +49,32 @@ public class CourseServiceImpl implements CourseService {
         List<CourseListResponse> courses = courseMapper.courseAllList(pageInfo.getOffset(), pageInfo.getItemsPerPage());
         return new Page<>(courses, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
     }
+    @Override
+    public Page<CourseListResponse> getCourseListByCategory(String category, String subject, String instructorName, String grade, int page){
+        System.out.println("subject: " + subject);
+        System.out.println("instructorName: " + instructorName);
+        System.out.println("grade: " + grade);
+        if(category.equals("instructorName"))
+            System.out.println("교사명");
+
+
+        if(category.equals("subject")) {
+            int total = courseMapper.getCourseCountBySubject(subject);
+            PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total, 9, page);
+            List<CourseListResponse> courses = courseMapper.getCourseListBySubject(subject, pageInfo.getOffset(), pageInfo.getItemsPerPage());
+            return new Page<>(courses, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
+        }else if(category.equals("instructorName")) {
+            int total = courseMapper.getCourseCountByName(instructorName);
+            PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total, 9, page);
+            List<CourseListResponse> courses = courseMapper.getCourseListByName(instructorName, pageInfo.getOffset(), pageInfo.getItemsPerPage());
+            return new Page<>(courses, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
+        }else {
+            int total = courseMapper.getCourseCountByGrade(grade);
+            PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total, 9, page);
+            List<CourseListResponse> courses = courseMapper.getCourseListByGrade(grade, pageInfo.getOffset(), pageInfo.getItemsPerPage());
+            return new Page<>(courses, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
+        }
+    }
 
     /**
      * {@inheritDoc}
@@ -69,9 +95,18 @@ public class CourseServiceImpl implements CourseService {
     /**
      * {@inheritDoc}
      */
+    @Override
+    public List<CourseListResponse> getCourseListByInstructor(String instructorName) {
+        return courseMapper.courseListByInstructor(instructorName);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Transactional
     @Override
     public void insertCourse(CourseRegisterRequest courseRegisterRequest) {
+        System.out.println(courseRegisterRequest.getCourseId());
         RegisterImageRequest imageRequest = new RegisterImageRequest();
         imageRequest.setEntityId(courseRegisterRequest.getCourseId());
         imageRequest.setEntityType("COURSE");

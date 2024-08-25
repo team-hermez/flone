@@ -4,11 +4,12 @@ import com.google.gson.Gson;
 import org.hermez.admin.dto.*;
 import org.hermez.admin.mapper.AdminMapper;
 import org.hermez.admin.service.AdminService;
+import org.hermez.common.page.Page;
+import org.hermez.common.page.PaginationUtil;
 import org.hermez.member.model.Member;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -59,8 +60,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<Member> getAllMembers() {
-        return adminMapper.getAllMembers();
+    public Page<Member> getMemberList(int page) {
+        int total = adminMapper.getTotalSignUpCount();
+        PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total, 10, page);
+        List<Member> members = adminMapper.selectMemberList(pageInfo.getOffset(), pageInfo.getItemsPerPage());
+        return new Page<>(members, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
     }
 
     @Override

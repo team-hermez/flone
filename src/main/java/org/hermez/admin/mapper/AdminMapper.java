@@ -1,12 +1,12 @@
 package org.hermez.admin.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.hermez.admin.dto.*;
 import org.hermez.member.model.Member;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface AdminMapper {
@@ -39,14 +39,6 @@ public interface AdminMapper {
             "ORDER BY month")
     List<MonthlySignupResponse> getMonthlyClassroomCreationStatistics();
 
-    @Select("SELECT c.title AS courseTitle, COUNT(r.reservation_id) AS reservationCount " +
-            "FROM course c " +
-            "JOIN reservation r ON c.course_id = r.course_id " +
-            "GROUP BY c.course_id, c.title " +
-            "ORDER BY reservationCount DESC " +
-            "LIMIT 5")
-    List<CourseReservationRankResponse> getTop5CoursesByReservations();
-
     @Select("SELECT DATE_FORMAT(created_at, '%Y-%m') AS month, COUNT(*) AS count " +
             "FROM course " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH) " +
@@ -55,16 +47,13 @@ public interface AdminMapper {
     List<MonthlySignupResponse> getMonthlyCourseCount();
 
     @Select("SELECT " +
-            "member_id AS memberId, " +
-            "role_id AS roleId, " +
-            "email, " +
-            "name, " +
-            "password, " +
-            "phone, " +
+            "member_id AS memberId, role_id AS roleId, " +
+            "email, name, password, phone," +
             "DATE_FORMAT(created_at, '%Y-%m-%d') AS createdAt " +
-            "FROM member")
-    List<Member> getAllMembers();
-
+            "FROM member " +
+            "ORDER BY created_at DESC " +
+            "LIMIT #{offset}, #{itemsPerPage}")
+    List<Member> selectMemberList(@Param("offset") int offset, @Param("itemsPerPage") int itemPerPage);
 
     @Select("SELECT m.email, m.name, m.phone, m.created_at AS createdAt, s.subject_name AS subjectName " +
             "FROM instructor i " +

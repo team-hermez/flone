@@ -79,7 +79,7 @@ function selfCancelPayments(merchantUid) {
     data: JSON.stringify(data),
     contentType: 'application/json;charset=utf-8',
     success: (result) => {
-      alert("결제금액 환불완료")
+      alert("환불 완료")
       location.href = 'list.hm';
       //결제취소 화면 이동
     },

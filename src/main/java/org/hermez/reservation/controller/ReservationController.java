@@ -30,6 +30,7 @@ import org.hermez.reservation.exception.NotActiveClassException;
 import org.hermez.reservation.model.Reservation;
 import org.hermez.reservation.model.ReservationRepository;
 import org.hermez.reservation.service.ReservationService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +39,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import retrofit2.HttpException;
 
 @Slf4j
 @Controller
@@ -97,9 +99,15 @@ public class ReservationController {
       Model model) {
     Member member = (Member) session.getAttribute("MEMBER");
     int memberId = member.getMemberId();
-    Page<ReservationListResponse> reservationPage = reservationRepository.getReservationList(memberId,
+    Page<ReservationListResponse> reservationPage = reservationRepository.getReservationList(
+        memberId,
         page);
     log.info("reservationPage = {}", reservationPage.getContents());
+    for (ReservationListResponse content : reservationPage.getContents()) {
+      if(content.getIsBefore()){
+        System.out.println("content.getTitle() = " + content.getTitle());
+      }
+    }
     model.addAttribute("memberId", memberId);
     model.addAttribute("reservationPage", reservationPage);
     return "/flone/reservation-list";
@@ -116,10 +124,12 @@ public class ReservationController {
   }
 
   @GetMapping("/reseved-course-list.hm")
-  public String getReservationList(@RequestParam(value = "page",defaultValue = "1") int page,HttpSession session, Model model) {
+  public String getReservationList(@RequestParam(value = "page", defaultValue = "1") int page,
+      HttpSession session, Model model) {
     Member member = (Member) session.getAttribute("MEMBER");
     int memberId = member.getMemberId();
-    Page<MyReservedReservationDTO> myReservationPage = reservationRepository.findMyReservedReservationList(memberId, page);
+    Page<MyReservedReservationDTO> myReservationPage = reservationRepository.findMyReservedReservationList(
+        memberId, page);
     System.out.println("myReservationPage.getContents() = " + myReservationPage.getContents());
     model.addAttribute("myReservationPage", myReservationPage);
     return "/flone/my-reservation-list";
@@ -130,15 +140,14 @@ public class ReservationController {
   public IamportResponse<Payment> postVerifyPayment(
       @RequestBody VerificationRequest verificationRequest,
       HttpSession session
-      )
+  )
       throws IamportResponseException, IOException {
     int courseId = verificationRequest.getCourseId();
     Member member = (Member) session.getAttribute("MEMBER");
     Integer myCourseOne = reservationRepository.findMyCourseOne(member.getMemberId(), courseId);
     CourseDetailResponse courseDetailResponse = courseService.courseDetailService(courseId);
     LocalDate courseStartDate = LocalDate.parse(courseDetailResponse.getStartDate());
-    System.out.println("courseStartDate = " + courseStartDate);
-    if(LocalDate.now().isAfter(courseStartDate)) {
+    if (LocalDate.now().isAfter(courseStartDate)) {
       throw new NotActiveClassException("수강 시작일이 지난 강의입니다.");
     }
     if (myCourseOne != null) {
@@ -162,6 +171,12 @@ public class ReservationController {
     Reservation findReservation = null;
     if (cancelDTO.getImp_uid() == null) {
       findReservation = reservationRepository.findById(cancelDTO.getMerchant_uid());
+      int courseId = findReservation.getCourseId();
+      CourseDetailResponse courseDetailResponse = courseService.courseDetailService(courseId);
+      LocalDate courseStartDate = LocalDate.parse(courseDetailResponse.getStartDate());
+      if (LocalDate.now().isAfter(courseStartDate)) {
+        throw new NotActiveClassException("강의일이 지난 강의는 환불이 어렵습니다");
+      }
       reservationService.cancel(findReservation);
     }
     CancelData cancelData = iamportService.getCancelData(cancelDTO, findReservation);

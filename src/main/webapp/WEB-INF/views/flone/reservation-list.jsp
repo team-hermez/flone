@@ -43,27 +43,33 @@
                                     <td class="product-thumbnail">
                                         <a href="reservation-detail.hm?courseId=${reservation.courseId}">${reservation.merchantUid}</a>
                                     </td>
-                                    <td class="product-name"><a href="/flone/course/detail.hm?courseId=${reservation.courseId}">${reservation.title}</a>
+                                    <td class="product-name"><a
+                                            href="/flone/course/detail.hm?courseId=${reservation.courseId}">${reservation.title}</a>
                                     </td>
                                     <td class="product-price-cart">${reservation.startDate}</td>
                                     <td class="product-subtotal">${reservation.paymentAmount}</td>
                                     <td class="product-remove">
-                                        <c:if test="${reservation.reservationStatusId eq 1}">
+                                        <c:if test="${reservation.reservationStatusId == 1 and reservation.isBefore}">
                                             <a href="#"><i class="fa fa-pencil">예약완료</i></a>
                                         </c:if>
-                                        <c:if test="${reservation.reservationStatusId eq 2}">
+                                        <c:if test="${reservation.reservationStatusId == 1 and reservation.isAfter}">
+                                            <a href="#"><i class="fa fa-pencil">수강중</i></a>
+                                        </c:if>
+                                        <c:if test="${reservation.reservationStatusId == 2}">
                                             <a href="#"><i class="fa fa-pencil">예약취소</i></a>
                                         </c:if>
                                     </td>
                                     <td>
-                                        <c:if test="${reservation.reservationStatusId eq 1}">
-                                            <input type="checkbox" class="checkList"
-                                                   value="${reservation.merchantUid}">
-                                        </c:if>
-                                        <c:if test="${reservation.reservationStatusId eq 2}">
-                                            <input type="checkbox"
-                                                   value="${reservation.merchantUid}" disabled>
-                                        </c:if>
+                                        <c:choose>
+                                            <c:when test="${reservation.reservationStatusId == 1 and reservation.isBefore}">
+                                                <input type="checkbox" class="checkList"
+                                                       value="${reservation.merchantUid}">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <input type="checkbox"
+                                                       value="${reservation.merchantUid}" disabled>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </td>
                                 </tr>
                             </c:forEach>

@@ -83,7 +83,7 @@ public class ReservationServiceImpl implements ReservationService {
       List<LocalDateTime[]> myCourseSchedule = entry.getValue();
       try {
         checkScheduleOverlap(courseSchedule, myCourseSchedule);
-      } catch (IllegalArgumentException e) {;
+      } catch (IllegalStateException e) {;
         throw new NoSuchUniqueCourseTimeException(e);
       }
     }

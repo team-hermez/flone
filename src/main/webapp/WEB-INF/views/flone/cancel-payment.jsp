@@ -20,7 +20,7 @@
                 <li>
                     <a href="index.jsp">Home</a>
                 </li>
-                <li class="active">login/Register </li>
+                <li class="active">결제취소 </li>
             </ul>
         </div>
     </div>

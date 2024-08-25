@@ -5,6 +5,7 @@ import com.siot.IamportRestClient.request.CancelData;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -24,6 +25,8 @@ import org.hermez.reservation.dto.MyReservedReservationDTO;
 import org.hermez.reservation.dto.ReservationFormResponse;
 import org.hermez.reservation.dto.ReservationListResponse;
 import org.hermez.reservation.dto.VerificationRequest;
+import org.hermez.reservation.exception.NoSuchUniqueCourseTimeException;
+import org.hermez.reservation.exception.NotActiveClassException;
 import org.hermez.reservation.model.Reservation;
 import org.hermez.reservation.model.ReservationRepository;
 import org.hermez.reservation.service.ReservationService;
@@ -132,8 +135,14 @@ public class ReservationController {
     int courseId = verificationRequest.getCourseId();
     Member member = (Member) session.getAttribute("MEMBER");
     Integer myCourseOne = reservationRepository.findMyCourseOne(member.getMemberId(), courseId);
+    CourseDetailResponse courseDetailResponse = courseService.courseDetailService(courseId);
+    LocalDate courseStartDate = LocalDate.parse(courseDetailResponse.getStartDate());
+    System.out.println("courseStartDate = " + courseStartDate);
+    if(LocalDate.now().isAfter(courseStartDate)) {
+      throw new NotActiveClassException("수강 시작일이 지난 강의입니다.");
+    }
     if (myCourseOne != null) {
-      throw new IllegalStateException("이미 수강 중인 강의입니다.");
+      throw new NoSuchUniqueCourseTimeException("이미 수강 중인 강의입니다.");
     }
     reservationService.verifyCourseSchedule(courseId);
     String impUid = verificationRequest.getImp_uid();//실 결제 금액 확인을 위한 아임포트 쪽에서 주는 아이디

@@ -14,4 +14,5 @@ public class InstructorDetailResponse {
     private String instructorDescription;
     private String instructorStatus;
     private String instructorTitle;
+    private String saveImage;
 }

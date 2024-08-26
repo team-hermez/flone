@@ -18,7 +18,7 @@
             <h2>관리자</h2>
         </div>
         <div class="row mt-5">
-            <div class="col-md-5">
+            <div class="col-md-5 card">
                 <div class="chart-container">
                     <canvas id="monthlySignupsChart"></canvas>
                 </div>
@@ -64,24 +64,26 @@
             </div>
 
             <div class="col-md-5">
-                <div class="chart-container">
-                    <canvas id="revenueRefundChart"></canvas>
+                <div class="card">
+                    <div class="chart-container">
+                        <canvas id="revenueRefundChart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="row mt-4">
-            <div class="col-md-3">
+            <div class="col-md-3 card">
                 <div class="chart-container">
                     <canvas id="courseCountChart"></canvas>
                 </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-5 card">
                 <div class="chart-container">
                     <canvas id="classroomCreationChart"></canvas>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 card">
                 <div class="chart-container">
                     <canvas id="courseChart"></canvas>
                 </div>
@@ -132,11 +134,11 @@
     </div>
     <%@ include file="admin-footer.jsp" %>
 </div>
-<%@ include file="chart-signup.jsp"%>
-<%@ include file="chart-payment-refund.jsp"%>
-<%@ include file="chart-course-subject.jsp"%>
-<%@ include file="chart-classroom.jsp"%>
-<%@ include file="chart-course.jsp"%>
+<%@ include file="chart-signup.jsp" %>
+<%@ include file="chart-payment-refund.jsp" %>
+<%@ include file="chart-course-subject.jsp" %>
+<%@ include file="chart-classroom.jsp" %>
+<%@ include file="chart-course.jsp" %>
 <%@ include file="script.jsp" %>
 </body>
 </html>

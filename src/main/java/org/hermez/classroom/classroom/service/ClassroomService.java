@@ -4,8 +4,6 @@ import org.hermez.classroom.classroom.dto.ClassroomCardResponse;
 import org.hermez.classroom.classroom.dto.ClassroomRegisterRequest;
 import org.hermez.common.page.Page;
 
-import java.util.Map;
-
 /**
  * 강의룸 서비스 인터페이스입니다.
  *

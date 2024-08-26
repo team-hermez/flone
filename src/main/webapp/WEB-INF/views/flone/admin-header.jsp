@@ -15,17 +15,6 @@
                     <div class="same-style header-search">
                         <a href="#"><i class="pe-7s-search"></i></a>
                     </div>
-                    <div class="same-style account-satting">
-                        <a class="account-satting-active" href="#"><i class="pe-7s-user-female"></i></a>
-                        <div class="account-dropdown">
-                            <ul>
-                                <li><a href="login-register.html">Login</a></li>
-                                <li><a href="login-register.html">Register</a></li>
-                                <li><a href="wishlist.html">Wishlist </a></li>
-                                <li><a href="my-account.html">my account</a></li>
-                            </ul>
-                        </div>
-                    </div>
                     <div class="same-style header-wishlist">
                         <a href="#"><i class="pe-7s-like"></i></a>
                     </div>

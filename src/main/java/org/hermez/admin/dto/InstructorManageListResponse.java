@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class InstructorManageListResponse {
+    private int instructorId;
     private String email;
     private String name;
     private String phone;

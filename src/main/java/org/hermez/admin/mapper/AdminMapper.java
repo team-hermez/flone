@@ -3,6 +3,7 @@ package org.hermez.admin.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.hermez.admin.dto.*;
 import org.hermez.member.model.Member;
 
@@ -55,12 +56,14 @@ public interface AdminMapper {
             "LIMIT #{offset}, #{itemsPerPage}")
     List<Member> selectMemberList(@Param("offset") int offset, @Param("itemsPerPage") int itemPerPage);
 
-    @Select("SELECT m.email, m.name, m.phone, m.created_at AS createdAt, s.subject_name AS subjectName " +
+    @Select("SELECT i.instructor_id as instructorId, m.email, m.name, m.phone, m.created_at AS createdAt, s.subject_name AS subjectName " +
             "FROM instructor i " +
             "JOIN member m ON i.member_id = m.member_id " +
             "JOIN subject s ON i.subject_id = s.subject_id " +
-            "WHERE i.instructor_status = 1")
-    List<InstructorManageListResponse> getInstructorManageList();
+            "WHERE i.instructor_status = 0 " +
+            "ORDER BY created_at DESC " +
+            "LIMIT #{offset}, #{itemsPerPage}")
+            List<InstructorManageListResponse> getInstructorManageList(@Param("offset") int offset, @Param("itemsPerPage") int itemPerPage);
 
     @Select("SELECT " +
             "c.course_id AS courseId, " +
@@ -135,4 +138,12 @@ public interface AdminMapper {
     @Select("SELECT COUNT(*) FROM member")
     int getTotalSignUpCount();
 
+    @Select("SELECT COUNT(*) FROM instructor where instructor_status = 0")
+    int selectTotalRequestRegisterCount();
+
+    @Update("UPDATE instructor SET instructor_status = 1 WHERE instructor_id = #{instructorId} AND instructor_status = 0")
+    int updateInstructorStatus(@Param("instructorId") int instructorId);
+
+    @Update("UPDATE member SET role_id = 2 WHERE member_id = (SELECT member_id FROM instructor WHERE instructor_id = #{instructorId})")
+    int updateMemberRole(@Param("instructorId") int instructorId);
 }

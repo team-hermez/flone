@@ -80,12 +80,23 @@
             <ul>
                 <li><a href="/flone/admin/main.hm"> MAIN </a></li>
                 <li><a href="/flone/admin/manage-member.hm"> 회원관리</a></li>
-                <li><a href="/flone/admin/manage-instructor.hm"> 강사관리</a></li>
-                <li><a href="/flone/admin/manage-course.hm"> 강의관리</a></li>
-                <li><a href="/flone/admin/manage-payment.hm">결제관리 <span><i class="fa fa-angle-right"></i></span></a>
+                <li><a href="/flone/admin/instructor/manage-instructor.hm"> 강사관리 <span><i class="fa fa-angle-right"></i></span></a>
                     <ul class="submenu">
-                        <li><a href="blog.html">결제 수익</a></li>
-                        <li><a href="blog-no-sidebar.html">환불 내역</a></li>
+                        <li><a href="/flone/admin/instructor/manage-instructor.hm">강사 조회</a></li>
+                        <li><a href="/flone/admin/instructor/request-register.hm">강사 등록 요청</a></li>
+                    </ul>
+                </li>
+                <li><a href="/flone/admin/manage-course.hm"> 강의관리<span><i class="fa fa-angle-right"></i></span></a>
+                    <ul class="submenu">
+                        <li><a href="/flone/admin/course/manage-course.hm?type=1">예약중 강의</a></li>
+                        <li><a href="/flone/admin/course/manage-course.hm?type=2">진행중 강의</a></li>
+                        <li><a href="/flone/admin/course/manage-course.hm?type=3">끝난 강의</a></li>
+                    </ul>
+                </li>
+                <li><a href="/flone/admin/payment/manage-payment.hm">예약관리<span><i class="fa fa-angle-right"></i></span></a>
+                    <ul class="submenu">
+                        <li><a href="/flone/admin/payment/manage-payment.hm">예약 및 결제</a></li>
+                        <li><a href="/flone/admin/payment/manage-refund.hm">환불 내역</a></li>
                     </ul>
                 </li>
                 <li><a href="contact.html"> About</a></li>

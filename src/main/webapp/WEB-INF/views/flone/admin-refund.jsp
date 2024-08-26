@@ -13,96 +13,82 @@
 <%@ include file="admin-sidebar.jsp" %>
 <%@ include file="admin-header.jsp" %>
 <div class="home-sidebar-right">
-    <div class="container">
-        <h1> 회원 관리 </h1>
-        <canvas id="revenueRefundChart"></canvas>
-        <h3 class="cart-page-title">회원 조회</h3>
-        <div class="row">
+    <div class="container mt-5">
+        <div class="section-title text-center">
+            <h2> 환불 내역 관리 </h2>
+        </div>
+        <div class="w-75 p-3 mx-auto">
+            <div>
+                <canvas id="revenueRefundChart"></canvas>
+            </div>
+        </div>
+        <div class="section-title text-center mt-5">
+            <h2>전체 환불 리스트</h2>
+        </div>
+        <div class="row mt-5">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                <form action="#">
-                    <div class="table-content table-responsive cart-table-content">
-                        <table>
-                            <thead>
+                <div class="table-content table-responsive cart-table-content ">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>주문번호</th>
+                            <th>강의제목</th>
+                            <th>결제금액</th>
+                            <th>결제일</th>
+                            <th>비고</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="refund" items="${refunds.contents}">
                             <tr>
-                                <th>프로필</th>
-                                <th>회원번호</th>
-                                <th>이름</th>
-                                <th>이메일</th>
-                                <th>전화번호</th>
-                                <th>가입일</th>
-                                <th>삭제</th>
+                                <td class="product-name">${refund.merchantUid}</td>
+                                <td class="product-name">${refund.merchantUid}</td>
+                                <td class="product-name">${refund.paymentAmount}</td>
+                                <td class="product-name">${refund.createdAt}</td>
+                                <td class="product-name">${refund.isBefore}</td>
                             </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach var="member" items="${members}">
-                                <tr>
-                                    <td class="product-thumbnail">
-                                        <a href="#"><img src="../../../resources/images/no_profile.png"
-                                                         width="100px"></a>
-                                    </td>
-                                    <td class="product-name"><a href="#">${member.memberId}</a></td>
-                                    <td class="product-name"><a href="#">${member.name}</a></td>
-                                    <td class="product-name"><a href="#">${member.email}</a></td>
-                                    <td class="product-name"><a href="#">${member.phone}</a></td>
-                                    <td class="product-name">${member.createdAt}</td>
-                                    <td class="product-remove">
-                                        <a href="#"><i class="fa fa-times"></i></a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="cart-shiping-update-wrapper">
-                                <div class="cart-shiping-update">
-                                    <a href="#">Continue Shopping</a>
-                                </div>
-                                <div class="cart-clear">
-                                    <button>Update Shopping Cart</button>
-                                    <a href="#">Clear Shopping Cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pro-pagination-style text-center mt-20">
+                    <ul>
+                        <c:choose>
+                            <c:when test="${refunds.currentPage > 1}">
+                                <li><a class="prev" href="?page=${refunds.currentPage - 1}"><i
+                                        class="fa fa-angle-double-left"></i></a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li><a class="prev" href="#"><i class="fa fa-angle-double-left"></i></a></li>
+                            </c:otherwise>
+                        </c:choose>
+                        <c:forEach begin="1" end="${refunds.totalPages}" var="pageNum">
+                            <c:choose>
+                                <c:when test="${pageNum == refunds.currentPage}">
+                                    <li><a class="active" href="#">${pageNum}</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a href="?page=${pageNum}">${pageNum}</a></li>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                        <c:choose>
+                            <c:when test="${refunds.currentPage < refunds.totalPages}">
+                                <li><a class="next" href="?page=${refunds.currentPage + 1}"><i
+                                        class="fa fa-angle-double-right"></i></a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li><a class="next" href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
     <%@ include file="admin-footer.jsp" %>
 </div>
-
-<script>
-    const revenueDataJson = '${chartDataJson}';
-    const revenueData = JSON.parse(revenueDataJson);
-
-    const revenueLabels = revenueData.map(data => data.month);
-    const refundAmounts = revenueData.map(data => data.refund);
-
-    const revenueCtx = document.getElementById('revenueRefundChart').getContext('2d');
-    new Chart(revenueCtx, {
-        type: 'line',
-        data: {
-            labels: revenueLabels,
-            datasets: [{
-                label: 'Refund',
-                borderColor: 'blue',
-                data: refundAmounts,
-                fill: false
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
-
+<%@ include file="chart-refund.jsp"%>
 <%@ include file="script.jsp" %>
 </body>
 </html>

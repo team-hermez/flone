@@ -16,7 +16,11 @@
         <div class="section-title text-center">
             <h2>회원 관리</h2>
         </div>
-        <canvas id="monthlySignupsChart"></canvas>
+        <div class="w-75 p-3 mx-auto">
+            <div>
+                <canvas id="monthlySignupsChart"></canvas>
+            </div>
+        </div>
         <div class="section-title text-center mt-5">
             <h2>전체 회원 리스트</h2>
         </div>

@@ -2,20 +2,17 @@ package org.hermez.instructor.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
 public class InstructorRegisterRequest {
+    private int instructorId;
     private int subjectId;
     private int memberId;
-
-    private String instructorDescription; // 국어교사입니다 국어 빡고수
-    private String instructorTitle; // 저와 함께 성장해 나가는 모습 기대해주세요!
-    private int instructorStatus; // 1
-
+    private MultipartFile saveImage;
+    private String instructorDescription;
+    private String instructorTitle;
     private int roleId;
-
-
-
 
 }

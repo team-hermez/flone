@@ -9,10 +9,12 @@ import org.hermez.member.dto.MemberLoginResponse;
 import java.util.ArrayList;
 
 public interface InstructorService {
-    Page<InstructorListResponse> selectInstructorList(int page);
-    ArrayList<InstructorDetailResponse> selectInstructorDetail(int instructorsID);
-    void insertInstructor(InstructorRegisterRequest instructorRegisterRequest);
 
+    Page<InstructorListResponse> selectInstructorList(int page);
+
+    InstructorDetailResponse selectInstructorDetail(int instructorsID);
+
+    void insertInstructor(InstructorRegisterRequest instructorRegisterRequest);
 
     Instructor findByMemberLoginResponseId(MemberLoginResponse memberLoginResponse);
 }

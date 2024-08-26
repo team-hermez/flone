@@ -4,6 +4,7 @@ import org.hermez.admin.dto.AdminMainResponse;
 import org.hermez.admin.dto.CourseManageListResponse;
 import org.hermez.admin.dto.InstructorManageListResponse;
 import org.hermez.common.page.Page;
+import org.hermez.instructor.dto.InstructorListResponse;
 import org.hermez.member.model.Member;
 
 import java.util.List;
@@ -24,7 +25,11 @@ public interface AdminService {
 
     Page<Member> getMemberList(int page);
 
-    List<InstructorManageListResponse> getInstructorManageList();
+    Page<InstructorManageListResponse> getInstructorManageList(int page);
 
     List<CourseManageListResponse> getCourseManageList(int type);
+
+    Page<InstructorListResponse> getInstructorList(int page);
+
+    boolean approveInstructor(int instructorId);
 }

@@ -89,7 +89,7 @@
                                                 <a href="#">Forgot Password?</a>
                                             </div>
                                             <button type="submit"><span>Login</span></button>
-                                            <a href="/flone/member/naverlogin.hm"
+                                            <a href="/flone/oauth/naverlogin.hm"
                                                style="position: absolute; bottom: 10px; right: 10px; display: block; width: 130px; height: 60px;">
                                                 <img src="http://static.nid.naver.com/oauth/small_g_in.PNG"
                                                      alt="Naver Login"

@@ -16,23 +16,25 @@ public class Instructor {
     private int memberId;
     private int roleId;
     private String email;
-    private String password;
+    private String encodedPassword;
+    private String socialLoginId;
     private String name;
     private String phone;
     private LocalDateTime createdAt;
 
-    public Instructor(int memberId, int roleId, String email, String password, String name, String phone, LocalDateTime createdAt) {
+    public Instructor(int memberId, int roleId, String email, String encodedPassword, String socialLoginId, String name, String phone, LocalDateTime createdAt) {
         this.memberId = memberId;
         this.roleId = roleId;
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.socialLoginId = socialLoginId;
+        this.encodedPassword = encodedPassword;
         this.phone = phone;
         this.createdAt = createdAt;
     }
 
-    public Instructor(String email, String password) {
+    public Instructor(String email, String encodedPassword) {
         this.email = email;
-        this.password = password;
+        this.encodedPassword = encodedPassword;
     }
 }

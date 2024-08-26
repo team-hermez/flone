@@ -19,8 +19,7 @@ public class MemberRegisterRequest {
     private int roleId;
 
     @NotEmpty(message = "{NotEmpty.member.password}")
-    private String password;
-    private String encoded_password;
+    private String encodedPassword;
 
     @Pattern(regexp ="^[가-힣]*$", message = "")
     @NotEmpty(message = "{NotEmpty.member.name}")
@@ -29,5 +28,6 @@ public class MemberRegisterRequest {
     @Pattern(regexp = "^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$", message = "{Pattern.member.phone}")
     private String phone;
 
+    private String socialLoginId;
     private LocalDateTime createdAt;
 }

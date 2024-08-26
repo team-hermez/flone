@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 @Data
 @Getter
 @Setter
@@ -15,6 +13,7 @@ public class MemberLoginResponse {
     private int memberId;
     private int roleId;
     private String email;
+    private String socialLoginId;
     private String encodedPassword;
     private String name;
     private String phone;

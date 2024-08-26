@@ -10,10 +10,10 @@ import org.hermez.member.model.*;
 
 @Mapper
 public interface MemberMapper {
-    @Insert("insert into member(role_id, name, email, password, encoded_password, phone, created_at) values (1, #{name}, #{email}, #{password}, #{encodedPassword}, #{phone}, NOW())")
+    @Insert("insert into member(role_id, name, email, encoded_password, phone, social_login_id, created_at) values (1, #{name}, #{email}, #{encodedPassword}, #{phone}, #{socialLoginId}, NOW())")
     void registerMember(Member member);
-    @Select("select member_id as memberId, role_id as roleId, email, password, name, phone, created_at as createdAt from member where email=#{email} and password=#{password}")
-//    @Select("select member_id as memberId, role_id as roleId, email, encoded_password as encodedPassword, name, phone, created_at as createdAt from member where email=#{email}")
+//    @Select("select member_id as memberId, role_id as roleId, email, encoded_password as encodedPassword, name, phone, created_at as createdAt from member where email=#{email} and encoded_password=#{password}")
+    @Select("select member_id as memberId, role_id as roleId, email, social_login_id as socialLoginId, encoded_password as encodedPassword, name, phone, created_at as createdAt from member where email=#{email}")
     MemberLoginResponse loginMember(MemberLoginRequest memberLoginRequest);
 
     @Select("SELECT COUNT(1) > 0 FROM member WHERE email = #{email}")
@@ -25,7 +25,7 @@ public interface MemberMapper {
     @Select("SELECT COUNT(1) > 0 FROM member WHERE phone = #{phone}")
     boolean selectMemberPhoneExist(MemberRegisterRequest memberRegisterRequest);
 
-    @Select("select member_id as memberId, email, name, password, phone from member where member_id = #{memberId};")
+    @Select("select member_id as memberId, email, name, encoded_password, phone from member where member_id = #{memberId};")
     MyAccountResponse getMyAccount(int memberId);
 
     @Select("SELECT COUNT(1) > 0 FROM instructor i, member m WHERE m.phone = #{phoneConfirm}")
@@ -36,6 +36,6 @@ public interface MemberMapper {
             "WHERE member_id = #{memberId}")
     void updateMyAccountPhone(MyAccountEditRequest myAccountEditRequest);
 
-    @Update("UPDATE member SET password = #{passwordConfirm} WHERE member_id = #{memberId}")
+    @Update("UPDATE member SET encoded_password = #{passwordConfirm} WHERE member_id = #{memberId}")
     void updateMyAccountPassword(MyAccountEditRequest myAccountEditRequest);
 }

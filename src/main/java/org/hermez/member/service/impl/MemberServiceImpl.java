@@ -45,16 +45,18 @@ public class MemberServiceImpl implements MemberService {
                 throw new MemberServiceException("중복된 전화번호가 존재합니다.");
             }
 
+            String socialLoginId = (String) session.getAttribute("socialLoginId");
+
             passwordEncoder = new BCryptPasswordEncoder();
-            String encodedPassword = passwordEncoder.encode(memberRegisterRequest.getPassword());
+            String encodedPassword = passwordEncoder.encode(memberRegisterRequest.getEncodedPassword());
 
             Member member = new Member(
                     memberRegisterRequest.getRoleId(),
-                    memberRegisterRequest.getEmail(),
-                    memberRegisterRequest.getPassword(),
-                    encodedPassword,
                     memberRegisterRequest.getName(),
+                    memberRegisterRequest.getEmail(),
+                    encodedPassword,
                     memberRegisterRequest.getPhone(),
+                    socialLoginId,
                     memberRegisterRequest.getCreatedAt()
             );
             save(member);
@@ -66,23 +68,30 @@ public class MemberServiceImpl implements MemberService {
         }
     }
 
+    //TODO 암호화 로그인
+    @Override
     public void loginMember(MemberLoginRequest memberLoginRequest) {
-        MemberLoginResponse memberLoginResponse = null;
+
         boolean exist = false;
         try {
             exist = memberMapper.selectMemberEmailExist(memberLoginRequest);
             if (!exist) {
                 throw new MemberServiceException("등록된 이메일이 없습니다.");
             }
-            memberLoginResponse = memberMapper.loginMember(memberLoginRequest);
 
+            MemberLoginResponse memberLoginResponse = memberMapper.loginMember(memberLoginRequest);
             if (memberLoginResponse == null) {
+                throw new MemberServiceException("비밀번호가 맞지 않습니다.");
+            }
+            boolean passwordsMatch = passwordEncoder.matches(memberLoginRequest.getPassword(), memberLoginResponse.getEncodedPassword());
+            if (!passwordsMatch) {
                 throw new MemberServiceException("비밀번호가 맞지 않습니다.");
             }
             Instructor instructor = instructorService.findByMemberLoginResponseId(memberLoginResponse);
             // TODO: admin 정보 받아오기
             Admin admin = new Admin();
 
+            // 역할에 따른 세션 설정
             if (memberLoginResponse.getRoleId() == 1) {
                 session.setAttribute("MEMBER", memberLoginResponse);
             } else if (memberLoginResponse.getRoleId() == 2) {
@@ -96,55 +105,8 @@ public class MemberServiceImpl implements MemberService {
 
         } catch (MemberServiceException e) {
             throw new MemberServiceException(e.getMessage());
-        } catch (Exception e) {
-            throw new MemberServiceException("로그인 중 오류가 발생했습니다.", e);
         }
     }
-
-    //TODO 암호화 로그인
-//    @Override
-//    public void loginMember(MemberLoginRequest memberLoginRequest) {
-//
-//        boolean exist = false;
-//        try {
-//            exist = memberMapper.selectMemberEmailExist(memberLoginRequest);
-//            if (!exist) {
-//                throw new MemberServiceException("등록된 이메일이 없습니다.");
-//            }
-//
-//            MemberLoginResponse memberLoginResponse = memberMapper.loginMember(memberLoginRequest);
-//
-//            if (memberLoginResponse == null) {
-//                throw new MemberServiceException("비밀번호가 맞지 않습니다.");
-//            }
-//
-//            boolean passwordsMatch = passwordEncoder.matches(memberLoginRequest.getPassword(), memberLoginResponse.getEncodedPassword());
-//            if (!passwordsMatch) {
-//                throw new MemberServiceException("비밀번호가 맞지 않습니다.");
-//            }
-//
-//            Instructor instructor = instructorService.findByMemberLoginResponseId(memberLoginResponse);
-//            // TODO: admin 정보 받아오기
-//            Admin admin = new Admin();
-//
-//            // 역할에 따른 세션 설정
-//            if (memberLoginResponse.getRoleId() == 1) {
-//                session.setAttribute("MEMBER", memberLoginResponse);
-//            } else if (memberLoginResponse.getRoleId() == 2) {
-//                session.setAttribute("MEMBER", memberLoginResponse);
-//                session.setAttribute("INSTRUCTOR", instructor);
-//            } else if (memberLoginResponse.getRoleId() == 3) {
-//                session.setAttribute("MEMBER", memberLoginResponse);
-//                session.setAttribute("INSTRUCTOR", instructor);
-//                session.setAttribute("ADMIN", admin);
-//            }
-//
-//        } catch (MemberServiceException e) {
-//            throw new MemberServiceException(e.getMessage());
-//        } catch (Exception e) {
-//            throw new MemberServiceException("로그인 중 오류가 발생했습니다.", e);
-//        }
-//    }
 
     @Override
     public void save(Member member) {
@@ -161,6 +123,8 @@ public class MemberServiceImpl implements MemberService {
     public void updateMyAccount(MyAccountEditRequest myAccountEditRequest) {
         int selectPhoneExists = memberMapper.selectPhoneExists(myAccountEditRequest);
         try {
+            String encodedPassword = passwordEncoder.encode(myAccountEditRequest.getPasswordConfirm());
+            myAccountEditRequest.setPasswordConfirm(encodedPassword);
             if (selectPhoneExists == 0) {
                 memberMapper.updateMyAccountPhone(myAccountEditRequest);
                 memberMapper.updateMyAccountPassword(myAccountEditRequest);

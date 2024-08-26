@@ -43,7 +43,7 @@ public interface InstructorMapper {
             "from instructor i, member m, subject s where m.member_id = i.member_id and s.subject_id = i.subject_id and i.instructor_id = #{instructorID}")
     InstructorDetailResponse selectInstructorDetail(int instructorsID);
 
-    @Select("SELECT DISTINCT m.role_id as roleId, m.email as email, m.name as name, m.password as password, m.phone as phone, m.created_at as createdAt " +
+    @Select("SELECT DISTINCT m.role_id as roleId, m.name as name, m.email as email, m.encoded_password as encodedPassword, m.phone as phone, m.social_login_id as socialLoginId, m.created_at as createdAt " +
             "FROM instructor i " +
             "JOIN member m ON m.member_id = i.member_id " +
             "WHERE m.member_id = #{memberId}")

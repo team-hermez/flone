@@ -83,25 +83,6 @@
                                                 <div class="col-lg-12 col-md-12">
                                                     <div class="billing-info"
                                                          style="position: relative; display: flex; align-items: center;">
-                                                        <label for="passwordField" style="margin-right: 10px;">현재
-                                                            비밀번호</label>
-                                                        <input id="passwordField" name="password"
-                                                               value="${myAccount.password}" type="password" readonly
-                                                               style="flex: 1; padding-right: 40px; border: 1px solid #ced4da; border-radius: 4px;">
-
-                                                        <button type="button"
-                                                                onclick="toggleVisibilityPassword('passwordField', 'icon')"
-                                                                style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; padding: 0; font-size: 16px;">
-                                                            <i id="icon" class="fa fa-eye-slash"
-                                                               style="font-size: 18px; color: #6c757d;"></i>
-                                                            <span class="blind" style="display: none;">비밀번호 보기</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-12 col-md-12">
-                                                    <div class="billing-info"
-                                                         style="position: relative; display: flex; align-items: center;">
                                                         <label for="passwordConfirm" style="margin-right: 10px;">비밀번호
                                                             확인</label>
                                                         <input id="passwordConfirm" name="passwordConfirm"

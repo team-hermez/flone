@@ -98,7 +98,7 @@
                         <div class="count-icon">
                             <i class="pe-7s-smile"></i>
                         </div>
-                        <h2 class="count">100</h2>
+                        <h2 class="count">${adminMainResponse.totalSignUpCount}</h2>
                         <span>전체 가입자</span>
                     </div>
                 </div>
@@ -125,7 +125,7 @@
                         <div class="count-icon">
                             <i class="pe-7s-portfolio"></i>
                         </div>
-                        <h2 class="count">360</h2>
+                        <h2 class="count">${adminMainResponse.totalClassroomCount}</h2>
                         <span>전체 클래스룸</span>
                     </div>
                 </div>

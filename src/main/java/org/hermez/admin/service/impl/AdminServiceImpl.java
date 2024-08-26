@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import org.hermez.admin.dto.*;
 import org.hermez.admin.mapper.AdminMapper;
 import org.hermez.admin.service.AdminService;
+import org.hermez.classroom.classroom.service.ClassroomService;
 import org.hermez.common.page.Page;
 import org.hermez.common.page.PaginationUtil;
 import org.hermez.course.dto.CourseDetailResponse;
@@ -11,6 +12,8 @@ import org.hermez.course.service.CourseService;
 import org.hermez.instructor.dto.InstructorListResponse;
 import org.hermez.instructor.service.InstructorService;
 import org.hermez.member.model.Member;
+import org.hermez.reservation.dto.ReservationListResponse;
+import org.hermez.reservation.service.ReservationService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,11 +25,15 @@ public class AdminServiceImpl implements AdminService {
     private final AdminMapper adminMapper;
     private final InstructorService instructorService;
     private final CourseService courseService;
+    private final ReservationService reservationService;
+    private final ClassroomService classroomService;
 
-    public AdminServiceImpl(AdminMapper adminMapper, InstructorService instructorService, CourseService courseService) {
+    public AdminServiceImpl(AdminMapper adminMapper, InstructorService instructorService, CourseService courseService, ReservationService reservationService, ClassroomService classroomService) {
         this.adminMapper = adminMapper;
         this.instructorService = instructorService;
         this.courseService = courseService;
+        this.reservationService = reservationService;
+        this.classroomService = classroomService;
     }
 
     @Override
@@ -35,6 +42,7 @@ public class AdminServiceImpl implements AdminService {
         adminMainResponse.setDailySignUpCount(adminMapper.getDailySignUpCount());
         adminMainResponse.setMonthlySignUpCount(adminMapper.getMonthlySignUpCount());
         adminMainResponse.setTotalSignUpCount(adminMapper.getTotalSignUpCount());
+        adminMainResponse.setTotalClassroomCount(classroomService.getTotalClassroomCount());
         return adminMainResponse;
     }
 
@@ -87,7 +95,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Page<CourseManageListResponse> getCourseManageList(int type, int page) {
         if (type == 1) {
-            int total = adminMapper.selectTotalRequestRegisterCount();
+            int total = adminMapper.selectTotalCountReservationCourse();
             PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total, 10, page);
             List<CourseManageListResponse> courseManageListResponse = adminMapper.getReservationCourses(pageInfo.getOffset(), pageInfo.getItemsPerPage());
             return new Page<>(courseManageListResponse, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
@@ -124,5 +132,15 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public CourseDetailResponse getCourseDetail(int courseId) {
         return courseService.courseDetailService(courseId);
+    }
+
+    @Override
+    public Page<ReservationListResponse> getReservationListAll(int page){
+        return reservationService.getReservationListAll(page);
+    }
+
+    @Override
+    public Page<ReservationListResponse> getRefundListAll(int page){
+        return reservationService.getRefundListAll(page);
     }
 }

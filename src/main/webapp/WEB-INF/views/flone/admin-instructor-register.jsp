@@ -43,7 +43,7 @@
                                 <td class="product-name"><a href="#">${instructor.email}</a></td>
                                 <td class="product-name"><a href="#">${instructor.phone}</a></td>
                                 <td class="product-name">
-                                    <form action="/flone/admin/instructor/register-instructor.hm" method="post" style="display:inline;">
+                                    <form action="/flone/admin/instructor/register-instructor.hm" method="post" style="display:inline;" onsubmit="return alert('등록이완료외었습니다');" >
                                         <input type="hidden" name="instructorId" value="${instructor.instructorId}">
                                         <button type="submit" class="btn btn-primary">
                                             등록

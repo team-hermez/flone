@@ -67,6 +67,7 @@ public interface AdminMapper {
 
     @Select("SELECT " +
             "c.course_id AS courseId, " +
+            "c.title AS courseTitle, " +
             "g.grade_name AS gradeName, " +
             "s.subject_name AS subjectName, " +
             "m.name AS instructorName, " +
@@ -83,12 +84,14 @@ public interface AdminMapper {
             "JOIN grade g ON c.grade_id = g.grade_id " +
             "LEFT JOIN reservation r ON c.course_id = r.course_id " +
             "WHERE CURDATE() <= c.start_date " +
-            "GROUP BY c.course_id")
-    List<CourseManageListResponse> getReservationCourses();
+            "GROUP BY c.course_id " +
+            "LIMIT #{offset}, #{itemsPerPage}")
+    List<CourseManageListResponse> getReservationCourses(@Param("offset") int offset, @Param("itemsPerPage") int itemPerPage);
 
 
     @Select("SELECT " +
             "c.course_id AS courseId, " +
+            "c.title AS courseTitle, " +
             "g.grade_name AS gradeName, " +
             "s.subject_name AS subjectName, " +
             "m.name AS instructorName, " +
@@ -105,11 +108,13 @@ public interface AdminMapper {
             "JOIN grade g ON c.grade_id = g.grade_id " +
             "LEFT JOIN reservation r ON c.course_id = r.course_id " +
             "WHERE CURDATE() BETWEEN c.start_date AND c.end_date " +
-            "GROUP BY c.course_id")
-    List<CourseManageListResponse> getProgressCourses();
+            "GROUP BY c.course_id " +
+            "LIMIT #{offset}, #{itemsPerPage}")
+    List<CourseManageListResponse> getProgressCourses(@Param("offset") int offset, @Param("itemsPerPage") int itemPerPage);
 
     @Select("SELECT " +
             "c.course_id AS courseId, " +
+            "c.title AS courseTitle, " +
             "g.grade_name AS gradeName, " +
             "s.subject_name AS subjectName, " +
             "m.name AS instructorName, " +
@@ -126,8 +131,9 @@ public interface AdminMapper {
             "JOIN grade g ON c.grade_id = g.grade_id " +
             "LEFT JOIN reservation r ON c.course_id = r.course_id " +
             "WHERE CURDATE() > c.end_date " +
-            "GROUP BY c.course_id")
-    List<CourseManageListResponse> getFinishedCourses();
+            "GROUP BY c.course_id " +
+            "LIMIT #{offset}, #{itemsPerPage}")
+    List<CourseManageListResponse> getFinishedCourses(@Param("offset") int offset, @Param("itemsPerPage") int itemPerPage);
 
     @Select("SELECT COUNT(*) FROM member WHERE DATE(created_at) = CURDATE()")
     int getDailySignUpCount();
@@ -146,4 +152,13 @@ public interface AdminMapper {
 
     @Update("UPDATE member SET role_id = 2 WHERE member_id = (SELECT member_id FROM instructor WHERE instructor_id = #{instructorId})")
     int updateMemberRole(@Param("instructorId") int instructorId);
+
+    @Select("SELECT COUNT(*) FROM course where CURDATE() <= start_date")
+    int selectTotalCountReservationCourse();
+
+    @Select("SELECT COUNT(*) FROM course WHERE CURDATE() BETWEEN start_date AND end_date")
+    int selectTotalCountProgressCourse();
+
+    @Select("SELECT COUNT(*) FROM course WHERE CURDATE() > end_date")
+    int selectTotalCountFinishedCourse();
 }

@@ -6,6 +6,8 @@ import org.hermez.admin.mapper.AdminMapper;
 import org.hermez.admin.service.AdminService;
 import org.hermez.common.page.Page;
 import org.hermez.common.page.PaginationUtil;
+import org.hermez.course.dto.CourseDetailResponse;
+import org.hermez.course.service.CourseService;
 import org.hermez.instructor.dto.InstructorListResponse;
 import org.hermez.instructor.service.InstructorService;
 import org.hermez.member.model.Member;
@@ -19,10 +21,12 @@ public class AdminServiceImpl implements AdminService {
 
     private final AdminMapper adminMapper;
     private final InstructorService instructorService;
+    private final CourseService courseService;
 
-    public AdminServiceImpl(AdminMapper adminMapper, InstructorService instructorService) {
+    public AdminServiceImpl(AdminMapper adminMapper, InstructorService instructorService, CourseService courseService) {
         this.adminMapper = adminMapper;
         this.instructorService = instructorService;
+        this.courseService = courseService;
     }
 
     @Override
@@ -81,14 +85,23 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<CourseManageListResponse> getCourseManageList(int type) {
+    public Page<CourseManageListResponse> getCourseManageList(int type, int page) {
         if (type == 1) {
-            return adminMapper.getReservationCourses();
+            int total = adminMapper.selectTotalRequestRegisterCount();
+            PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total, 10, page);
+            List<CourseManageListResponse> courseManageListResponse = adminMapper.getReservationCourses(pageInfo.getOffset(), pageInfo.getItemsPerPage());
+            return new Page<>(courseManageListResponse, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
         }
         if (type == 2) {
-            return adminMapper.getProgressCourses();
+            int total = adminMapper.selectTotalCountProgressCourse();
+            PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total, 10, page);
+            List<CourseManageListResponse> courseManageListResponse = adminMapper.getProgressCourses(pageInfo.getOffset(), pageInfo.getItemsPerPage());
+            return new Page<>(courseManageListResponse, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
         }
-        return adminMapper.getFinishedCourses();
+        int total = adminMapper.selectTotalCountFinishedCourse();
+        PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total, 10, page);
+        List<CourseManageListResponse> courseManageListResponse = adminMapper.getFinishedCourses(pageInfo.getOffset(), pageInfo.getItemsPerPage());
+        return new Page<>(courseManageListResponse, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
     }
 
     @Override
@@ -106,5 +119,10 @@ public class AdminServiceImpl implements AdminService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public CourseDetailResponse getCourseDetail(int courseId) {
+        return courseService.courseDetailService(courseId);
     }
 }

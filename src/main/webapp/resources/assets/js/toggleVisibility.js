@@ -58,14 +58,31 @@ window.toggleVisibilitySelectorPassword = toggleVisibilitySelectorPassword;
 function formatPhoneNumber(input) {
     let value = input.value.replace(/\D/g, '');
 
-    if (value.length <= 3) {
-        value = value;
-    } else if (value.length <= 7) {
-        value = value.slice(0, 3) + '-' + value.slice(3);
-    } else {
-        value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7, 11);
+    if (!value.startsWith("010")) {
+        value = "010" + value.substring(3);
+    }
+
+    if (value.length > 11) {
+        value = value.substring(0, 11);
+    }
+
+    if (value.length > 3 && value.length <= 7) {
+        value = value.replace(/(\d{3})(\d+)/, "$1-$2");
+    } else if (value.length > 7) {
+        value = value.replace(/(\d{3})(\d{4})(\d+)/, "$1-$2-$3");
     }
 
     input.value = value;
 }
 
+function validatePhoneNumber() {
+    const phoneInput = document.getElementById("phoneConfirm").value;
+
+    const phonePattern = /^010-\d{4}-\d{4}$/;
+    if (!phonePattern.test(phoneInput)) {
+        alert("전화번호는 '010-XXXX-XXXX' 형식으로 입력해 주세요.");
+        return false;
+    }
+
+    return true;
+}

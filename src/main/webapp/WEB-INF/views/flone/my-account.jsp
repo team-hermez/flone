@@ -73,7 +73,7 @@
                             </div>
                             <div id="my-account-2" class="panel-collapse collapse" data-bs-parent="#faq">
                                 <form action="/flone/member/my-account-edit.hm?memberId=${sessionScope.MEMBER.memberId}"
-                                      method="post">
+                                      method="post" onsubmit="return validatePhoneNumber()">
                                     <div class="panel-body">
                                         <div class="myaccount-info-wrapper">
                                             <div class="account-info-wrapper">
@@ -83,10 +83,9 @@
                                                 <div class="col-lg-12 col-md-12">
                                                     <div class="billing-info"
                                                          style="position: relative; display: flex; align-items: center;">
-                                                        <label for="passwordConfirm" style="margin-right: 10px;">비밀번호
-                                                            확인</label>
+                                                        <label style="margin-right: 10px">비밀번호</label>
                                                         <input id="passwordConfirm" name="passwordConfirm"
-                                                               type="password" placeholder="변경하실 비밀번호를 입력해주세요."
+                                                               type="password" placeholder="변경하실 비밀번호를 입력해주세요." required
                                                                style="flex: 1; padding-right: 40px; border: 1px solid #ced4da; border-radius: 4px;">
                                                         <button type="button"
                                                                 onclick="toggleVisibilityPassword('passwordConfirm', 'iconConfirm')"
@@ -100,7 +99,7 @@
                                                 <div class="col-lg-12 col-md-12">
                                                     <div class="billing-info"
                                                          style="position: relative; display: flex; align-items: center;">
-                                                        <label style="margin-right: 10px">전화번호</label>
+                                                        <label style="margin-right: 10px">현재 전화번호</label>
                                                         <input name="phone" id="phone" type="text"
                                                                placeholder="${myAccount.phone}" readonly
                                                                style="flex: 1; padding-right: 40px; border: 1px solid #ced4da; border-radius: 4px;">
@@ -112,18 +111,19 @@
                                                          style="position: relative; display: flex; align-items: center;">
                                                         <label style="margin-right: 10px;">전화번호 확인</label>
                                                         <input name="phoneConfirm" id="phoneConfirm" type="text"
+                                                               value="010"
                                                                placeholder="변경하실 핸드폰 번호를 입력해주세요."
                                                                style="flex: 1; padding-right: 40px; border: 1px solid #ced4da; border-radius: 4px;"
                                                                oninput="formatPhoneNumber(this)">
                                                     </div>
                                                 </div>
 
-                                                <div class="col-lg-12 col-md-12">
+                                                <div class="col-lg-12 col-md-12" style="margin-top: -26px;">
                                                     <div class="billing-back-btn">
                                                         <div class="billing-back">
                                                         </div>
                                                         <div class="billing-btn">
-                                                            <button type="submit">Continue</button>
+                                                            <button type="submit">변경하기</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -315,22 +315,6 @@
 <%@include file="footer.jsp" %>
 <%@include file="script.jsp" %>
 <script src="/resources/assets/js/toggleVisibility.js"></script>
-<script>
-    function formatPhoneNumber(input) {
-        let value = input.value.replace(/\D/g, ''); // 모든 비숫자 문자를 제거
-
-        // 하이픈 추가
-        if (value.length <= 3) {
-            value = value;
-        } else if (value.length <= 7) {
-            value = value.slice(0, 3) + '-' + value.slice(3);
-        } else {
-            value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7, 11);
-        }
-
-        input.value = value; // 포맷된 값을 입력 필드에 다시 설정
-    }
-</script>
 </body>
 
 </html>

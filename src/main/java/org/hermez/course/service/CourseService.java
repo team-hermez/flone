@@ -1,5 +1,6 @@
 package org.hermez.course.service;
 
+import org.apache.ibatis.annotations.Param;
 import org.hermez.common.page.Page;
 import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.course.dto.CourseListResponse;
@@ -22,6 +23,15 @@ public interface CourseService {
      */
     Page<CourseListResponse> getCourseList(int page);
 
+    /**
+     * 카테고리별 강의 목록을 조회합니다
+     * @param category
+     * @param subject
+     * @param instructorName
+     * @param grade
+     * @param page
+     * @return 강의 목록과 페이지 정보를 담고 있는 Map 객체
+     */
     Page<CourseListResponse> getCourseListByCategory(String category,String subject,String instructorName, String grade, int page);
 
     /**
@@ -38,12 +48,9 @@ public interface CourseService {
      */
     List<CourseTime> courseDetailTime(int courseId);
 
-    /**
-     * instructorName과 일치하는 강의 정보를 조회합니다.
-     * @param instructorName
-     * @return
-     */
     List<CourseListResponse> getCourseListByInstructor(String instructorName);
+
+    int getInstructorIdByMemberId(int memberId);
 
     /**
      * 강의를 등록합니다

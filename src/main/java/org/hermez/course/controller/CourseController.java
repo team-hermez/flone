@@ -6,6 +6,9 @@ import org.hermez.course.dto.CourseListResponse;
 import org.hermez.course.dto.CourseRegisterRequest;
 import org.hermez.course.model.CourseTime;
 import org.hermez.course.service.CourseService;
+import org.hermez.instructor.dto.InstructorListResponse;
+import org.hermez.instructor.model.Instructor;
+import org.hermez.member.dto.MemberLoginResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -26,6 +30,7 @@ import java.util.List;
 public class CourseController {
     private final CourseService courseService;
     private final ServletRequest httpServletRequest;
+    private final HttpSession httpSession;
     private CourseRegisterRequest courseRegisterRequest;
     private CourseTime courseTime;
     /**
@@ -33,9 +38,10 @@ public class CourseController {
      *
      * @param courseService
      */
-    public CourseController(CourseService courseService, @Qualifier("httpServletRequest") ServletRequest httpServletRequest) {
+    public CourseController(CourseService courseService, @Qualifier("httpServletRequest") ServletRequest httpServletRequest, HttpSession httpSession) {
         this.courseService = courseService;
         this.httpServletRequest = httpServletRequest;
+        this.httpSession = httpSession;
     }
 
     /**
@@ -45,14 +51,6 @@ public class CourseController {
      * @param page  현재 page
      * @return 게시판 목록 페이지 뷰 이름
      */
-//    @GetMapping(value = "list.hm")
-//    public String getCourseList(
-//            @RequestParam(value = "page", defaultValue = "1") int page,
-//            Model model) {
-//        Page<CourseListResponse> courseList = courseService.getCourseList(page);
-//        model.addAttribute("courses", courseList);
-//        return "flone/course-list";
-//    }
 
     @GetMapping(value = "list.hm")
     public String getCourseListByCategory(@RequestParam (name ="category", defaultValue = "default") String category,
@@ -61,7 +59,7 @@ public class CourseController {
                                           @RequestParam (name ="grade", required = false) String grade,
                                           @RequestParam (value = "page", defaultValue = "1") int page,
                                           Model model){
-        System.out.println("category check: " + category);
+
 
         if (category.equals("default")) {
             Page<CourseListResponse> courseList = courseService.getCourseList(page);
@@ -103,8 +101,6 @@ public class CourseController {
      */
     @GetMapping(value = "register.hm")
     public String getCourseRegisterPage(Model model, final HttpServletRequest request) {
-        String id = request.getSession().getId();
-        System.out.println("idvalue: "+id);
         return "flone/course-register";
     }
 
@@ -115,7 +111,11 @@ public class CourseController {
      */
     @PostMapping("regist.hm")
     public String postCourseRegister(@ModelAttribute CourseRegisterRequest courseRegisterRequest) {
-//        courseRegisterRequest.setInstructorId();
+        MemberLoginResponse memberLoginResponse = (MemberLoginResponse) httpSession.getAttribute("MEMBER");
+        int memberId = memberLoginResponse.getMemberId();
+        int instructorId = courseService.getInstructorIdByMemberId(memberId);
+
+        courseRegisterRequest.setInstructorId(instructorId);
         courseService.insertCourse(courseRegisterRequest);
         return "redirect:list.hm";
     }

@@ -1,6 +1,6 @@
 package org.hermez.oauth.controller;
 
-import org.hermez.oauth.service.NaverService;
+import org.hermez.oauth.service.SocialService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,17 +10,17 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("flone/oauth")
-public class NaverController {
-    private final NaverService naverOauthService;
+public class SocialController {
+    private final SocialService socialService;
 
-    public NaverController(NaverService naverOauthService) {
-        this.naverOauthService = naverOauthService;
+    public SocialController(SocialService socialService) {
+        this.socialService = socialService;
     }
 
     @GetMapping("naverlogin.hm")
     public String naverLogin(HttpSession session) {
         try {
-            String apiURL = naverOauthService.naverLogin(session);
+            String apiURL = socialService.naverLogin(session);
             return "redirect:" + apiURL; // 네이버 로그인 페이지로 리다이렉트
         } catch (Exception e) {
             e.printStackTrace();
@@ -30,6 +30,12 @@ public class NaverController {
 
     @GetMapping("naverHandle.hm")
     public String naverHandle(@RequestParam("code") String code, @RequestParam("state") String state) {
-        return naverOauthService.naverHandle(code, state);
+        return socialService.naverHandle(code, state);
     }
+
+    @GetMapping("profile.hm")
+    public String getMemberProfile(HttpSession session) {
+        return socialService.naverGetProfile(session);
+    }
+
 }

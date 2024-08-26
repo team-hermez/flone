@@ -2,8 +2,10 @@ package org.hermez.oauth.service.impl;
 
 import org.hermez.instructor.service.InstructorService;
 import org.hermez.member.exception.MemberServiceException;
-import org.hermez.oauth.mapper.NaverMapper;
-import org.hermez.oauth.service.NaverService;
+import org.hermez.member.service.MemberService;
+import org.hermez.oauth.exception.OauthServiceException;
+import org.hermez.oauth.mapper.SocialMapper;
+import org.hermez.oauth.service.SocialService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -11,7 +13,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
@@ -20,12 +21,14 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
 
-import static org.springframework.web.context.request.RequestContextHolder.*;
+import static org.springframework.web.context.request.RequestContextHolder.currentRequestAttributes;
 
 @Service
-public class NaverServiceImpl implements NaverService {
-    private final NaverMapper naverMapper;
+public class SocialServiceImpl implements SocialService {
+    private final SocialMapper socialMapper;
     private final InstructorService instructorService;
+    private final MemberService memberService;
+    private final String API_URL = "https://openapi.naver.com/v1/nid/me";
 
     @Value("${NAVER_CLIENTID}")
     private String NAVER_CLIENTID;
@@ -33,9 +36,10 @@ public class NaverServiceImpl implements NaverService {
     @Value("${NAVER_SECRET}")
     private String NAVER_SECRET;
 
-    public NaverServiceImpl(NaverMapper naverMapper, InstructorService instructorService) {
-        this.naverMapper = naverMapper;
+    public SocialServiceImpl(SocialMapper socialMapper, InstructorService instructorService, MemberService memberService) {
+        this.socialMapper = socialMapper;
         this.instructorService = instructorService;
+        this.memberService = memberService;
     }
 
     public String naverLogin(HttpSession session) {
@@ -58,6 +62,7 @@ public class NaverServiceImpl implements NaverService {
             return "error"; // 에러 발생 시 에러 페이지로 이동
         }
     }
+
 
     @Override
     public String naverHandle(String code, String state) {
@@ -101,38 +106,60 @@ public class NaverServiceImpl implements NaverService {
                 session.setAttribute("accessToken", accessToken);
                 session.setAttribute("refreshToken", refreshToken);
 
-//                System.out.println("selectNaverRefreshToken(refreshToken) = " + selectNaverRefreshToken(refreshToken));
-//
-//                if (selectNaverRefreshToken(refreshToken)) {
-//                    MemberLoginResponse memberLoginResponse = naverOauthMapper.selectNaverlogin(refreshToken);
-//
-//                    Instructor instructor = instructorService.findByMemberLoginResponseId(memberLoginResponse);
-//                    Admin admin = new Admin();
-//
-//                    if (memberLoginResponse.getRoleId() == 1) {
-//                        session.setAttribute("MEMBER", memberLoginResponse);
-//                    } else if (memberLoginResponse.getRoleId() == 2) {
-//                        session.setAttribute("MEMBER", memberLoginResponse);
-//                        session.setAttribute("INSTRUCTOR", instructor);
-//                    } else if (memberLoginResponse.getRoleId() == 3) {
-//                        session.setAttribute("MEMBER", memberLoginResponse);
-//                        session.setAttribute("INSTRUCTOR", instructor);
-//                        session.setAttribute("ADMIN", admin);
-//                    }
-//                    return "redirect:/flone/index.hm";
-//                } else if (!selectNaverRefreshToken(refreshToken)) {
-                    return "redirect:/flone/member/register.hm"; //데베에 없으면 회원가입으로 가도록.
-//                }
+                return naverGetProfile(session);
             }
+        } catch (OauthServiceException e) {
+            throw new OauthServiceException(e.getMessage());
         } catch (Exception e) {
             throw new MemberServiceException("네이버 로그인 중 오류가 발생했습니다.", e);
         }
         return "error";
     }
 
-
     @Override
-    public boolean selectNaverRefreshToken(String refreshToken) {
-        return selectNaverRefreshToken(refreshToken);
+    public String naverGetProfile(HttpSession session) {
+        try {
+            URL url = new URL("https://openapi.naver.com/v1/nid/me");
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Authorization", "Bearer " + session.getAttribute("accessToken"));
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            JSONObject jsonResponse = new JSONObject(response.toString());
+            System.out.println("JSON Response: " + jsonResponse.toString(2)); // Pretty print JSON
+
+            JSONObject responseObject = jsonResponse.getJSONObject("response");
+            String id = responseObject.getString("id");
+            String name = responseObject.getString("name");
+            String email = responseObject.getString("email");
+
+            System.out.println("ID: " + id);
+            System.out.println("Name: " + name);
+            System.out.println("Email: " + email);
+
+            return "redirect:/flone/index.hm";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }
+
+
+
+
+//    @Override
+//    public boolean selectNaverSocialId(String socialLoginId) {
+//        boolean exist = socialMapper.selectNaverSocialId(socialLoginId);
+//        return exist;
+//    }

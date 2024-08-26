@@ -12,6 +12,7 @@ public class CourseManageListResponse {
 
     private int courseId;
     private String gradeName;
+    private String courseTitle;
     private String subjectName;
     private String instructorName;
     private LocalDateTime createdAt;

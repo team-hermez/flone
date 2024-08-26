@@ -6,6 +6,8 @@ import org.hermez.admin.mapper.AdminMapper;
 import org.hermez.admin.service.AdminService;
 import org.hermez.common.page.Page;
 import org.hermez.common.page.PaginationUtil;
+import org.hermez.course.dto.CourseDetailResponse;
+import org.hermez.course.service.CourseService;
 import org.hermez.instructor.dto.InstructorListResponse;
 import org.hermez.instructor.service.InstructorService;
 import org.hermez.member.model.Member;
@@ -19,10 +21,12 @@ public class AdminServiceImpl implements AdminService {
 
     private final AdminMapper adminMapper;
     private final InstructorService instructorService;
+    private final CourseService courseService;
 
-    public AdminServiceImpl(AdminMapper adminMapper, InstructorService instructorService) {
+    public AdminServiceImpl(AdminMapper adminMapper, InstructorService instructorService, CourseService courseService) {
         this.adminMapper = adminMapper;
         this.instructorService = instructorService;
+        this.courseService = courseService;
     }
 
     @Override
@@ -106,5 +110,10 @@ public class AdminServiceImpl implements AdminService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public CourseDetailResponse getCourseDetail(int courseId) {
+        return courseService.courseDetailService(courseId);
     }
 }

@@ -4,6 +4,7 @@ import org.hermez.admin.dto.AdminMainResponse;
 import org.hermez.admin.dto.CourseManageListResponse;
 import org.hermez.admin.dto.InstructorManageListResponse;
 import org.hermez.common.page.Page;
+import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.instructor.dto.InstructorListResponse;
 import org.hermez.member.model.Member;
 
@@ -32,4 +33,6 @@ public interface AdminService {
     Page<InstructorListResponse> getInstructorList(int page);
 
     boolean approveInstructor(int instructorId);
+
+    CourseDetailResponse getCourseDetail(int courseId);
 }

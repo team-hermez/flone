@@ -67,6 +67,7 @@ public interface AdminMapper {
 
     @Select("SELECT " +
             "c.course_id AS courseId, " +
+            "c.title AS courseTitle, " +
             "g.grade_name AS gradeName, " +
             "s.subject_name AS subjectName, " +
             "m.name AS instructorName, " +
@@ -89,6 +90,7 @@ public interface AdminMapper {
 
     @Select("SELECT " +
             "c.course_id AS courseId, " +
+            "c.title AS courseTitle, " +
             "g.grade_name AS gradeName, " +
             "s.subject_name AS subjectName, " +
             "m.name AS instructorName, " +
@@ -110,6 +112,7 @@ public interface AdminMapper {
 
     @Select("SELECT " +
             "c.course_id AS courseId, " +
+            "c.title AS courseTitle, " +
             "g.grade_name AS gradeName, " +
             "s.subject_name AS subjectName, " +
             "m.name AS instructorName, " +

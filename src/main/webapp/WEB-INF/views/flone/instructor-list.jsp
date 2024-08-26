@@ -1,19 +1,19 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!doctype html>
 <html class="no-js" lang="zxx">
 
 <head>
-    <%@ include file="css.jsp"%>
+    <%@ include file="css.jsp" %>
     <style>
         .row .billing-info-wrap {
             flex-shrink: 0;
             width: 7.7%;
             bottom: 33.5px;
             max-width: 100%;
-            padding-right: calc(var(--bs-gutter-x)* .5);
-            padding-left: calc(var(--bs-gutter-x)* .5);
+            padding-right: calc(var(--bs-gutter-x) * .5);
+            padding-left: calc(var(--bs-gutter-x) * .5);
             margin-top: var(--bs-gutter-y);
         }
 
@@ -37,7 +37,7 @@
                 <li>
                     <a href="index.html">Home</a>
                 </li>
-                <li class="active">About us </li>
+                <li class="active">About us</li>
             </ul>
         </div>
     </div>
@@ -50,23 +50,26 @@
             <p>완전 짱짱 강사진들</p>
         </div>
         <div class="row">
-            <c:forEach var ="instructors" items="${instructors.contents}">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="team-wrapper mb-30">
-                    <div class="team-img">
-                        <a href="/flone/instructor/detail.hm?instructorId=${instructors.instructorId}">
-                            <img src="/assets/img/team/team-1.jpg" href="/flone/instructor/detail.hm?instructorId=${instructors.instructorId}">
-                        </a>
-                    </div>
-                    <div class="team-content text-center">
-                        <h4>${instructors.name}</h4>
-                        <span>${instructors.instructorTitle} </span>
+            <c:forEach var="instructors" items="${instructors.contents}">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="team-wrapper mb-30">
+                        <div class="team-img">
+                            <a href="/flone/instructor/detail.hm?instructorId=${instructors.instructorId}">
+                                <img src="../../../../images/${instructors.saveImage}"
+                                     href="/flone/instructor/detail.hm?instructorId=${instructors.instructorId}"
+                                     onerror="this.onerror=null; this.src='../../../../images/image.png';">
+                            </a>
+                        </div>
+                        <div class="team-content text-center">
+                            <h4>${instructors.name}</h4>
+                            <span>${instructors.instructorTitle} </span>
+                        </div>
                     </div>
                 </div>
-            </div>
-                <div class = "billing-info-wrap">
+                <div class="billing-info-wrap">
                     <div class="checkout-account-toggle open-toggle2 mb-30">
-                        <button class="btn-hover checkout-btn" type="button" onclick="location.href = '/flone/instructor/register.hm'"><span>register</span></button>
+                        <button class="btn-hover checkout-btn" type="button"
+                                onclick="location.href = '/flone/instructor/register.hm'"><span>register</span></button>
                     </div>
                 </div>
             </c:forEach>
@@ -76,7 +79,8 @@
                 <%--                        Prev Page--%>
                 <c:choose>
                     <c:when test="${instructors.currentPage > 1}">
-                        <li><a class="prev" href="?page=${instructors.currentPage - 1}"><i class="fa fa-angle-double-left"></i></a></li>
+                        <li><a class="prev" href="?page=${instructors.currentPage - 1}"><i
+                                class="fa fa-angle-double-left"></i></a></li>
                     </c:when>
                     <c:otherwise>
                         <li><a class="prev" href="#"><i class="fa fa-angle-double-left"></i></a></li>
@@ -96,7 +100,8 @@
                 <%--                        Next Page--%>
                 <c:choose>
                     <c:when test="${instructors.currentPage<instructors.totalPages}">
-                        <li><a class="next" href="?page=${instructors.currentPage + 1}"><i class="fa fa-angle-double-right"></i></a></li>
+                        <li><a class="next" href="?page=${instructors.currentPage + 1}"><i
+                                class="fa fa-angle-double-right"></i></a></li>
                     </c:when>
                     <c:otherwise>
                         <li><a class="next" href="#"><i class="fa fa-angle-double-right"></i></a></li>
@@ -133,7 +138,7 @@
 <!-- All JS is here
 ============================================ -->
 
-<%@ include file="script.jsp"%>
+<%@ include file="script.jsp" %>
 
 </body>
 

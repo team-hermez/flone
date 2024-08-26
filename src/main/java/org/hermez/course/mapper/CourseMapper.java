@@ -43,6 +43,13 @@ public interface CourseMapper {
     @Select("select COUNT(*) from course")
     int courseCount();
 
+    /**
+     * 같은 과목명을 가진 강의를 조회합니다.
+     * @param subject
+     * @param offset
+     * @param itemsPerPage
+     * @return subject가 같은 강의
+     */
     @Select("select " +
             "c.course_id as courseId," +
             "start_date as startDate, " +
@@ -54,13 +61,18 @@ public interface CourseMapper {
             "left join member m on (i.member_id = m.member_id) \n" +
             "left join image img on (img.entity_id = c.course_id) \n" +
             "left join subject s on (i.subject_id = s.subject_id) " +
-            "where s.subject_name = #{subject} "+
+            "where s.subject_name like #{subject} "+
             "order by c.start_date desc " +
             "limit #{offset}, #{itemsPerPage}")
     List<CourseListResponse> getCourseListBySubject(@Param("subject") String subject,
                                                     @Param("offset") int offset,
                                                     @Param("itemsPerPage") int itemsPerPage);
 
+    /**
+     * subject가 동일한 강의의 갯수를 조회합니다.
+     * @param subject
+     * @return subject가 같은 강의의 수
+     */
     @Select("select count(*) " +
             "from course c left join instructor i on (i.instructor_id = c.instructor_id) \n"+
             "left join member m on (i.member_id = m.member_id) \n" +
@@ -69,6 +81,13 @@ public interface CourseMapper {
             "where s.subject_name like #{subject} ")
     int getCourseCountBySubject(@Param("subject") String subject);
 
+    /**
+     * 강사명이 같은 내용을 조회합니다.
+     * @param instructorName
+     * @param offset
+     * @param itemsPerPage
+     * @return instructorName이 같은 강의
+     */
     @Select("select " +
             "c.course_id as courseId," +
             "start_date as startDate, " +
@@ -86,12 +105,24 @@ public interface CourseMapper {
                                                  @Param("offset") int offset,
                                                  @Param("itemsPerPage") int itemsPerPage);
 
+    /**
+     * 강사명이 같은 강의의 갯수를 조회합니다.
+     * @param instructorName
+     * @return 강사명이 같은 강의의 수
+     */
     @Select("select count(*) from course c " +
             "left join instructor i on (c.instructor_id = i.instructor_id) \n" +
             "left join member m on (i.member_id = m.member_id) \n" +
             "where m.name like #{instructorName}")
     int getCourseCountByName(@Param("instructorName") String instructorName);
 
+    /**
+     * 교과과정이 같은 강의를 조회합니다.
+     * @param grade
+     * @param offset
+     * @param itemsPerPage
+     * @return grade가 같은 강의
+     */
     @Select("select " +
             "c.course_id as courseId," +
             "start_date as startDate, " +
@@ -110,6 +141,11 @@ public interface CourseMapper {
                                                   @Param("offset") int offset,
                                                   @Param("itemsPerPage") int itemsPerPage);
 
+    /**
+     * 교과 과정이 같은 강의의 갯수를 조회합니다.
+     * @param grade
+     * @return 교과 과정이 같은 강의의 수
+     */
     @Select("select count(*) " +
             "from course c left join instructor i on (i.instructor_id = c.instructor_id) \n"+
             "left join member m on (i.member_id = m.member_id) \n" +
@@ -141,6 +177,11 @@ public interface CourseMapper {
             "where c.course_id = #{courseId}")
     CourseDetailResponse courseDetailResponse(int courseId);
 
+    /**
+     * 강사 이름이 같은 강의를 조회합니다
+     * @param instructorName
+     * @return 강사 이름이 같은 강의
+     */
     @Select("select " +
             "c.course_id as courseId," +
             "c.course_price as coursePrice," +
@@ -154,7 +195,7 @@ public interface CourseMapper {
             "left join image img on (img.entity_id = c.course_id) \n" +
             "where m.name = #{instructorName} "+
             "order by c.start_date desc " +
-            "limit 0, 4")
+            "limit 0, 10")
     List<CourseListResponse> courseListByInstructor(@Param("instructorName") String instructorName);
 
     /**
@@ -166,13 +207,18 @@ public interface CourseMapper {
     @Select("select course_id as courseId, day_of_week as dayOfWeek, start_time as startTime, end_time as endTime from course_schedule where course_id = #{courseId}")
     List<CourseTime> courseDetailTime(int courseId);
 
+    @Select("select i.instructor_id as instructorId from instructor i " +
+            "left join member m on (i.member_id = m.member_id) " +
+            "where (m.member_id = #{memberId} and role_id = 2)")
+    int getInstructorIdByMemberId(@Param("memberId") int memberId);
+
     /**
      * 신규 강의를 등록하는 Mapper입니다.
      *
      * @param courseRegisterRequest
      */
     @Insert("insert into course(instructor_id, grade_id, title, created_at, updated_at, description, start_date, end_date, course_price)" +
-            " values(1,#{gradeId},#{title},now(),now(),#{description},#{startDate},#{endDate},#{coursePrice})")
+            "values(#{instructorId},#{gradeId},#{title},now(),now(),#{description},#{startDate},#{endDate},#{coursePrice})")
     @Options(useGeneratedKeys = true, keyProperty = "courseId")
     void insertCourse(CourseRegisterRequest courseRegisterRequest);
 

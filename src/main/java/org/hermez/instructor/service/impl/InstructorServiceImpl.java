@@ -31,7 +31,7 @@ public class InstructorServiceImpl implements InstructorService {
     @Override
     public Page<InstructorListResponse> selectInstructorList(int page) {
         int total = instructorMapper.instructorCount();
-        PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total, 4, page);
+        PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total, 8, page);
         List<InstructorListResponse> instructors = instructorMapper.selectInstructorList(pageInfo.getOffset(), pageInfo.getItemsPerPage());
         return new Page<>(instructors, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
     }

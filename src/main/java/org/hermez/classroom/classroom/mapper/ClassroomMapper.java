@@ -30,7 +30,7 @@ public interface ClassroomMapper {
             "FROM classroom c " +
             "LEFT JOIN image i ON c.classroom_id = i.entity_id " +
             "WHERE c.course_id = #{courseId} " +
-            "AND i.entity_type = 'classroom' " +
+            "AND i.entity_type = 'CLASSROOM' " +
             "ORDER BY c.created_at DESC " +
             "LIMIT #{offset}, #{itemsPerPage}")
     List<ClassroomCardResponse> selectClassroomList(@Param("courseId") int courseId, @Param("offset") int offset, @Param("itemsPerPage") int itemPerPage);
@@ -73,4 +73,7 @@ public interface ClassroomMapper {
      */
     @Delete("DELETE FROM classroom WHERE CLASSROOM_ID = #{classroomId}")
     int deleteClassroomById(@Param("classroomId") int classroomId);
+
+    @Select("SELECT COUNT(*) FROM CLASSROOM")
+    int selectCountAll();
 }

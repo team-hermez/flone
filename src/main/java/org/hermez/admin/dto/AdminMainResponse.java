@@ -9,4 +9,7 @@ public class AdminMainResponse {
     int DailySignUpCount;
     int MonthlySignUpCount;
     int TotalSignUpCount;
+    int TotalClassroomCount;
+    int TotalInstructorCount;
+    int TotalCourseCount;
 }

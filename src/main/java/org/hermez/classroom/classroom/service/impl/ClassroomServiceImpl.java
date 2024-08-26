@@ -80,4 +80,8 @@ public class ClassroomServiceImpl implements ClassroomService {
             throw new ClassroomNotFoundException("삭제할 강의실이 존재하지 않습니다. ID: " + classroomId);
         }
     }
+
+    public int getTotalClassroomCount(){
+        return classroomMapper.selectCountAll();
+    }
 }

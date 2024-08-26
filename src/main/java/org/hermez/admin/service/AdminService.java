@@ -7,6 +7,7 @@ import org.hermez.common.page.Page;
 import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.instructor.dto.InstructorListResponse;
 import org.hermez.member.model.Member;
+import org.hermez.reservation.dto.ReservationListResponse;
 
 public interface AdminService {
 
@@ -33,4 +34,8 @@ public interface AdminService {
     boolean approveInstructor(int instructorId);
 
     CourseDetailResponse getCourseDetail(int courseId);
+
+    Page<ReservationListResponse> getReservationListAll(int page);
+
+    Page<ReservationListResponse> getRefundListAll(int page);
 }

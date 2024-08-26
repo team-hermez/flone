@@ -33,4 +33,6 @@ public interface ClassroomService {
      * @param classroomId 삭제할 강의룸의 고유 ID
      */
     void deleteClassroom(int classroomId);
+
+    int getTotalClassroomCount();
 }

@@ -85,14 +85,23 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<CourseManageListResponse> getCourseManageList(int type) {
+    public Page<CourseManageListResponse> getCourseManageList(int type, int page) {
         if (type == 1) {
-            return adminMapper.getReservationCourses();
+            int total = adminMapper.selectTotalRequestRegisterCount();
+            PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total, 10, page);
+            List<CourseManageListResponse> courseManageListResponse = adminMapper.getReservationCourses(pageInfo.getOffset(), pageInfo.getItemsPerPage());
+            return new Page<>(courseManageListResponse, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
         }
         if (type == 2) {
-            return adminMapper.getProgressCourses();
+            int total = adminMapper.selectTotalCountProgressCourse();
+            PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total, 10, page);
+            List<CourseManageListResponse> courseManageListResponse = adminMapper.getProgressCourses(pageInfo.getOffset(), pageInfo.getItemsPerPage());
+            return new Page<>(courseManageListResponse, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
         }
-        return adminMapper.getFinishedCourses();
+        int total = adminMapper.selectTotalCountFinishedCourse();
+        PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total, 10, page);
+        List<CourseManageListResponse> courseManageListResponse = adminMapper.getFinishedCourses(pageInfo.getOffset(), pageInfo.getItemsPerPage());
+        return new Page<>(courseManageListResponse, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
     }
 
     @Override

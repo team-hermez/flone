@@ -35,8 +35,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="course" items="${courses}">
-                            <tr>
+                        <c:forEach var="course" items="${courses.contents}">
+                            <tr onclick="window.location.href='/flone/admin/course/manage-course-detail.hm?courseId=${course.courseId}'" style="cursor:pointer;">
                                 <td class="product-name">${course.courseId}</td>
                                 <td class="product-name">${course.gradeName}</td>
                                 <td class="product-name">${course.subjectName}</td>
@@ -51,6 +51,38 @@
                         </c:forEach>
                         </tbody>
                     </table>
+                </div>
+                <div class="pro-pagination-style text-center mt-20">
+                    <ul>
+                        <c:choose>
+                            <c:when test="${courses.currentPage > 1}">
+                                <li><a class="prev" href="?page=${courses.currentPage - 1}"><i
+                                        class="fa fa-angle-double-left"></i></a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li><a class="prev" href="#"><i class="fa fa-angle-double-left"></i></a></li>
+                            </c:otherwise>
+                        </c:choose>
+                        <c:forEach begin="1" end="${courses.totalPages}" var="pageNum">
+                            <c:choose>
+                                <c:when test="${pageNum == courses.currentPage}">
+                                    <li><a class="active" href="#">${pageNum}</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a href="?page=${pageNum}">${pageNum}</a></li>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                        <c:choose>
+                            <c:when test="${courses.currentPage < courses.totalPages}">
+                                <li><a class="next" href="?page=${courses.currentPage + 1}"><i
+                                        class="fa fa-angle-double-right"></i></a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li><a class="next" href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </ul>
                 </div>
             </div>
         </div>

@@ -86,7 +86,7 @@
                         <li><a href="/flone/admin/instructor/request-register.hm">강사 등록 요청</a></li>
                     </ul>
                 </li>
-                <li><a href="/flone/admin/manage-course.hm"> 강의관리<span><i class="fa fa-angle-right"></i></span></a>
+                <li><a href="/flone/admin/course/manage-course.hm?type=1"> 강의관리<span><i class="fa fa-angle-right"></i></span></a>
                     <ul class="submenu">
                         <li><a href="/flone/admin/course/manage-course.hm?type=1">예약중 강의</a></li>
                         <li><a href="/flone/admin/course/manage-course.hm?type=2">진행중 강의</a></li>

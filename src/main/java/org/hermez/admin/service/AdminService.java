@@ -8,8 +8,6 @@ import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.instructor.dto.InstructorListResponse;
 import org.hermez.member.model.Member;
 
-import java.util.List;
-
 public interface AdminService {
 
     AdminMainResponse getAdminMain();
@@ -28,7 +26,7 @@ public interface AdminService {
 
     Page<InstructorManageListResponse> getInstructorManageList(int page);
 
-    List<CourseManageListResponse> getCourseManageList(int type);
+    Page<CourseManageListResponse> getCourseManageList(int type,int page);
 
     Page<InstructorListResponse> getInstructorList(int page);
 

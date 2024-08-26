@@ -59,87 +59,55 @@
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <div class="billing-select mb-20">
-                                    <label>강의 요일</label>
-                                    <select name="courseTimes[0].dayOfWeek">
-                                        <option id="monday" value="monday">월요일</option>
-                                        <option id="tuesday" value="tuesday">화요일</option>
-                                        <option id="wednesday" value="wednesday">수요일</option>
-                                        <option id="thursday" value="thursday">목요일</option>
-                                        <option id="friday" value="friday">금요일</option>
-                                    </select>
-                                </div>
-                                <%--                        <div class="col-lg-12">--%>
-                                <div class="billing-select mb-20">
-                                    <label>시작시간</label>
-                                    <select name="courseTimes[0].startTime">
-                                        <option id="start09:00" value="09:00">오전 09:00</option>
-                                        <option id="start10:00" value="10:00">오전 10:00</option>
-                                        <option id="start11:00" value="11:00">오전 11:00</option>
-                                        <option id="start13:00" value="13:00">오후 13:00</option>
-                                        <option id="start14:00" value="14:00">오후 14:00</option>
-                                        <option id="start15:00" value="15:00">오후 15:00</option>
-                                        <option id="start16:00" value="16:00">오후 16:00</option>
-                                        <option id="start17:00" value="17:00">오후 17:00</option>
-                                    </select>
-                                </div>
-                                <div class="billing-select mb-20">
-                                    <label>종료시간</label>
-                                    <select name="courseTimes[0].endTime">
-                                        <option id="endTime10:00" value="10:00">오전 10:00</option>
-                                        <option id="endTime11:00" value="11:00">오전 11:00</option>
-                                        <option id="endTime12:00" value="12:00">오후 12:00</option>
-                                        <option id="endTime14:00" value="14:00">오후 14:00</option>
-                                        <option id="endTime15:00" value="15:00">오후 15:00</option>
-                                        <option id="endTime16:00" value="16:00">오후 16:00</option>
-                                        <option id="endTime17:00" value="17:00">오후 17:00</option>
-                                        <option id="endTime18:00" value="18:00">오후 18:00</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="billing-select mb-20">
-                                    <label>강의 요일</label>
-                                    <select name="courseTimes[1].dayOfWeek">
-                                        <option value="monday">월요일</option>
-                                        <option value="tuesday">화요일</option>
-                                        <option value="wednesday">수요일</option>
-                                        <option value="thursday">목요일</option>
-                                        <option value="friday">금요일</option>
-                                    </select>
-                                </div>
-                                <%--                        <div class="col-lg-12">--%>
-                                <div class="billing-select mb-20">
-                                    <label>시작시간</label>
-                                    <select name="courseTimes[1].startTime">
-                                        <option value="09:00">오전 09:00</option>
-                                        <option value="10:00">오전 10:00</option>
-                                        <option value="11:00">오전 11:00</option>
-                                        <option value="13:00">오후 13:00</option>
-                                        <option value="14:00">오후 14:00</option>
-                                        <option value="15:00">오후 15:00</option>
-                                        <option value="16:00">오후 16:00</option>
-                                        <option value="17:00">오후 17:00</option>
-                                    </select>
-                                </div>
-                                <div class="billing-select mb-20">
-                                    <label>종료시간</label>
-                                    <select name="courseTimes[1].endTime">
-                                        <option value="10:00">오전 10:00</option>
-                                        <option value="11:00">오전 11:00</option>
-                                        <option value="12:00">오후 12:00</option>
-                                        <option value="14:00">오후 14:00</option>
-                                        <option value="15:00">오후 15:00</option>
-                                        <option value="16:00">오후 16:00</option>
-                                        <option value="17:00">오후 17:00</option>
-                                        <option value="18:00">오후 18:00</option>
-                                    </select>
+                                <div id = "course-container">
+                                    <div class="course=time" id="initial-course-time">
+                                        <div class="billing-select mb-20">
+                                            <label>강의 요일</label>
+                                            <select name="courseTimes[0].dayOfWeek">
+                                                <option id="monday" value="monday">월요일</option>
+                                                <option id="tuesday" value="tuesday">화요일</option>
+                                                <option id="wednesday" value="wednesday">수요일</option>
+                                                <option id="thursday" value="thursday">목요일</option>
+                                                <option id="friday" value="friday">금요일</option>
+                                            </select>
+                                        </div>
+                                        <%--                        <div class="col-lg-12">--%>
+                                        <div class="billing-select mb-20">
+                                            <label>시작시간</label>
+                                            <select name="courseTimes[0].startTime">
+                                                <option id="start09:00" value="09:00">오전 09:00</option>
+                                                <option id="start10:00" value="10:00">오전 10:00</option>
+                                                <option id="start11:00" value="11:00">오전 11:00</option>
+                                                <option id="start13:00" value="13:00">오후 13:00</option>
+                                                <option id="start14:00" value="14:00">오후 14:00</option>
+                                                <option id="start15:00" value="15:00">오후 15:00</option>
+                                                <option id="start16:00" value="16:00">오후 16:00</option>
+                                                <option id="start17:00" value="17:00">오후 17:00</option>
+                                            </select>
+                                        </div>
+                                        <div class="billing-select mb-20">
+                                            <label>종료시간</label>
+                                            <select name="courseTimes[0].endTime">
+                                                <option id="endTime10:00" value="10:00">오전 10:00</option>
+                                                <option id="endTime11:00" value="11:00">오전 11:00</option>
+                                                <option id="endTime12:00" value="12:00">오후 12:00</option>
+                                                <option id="endTime14:00" value="14:00">오후 14:00</option>
+                                                <option id="endTime15:00" value="15:00">오후 15:00</option>
+                                                <option id="endTime16:00" value="16:00">오후 16:00</option>
+                                                <option id="endTime17:00" value="17:00">오후 17:00</option>
+                                                <option id="endTime18:00" value="18:00">오후 18:00</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+                        </div>
+                        <div class="checkout-account-toggle open-toggle2 mb-30">
+                            <button id = "add-select" type = "button" onclick="addSelect()">Add Select</button>
+                            <button id="remove-select" type = "button">Remove Select</button>
+                        </div>
+                        <div class="col-lg-12">
                                 <div class="billing-info mt-15">
-<%--                                    <label>이미지 등록</label>--%>
-<%--                                    <input type="file">--%>
                                     <label for="formFile" class="form-label">사진 등록</label>
                                     <input class="form-control" type="file" id="formFile" name="imageFile" accept=".jpg, .jpeg, .png">
                                 </div>
@@ -156,18 +124,17 @@
                                     <input type="date" name="endDate">
                                 </div>
                             </div>
-                        </div>
                         <div class="checkout-account-toggle open-toggle2 mb-30">
                             <button class="btn-hover checkout-btn" type="submit">register</button>
                         </div>
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
 
+<script src ="/resources/assets/js/addselect.js"></script>
 <%@ include file="footer.jsp" %>
 <%@ include file="css.jsp" %>
 </body>

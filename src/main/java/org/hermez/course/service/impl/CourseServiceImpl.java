@@ -1,6 +1,7 @@
 package org.hermez.course.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.hermez.common.page.Page;
 import org.hermez.common.page.PaginationUtil;
 import org.hermez.course.dto.CourseDetailResponse;
@@ -49,14 +50,14 @@ public class CourseServiceImpl implements CourseService {
         List<CourseListResponse> courses = courseMapper.courseAllList(pageInfo.getOffset(), pageInfo.getItemsPerPage());
         return new Page<>(courses, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Page<CourseListResponse> getCourseListByCategory(String category, String subject, String instructorName, String grade, int page){
-        System.out.println("subject: " + subject);
-        System.out.println("instructorName: " + instructorName);
-        System.out.println("grade: " + grade);
         if(category.equals("instructorName"))
             System.out.println("교사명");
-
 
         if(category.equals("subject")) {
             int total = courseMapper.getCourseCountBySubject(subject);
@@ -92,21 +93,24 @@ public class CourseServiceImpl implements CourseService {
         return courseMapper.courseDetailTime(courseId);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public List<CourseListResponse> getCourseListByInstructor(String instructorName) {
+    public List<CourseListResponse> getCourseListByInstructor (String instructorName){
         return courseMapper.courseListByInstructor(instructorName);
+    }
+
+    @Override
+    public int getInstructorIdByMemberId(int memberId){
+        return courseMapper.getInstructorIdByMemberId(memberId);
     }
 
     /**
      * {@inheritDoc}
      */
-    @Transactional
     @Override
     public void insertCourse(CourseRegisterRequest courseRegisterRequest) {
-        System.out.println(courseRegisterRequest.getCourseId());
+        courseMapper.insertCourse(courseRegisterRequest);
+        int courseId = courseRegisterRequest.getCourseId();
+
         RegisterImageRequest imageRequest = new RegisterImageRequest();
         imageRequest.setEntityId(courseRegisterRequest.getCourseId());
         imageRequest.setEntityType("COURSE");
@@ -118,8 +122,7 @@ public class CourseServiceImpl implements CourseService {
         } catch (Exception e) {
             throw new RuntimeException("강의 등록 중 알 수 없는 오류가 발생했습니다.", e);
         }
-        courseMapper.insertCourse(courseRegisterRequest);
-        int courseId = courseRegisterRequest.getCourseId();
+
         List<CourseTime> courseTimes = courseRegisterRequest.getCourseTimes();
         for (CourseTime item : courseTimes) {
             item.setCourseId(courseId);

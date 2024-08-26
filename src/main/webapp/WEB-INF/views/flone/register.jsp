@@ -126,16 +126,16 @@
                                     <h5>비밀번호</h5>
                                     <div class="form-group">
                                         <div style="position: relative;">
-                                            <form:input type="password" id="password" path="password" placeholder="비밀번호"
+                                            <form:input type="encodedPassword" id="encodedPassword" path="encodedPassword" placeholder="비밀번호"
                                                         style="padding-right: 40px;"/>
                                             <button type="button"
-                                                    onclick="toggleVisibilitySelectorPassword('#password', '#iconPassword')"
+                                                    onclick="toggleVisibilitySelectorPassword('#encodedPassword', '#iconPassword')"
                                                     style="position: absolute; right: 10px; top: 35%; transform: translateY(-50%); background: none; border: none; cursor: pointer; padding: 0; font-size: 16px;">
                                                 <i id="iconPassword" class="fa fa-eye-slash"
                                                    style="font-size: 18px; color: #6c757d;"></i>
                                             </button>
                                             <div class="error-container">
-                                                <form:errors path="password" cssClass="error"/>
+                                                <form:errors path="encodedPassword" cssClass="error"/>
                                             </div>
                                         </div>
                                     </div>

@@ -12,4 +12,7 @@ public class MemberLoginRequest {
         this.email = email;
         this.password = password;
     }
+    public MemberLoginRequest(String email) {
+        this.email = email;
+    }
 }

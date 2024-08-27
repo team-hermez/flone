@@ -11,7 +11,9 @@ import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.course.service.CourseService;
 import org.hermez.instructor.dto.InstructorListResponse;
 import org.hermez.instructor.service.InstructorService;
+import org.hermez.member.dto.MyAccountResponse;
 import org.hermez.member.model.Member;
+import org.hermez.member.service.MemberService;
 import org.hermez.reservation.dto.ReservationListResponse;
 import org.hermez.reservation.service.ReservationService;
 import org.springframework.stereotype.Service;
@@ -27,13 +29,15 @@ public class AdminServiceImpl implements AdminService {
     private final CourseService courseService;
     private final ReservationService reservationService;
     private final ClassroomService classroomService;
+    private final MemberService memberService;
 
-    public AdminServiceImpl(AdminMapper adminMapper, InstructorService instructorService, CourseService courseService, ReservationService reservationService, ClassroomService classroomService) {
+    public AdminServiceImpl(AdminMapper adminMapper, InstructorService instructorService, CourseService courseService, ReservationService reservationService, ClassroomService classroomService, MemberService memberService) {
         this.adminMapper = adminMapper;
         this.instructorService = instructorService;
         this.courseService = courseService;
         this.reservationService = reservationService;
         this.classroomService = classroomService;
+        this.memberService = memberService;
     }
 
     @Override
@@ -43,6 +47,9 @@ public class AdminServiceImpl implements AdminService {
         adminMainResponse.setMonthlySignUpCount(adminMapper.getMonthlySignUpCount());
         adminMainResponse.setTotalSignUpCount(adminMapper.getTotalSignUpCount());
         adminMainResponse.setTotalClassroomCount(classroomService.getTotalClassroomCount());
+        adminMainResponse.setTotalInstructorCount(instructorService.instructorsCount());
+        adminMainResponse.setTotalCourseCount(courseService.getAllCourseCount());
+
         return adminMainResponse;
     }
 
@@ -142,5 +149,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Page<ReservationListResponse> getRefundListAll(int page){
         return reservationService.getRefundListAll(page);
+    }
+
+    @Override
+    public MyAccountResponse getMemberDetail(int memberId){
+        return memberService.getMyAccount(memberId);
     }
 }

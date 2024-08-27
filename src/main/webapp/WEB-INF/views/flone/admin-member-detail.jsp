@@ -15,7 +15,7 @@
 <div class="home-sidebar-right">
     <div class="container-fluid mt-5">
         <div class="section-title text-center">
-            <h2>관리자</h2>
+            <h2>회원 상세</h2>
         </div>
         <div class="row mt-5">
             <div class="col-md-5 card">

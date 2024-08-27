@@ -30,7 +30,6 @@
                     <table>
                         <thead>
                         <tr>
-                            <th>프로필</th>
                             <th>회원번호</th>
                             <th>이름</th>
                             <th>이메일</th>
@@ -41,11 +40,7 @@
                         </thead>
                         <tbody>
                         <c:forEach var="member" items="${memberPage.contents}">
-                            <tr>
-                                <td class="product-thumbnail">
-                                    <a href="#"><img src="../../../resources/images/no_profile.png"
-                                                     width="100px"></a>
-                                </td>
+                            <tr onclick="window.location.href='/flone/admin/member/member-detail.hm?memberId=${member.memberId}'" style="cursor:pointer;">
                                 <td class="product-name"><a href="#">${member.memberId}</a></td>
                                 <td class="product-name"><a href="#">${member.name}</a></td>
                                 <td class="product-name"><a href="#">${member.email}</a></td>

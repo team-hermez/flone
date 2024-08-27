@@ -99,6 +99,11 @@ public class ReservationServiceImpl implements ReservationService {
   }
 
   @Override
+  public Page<ReservationListResponse> getReservationListAllByCourseId(int courseId, int page) {
+    return reservationRepository.selectReservationListAllByCourseId(courseId, page);
+  }
+
+  @Override
   public Page<ReservationListResponse> getRefundListAll(int page) {
     return reservationRepository.getRefundListAll(page);
   }

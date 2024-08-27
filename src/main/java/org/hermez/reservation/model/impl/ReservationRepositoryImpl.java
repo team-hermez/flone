@@ -89,6 +89,14 @@ public class ReservationRepositoryImpl implements ReservationRepository {
   }
 
   @Override
+  public Page<ReservationListResponse> selectReservationListAllByCourseId(int courseId, int page) {
+    int total = reservationMapper.countReservationsAllByCourseId(courseId);
+    PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total,10,page);
+    List<ReservationListResponse> reservationAll = reservationMapper.selectReservationListAll(pageInfo.getOffset(),pageInfo.getItemsPerPage());
+    return new Page<>(reservationAll, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
+  }
+
+  @Override
   public Page<ReservationListResponse> getRefundListAll(int page) {
     int total = reservationMapper.countRefundAll();
     PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total,5,page);

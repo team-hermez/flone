@@ -31,7 +31,12 @@ public interface ReservationService {
 
   Page<ReservationListResponse> getReservationListAll(int page);
 
+  Page<ReservationListResponse> getReservationListAllByCourseId(int courseId,int page);
+
   Page<ReservationListResponse> getRefundListAll(int page);
+
+
+
 
 
 }

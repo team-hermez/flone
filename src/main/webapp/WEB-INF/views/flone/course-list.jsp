@@ -66,12 +66,13 @@
 <%--                        Prev Page--%>
                         <c:choose>
                             <c:when test="${courses.currentPage > 1}">
-                                <li><a class="prev" href="?page=${courses.currentPage - 1}"><i class="fa fa-angle-double-left"></i></a></li>
+                                <li><a class="prev" href="?category=${param.category}&${param.category}=${param.subject}${param.name}${param.grade}&page=${course.currentPage - 1}"><i class="fa fa-angle-double-left"></i></a></li>
                             </c:when>
                             <c:otherwise>
                                 <li><a class="prev" href="#"><i class="fa fa-angle-double-left"></i></a></li>
                             </c:otherwise>
                         </c:choose>
+
 <%--                        Current Page--%>
                         <c:forEach begin="1" end="${courses.totalPages}" var="pageNum">
                             <c:choose>
@@ -79,14 +80,15 @@
                                     <li><a class="active" href="#">${pageNum}</a></li>
                                 </c:when>
                                 <c:otherwise>
-                                    <li><a href="?page=${pageNum}">${pageNum}</a></li>
+                                    <li><a href="?category=${param.category}&${param.category}=${param.subject}${param.name}${param.grade}&page=${pageNum}">${pageNum}</a></li>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
+
 <%--                        Next Page--%>
                         <c:choose>
                             <c:when test="${courses.currentPage < courses.totalPages}">
-                                <li><a class="next" href="?page=${courses.currentPage + 1}"><i class="fa fa-angle-double-right"></i></a></li>
+                                <li><a class="next" href="?category=${param.category}&${param.category}=${param.subject}${param.name}${param.grade}&page=${courses.currentPage + 1}&category=${course.category}"><i class="fa fa-angle-double-right"></i></a></li>
                             </c:when>
                             <c:otherwise>
                                 <li><a class="next" href="#"><i class="fa fa-angle-double-right"></i></a></li>
@@ -104,3 +106,5 @@
 </body>
 
 </html>
+
+&category=${courses.category}&subject=${courses.subject}&name=${courses.instuctorName}&grade${courses.grade}

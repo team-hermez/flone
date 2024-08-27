@@ -32,16 +32,16 @@ public class Member {
         this.phone = phone;
         this.createdAt = createdAt;
     }
-//    public Member(int memberId, int roleId, String email, String encodedPassword, String name, String phone, int memberStatus, LocalDateTime createdAt) {
-//        this.memberId = memberId;
-//        this.roleId = roleId;
-//        this.name = name;
-//        this.email = email;
-//        this.memberStatus = memberStatus;
-//        this.encodedPassword = encodedPassword;
-//        this.phone = phone;
-//        this.createdAt = createdAt;
-//    }
+    public Member(int memberId, int roleId, String email, String encodedPassword, String name, String phone, int memberStatus, LocalDateTime createdAt) {
+        this.memberId = memberId;
+        this.roleId = roleId;
+        this.name = name;
+        this.email = email;
+        this.memberStatus = memberStatus;
+        this.encodedPassword = encodedPassword;
+        this.phone = phone;
+        this.createdAt = createdAt;
+    }
 
 }
 

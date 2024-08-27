@@ -48,7 +48,6 @@ public class InstructorController {
         HttpSession session = httpRequest.getSession(false);
         MemberLoginResponse member = (MemberLoginResponse) session.getAttribute("MEMBER");
         instructorRegisterRequest.setMemberId(member.getMemberId());
-        instructorRegisterRequest.setMemberId(member.getMemberId());
         instructorService.insertInstructor(instructorRegisterRequest);
         return "redirect:/flone/instructor/list.hm";
     }

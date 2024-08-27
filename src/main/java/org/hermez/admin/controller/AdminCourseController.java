@@ -23,6 +23,7 @@ public class AdminCourseController {
     @GetMapping("manage-course.hm")
     public String getManageCoursePage(Model model, @RequestParam("type") int type, @RequestParam(value = "page", defaultValue = "1") int page) {
         Page<CourseManageListResponse> courses = adminService.getCourseManageList(type, page);
+        model.addAttribute("type", type);
         model.addAttribute("courses", courses);
 
         return "flone/admin-course";

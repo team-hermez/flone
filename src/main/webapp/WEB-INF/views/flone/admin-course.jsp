@@ -56,7 +56,7 @@
                     <ul>
                         <c:choose>
                             <c:when test="${courses.currentPage > 1}">
-                                <li><a class="prev" href="?page=${courses.currentPage - 1}"><i
+                                <li><a class="prev" href="?page=${courses.currentPage - 1}&type=${type}"><i
                                         class="fa fa-angle-double-left"></i></a></li>
                             </c:when>
                             <c:otherwise>
@@ -69,13 +69,13 @@
                                     <li><a class="active" href="#">${pageNum}</a></li>
                                 </c:when>
                                 <c:otherwise>
-                                    <li><a href="?page=${pageNum}">${pageNum}</a></li>
+                                    <li><a href="?page=${pageNum}&type=${type}">${pageNum}</a></li>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
                         <c:choose>
                             <c:when test="${courses.currentPage < courses.totalPages}">
-                                <li><a class="next" href="?page=${courses.currentPage + 1}"><i
+                                <li><a class="next" href="?page=${courses.currentPage + 1}&type=${type}"><i
                                         class="fa fa-angle-double-right"></i></a></li>
                             </c:when>
                             <c:otherwise>

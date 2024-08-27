@@ -14,7 +14,7 @@
         <div class="breadcrumb-content text-center">
             <ul>
                 <li>
-                    <a href="index.html">Home</a>
+                    <a href="index.html">홈</a>
                 </li>
                 <li class="active"> 게시글 </li>
             </ul>

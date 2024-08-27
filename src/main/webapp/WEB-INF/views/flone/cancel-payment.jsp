@@ -18,7 +18,7 @@
         <div class="breadcrumb-content text-center">
             <ul>
                 <li>
-                    <a href="index.jsp">Home</a>
+                    <a href="index.jsp">홈</a>
                 </li>
                 <li class="active">결제취소 </li>
             </ul>

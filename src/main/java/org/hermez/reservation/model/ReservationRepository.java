@@ -62,7 +62,7 @@ public interface ReservationRepository {
 
   Page<MyReservedReservationDTO> findMyReservedReservationList(int memberId, int page);
 
-  MyPaymentDetailResponse findMyPaymentDetail(String merchantUid, int memberId);
+  MyPaymentDetailResponse findMyPaymentDetail(String merchantUid);
 
 
 }

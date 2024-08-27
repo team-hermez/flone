@@ -101,9 +101,7 @@ public class ReservationController {
       Model model) {
     MemberLoginResponse memberLoginResponse = (MemberLoginResponse) session.getAttribute("MEMBER");
     int memberId = memberLoginResponse.getMemberId();
-    Page<ReservationListResponse> reservationPage = reservationRepository.getReservationList(
-        memberId,
-        page);
+    Page<ReservationListResponse> reservationPage = reservationRepository.getReservationList(memberId,page);
     log.info("reservationPage = {}", reservationPage.getContents());
     for (ReservationListResponse content : reservationPage.getContents()) {
       if(content.getIsBefore()){
@@ -142,7 +140,7 @@ public class ReservationController {
       Model model) {
     MemberLoginResponse memberLoginResponse = (MemberLoginResponse) session.getAttribute("MEMBER");
     int memberId = memberLoginResponse.getMemberId();
-    MyPaymentDetailResponse myPaymentDetail = reservationRepository.findMyPaymentDetail(merchantUid, memberId);
+    MyPaymentDetailResponse myPaymentDetail = reservationRepository.findMyPaymentDetail(merchantUid);
     int courseId = myPaymentDetail.getCourseId();
     CourseDetailResponse courseDetailList = courseService.courseDetailService(courseId);
     List<CourseTime> courseTimeList = courseService.courseDetailTime(courseId);

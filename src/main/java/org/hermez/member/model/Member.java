@@ -1,6 +1,5 @@
 package org.hermez.member.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,7 +8,6 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Data
 @NoArgsConstructor
 public class Member {
     private int memberId;
@@ -32,16 +30,16 @@ public class Member {
         this.phone = phone;
         this.createdAt = createdAt;
     }
-//    public Member(int memberId, int roleId, String email, String encodedPassword, String name, String phone, int memberStatus, LocalDateTime createdAt) {
-//        this.memberId = memberId;
-//        this.roleId = roleId;
-//        this.name = name;
-//        this.email = email;
-//        this.memberStatus = memberStatus;
-//        this.encodedPassword = encodedPassword;
-//        this.phone = phone;
-//        this.createdAt = createdAt;
-//    }
+    public Member(int memberId, int roleId, String email, String encodedPassword, String name, String phone, int memberStatus, LocalDateTime createdAt) {
+        this.memberId = memberId;
+        this.roleId = roleId;
+        this.name = name;
+        this.email = email;
+        this.memberStatus = memberStatus;
+        this.encodedPassword = encodedPassword;
+        this.phone = phone;
+        this.createdAt = createdAt;
+    }
 
 }
 

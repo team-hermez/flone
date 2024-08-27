@@ -12,7 +12,7 @@ import org.hermez.member.model.*;
 public interface MemberMapper {
     @Insert("insert into member(role_id, name, email, encoded_password, phone, social_login_id, member_status, created_at) values (1, #{name}, #{email}, #{encodedPassword}, #{phone}, #{socialLoginId}, 1, NOW())")
     void registerMember(Member member);
-    //    @Select("select member_id as memberId, role_id as roleId, email, encoded_password as encodedPassword, name, phone, created_at as createdAt from member where email=#{email} and encoded_password=#{password}")
+    //   @Select("select member_id as memberId, role_id as roleId, email, encoded_password as encodedPassword, name, phone, created_at as createdAt from member where email=#{email} and encoded_password=#{password}")
     @Select("select member_id as memberId, role_id as roleId, email, social_login_id as socialLoginId, encoded_password as encodedPassword, name, phone, created_at as createdAt from member where email=#{email}")
     MemberLoginResponse loginMember(MemberLoginRequest memberLoginRequest);
 

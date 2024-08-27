@@ -6,6 +6,7 @@ import org.hermez.admin.dto.InstructorManageListResponse;
 import org.hermez.common.page.Page;
 import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.instructor.dto.InstructorListResponse;
+import org.hermez.member.dto.MyAccountResponse;
 import org.hermez.member.model.Member;
 import org.hermez.reservation.dto.ReservationListResponse;
 
@@ -38,4 +39,6 @@ public interface AdminService {
     Page<ReservationListResponse> getReservationListAll(int page);
 
     Page<ReservationListResponse> getRefundListAll(int page);
+
+    MyAccountResponse getMemberDetail(int memberId);
 }

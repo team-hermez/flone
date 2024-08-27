@@ -30,4 +30,10 @@ public class AdminMemberController {
 
         return "flone/admin-member";
     }
+
+    @GetMapping("memeber-detail.hm")
+    public String getMemberDetailPage(@RequestParam int memberId, Model model){
+        model.addAttribute("member", adminService.getMemberDetail(memberId));
+        return "flone/admin-member-detail";
+    }
 }

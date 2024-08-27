@@ -56,11 +56,13 @@ public interface ReservationRepository {
 
   Page<ReservationListResponse> getReservationListAll(int page);
 
+  Page<ReservationListResponse> selectReservationListAllByCourseId(int courseId,int page);
+
   Page<ReservationListResponse> getRefundListAll(int page);
 
   Page<MyReservedReservationDTO> findMyReservedReservationList(int memberId, int page);
 
-  MyPaymentDetailResponse findMyPaymentDetail(String merchantUid, int memberId);
+  MyPaymentDetailResponse findMyPaymentDetail(String merchantUid);
 
 
 }

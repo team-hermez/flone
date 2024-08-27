@@ -155,4 +155,5 @@ public class AdminServiceImpl implements AdminService {
     public MyAccountResponse getMemberDetail(int memberId){
         return memberService.getMyAccount(memberId);
     }
+
 }

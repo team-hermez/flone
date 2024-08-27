@@ -49,7 +49,7 @@ public interface AdminMapper {
 
     @Select("SELECT " +
             "member_id AS memberId, role_id AS roleId, " +
-            "email, name, password, phone," +
+            "email, name, encoded_password AS encodedPassword, phone," +
             "DATE_FORMAT(created_at, '%Y-%m-%d') AS createdAt " +
             "FROM member " +
             "ORDER BY created_at DESC " +

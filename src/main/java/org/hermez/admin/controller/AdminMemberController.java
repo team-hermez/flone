@@ -3,22 +3,24 @@ package org.hermez.admin.controller;
 import org.hermez.admin.service.AdminService;
 import org.hermez.common.page.Page;
 import org.hermez.member.model.Member;
+import org.hermez.reservation.dto.MyReservedReservationDTO;
+import org.hermez.reservation.model.ReservationRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-
 @Controller
-@RequestMapping("flone/admin")
+@RequestMapping("flone/admin/member")
 public class AdminMemberController {
 
     private final AdminService adminService;
+    private final ReservationRepository reservationRepository;
 
-    public AdminMemberController(AdminService adminService) {
+    public AdminMemberController(AdminService adminService, ReservationRepository reservationRepository) {
         this.adminService = adminService;
+        this.reservationRepository = reservationRepository;
     }
 
     @GetMapping("manage-member.hm")
@@ -31,9 +33,13 @@ public class AdminMemberController {
         return "flone/admin-member";
     }
 
-    @GetMapping("memeber-detail.hm")
-    public String getMemberDetailPage(@RequestParam int memberId, Model model){
+    @GetMapping("member-detail.hm")
+    public String getMemberDetailPage(@RequestParam int memberId,@RequestParam(value = "page", defaultValue = "1") int page, Model model){
+        Page<MyReservedReservationDTO> reservations = reservationRepository.findMyReservedReservationList(memberId, page);
         model.addAttribute("member", adminService.getMemberDetail(memberId));
+        model.addAttribute("reservations", reservations);
         return "flone/admin-member-detail";
     }
+
+
 }

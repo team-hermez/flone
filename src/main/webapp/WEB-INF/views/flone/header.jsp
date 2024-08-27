@@ -1,11 +1,11 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!doctype html>
 
 <html class="no-js" lang="zxx">
 <head>
-    <%@ include file="css.jsp"%>
+    <%@ include file="css.jsp" %>
 </head>
 <body>
 <header class="header-area header-in-container clearfix">
@@ -16,7 +16,10 @@
                 <div class="col-xl-2 col-lg-2 col-md-6 col-4">
                     <div class="logo">
                         <a href="/">
-                            <img alt="" src="/assets/img/logo/logo.png">
+                            <img alt="" src="/assets/img/logo/logo-3.png" style="
+                                width: 101%;
+                                margin-top: -19px;
+                            ">
                         </a>
                     </div>
                 </div>
@@ -30,48 +33,56 @@
                                     <ul class="mega-menu mega-menu-padding">
                                         <li>
                                             <ul>
-                                                <li class="mega-menu-title"><a href="/flone/course/list.hm">카테고리</a></li>
-                                                <li><a href="/flone/course/list.hm?category=subject&subject=국어">국어</a></li>
-                                                <li><a href="/flone/course/list.hm?category=subject&subject=영어">영어</a></li>
-                                                <li><a href="/flone/course/list.hm?category=subject&subject=수학">수학</a></li>
-                                                <li><a href="/flone/course/list.hm?category=subject&subject=과학">과학</a></li>
-                                                <li><a href="/flone/course/list.hm?category=subject&subject=사회">사회</a></li>
+                                                <li class="mega-menu-title"><a href="/flone/course/list.hm">카테고리</a>
+                                                </li>
+                                                <li><a href="/flone/course/list.hm?category=subject&subject=국어">국어</a>
+                                                </li>
+                                                <li><a href="/flone/course/list.hm?category=subject&subject=영어">영어</a>
+                                                </li>
+                                                <li><a href="/flone/course/list.hm?category=subject&subject=수학">수학</a>
+                                                </li>
+                                                <li><a href="/flone/course/list.hm?category=subject&subject=과학">과학</a>
+                                                </li>
+                                                <li><a href="/flone/course/list.hm?category=subject&subject=사회">사회</a>
+                                                </li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
                                 <c:choose>
-                                <c:when test="${not empty sessionScope.INSTRUCTOR}">
-                                    <li>
-                                        <a href="#">강의 등록 <i class="fa fa-angle-down"></i></a>
-                                        <ul class="submenu">
-                                            <li><a href="/flone/course/list.hm">내 강의</a></li>
-                                            <li><a href="/flone/course/register.hm">강의 등록</a></li>
-                                        </ul>
-                                    </li>
-                                </c:when>
-                            </c:choose>
+                                    <c:when test="${not empty sessionScope.INSTRUCTOR}">
+                                        <li>
+                                            <a href="#">강의 등록 <i class="fa fa-angle-down"></i></a>
+                                            <ul class="submenu">
+                                                <li><a href="/flone/course/list.hm">내 강의</a></li>
+                                                <li><a href="/flone/course/register.hm">강의 등록</a></li>
+                                            </ul>
+                                        </li>
+                                    </c:when>
+                                </c:choose>
                                 <li><a href="/flone/instructor/list.hm">강사</a></li>
                                 <c:choose>
-                                <c:when test="${not empty sessionScope.MEMBER}">
-                                   <li>
-                                        <a href="#">내 정보 <i class="fa fa-angle-down"></i></a>
-                                        <ul class="submenu">
-                                            <li><a href="/flone/member/my-account.hm?memberId=${sessionScope.MEMBER.memberId}">마이페이지</a></li>
-                                            <li><a href="/flone/reservation/reserved-course-list.hm">나의 강의</a></li>
-                                            <li><a href="/flone/reservation/list.hm">예약 및 결제</a></li>
-                                        </ul>
-                                    </li>
-                                </c:when>
-                            </c:choose>
+                                    <c:when test="${not empty sessionScope.MEMBER}">
+                                        <li>
+                                            <a href="#">내 정보 <i class="fa fa-angle-down"></i></a>
+                                            <ul class="submenu">
+                                                <li>
+                                                    <a href="/flone/member/my-account.hm?memberId=${sessionScope.MEMBER.memberId}">마이페이지</a>
+                                                </li>
+                                                <li><a href="/flone/reservation/reserved-course-list.hm">나의 강의</a></li>
+                                                <li><a href="/flone/reservation/list.hm">예약 및 결제</a></li>
+                                            </ul>
+                                        </li>
+                                    </c:when>
+                                </c:choose>
 
                                 <li>
-                            <c:choose>
-                                <c:when test="${not empty sessionScope.ADMIN}">
-                                    <a href="admin.jsp">[관리자]</a>
-                                </c:when>
-                            </c:choose>
-                        </li>
+                                    <c:choose>
+                                        <c:when test="${not empty sessionScope.ADMIN}">
+                                            <a href="/flone/admin/main.hm">관리자</a>
+                                        </c:when>
+                                    </c:choose>
+                                </li>
                             </ul>
                         </nav>
                     </div>
@@ -84,7 +95,9 @@
                                 <ul>
                                     <c:choose>
                                         <c:when test="${not empty sessionScope.MEMBER}">
-                                            <li><a href="/flone/member/my-account.hm?memberId=${sessionScope.MEMBER.memberId}">마이페이지</a></li>
+                                            <li>
+                                                <a href="/flone/member/my-account.hm?memberId=${sessionScope.MEMBER.memberId}">마이페이지</a>
+                                            </li>
                                             <li><a href="/flone/member/logout.hm">로그아웃</a></li>
                                         </c:when>
                                         <c:otherwise>
@@ -125,7 +138,7 @@
                                             <li><a href="index-13.html">Home 13 – Cosmetic</a></li>
                                             <li><a href="index-14.html">Home 14 – Christmas</a></li>
                                             <li><a href="index-15.html">Home 15 – Fruit</a></li>
-                                            <li><a href="index-16.html">Home 16 –  Black Friday</a></li>
+                                            <li><a href="index-16.html">Home 16 – Black Friday</a></li>
                                             <li><a href="index-17.html">Home 17 – Flower</a></li>
                                             <li><a href="index-18.html">Home 18 – Book</a></li>
                                             <li><a href="index-19.html">Home 19 – Fashion</a></li>
@@ -163,7 +176,7 @@
                                             <li><a href="shop-right-sidebar.html">Grid right sidebar</a></li>
                                             <li><a href="shop-list.html">list 1 column box </a></li>
                                             <li><a href="shop-list-fw.html">list 1 column full wide </a></li>
-                                            <li><a href="shop-list-fw-2col.html">list 2 column  full wide</a></li>
+                                            <li><a href="shop-list-fw-2col.html">list 2 column full wide</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="#">product details</a>

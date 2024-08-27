@@ -5,9 +5,13 @@ import org.hermez.instructor.dto.InstructorDetailResponse;
 import org.hermez.instructor.dto.InstructorListResponse;
 import org.hermez.instructor.dto.InstructorRegisterRequest;
 import org.hermez.instructor.service.InstructorService;
+import org.hermez.member.dto.MemberLoginResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("flone/instructor")
@@ -40,8 +44,11 @@ public class InstructorController {
     }
 
     @PostMapping("regist.hm")
-    public String PostInstructorRegister(InstructorRegisterRequest instructorRegisterRequest) {
-        instructorRegisterRequest.setMemberId(1);
+    public String postInstructorRegister(InstructorRegisterRequest instructorRegisterRequest, HttpServletRequest httpRequest) {
+        HttpSession session = httpRequest.getSession(false);
+        MemberLoginResponse member = (MemberLoginResponse) session.getAttribute("MEMBER");
+        instructorRegisterRequest.setMemberId(member.getMemberId());
+        instructorRegisterRequest.setMemberId(member.getMemberId());
         instructorService.insertInstructor(instructorRegisterRequest);
         return "redirect:/flone/instructor/list.hm";
     }

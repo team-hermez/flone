@@ -153,7 +153,8 @@ public class ReservationController {
       throws IamportResponseException, IOException {
     int courseId = verificationRequest.getCourseId();
     MemberLoginResponse memberLoginResponse = (MemberLoginResponse) session.getAttribute("MEMBER");
-    Integer myCourseOne = reservationRepository.findMyCourseOne(memberLoginResponse.getMemberId(), courseId);
+    int memberId = memberLoginResponse.getMemberId();
+    Integer myCourseOne = reservationRepository.findMyCourseOne(memberId, courseId);
     CourseDetailResponse courseDetailResponse = courseService.courseDetailService(courseId);
     LocalDate courseStartDate = LocalDate.parse(courseDetailResponse.getStartDate());
     if (LocalDate.now().isAfter(courseStartDate)) {
@@ -162,13 +163,14 @@ public class ReservationController {
     if (myCourseOne != null) {
       throw new NoSuchUniqueCourseTimeException("이미 수강 중인 강의입니다.");
     }
-    reservationService.verifyCourseSchedule(courseId);
+
+    reservationService.verifyCourseSchedule(courseId,memberId);
     String impUid = verificationRequest.getImp_uid();//실 결제 금액 확인을 위한 아임포트 쪽에서 주는 아이디
     int amount = verificationRequest.getAmount();// 실제 유저가 결제한 금액
     String merchantUid = verificationRequest.getMerchant_uid(); //내가 만든 주문번호
     IamportResponse<Payment> iamportResponse = iamportService.getIamportClient()
         .paymentByImpUid(impUid);
-    reservationService.save(memberLoginResponse.getMemberId(), courseId, amount, impUid, merchantUid);
+    reservationService.save(memberId, courseId, amount, impUid, merchantUid);
     iamportService.verifyPayment(iamportResponse, amount, merchantUid);
     return iamportResponse;
   }

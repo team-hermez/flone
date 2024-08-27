@@ -68,8 +68,8 @@ public class ReservationServiceImpl implements ReservationService {
 
   @Transactional
   @Override
-  public void verifyCourseSchedule(int courseId) {
-    List<MyReservationDTO> myReservationList = reservationRepository.findMyReservationList(1);
+  public void verifyCourseSchedule(int courseId, int memberId) {
+    List<MyReservationDTO> myReservationList = reservationRepository.findMyReservationList(memberId);
     List<MyReservationDTO> reservationCourseScheduleList = reservationRepository.findReservationCourseSchedule(
         courseId);
     Multimap<List<LocalDateTime[]>, List<LocalDateTime[]>> multimap = ArrayListMultimap.create();
@@ -86,7 +86,7 @@ public class ReservationServiceImpl implements ReservationService {
       try {
         checkScheduleOverlap(courseSchedule, myCourseSchedule);
       } catch (IllegalStateException e) {
-        ;
+
         throw new NoSuchUniqueCourseTimeException(e);
       }
     }

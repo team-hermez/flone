@@ -27,7 +27,7 @@ public interface ReservationService {
    */
   void cancel(Reservation reservation);
 
-  void verifyCourseSchedule(int courseId);
+  void verifyCourseSchedule(int courseId, int memberId);
 
   Page<ReservationListResponse> getReservationListAll(int page);
 

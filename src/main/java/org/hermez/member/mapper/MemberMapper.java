@@ -10,9 +10,9 @@ import org.hermez.member.model.*;
 
 @Mapper
 public interface MemberMapper {
-    @Insert("insert into member(role_id, name, email, encoded_password, phone, social_login_id, created_at) values (1, #{name}, #{email}, #{encodedPassword}, #{phone}, #{socialLoginId}, NOW())")
+    @Insert("insert into member(role_id, name, email, encoded_password, phone, social_login_id, member_status, created_at) values (1, #{name}, #{email}, #{encodedPassword}, #{phone}, #{socialLoginId}, 1, NOW())")
     void registerMember(Member member);
-//    @Select("select member_id as memberId, role_id as roleId, email, encoded_password as encodedPassword, name, phone, created_at as createdAt from member where email=#{email} and encoded_password=#{password}")
+    //    @Select("select member_id as memberId, role_id as roleId, email, encoded_password as encodedPassword, name, phone, created_at as createdAt from member where email=#{email} and encoded_password=#{password}")
     @Select("select member_id as memberId, role_id as roleId, email, social_login_id as socialLoginId, encoded_password as encodedPassword, name, phone, created_at as createdAt from member where email=#{email}")
     MemberLoginResponse loginMember(MemberLoginRequest memberLoginRequest);
 
@@ -27,6 +27,9 @@ public interface MemberMapper {
 
     @Select("select member_id as memberId, email, name, encoded_password, phone from member where member_id = #{memberId};")
     MyAccountResponse getMyAccount(int memberId);
+
+    @Insert("update member set member_status = 0 where member_id = #{memberId}")
+    void insertMemberStatus(int memberId);
 
     @Select("SELECT COUNT(1) > 0 FROM instructor i, member m WHERE m.phone = #{phoneConfirm}")
     int selectPhoneExists(MyAccountEditRequest myAccountEditRequest);

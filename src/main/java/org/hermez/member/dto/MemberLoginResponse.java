@@ -12,6 +12,7 @@ import lombok.Setter;
 public class MemberLoginResponse {
     private int memberId;
     private int roleId;
+    private int memberStatus;
     private String email;
     private String socialLoginId;
     private String encodedPassword;

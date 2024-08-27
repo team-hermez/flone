@@ -17,6 +17,7 @@ public class MemberRegisterRequest {
     @NotNull
     private String email;
     private int roleId;
+    private int memberStatus;
 
     @NotEmpty(message = "{NotEmpty.member.password}")
     private String encodedPassword;
@@ -27,6 +28,7 @@ public class MemberRegisterRequest {
 
     @Pattern(regexp = "^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$", message = "{Pattern.member.phone}")
     private String phone;
+
 
     private String socialLoginId;
     private LocalDateTime createdAt;

@@ -12,6 +12,8 @@ public interface MemberService {
    void loginMember(MemberLoginRequest memberLoginRequest);
    void save(Member member);
 
+   void insertMemberStatus(int memberId);
+
    MyAccountResponse getMyAccount(int memberId);
 
    void updateMyAccount(MyAccountEditRequest myAccountEditRequest);

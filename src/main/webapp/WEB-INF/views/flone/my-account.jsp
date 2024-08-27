@@ -44,9 +44,6 @@
                                             <h3>내 정보</h3>
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-3 col-md-3">
-                                                <h1>이미지 들어갈 곳</h1>
-                                            </div>
                                             <div class="col-lg-9 col-md-9">
                                                 <div class="billing-info">
                                                     <h4>이름</h4>

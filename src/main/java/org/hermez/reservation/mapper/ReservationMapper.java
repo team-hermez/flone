@@ -56,7 +56,7 @@ public interface ReservationMapper {
    * @param merchantUid 취소/환불시 주문 조회할 hermez에서 생성한 주문번호
    * @return payment_amount hermez서버에 저장된 예약시 결제한 금액
    */
-  @Select("select payment_amount as paymentAmount from reservation join payment_history using (payment_history_id) where merchant_uid=#{merchantUid}")
+  @Select("select course_price  from course where course_id = (select course_id from reservation join payment_history using (payment_history_id)where merchant_uid=#{merchantUid})")
   Integer findPayAmount(String merchantUid);
 
   /**

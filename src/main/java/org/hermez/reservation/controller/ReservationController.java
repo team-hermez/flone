@@ -102,12 +102,6 @@ public class ReservationController {
     MemberLoginResponse memberLoginResponse = (MemberLoginResponse) session.getAttribute("MEMBER");
     int memberId = memberLoginResponse.getMemberId();
     Page<ReservationListResponse> reservationPage = reservationRepository.getReservationList(memberId,page);
-    log.info("reservationPage = {}", reservationPage.getContents());
-    for (ReservationListResponse content : reservationPage.getContents()) {
-      if(content.getIsBefore()){
-        System.out.println("content.getTitle() = " + content.getTitle());
-      }
-    }
     model.addAttribute("memberId", memberId);
     model.addAttribute("reservationPage", reservationPage);
     return "/flone/reservation-list";
@@ -134,12 +128,7 @@ public class ReservationController {
   }
 
   @GetMapping("/my-payment-detail.hm")
-  public String getMyPaymentDetailPage(
-      @RequestParam String merchantUid,
-      HttpSession session,
-      Model model) {
-    MemberLoginResponse memberLoginResponse = (MemberLoginResponse) session.getAttribute("MEMBER");
-    int memberId = memberLoginResponse.getMemberId();
+  public String getMyPaymentDetailPage(@RequestParam String merchantUid, Model model) {
     MyPaymentDetailResponse myPaymentDetail = reservationRepository.findMyPaymentDetail(merchantUid);
     int courseId = myPaymentDetail.getCourseId();
     CourseDetailResponse courseDetailList = courseService.courseDetailService(courseId);

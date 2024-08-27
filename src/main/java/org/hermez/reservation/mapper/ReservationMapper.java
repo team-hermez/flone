@@ -153,6 +153,6 @@ public interface ReservationMapper {
       + " from reservation\n"
       + " join course using (course_id)\n"
       + " join payment_history using (payment_history_id)\n"
-      + " where merchant_uid =#{merchantUid} and member_id =#{memberId}")
-  MyPaymentDetailResponse findMyPaymentDetail(@Param("merchantUid") String merchantUid, @Param("memberId") Integer memberId);
+      + " where merchant_uid =#{merchantUid}")
+  MyPaymentDetailResponse findMyPaymentDetail(@Param("merchantUid") String merchantUid);
 }

@@ -115,8 +115,8 @@ public class ReservationRepositoryImpl implements ReservationRepository {
   }
 
   @Override
-  public MyPaymentDetailResponse findMyPaymentDetail(String merchantUid, int memberId) {
-   return reservationMapper.findMyPaymentDetail(merchantUid, memberId);
+  public MyPaymentDetailResponse findMyPaymentDetail(String merchantUid) {
+   return reservationMapper.findMyPaymentDetail(merchantUid);
   }
 
 

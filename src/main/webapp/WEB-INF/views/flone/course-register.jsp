@@ -88,14 +88,14 @@
                                         <div class="billing-select mb-20">
                                             <label>종료시간</label>
                                             <select name="courseTimes[0].endTime">
-                                                <option id="endTime10:00" value="10:00">오전 10:00</option>
-                                                <option id="endTime11:00" value="11:00">오전 11:00</option>
-                                                <option id="endTime12:00" value="12:00">오후 12:00</option>
-                                                <option id="endTime14:00" value="14:00">오후 14:00</option>
-                                                <option id="endTime15:00" value="15:00">오후 15:00</option>
-                                                <option id="endTime16:00" value="16:00">오후 16:00</option>
-                                                <option id="endTime17:00" value="17:00">오후 17:00</option>
-                                                <option id="endTime18:00" value="18:00">오후 18:00</option>
+                                                <option id="endTime10:00" value="09:50">오전 09:50</option>
+                                                <option id="endTime11:00" value="10:50">오전 10:50</option>
+                                                <option id="endTime12:00" value="11:50">오후 11:50</option>
+                                                <option id="endTime14:00" value="13:50">오후 13:50</option>
+                                                <option id="endTime15:00" value="14:50">오후 14:50</option>
+                                                <option id="endTime16:00" value="15:50">오후 15:50</option>
+                                                <option id="endTime17:00" value="16:50">오후 16:50</option>
+                                                <option id="endTime18:00" value="17:50">오후 17:50</option>
                                             </select>
                                         </div>
                                     </div>

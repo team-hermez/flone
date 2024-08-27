@@ -28,7 +28,7 @@
                 <div class="blog-details-wrapper ml-20">
                     <div class="blog-details-top">
                         <div class="blog-details-img">
-                            <img alt="" src="/resources/images/image.png">
+                            <img alt="" src="../../../../images/${courseDetailList.courseImage}">
                         </div>
                         <div class="blog-details-content">
                             <div class="blog-meta-2">
@@ -64,7 +64,7 @@
                                         <div class="sidebar-blog-img">
                                             <a href="/flone/board/board-list.hm?classroomId=${classroom.classroomId}">
                                                 <img src="../../../../images/${classroom.classroomImage}" width="200px"
-                                                     height="50px"
+                                                     height="80px"
                                                      onerror="this.onerror=null; this.src='../../../../images/image.png';"></a>
                                         </div>
                                         <div class="sidebar-blog-content">

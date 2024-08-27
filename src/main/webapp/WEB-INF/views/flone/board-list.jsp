@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="text-center mb-30">
-            <a href="board-register-form.hm?classroomId=${boardListResponse.classroomId}" class="btn btn-primary">글 등록하기</a>
+            <a href="board-register-form.hm?classroomId=${boardListResponse.classroomId}" class="btn btn-primary">과제 등록</a>
         </div>
         <div class="row">
             <div class="ms-auto me-auto col-lg-9">

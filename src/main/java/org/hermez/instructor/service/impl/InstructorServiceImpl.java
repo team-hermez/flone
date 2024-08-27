@@ -43,6 +43,12 @@ public class InstructorServiceImpl implements InstructorService {
         return instructorDetails;
     }
 
+    @Override
+    public int instructorsCount() {
+        int total = instructorMapper.instructorCount();
+        return total;
+    }
+
 
     @Transactional
     @Override

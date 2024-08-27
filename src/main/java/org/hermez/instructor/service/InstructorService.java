@@ -14,6 +14,8 @@ public interface InstructorService {
 
     InstructorDetailResponse selectInstructorDetail(int instructorsID);
 
+    int instructorsCount();
+
     void insertInstructor(InstructorRegisterRequest instructorRegisterRequest);
 
     Instructor findByMemberLoginResponseId(MemberLoginResponse memberLoginResponse);

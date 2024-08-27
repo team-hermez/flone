@@ -4,6 +4,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 현재 사용자가 예약할 강의 정보를 담을 DTO 클래스입니다.
+ *
+ * @author 허상범
+ */
 @Getter @Setter
 @Builder
 public class ReservationFormResponse {

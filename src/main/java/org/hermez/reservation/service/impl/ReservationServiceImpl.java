@@ -39,13 +39,8 @@ public class ReservationServiceImpl implements ReservationService {
   private final ReservationRepository reservationRepository;
 
   /**
-   * @param memberId    예약자 키값
-   * @param courseId    예약 강의 키값
-   * @param amount      예약 강의 가격
-   * @param imp_uid     결제 API( 아임포트 ) 에서 생성한 주문번호
-   * @param merchantUid hermez 서버에서 생성한 주문번호
+   * {@inheritDoc}
    */
-
   @Transactional
   @Override
   public void save(int memberId, int courseId, int amount, String imp_uid, String merchantUid) {
@@ -57,6 +52,9 @@ public class ReservationServiceImpl implements ReservationService {
     reservationRepository.save(createdReservation);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Transactional
   @Override
   public void cancel(Reservation reservation) {
@@ -65,7 +63,9 @@ public class ReservationServiceImpl implements ReservationService {
     paymentHistoryRepository.updateCancelAt(merchantUid);
   }
 
-
+  /**
+   * {@inheritDoc}
+   */
   @Transactional
   @Override
   public void verifyCourseSchedule(int courseId, int memberId) {
@@ -93,22 +93,36 @@ public class ReservationServiceImpl implements ReservationService {
 
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Page<ReservationListResponse> getReservationListAll(int page) {
     return reservationRepository.getReservationListAll(page);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Page<ReservationListResponse> getReservationListAllByCourseId(int courseId, int page) {
     return reservationRepository.selectReservationListAllByCourseId(courseId, page);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Page<ReservationListResponse> getRefundListAll(int page) {
     return reservationRepository.getRefundListAll(page);
   }
 
-
+  /**
+   * 예약 DTO를 기반으로 강의 일정을 생성합니다.
+   *
+   * @param myReservationDTO 예약 DTO 객체
+   * @return 강의 일정을 포함하는 LocalDateTime 배열의 리스트
+   */
   private List<LocalDateTime[]> getCourseSchedule(MyReservationDTO myReservationDTO) {
     LocalDate startDate = myReservationDTO.getStartDate();
     LocalDate endDate = myReservationDTO.getEndDate();
@@ -118,7 +132,14 @@ public class ReservationServiceImpl implements ReservationService {
     return createCourseSchedule(startDate, endDate, weeklySchedule);
   }
 
-  //==스케쥴 생성==//
+  /**
+   * 주어진 시작일과 종료일, 주간 일정에 따라 강의 일정을 생성합니다.
+   *
+   * @param startDate 시작 날짜
+   * @param endDate 종료 날짜
+   * @param weeklySchedule 주간 일정
+   * @return 생성된 강의 일정의 LocalDateTime 배열 리스트
+   */
   private List<LocalDateTime[]> createCourseSchedule(LocalDate startDate, LocalDate endDate,
       Map<DayOfWeek, LocalTime[]> weeklySchedule) {
     List<LocalDateTime[]> schedules = new ArrayList<>();
@@ -136,7 +157,13 @@ public class ReservationServiceImpl implements ReservationService {
     return schedules;
   }
 
-  //==비즈니스 로직==//
+  /**
+   * 두 개의 강의 일정이 겹치는지 확인합니다.
+   *
+   * @param schedule1 첫 번째 강의 일정
+   * @param schedule2 두 번째 강의 일정
+   * @throws IllegalStateException 일정이 겹칠 경우 발생
+   */
   private void checkScheduleOverlap(List<LocalDateTime[]> schedule1,
       List<LocalDateTime[]> schedule2) {
     for (LocalDateTime[] timeSlot1 : schedule1) {
@@ -150,7 +177,13 @@ public class ReservationServiceImpl implements ReservationService {
     }
   }
 
-  //==오버랩 확인==//
+  /**
+   * 두 개의 시간 슬롯이 겹치는지 확인합니다.
+   *
+   * @param timeSlot1 첫 번째 시간 슬롯
+   * @param timeSlot2 두 번째 시간 슬롯
+   * @return 시간 슬롯이 겹치면 true, 그렇지 않으면 false.
+   */
   private boolean isOverlapping(LocalDateTime[] timeSlot1, LocalDateTime[] timeSlot2) {
     LocalDateTime start1 = timeSlot1[0];
     LocalDateTime end1 = timeSlot1[1];

@@ -3,6 +3,11 @@ package org.hermez.paymenthistory.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 예약 취소시 필요한 데이터를 담을 DTO 클래스입니다.
+ *
+ * @author 허상범
+ */
 @Getter @Setter
 public class CancelDTO {
   private String imp_uid;

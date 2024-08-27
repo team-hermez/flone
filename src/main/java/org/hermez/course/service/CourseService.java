@@ -5,6 +5,7 @@ import org.hermez.common.page.Page;
 import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.course.dto.CourseListResponse;
 import org.hermez.course.dto.CourseRegisterRequest;
+import org.hermez.course.exception.CourseRegisterTimeException;
 import org.hermez.course.model.CourseTime;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,6 +23,8 @@ public interface CourseService {
      * @return 강의 목록과 페이지 정보를 담고 있는 Map 객체
      */
     Page<CourseListResponse> getCourseList(int page);
+
+    int getAllCourseCount();
 
     /**
      * 카테고리별 강의 목록을 조회합니다
@@ -56,5 +59,5 @@ public interface CourseService {
      * 강의를 등록합니다
      * @param courseRegisterRequest 강의의 상세 정보
      */
-    void insertCourse(CourseRegisterRequest courseRegisterRequest);
+    void insertCourse(CourseRegisterRequest courseRegisterRequest) throws CourseRegisterTimeException;
 }

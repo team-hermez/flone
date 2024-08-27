@@ -5,9 +5,9 @@ import static org.springframework.http.HttpStatus.*;
 import org.hermez.classroom.board.exception.BoardServiceException;
 import org.hermez.classroom.classroom.exception.ClassroomNotFoundException;
 import org.hermez.classroom.reply.exception.ReplyNotFoundException;
+import org.hermez.course.exception.CourseRegisterTimeException;
 import org.hermez.image.exception.ImageProcessingException;
 import org.hermez.reservation.exception.NotActiveClassException;
-import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -64,5 +64,9 @@ public class GlobalExceptionHandler {
         model.addAttribute("errorMessage", ex.getMessage());
         return "error";
     }
-
+    @ExceptionHandler(CourseRegisterTimeException.class)
+    public String handleCourseServiceException(CourseRegisterTimeException ex, Model model) {
+        model.addAttribute("errorMessage", ex.getMessage());
+        return "error";
+    }
 }

@@ -1,10 +1,7 @@
 package org.hermez.member.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.hermez.member.dto.MemberLoginRequest;
-import org.hermez.member.dto.MemberRegisterRequest;
-import org.hermez.member.dto.MyAccountEditRequest;
-import org.hermez.member.dto.MyAccountResponse;
+import org.hermez.member.dto.*;
 import org.hermez.member.model.Member;
 import org.hermez.member.service.MemberService;
 import org.springframework.stereotype.Controller;
@@ -40,7 +37,7 @@ public class MemberController {
     @GetMapping("logout.hm")
     public String getLogout(HttpSession session) {
         session.invalidate();
-        return "flone/index";
+        return "redirect:/";
     }
 
     @GetMapping("my-account.hm")
@@ -77,6 +74,17 @@ public class MemberController {
     public String postDeleteMember(@RequestParam int memberId, HttpSession session) {
         memberService.insertMemberStatus(memberId);
         session.invalidate();
+        return "redirect:/";
+    }
+
+    @GetMapping("updatepassword.hm")
+    public String getUpdatePassword() {
+        return "flone/password-edit-form";
+    }
+
+    @PostMapping("changepassword.hm")
+    public String postUpdatePassword(MemberCheckPasswordRequest memberCheckPasswordRequest) {
+        memberService.changePassword(memberCheckPasswordRequest);
         return "redirect:/";
     }
 

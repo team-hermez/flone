@@ -30,6 +30,9 @@ public interface MemberMapper {
     @Select("SELECT COUNT(1) > 0 FROM member WHERE email = #{email}")
     int selectMemberRegisterEmailExist(MemberRegisterRequest memberRegisterRequest);
 
+    @Select("SELECT COUNT(1) > 0 FROM member WHERE phone = #{phone} and email = #{email}")
+    int selectCheckPassword(MemberCheckPasswordRequest memberCheckPasswordRequest);
+
     @Select("SELECT COUNT(1) > 0 FROM member WHERE phone = #{phone}")
     int selectMemberPhoneExist(MemberRegisterRequest memberRegisterRequest);
 
@@ -47,6 +50,9 @@ public interface MemberMapper {
 
     @Select("SELECT member_id as member_id, m.role_id as roleId, m.name as name, m.email as email, m.encoded_password as encodedPassword, m.phone as phone, m.social_login_id as socialLoginId, m.created_at as createdAt from member m , social_login s where s.SOCIAL_LOGIN_ID = #{socialLoginId}")
     MemberLoginResponse selectSocialLoginId(String socialLoginId);
+
+    @Update("UPDATE member SET encoded_password = #{passwordConfirm} WHERE phone=#{phone} and email=#{email}")
+    void changePassword(MemberCheckPasswordRequest memberCheckPasswordRequest);
 
 
 }

@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -122,6 +123,8 @@ public class CourseServiceImpl implements CourseService {
             courseMapper.insertCourse(courseRegisterRequest);
             int courseId = courseRegisterRequest.getCourseId();
 
+            System.out.println("checkException");
+
             RegisterImageRequest imageRequest = new RegisterImageRequest();
             imageRequest.setEntityId(courseRegisterRequest.getCourseId());
             imageRequest.setEntityType("COURSE");
@@ -133,7 +136,6 @@ public class CourseServiceImpl implements CourseService {
             } catch (Exception e) {
                 throw new RuntimeException("강의 등록 중 알 수 없는 오류가 발생했습니다.", e);
             }
-
             List<CourseTime> courseTimes = courseRegisterRequest.getCourseTimes();
             for (CourseTime item : courseTimes) {
                 item.setCourseId(courseId);
@@ -145,56 +147,51 @@ public class CourseServiceImpl implements CourseService {
 
     public boolean checkDay(CourseRegisterRequest courseRegisterRequest){
         List<CourseTime> courseTimesList =courseRegisterRequest.getCourseTimes();
-        String firstDay = courseTimesList.get(0).getDayOfWeek();
+        int dayCount = courseTimesList.size();
+        if(dayCount == 1) return true;
+        boolean flag = false;
 
-        for (int i = 1; i < courseTimesList.size(); i++) {
-            if(courseTimesList.get(i).getDayOfWeek().equals(firstDay)){
-                boolean checkStartTime = checkStartTime(courseRegisterRequest);
-                boolean checkEndTime = checkEndTime(courseRegisterRequest);
-                if (checkStartTime && checkEndTime) {
-                    return true;
-                }else
-                    throw new CourseRegisterTimeException("동일한 날짜에 겹치는 시간 강의 예약은 불가능합니다.");
+        for (int i = 0; i < dayCount; i++) {
+            for (int j = dayCount-1; j > i; j--) {
+                if ((courseTimesList.get(j).getDayOfWeek()).equals(courseTimesList.get(i).getDayOfWeek())) {
+                    int checkStart = i;
+                    int checkEnd = j;
+                    flag = checkTime(courseRegisterRequest,checkStart,checkEnd);
                 }
-            }
-        return true;
-    }
-    public boolean checkStartTime(CourseRegisterRequest courseRegisterRequest){
-        List<CourseTime> courseTimesList = courseRegisterRequest.getCourseTimes();
-        String firstTime = courseTimesList.get(0).getStartTime();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-
-        for(int i = 0; i < courseTimesList.size(); i++) {
-            try {
-                String startTime = courseTimesList.get(i).getStartTime();
-                LocalTime firstStartTime = LocalTime.parse(firstTime, formatter);
-                LocalTime anotherStartTime = LocalTime.parse(startTime, formatter);
-                if(firstStartTime.equals(anotherStartTime)){
-                    throw new CourseRegisterTimeException("동일한 시작 시간이 있습니다.");
-                }
-            } catch (DateTimeParseException dateTimeParseException) {
-                throw new CourseRegisterTimeException("올바른 시간형식이 아닙니다.");
             }
         }
-        return true;
+        return flag;
     }
-    public boolean checkEndTime(CourseRegisterRequest courseRegisterRequest){
+
+    public boolean checkTime(CourseRegisterRequest courseRegisterRequest,int checkStart,int checkEnd){
         List<CourseTime> courseTimesList =courseRegisterRequest.getCourseTimes();
-        String firstTime = courseTimesList.get(0).getEndTime();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
-        for(int i = 0; i < courseTimesList.size(); i++) {
-            try{
-                String endTime = courseTimesList.get(i).getEndTime();
-                LocalTime firstEndTime = LocalTime.parse(firstTime, formatter);
-                LocalTime anotherEndTime = LocalTime.parse(endTime, formatter);
-                if(firstEndTime.equals(anotherEndTime)){
-                    throw new CourseRegisterTimeException("동일한 종료 시간이 있습니다.");
-                }
-            }catch (DateTimeParseException dateTimeParseException) {
-                throw new RuntimeException("올바른 시간형식이 아닙니다.");
+        String firstStart = courseTimesList.get(checkStart).getStartTime();
+        String firstEnd = courseTimesList.get(checkStart).getEndTime();
+        String anotherStart = courseTimesList.get(checkEnd).getStartTime();
+        String anotherEnd = courseTimesList.get(checkEnd).getEndTime();
+
+        System.out.println(firstStart);
+        System.out.println(firstEnd);
+        try{
+            LocalTime firstStartTime = LocalTime.parse(firstStart, formatter);
+            LocalTime firstEndTime = LocalTime.parse(firstEnd, formatter);
+            LocalTime anotherStartTime = LocalTime.parse(anotherStart, formatter);
+            LocalTime anotherEndTime = LocalTime.parse(anotherEnd, formatter);
+
+            System.out.println(firstStartTime);
+            System.out.println(firstEndTime);
+            System.out.println(anotherStartTime);
+            System.out.println(anotherEndTime);
+            if(firstStartTime.isBefore(anotherEndTime)&&firstEndTime.isBefore(anotherStartTime)) {
+                System.out.println(firstStartTime.isBefore(anotherEndTime));
+                System.out.println(firstEndTime.isBefore(anotherStartTime));
+                return true;
             }
+            throw new CourseRegisterTimeException("동일한 요일에 시간대가 겹칠 수 없습니다.");
+        }catch (DateTimeParseException e) {
+            throw new CourseRegisterTimeException("시간 변환하는 과정에서 오류 발생했습니다.");
         }
-        return true;
     }
 }

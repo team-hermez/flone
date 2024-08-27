@@ -67,11 +67,11 @@
                                         <li>
                                             <ul>
                                                 <li class="mega-menu-title"><a href="/flone/course/list.hm">카테고리</a></li>
-                                                <li><a href="/flone/course/list.hm">국어</a></li>
-                                                <li><a href="/flone/course/list.hm">영어</a></li>
-                                                <li><a href="/flone/course/list.hm">수학</a></li>
-                                                <li><a href="/flone/course/list.hm">과학</a></li>
-                                                <li><a href="/flone/course/list.hm">사회</a></li>
+                                                <li><a href="/flone/course/list.hm?category=subject&subject=국어">국어</a></li>
+                                                <li><a href="/flone/course/list.hm?category=subject&subject=영어">영어</a></li>
+                                                <li><a href="/flone/course/list.hm?category=subject&subject=수학">수학</a></li>
+                                                <li><a href="/flone/course/list.hm?category=subject&subject=과학">과학</a></li>
+                                                <li><a href="/flone/course/list.hm?category=subject&subject=사회">사회</a></li>
                                             </ul>
                                         </li>
                                         <li>

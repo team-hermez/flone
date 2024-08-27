@@ -4,10 +4,10 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
-    <%@ include file="css.jsp"%>
+    <%@ include file="css.jsp" %>
 </head>
 <body>
-<%@ include file="header.jsp"%>
+<%@ include file="header.jsp" %>
 
 <div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
     <div class="container">
@@ -40,7 +40,8 @@
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="blog-wrap-2 mb-30">
                                 <div class="blog-img-2">
-                                    <img src="../../../../images/${classroom.classroomImage}" width="300px" height="300px"
+                                    <img src="../../../../images/${classroom.classroomImage}" width="300px"
+                                         height="300px"
                                          onerror="this.onerror=null; this.src='../../../../images/image.png';">
                                 </div>
                                 <div class="blog-content-2">
@@ -50,20 +51,29 @@
                                             <li><a href="#">4 <i class="fa fa-comments-o"></i></a></li>
                                         </ul>
                                     </div>
-                                    <h4><a href="/flone/board/board-list.hm?classroomId=${classroom.classroomId}">${classroom.classroomName}</a></h4>
+                                    <h4>
+                                        <a href="/flone/board/board-list.hm?classroomId=${classroom.classroomId}">${classroom.classroomName}</a>
+                                    </h4>
                                     <p>${classroom.description}</p>
                                     <div class="blog-share-comment">
                                         <div class="blog-btn-2">
                                             <a href="blog-details.html">read more</a>
                                         </div>
                                     </div>
-                                    <div class="text-center mt-3">
-                                        <form action="classroom-delete.hm" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
-                                            <input type="hidden" name="classroomId" value="${classroom.classroomId}">
-                                            <input type="hidden" name="courseId" value="${courseId}">
-                                            <button type="submit" class="btn btn-danger">삭제</button>
-                                        </form>
-                                    </div>
+
+                                    <c:choose>
+                                        <c:when test="${not empty sessionScope.INSTRUCTOR}">
+                                            <div class="text-center mt-3">
+                                                <form action="classroom-delete.hm" method="post"
+                                                      onsubmit="return confirm('정말 삭제하시겠습니까?');">
+                                                    <input type="hidden" name="classroomId"
+                                                           value="${classroom.classroomId}">
+                                                    <input type="hidden" name="courseId" value="${courseId}">
+                                                    <button type="submit" class="btn btn-danger">삭제</button>
+                                                </form>
+                                            </div>
+                                        </c:when>
+                                    </c:choose>
                                 </div>
                             </div>
                         </div>
@@ -106,6 +116,6 @@
 </div>
 
 <%@ include file="footer.jsp" %>
-<%@ include file="script.jsp"%>
+<%@ include file="script.jsp" %>
 </body>
 </html>

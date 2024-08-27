@@ -32,8 +32,8 @@ public interface CourseMapper {
             "from course c left join instructor i on (i.instructor_id = c.instructor_id) \n"+
             "left join member m on (i.member_id = m.member_id) \n" +
             "left join image img on (img.entity_id = c.course_id) \n" +
-            "where img.entity_type like 'course' "+
-            "order by c.start_date desc " +
+            "where (img.entity_type like 'course' and CURDATE() <= c.start_date) "+
+            "order by c.course_id desc " +
             "limit #{offset}, #{itemsPerPage}")
     List<CourseListResponse> courseAllList(@Param("offset") int offset, @Param("itemsPerPage") int itemsPerPage);
 
@@ -63,7 +63,7 @@ public interface CourseMapper {
             "left join image img on (img.entity_id = c.course_id) \n" +
             "left join subject s on (i.subject_id = s.subject_id) " +
             "where (s.subject_name like #{subject} and img.entity_type like 'course') "+
-            "order by c.start_date desc " +
+            "order by c.course_id desc " +
             "limit #{offset}, #{itemsPerPage}")
     List<CourseListResponse> getCourseListBySubject(@Param("subject") String subject,
                                                     @Param("offset") int offset,
@@ -101,7 +101,7 @@ public interface CourseMapper {
             "left join member m on (i.member_id = m.member_id) \n" +
             "left join image img on (img.entity_id = c.course_id) \n" +
             "where (m.name like #{instructorName} and img.entity_type like 'course') \n" +
-            "order by c.start_date desc " +
+            "order by c.course_id desc " +
             "limit #{offset}, #{itemsPerPage}")
     List<CourseListResponse> getCourseListByName(@Param("instructorName") String instructorName,
                                                  @Param("offset") int offset,
@@ -137,7 +137,7 @@ public interface CourseMapper {
             "left join image img on (img.entity_id = c.course_id) \n" +
             "left join grade g on (c.grade_id = g.grade_id) \n" +
             "where (g.grade_name like #{grade} and img.entity_type like 'course') "+
-            "order by c.start_date desc " +
+            "order by c.course_id desc " +
             "limit #{offset}, #{itemsPerPage}")
     List<CourseListResponse> getCourseListByGrade(@Param("grade") String grade,
                                                   @Param("offset") int offset,
@@ -197,7 +197,7 @@ public interface CourseMapper {
             "left join member m on (i.member_id = m.member_id) \n" +
             "left join image img on (img.entity_id = c.course_id) \n" +
             "where (m.name = #{instructorName} and img.entity_type like 'course')"+
-            "order by c.start_date desc " +
+            "order by c.course_id desc " +
             "limit 0, 10")
     List<CourseListResponse> courseListByInstructor(@Param("instructorName") String instructorName);
 

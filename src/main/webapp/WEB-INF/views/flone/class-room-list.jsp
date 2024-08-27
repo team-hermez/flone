@@ -13,8 +13,8 @@
     <div class="container">
         <div class="breadcrumb-content text-center">
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li class="active">강의 룸</li>
+                <li><a href="index.html">홈</a></li>
+                <li class="active">클래스룸 목록</li>
             </ul>
         </div>
     </div>
@@ -50,16 +50,6 @@
                                     <div class="blog-share-comment">
                                         <div class="blog-btn-2">
                                             <a href="blog-details.html">read more</a>
-                                        </div>
-                                        <div class="blog-share">
-                                            <span>share :</span>
-                                            <div class="share-social">
-                                                <ul>
-                                                    <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                                                    <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                                                    <li><a class="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
-                                                </ul>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="text-center mt-3">

@@ -15,9 +15,9 @@
         <div class="breadcrumb-content text-center">
             <ul>
                 <li>
-                    <a href="index.html">Home</a>
+                    <a href="index.html">홈</a>
                 </li>
-                <li class="active">Blog Details</li>
+                <li class="active">클래스룸 등록</li>
             </ul>
         </div>
     </div>

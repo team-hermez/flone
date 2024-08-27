@@ -9,7 +9,7 @@
         <div class="breadcrumb-content text-center">
             <ul>
                 <li>
-                    <a href="/flone/index.hm">Home</a>
+                    <a href="/flone/index.hm">홈</a>
                 </li>
                 <li class="active">나의 강의 목록</li>
             </ul>

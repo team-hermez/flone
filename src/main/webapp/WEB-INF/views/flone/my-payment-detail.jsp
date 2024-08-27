@@ -22,9 +22,9 @@
         <div class="breadcrumb-content text-center">
             <ul>
                 <li>
-                    <a href="/flone/index.hm">Home</a>
+                    <a href="/flone/index.hm">홈</a>
                 </li>
-                <li class="active">Checkout</li>
+                <li class="active">결제 상세</li>
             </ul>
         </div>
     </div>

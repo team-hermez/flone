@@ -18,7 +18,7 @@
         <div class="breadcrumb-content text-center">
             <ul>
                 <li>
-                    <a href="/flone/index.hm">Home</a>
+                    <a href="/flone/index.hm">홈</a>
                 </li>
                 <li class="active">결제완료 </li>
             </ul>

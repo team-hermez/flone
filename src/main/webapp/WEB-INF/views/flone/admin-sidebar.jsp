@@ -79,7 +79,7 @@
         <nav>
             <ul>
                 <li><a href="/flone/admin/main.hm"> MAIN </a></li>
-                <li><a href="/flone/admin/manage-member.hm"> 회원관리</a></li>
+                <li><a href="/flone/admin/member/manage-member.hm"> 회원관리</a></li>
                 <li><a href="/flone/admin/instructor/manage-instructor.hm"> 강사관리 <span><i class="fa fa-angle-right"></i></span></a>
                     <ul class="submenu">
                         <li><a href="/flone/admin/instructor/manage-instructor.hm">강사 조회</a></li>

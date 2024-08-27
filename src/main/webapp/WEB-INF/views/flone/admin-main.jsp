@@ -107,7 +107,7 @@
                         <div class="count-icon">
                             <i class="pe-7s-light"></i>
                         </div>
-                        <h2 class="count">420</h2>
+                        <h2 class="count">${adminMainResponse.TotalInstructorCount}</h2>
                         <span>전체 강사</span>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
                         <div class="count-icon">
                             <i class="pe-7s-video"></i>
                         </div>
-                        <h2 class="count">690</h2>
+                        <h2 class="count">${adminMainResponse.TotalCourseCount}</h2>
                         <span>전체 강의</span>
                     </div>
                 </div>

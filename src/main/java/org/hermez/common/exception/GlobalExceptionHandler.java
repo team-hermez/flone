@@ -6,6 +6,7 @@ import org.hermez.classroom.board.exception.BoardServiceException;
 import org.hermez.classroom.classroom.exception.ClassroomNotFoundException;
 import org.hermez.classroom.reply.exception.ReplyNotFoundException;
 import org.hermez.course.exception.CourseRegisterTimeException;
+import org.hermez.filter.exception.AdminFilterException;
 import org.hermez.image.exception.ImageProcessingException;
 import org.hermez.reservation.exception.NotActiveClassException;
 import org.springframework.ui.Model;
@@ -31,6 +32,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ImageProcessingException.class)
     public String handleImageProcessingException(ImageProcessingException ex, Model model) {
+        model.addAttribute("errorMessage", ex.getMessage());
+        return "error";
+    }
+
+    @ExceptionHandler(AdminFilterException.class)
+    public String handleAdminFilterException(AdminFilterException ex, Model model) {
         model.addAttribute("errorMessage", ex.getMessage());
         return "error";
     }

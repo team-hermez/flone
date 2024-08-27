@@ -14,7 +14,7 @@
         <div class="breadcrumb-content text-center">
             <ul>
                 <li>
-                    <a href="/flone/index.hm">Home</a>
+                    <a href="/flone/index.hm">홈</a>
                 </li>
                 <li class="active">수강 예약 강의 상세</li>
             </ul>
@@ -64,7 +64,7 @@
                                         <div class="sidebar-blog-img">
                                             <a href="/flone/board/board-list.hm?classroomId=${classroom.classroomId}">
                                                 <img src="../../../../images/${classroom.classroomImage}" width="200px"
-                                                     height="100px"
+                                                     height="50px"
                                                      onerror="this.onerror=null; this.src='../../../../images/image.png';"></a>
                                         </div>
                                         <div class="sidebar-blog-content">
@@ -78,7 +78,7 @@
                             </c:forEach>
                             <div class="single-sidebar-blog">
                                 <form action="/flone/classroom/classroom-list.hm" method="get" style="display:inline;">
-                                    <input type="hidden" name="courseId" value="${courseId}">
+                                    <input type="hidden" name="courseId" value="${courseDetailList.courseId}">
                                     <div class="sidebar-blog-content">
                                         <button type="submit" class="btn btn-outline-danger">나의 강의 룸</button>
                                     </div>

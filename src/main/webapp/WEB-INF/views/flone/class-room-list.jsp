@@ -25,9 +25,14 @@
         <div class="section-title text-center mb-sm-5">
             <h2>강의 룸</h2>
         </div>
-        <div class="text-center mb-30">
-            <a href="classroom-register-form.hm?courseId=${courseId}" class="btn btn-primary">클래스룸 등록하기</a>
-        </div>
+        <c:choose>
+            <c:when test="${not empty sessionScope.INSTRUCTOR}">
+                <div class="text-center mb-30">
+                    <a href="classroom-register-form.hm?courseId=${courseId}" class="btn btn-primary">클래스룸 등록하기</a>
+                </div>
+            </c:when>
+        </c:choose>
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="row">

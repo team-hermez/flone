@@ -23,68 +23,85 @@ public class MemberServiceImpl implements MemberService {
     private final BCryptPasswordEncoder passwordEncoder;
 
     public void registerMember(MemberRegisterRequest memberRegisterRequest) {
-        boolean emailExist = memberMapper.selectMemberRegisterEmailExist(memberRegisterRequest);
-        boolean phoneExist = memberMapper.selectMemberPhoneExist(memberRegisterRequest);
+        try {
+            int emailExist = memberMapper.selectMemberRegisterEmailExist(memberRegisterRequest);
+            int phoneExist = memberMapper.selectMemberPhoneExist(memberRegisterRequest);
 
-        if (emailExist) {
-            throw new MemberServiceException("중복된 이메일이 존재합니다.");
-        }
+            if (emailExist == 1) {
+                throw new MemberServiceException("중복된 이메일이 존재합니다.");
+            }
 
-        if (phoneExist) {
-            throw new MemberServiceException("중복된 전화번호가 존재합니다.");
-        }
+            if (phoneExist == 1) {
+                throw new MemberServiceException("중복된 전화번호가 존재합니다.");
+            }
 
-        if(session!=null) {
-            String socialLoginId = (String) session.getAttribute("socialLoginId");
+            if (session != null) {
+                String socialLoginId = (String) session.getAttribute("socialLoginId");
 
-            String encodedPassword = passwordEncoder.encode(memberRegisterRequest.getEncodedPassword());
-            Member member = new Member(
-                    memberRegisterRequest.getRoleId(),
-                    memberRegisterRequest.getName(),
-                    socialLoginId,
-                    memberRegisterRequest.getEmail(),
-                    encodedPassword,
-                    memberRegisterRequest.getPhone(),
-                    memberRegisterRequest.getMemberStatus(),
-                    memberRegisterRequest.getCreatedAt()
-            );
-            save(member);
+                String encodedPassword = passwordEncoder.encode(memberRegisterRequest.getEncodedPassword());
+                Member member = new Member(
+                        memberRegisterRequest.getRoleId(),
+                        memberRegisterRequest.getName(),
+                        socialLoginId,
+                        memberRegisterRequest.getEmail(),
+                        encodedPassword,
+                        memberRegisterRequest.getPhone(),
+                        memberRegisterRequest.getMemberStatus(),
+                        memberRegisterRequest.getCreatedAt()
+                );
+                save(member);
+            }
+        } catch (MemberServiceException e) {
+            throw new MemberServiceException(e.getMessage());
+        } catch (Exception e) {
+            throw new MemberServiceException("회원가입 중 오류가 발생했습니다.", e);
         }
     }
 
     @Override
     public void loginMember(MemberLoginRequest memberLoginRequest) {
-        boolean exist = memberMapper.selectMemberEmailExist(memberLoginRequest);
-        if (!exist) {
-            throw new MemberServiceException("등록된 이메일이 없습니다.");
+        try {
+            int exists = memberMapper.selectMemberEmailExist(memberLoginRequest);
+            int status = memberMapper.selectMemberStatus(memberLoginRequest);
+
+            if (exists == 0) {
+                throw new MemberServiceException("등록된 이메일이 없습니다.");
+            }
+
+            if (status == 1) {
+                throw new MemberServiceException("비회원입니다. 관리자에게 문의해주세요.");
+            }
+
+            MemberLoginResponse memberLoginResponse = memberMapper.loginMember(memberLoginRequest);
+            if (memberLoginResponse == null) {
+                throw new MemberServiceException("비밀번호가 맞지 않습니다.");
+            }
+
+            boolean passwordsMatch = passwordEncoder.matches(memberLoginRequest.getPassword(), memberLoginResponse.getEncodedPassword());
+            if (!passwordsMatch) {
+                throw new MemberServiceException("비밀번호가 맞지 않습니다.");
+            }
+
+            Instructor instructor = instructorService.findByMemberLoginResponseId(memberLoginResponse);
+            MemberLoginResponse admin = memberMapper.loginMember(memberLoginRequest);
+
+            if (memberLoginResponse.getRoleId() == 1) {
+                session.setAttribute("MEMBER", memberLoginResponse);
+            } else if (memberLoginResponse.getRoleId() == 2) {
+                session.setAttribute("MEMBER", memberLoginResponse);
+                session.setAttribute("INSTRUCTOR", instructor);
+            } else if (memberLoginResponse.getRoleId() == 3) {
+                session.setAttribute("MEMBER", memberLoginResponse);
+                session.setAttribute("INSTRUCTOR", instructor);
+                session.setAttribute("ADMIN", admin);
+            }
         }
-
-        MemberLoginResponse memberLoginResponse = memberMapper.loginMember(memberLoginRequest);
-        if (memberLoginResponse == null) {
-            throw new MemberServiceException("비밀번호가 맞지 않습니다.");
-        }
-
-        boolean passwordsMatch = passwordEncoder.matches(memberLoginRequest.getPassword(), memberLoginResponse.getEncodedPassword());
-        if (!passwordsMatch) {
-            throw new MemberServiceException("비밀번호가 맞지 않습니다.");
-        }
-
-        Instructor instructor = instructorService.findByMemberLoginResponseId(memberLoginResponse);
-        MemberLoginResponse admin = memberMapper.loginMember(memberLoginRequest);
-
-        if (memberLoginResponse.getRoleId() == 1) {
-            session.setAttribute("MEMBER", memberLoginResponse);
-        } else if (memberLoginResponse.getRoleId() == 2) {
-            session.setAttribute("MEMBER", memberLoginResponse);
-            session.setAttribute("INSTRUCTOR", instructor);
-        } else if (memberLoginResponse.getRoleId() == 3) {
-            session.setAttribute("MEMBER", memberLoginResponse);
-            session.setAttribute("INSTRUCTOR", instructor);
-            session.setAttribute("ADMIN", admin);
+        catch (MemberServiceException e) {
+            throw new MemberServiceException(e.getMessage());
+        } catch (Exception e) {
+            throw new MemberServiceException("로그인 중 오류가 발생했습니다.", e);
         }
     }
-
-
 
     @Override
     public void save(Member member) {

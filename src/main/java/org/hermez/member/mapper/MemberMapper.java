@@ -17,13 +17,13 @@ public interface MemberMapper {
     MemberLoginResponse loginMember(MemberLoginRequest memberLoginRequest);
 
     @Select("SELECT COUNT(1) > 0 FROM member WHERE email = #{email}")
-    boolean selectMemberEmailExist(MemberLoginRequest memberLoginRequest);
+    int selectMemberEmailExist(MemberLoginRequest memberLoginRequest);
 
     @Select("SELECT COUNT(1) > 0 FROM member WHERE email = #{email}")
-    boolean selectMemberRegisterEmailExist(MemberRegisterRequest memberRegisterRequest);
+    int selectMemberRegisterEmailExist(MemberRegisterRequest memberRegisterRequest);
 
     @Select("SELECT COUNT(1) > 0 FROM member WHERE phone = #{phone}")
-    boolean selectMemberPhoneExist(MemberRegisterRequest memberRegisterRequest);
+    int selectMemberPhoneExist(MemberRegisterRequest memberRegisterRequest);
 
     @Select("select member_id as memberId, email, name, encoded_password, phone from member where member_id = #{memberId};")
     MyAccountResponse getMyAccount(int memberId);
@@ -41,4 +41,9 @@ public interface MemberMapper {
 
     @Update("UPDATE member SET encoded_password = #{passwordConfirm} WHERE member_id = #{memberId}")
     void updateMyAccountPassword(MyAccountEditRequest myAccountEditRequest);
+
+    @Select("SELECT COUNT(1) > 0 from member where email = #{email} and member_status = #{memberStatus}")
+    int selectMemberStatus(MemberLoginRequest memberLoginRequest);
+
+
 }

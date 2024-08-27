@@ -126,7 +126,7 @@
                                     <h5>비밀번호</h5>
                                     <div class="form-group">
                                         <div style="position: relative;">
-                                            <form:input type="encodedPassword" id="encodedPassword" path="encodedPassword" placeholder="비밀번호"
+                                            <form:input type="password" id="encodedPassword" path="encodedPassword" placeholder="비밀번호"
                                                         style="padding-right: 40px;"/>
                                             <button type="button"
                                                     onclick="toggleVisibilitySelectorPassword('#encodedPassword', '#iconPassword')"

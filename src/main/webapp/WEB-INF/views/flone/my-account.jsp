@@ -151,15 +151,18 @@
                                                 <p>버튼을 누르면 비회원으로 전환되며</p>
                                                 <p>철회는 불가능하니 신중하게 부탁드립니다.</p>
                                             </div>
+
                                         </div>
-                                        <form action="/flone/member/delete.hm?memberId=${sessionScope.MEMBER.memberId}" method="post">
-                                            <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
-                                                <div class="entries-edit-delete text-center">
-                                                    <a class="edit" href="/flone/index.hm">홈으로</a>
-                                                    <button type="submit">회원탈퇴</button>
-                                                </div>
+                                        <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
+                                            <div class="entries-edit-delete text-center">
+                                                <a class="edit" href="/flone/index.hm">홈으로</a>
+
+                                                <!-- 회원탈퇴 폼 -->
+                                                <form action="/flone/member/delete.hm?memberId=${sessionScope.MEMBER.memberId}" method="post" style="display: inline;">
+                                                    <button type="submit" class="edit" style="color: #fff;display: inline-block;line-height: 1;margin: 0 2px;padding: 12px 15px;text-transform: uppercase;font-weight: 500;background: black;: 0; height: 42px;">회원탈퇴</button>                                                </form>
                                             </div>
-                                        </form>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -169,6 +172,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 </div>
 </div>

@@ -77,7 +77,6 @@ public class MemberController {
     public String postDeleteMember(@RequestParam int memberId, HttpSession session) {
         memberService.insertMemberStatus(memberId);
         session.invalidate();
-
         return "redirect:/flone/index.hm";
     }
 

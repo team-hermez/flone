@@ -69,16 +69,15 @@ public class ImageServiceImpl implements ImageService {
             encodedOriginalName = encodedOriginalName.replaceAll("\\+", "%20");
             String saveName = System.currentTimeMillis() + "_" + encodedOriginalName;
 
-            String targetDir = new File(servletContext.getRealPath("/")).getParentFile().getParent()
-                    + File.separator + "src" + File.separator + "main" + File.separator + "webapp" + File.separator + "resources"
-                    + File.separator + "images";
+            String targetDir = servletContext.getRealPath("/")
+                    + "resources" + File.separator + "images";
             File directory = new File(targetDir);
             if (!directory.exists()) {
                 directory.mkdirs();
             }
-
             String filePath = targetDir + File.separator + saveName;
             File destinationFile = new File(filePath);
+
             file.transferTo(destinationFile);
 
             Image image = new Image(

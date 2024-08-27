@@ -58,57 +58,36 @@
                     <div class="sidebar-widget mt-50">
                         <h4 class="pro-sidebar-title">강의 룸 </h4>
                         <div class="sidebar-project-wrap mt-30">
+                            <c:forEach var="classroom" items="${classrooms.contents}" varStatus="status">
+                                <c:if test="${status.index < 4}">
+                                    <div class="single-sidebar-blog">
+                                        <div class="sidebar-blog-img">
+                                            <a href="/flone/board/board-list.hm?classroomId=${classroom.classroomId}">
+                                                <img src="../../../../images/${classroom.classroomImage}" width="300px"
+                                                     height="300px"
+                                                     onerror="this.onerror=null; this.src='../../../../images/image.png';"></a>
+                                        </div>
+                                        <div class="sidebar-blog-content">
+                                            <span>Photography</span>
+                                            <h4>
+                                                <a href="/flone/board/board-list.hm?classroomId=${classroom.classroomId}">${classroom.classroomName}</a>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </c:if>
+                            </c:forEach>
                             <div class="single-sidebar-blog">
-                                <div class="sidebar-blog-img">
-                                    <a href="#"><img src="/resources/images/image.png"
-                                                     alt=""></a>
-                                </div>
-                                <div class="sidebar-blog-content">
-                                    <span>Photography</span>
-                                    <h4><a href="#">1주차 - 화법과 작문(1)</a></h4>
-                                </div>
-                            </div>
-                            <div class="single-sidebar-blog">
-                                <div class="sidebar-blog-img">
-                                    <a href="#"><img src="/resources/images/image.png"
-                                                     alt=""></a>
-                                </div>
-                                <div class="sidebar-blog-content">
-                                    <span>Branding</span>
-                                    <h4><a href="#">2주차 - 화법과 작문(2)</a></h4>
-                                </div>
-                            </div>
-                            <div class="single-sidebar-blog">
-                                <div class="sidebar-blog-img">
-                                    <a href="#"><img src="/resources/images/image.png"
-                                                     alt=""></a>
-                                </div>
-                                <div class="sidebar-blog-content">
-                                    <span>Design</span>
-                                    <h4><a href="#">3주차 - 비문학 (1)</a></h4>
-                                </div>
-                            </div>
-                            <div class="single-sidebar-blog">
-                                <div class="sidebar-blog-img">
-                                    <a href="#"><img src="/resources/images/image.png"
-                                                     alt=""></a>
-                                </div>
-                                <div class="sidebar-blog-content">
-                                    <span>Photography</span>
-                                    <h4><a href="#">4주차 - 비문학 (2)</a></h4>
-                                </div>
-                            </div>
-                            <div class="single-sidebar-blog">
-                                <div class="sidebar-blog-content">
-                                    <button type="button" class="btn btn-outline-danger">나의 강의 룸
-                                    </button>
-                                </div>
+                                <form action="/flone/classroom/classroom-list.hm?courseId=${courseId}" method="get">
+                                    <div class="sidebar-blog-content">
+                                        <button type="submit" class="btn btn-outline-danger">나의 강의 룸</button>
+                                    </div>
+                                </form>
                             </div>
                             <div class="single-sidebar-blog">
                                 <form action="reserved-course-list.hm" method="get">
-                                <div class="sidebar-blog-content">
-                                    <button type="submit" class="btn btn-secondary">나의 수강 목록</button>
-                                </div>
+                                    <div class="sidebar-blog-content">
+                                        <button type="submit" class="btn btn-secondary">나의 수강 목록</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>

@@ -13,6 +13,8 @@ import java.util.UUID;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hermez.classroom.classroom.dto.ClassroomCardResponse;
+import org.hermez.classroom.classroom.service.ClassroomService;
 import org.hermez.common.page.Page;
 import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.course.model.CourseTime;
@@ -54,6 +56,7 @@ public class ReservationController {
   private final ReservationService reservationService;
   private final IamportService iamportService;
   private final CourseService courseService;
+  private final ClassroomService classroomService;
 
 
   @GetMapping("/detail.hm")
@@ -111,6 +114,8 @@ public class ReservationController {
   public String getReservationDetailPage(@RequestParam int courseId, Model model) {
     CourseDetailResponse courseDetailList = courseService.courseDetailService(courseId);
     List<CourseTime> courseTimeList = courseService.courseDetailTime(courseId);
+    Page<ClassroomCardResponse> classrooms = classroomService.getClassroomList(courseId, 1);
+    model.addAttribute("classrooms", classrooms);
     model.addAttribute("courseDetailList", courseDetailList);
     model.addAttribute("courseTimeList", courseTimeList);
     return "flone/reservation-detail";

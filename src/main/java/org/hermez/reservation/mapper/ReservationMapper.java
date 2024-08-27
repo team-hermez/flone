@@ -86,6 +86,9 @@ public interface ReservationMapper {
   @Select("select count(reservation_id) from reservation")
   int countReservationsAll();
 
+  @Select("select count(reservation_id) from reservation where course_id=#{courseId}")
+  int countReservationsAllByCourseId(int courseId);
+
   @Select("select count(reservation_id) from reservation where reservation_status_id=2")
   int countRefundAll();
 
@@ -113,6 +116,17 @@ public interface ReservationMapper {
           + "order by reservation_id desc \n"
           + "limit #{offset}, #{itemsPerPage}")
   List<ReservationListResponse> selectReservationListAll(@Param("offset") int offset,
+      @Param("itemsPerPage") int itemsPerPage);
+
+  @Select(
+      "select course_id as courseId,reservation_status_id as reservationStatusId, merchant_uid as merchantUid,payment_amount as paymentAmount ,payment_history.created_at as createdAt,cancel_at as cancelAt,title,start_date as startDate,end_date as endDate \n"
+          + "from reservation \n"
+          + "join payment_history using (payment_history_id) \n"
+          + "join course using (course_id) \n"
+          + "where course_id=#{courseId} \n"
+          + "order by reservation_id desc \n"
+          + "limit #{offset}, #{itemsPerPage}")
+  List<ReservationListResponse> selectReservationListAllByCourseId(@Param("courseId") int courseId ,@Param("offset") int offset,
       @Param("itemsPerPage") int itemsPerPage);
 
   @Select(

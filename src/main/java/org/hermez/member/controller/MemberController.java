@@ -73,4 +73,11 @@ public class MemberController {
         return "redirect:/flone/index.hm";
     }
 
+    @PostMapping("delete.hm")
+    public String postDeleteMember(@RequestParam int memberId, HttpSession session) {
+        memberService.insertMemberStatus(memberId);
+        session.invalidate();
+        return "redirect:/flone/index.hm";
+    }
+
 }

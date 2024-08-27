@@ -14,6 +14,9 @@ import org.hermez.reservation.model.Reservation;
 import org.hermez.reservation.model.ReservationRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * {@inheritDoc}
+ */
 @Slf4j
 @Repository
 @RequiredArgsConstructor
@@ -62,16 +65,25 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     reservationMapper.updateReservationStatus(merchantUid);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public List<MyReservationDTO> findMyReservationList(int memberId) {
     return reservationMapper.findMyReservationList(memberId);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public List<MyReservationDTO> findReservationCourseSchedule(int courseId) {
     return reservationMapper.findReservationCourseSchedule(courseId);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Page<ReservationListResponse> getReservationList(int memberId, int page) {
     int total = reservationMapper.countReservations(memberId);
@@ -80,6 +92,9 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     return new Page<>(reservations, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Page<ReservationListResponse> getReservationListAll(int page) {
     int total = reservationMapper.countReservationsAll();
@@ -88,6 +103,9 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     return new Page<>(reservationAll, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Page<ReservationListResponse> selectReservationListAllByCourseId(int courseId, int page) {
     int total = reservationMapper.countReservationsAllByCourseId(courseId);
@@ -96,6 +114,9 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     return new Page<>(reservationAll, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Page<ReservationListResponse> getRefundListAll(int page) {
     int total = reservationMapper.countRefundAll();
@@ -104,7 +125,9 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     return new Page<>(refundListAll, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
   }
 
-
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Page<MyReservedReservationDTO> findMyReservedReservationList(int memberId, int page) {
     int total = reservationMapper.countMyReservedCourse(memberId);
@@ -114,6 +137,9 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     return new Page<>(myReservations, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public MyPaymentDetailResponse findMyPaymentDetail(String merchantUid) {
    return reservationMapper.findMyPaymentDetail(merchantUid);

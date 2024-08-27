@@ -55,15 +55,11 @@ public class IamportService {
   public void verifyPayment(IamportResponse<Payment> payResponse, int amount, String merchantUid) {
     log.info("[결제 검증 시작]");
     int iamportAmount = payResponse.getResponse().getAmount().intValue();
-    //결제금액과 아임포트 서버 금액 대조
     if (iamportAmount != amount) {
       log.info("[아임포트 서버(실결제 금액)과 강의 가격이 다릅니다] 아임포트 서버 금액 = {} , 클라이언트가 보낸 강의 가격 = {} ",iamportAmount ,amount);
       throw new IllegalStateException("클라이언트가 보낸 강의 가격이 아임포트 서버 결제 금액과 다릅니다.");
     }
-    int payAmount = reservationRepository.findPayAmount(merchantUid);//강의에서 가져와야함
-
-    //db에서 강의 가격과 결제금액 같은지 확인
-
+    int payAmount = reservationRepository.findPayAmount(merchantUid);
     if (amount != payAmount) {
       log.info("[결제시 hermez 서버에 저장된 금액과 클라이언트가 보낸 강의 가격이 다릅니다] hermez 서버 금액 = {} , 클라이언트가 보낸 강의 가격 = {}",payAmount,amount);
       throw new IllegalStateException("결제시 hermez 서버에 저장된 금액과 클라이언트가 보낸 강의 가격이 다릅니다.");
@@ -76,8 +72,8 @@ public class IamportService {
    * @param cancelDTO 취소/환불 요청시 요청 데이터
    * @param findReservation 고객의 환불 요청한 예약 정보
    * @return 결제 API( 아임포트 ) 서버 응답
-   * @throws IamportResponseException 결제 API( 아임포트 ) 서버 응답 요류시 발생
-   * @throws IOException
+   * @throws IamportResponseException 결제 API( 아임포트 ) 서버의 응답이 실패했거나, 서버에서 오류 응답을 반환한 경우 발생
+   * @throws IOException 결제 API 서버와의 통신 중 I/O 예외가 발생. 네트워크 장애, 서버 불가용 상태 등으로 인해 아임포트 서버와의 통신이 실패할 때 발생.
    */
   public IamportResponse<Payment> cancelMethod(CancelDTO cancelDTO, Reservation findReservation) throws IamportResponseException, IOException {
     IamportResponse<Payment> cancelResponse = null;
@@ -95,8 +91,8 @@ public class IamportService {
    * @param cancelDTO 취소 요청 데이터
    * @param findReservation 고객의 환불 요청한 예약 정보
    * @return 취소/환불 데이터
-   * @throws IamportResponseException 결제 API( 아임포트 ) 서버 응답 요류시 발생
-   * @throws IOException
+   * @throws IamportResponseException 결제 API( 아임포트 ) 서버의 응답이 실패했거나, 서버에서 오류 응답을 반환한 경우 발생
+   * @throws IOException 결제 API 서버와의 통신 중 I/O 예외가 발생. 네트워크 장애, 서버 불가용 상태 등으로 인해 아임포트 서버와의 통신이 실패할 때 발생.
    */
   public CancelData getCancelData(CancelDTO cancelDTO , Reservation findReservation)
       throws IamportResponseException, IOException {

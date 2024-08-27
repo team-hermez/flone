@@ -3,6 +3,11 @@ package org.hermez.reservation.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 결제 요청시 정보를 담는 DTO 클래스입니다.
+ *
+ * @author 허상범
+ */
 @Getter @Setter
 public class VerificationRequest {
 

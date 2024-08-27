@@ -6,6 +6,9 @@ import org.hermez.paymenthistory.model.PaymentHistory;
 import org.hermez.paymenthistory.model.PaymentHistoryRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * {@inheritDoc}
+ */
 @Repository
 @RequiredArgsConstructor
 public class PaymentHistoryRepositoryImpl implements PaymentHistoryRepository {

@@ -25,7 +25,7 @@ public interface InstructorMapper {
             "ins.instructor_status AS instructorStatus, " +
             "i.save_name AS saveImage " +
             "FROM instructor ins " +
-            "LEFT JOIN image i ON ins.instructor_id = i.entity_id AND i.entity_type = 'instructor' " +
+            "LEFT JOIN image i ON ins.instructor_id = i.entity_id AND i.entity_type = 'INSTRUCTOR' " +
             "LEFT JOIN member m ON m.member_id = ins.member_id " +
             "WHERE ins.instructor_status = 1 " +
             "ORDER BY ins.instructor_id DESC " +

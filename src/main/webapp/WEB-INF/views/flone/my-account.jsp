@@ -152,12 +152,14 @@
                                                 <p>철회는 불가능하니 신중하게 부탁드립니다.</p>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
-                                            <div class="entries-edit-delete text-center">
-                                                <a class="edit" href="#">홈으로</a>
-                                                <a href="#">회원 탈퇴</a>
+                                        <form action="/flone/member/delete.hm?memberId=${sessionScope.MEMBER.memberId}" method="post">
+                                            <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
+                                                <div class="entries-edit-delete text-center">
+                                                    <a class="edit" href="/flone/index.hm">홈으로</a>
+                                                    <button type="submit">회원탈퇴</button>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

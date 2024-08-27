@@ -63,8 +63,8 @@
                                     <div class="single-sidebar-blog">
                                         <div class="sidebar-blog-img">
                                             <a href="/flone/board/board-list.hm?classroomId=${classroom.classroomId}">
-                                                <img src="../../../../images/${classroom.classroomImage}" width="300px"
-                                                     height="300px"
+                                                <img src="../../../../images/${classroom.classroomImage}" width="200px"
+                                                     height="100px"
                                                      onerror="this.onerror=null; this.src='../../../../images/image.png';"></a>
                                         </div>
                                         <div class="sidebar-blog-content">
@@ -77,7 +77,8 @@
                                 </c:if>
                             </c:forEach>
                             <div class="single-sidebar-blog">
-                                <form action="/flone/classroom/classroom-list.hm?courseId=${courseId}" method="get">
+                                <form action="/flone/classroom/classroom-list.hm" method="get" style="display:inline;">
+                                    <input type="hidden" name="courseId" value="${courseId}">
                                     <div class="sidebar-blog-content">
                                         <button type="submit" class="btn btn-outline-danger">나의 강의 룸</button>
                                     </div>

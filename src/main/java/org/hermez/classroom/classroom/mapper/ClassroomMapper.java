@@ -29,8 +29,8 @@ public interface ClassroomMapper {
             "i.save_name AS classroomImage " +
             "FROM classroom c " +
             "LEFT JOIN image i ON c.classroom_id = i.entity_id " +
-            "WHERE c.course_id = #{courseId} " +
-            "AND i.entity_type = 'CLASSROOM' " +
+            "WHERE (c.course_id = #{courseId} " +
+            "AND i.entity_type = 'CLASSROOM') " +
             "ORDER BY c.created_at DESC " +
             "LIMIT #{offset}, #{itemsPerPage}")
     List<ClassroomCardResponse> selectClassroomList(@Param("courseId") int courseId, @Param("offset") int offset, @Param("itemsPerPage") int itemPerPage);

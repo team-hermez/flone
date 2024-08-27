@@ -70,14 +70,14 @@ public class MemberController {
     @PostMapping("login.hm")
     public String postLogin(@Validated @ModelAttribute("member") MemberLoginRequest memberLoginRequest, HttpSession session) {
         memberService.loginMember(memberLoginRequest);
-        return "redirect:/flone/index.hm";
+        return "redirect:/";
     }
 
     @PostMapping("delete.hm")
     public String postDeleteMember(@RequestParam int memberId, HttpSession session) {
         memberService.insertMemberStatus(memberId);
         session.invalidate();
-        return "redirect:/flone/index.hm";
+        return "redirect:/";
     }
 
 }

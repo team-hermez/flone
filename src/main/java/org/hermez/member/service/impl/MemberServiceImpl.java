@@ -36,20 +36,34 @@ public class MemberServiceImpl implements MemberService {
             }
 
             if (session != null) {
-                String socialLoginId = (String) session.getAttribute("socialLoginId");
-
-                String encodedPassword = passwordEncoder.encode(memberRegisterRequest.getEncodedPassword());
-                Member member = new Member(
-                        memberRegisterRequest.getRoleId(),
-                        memberRegisterRequest.getName(),
-                        socialLoginId,
-                        memberRegisterRequest.getEmail(),
-                        encodedPassword,
-                        memberRegisterRequest.getPhone(),
-                        memberRegisterRequest.getMemberStatus(),
-                        memberRegisterRequest.getCreatedAt()
-                );
-                save(member);
+                String socialId = (String) session.getAttribute("socialLoginId");
+                Member member=null;
+                if (socialId != null) {
+                    String encodedPassword = passwordEncoder.encode(memberRegisterRequest.getEncodedPassword());
+                    MemberSocialLoginResponse memberSocialLoginResponse = new MemberSocialLoginResponse(
+                            memberRegisterRequest.getRoleId(),
+                            memberRegisterRequest.getName(),
+                            socialId,
+                            memberRegisterRequest.getEmail(),
+                            encodedPassword,
+                            memberRegisterRequest.getPhone(),
+                            memberRegisterRequest.getMemberStatus(),
+                            memberRegisterRequest.getCreatedAt()
+                    );
+                    memberMapper.updateSocialMember(memberSocialLoginResponse);
+                }else {
+                    String encodedPassword = passwordEncoder.encode(memberRegisterRequest.getEncodedPassword());
+                    member = new Member(
+                            memberRegisterRequest.getRoleId(),
+                            memberRegisterRequest.getName(),
+                            memberRegisterRequest.getEmail(),
+                            encodedPassword,
+                            memberRegisterRequest.getPhone(),
+                            memberRegisterRequest.getMemberStatus(),
+                            memberRegisterRequest.getCreatedAt()
+                    );
+                    save(member);
+                }
             }
         } catch (MemberServiceException e) {
             throw new MemberServiceException(e.getMessage());
@@ -102,7 +116,9 @@ public class MemberServiceImpl implements MemberService {
             throw new MemberServiceException("로그인 중 오류가 발생했습니다.", e);
         }
     }
-
+    public void update(MemberSocialLoginResponse memberSocialLoginResponse) {
+        memberMapper.updateSocialMember(memberSocialLoginResponse);
+    }
     @Override
     public void save(Member member) {
         memberMapper.registerMember(member);

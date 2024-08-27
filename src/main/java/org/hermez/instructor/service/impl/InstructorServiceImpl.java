@@ -46,6 +46,7 @@ public class InstructorServiceImpl implements InstructorService {
     @Override
     public int instructorsCount() {
         int total = instructorMapper.instructorCount();
+        System.out.println(total);
         return total;
     }
 

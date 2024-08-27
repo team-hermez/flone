@@ -7,6 +7,5 @@ public interface SocialService {
     String naverLogin(HttpSession session);
 
     String naverGetProfile(HttpSession session);
-
-//    boolean selectNaverSocialId(String socialLoginId);
+    int selectNaverSocialId(String socialLoginId);
 }

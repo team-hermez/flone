@@ -20,6 +20,15 @@ public class Member {
     private String socialLoginId;
     private LocalDateTime createdAt;
 
+    public Member(int roleId, String name, String email, String encodedPassword, String phone, int memberStatus, LocalDateTime createdAt) {
+        this.roleId = roleId;
+        this.name = name;
+        this.email = email;
+        this.encodedPassword = encodedPassword;
+        this.memberStatus = memberStatus;
+        this.phone = phone;
+        this.createdAt = createdAt;
+    }
     public Member(int roleId, String name, String socialLoginId,String email, String encodedPassword, String phone, int memberStatus, LocalDateTime createdAt) {
         this.roleId = roleId;
         this.name = name;

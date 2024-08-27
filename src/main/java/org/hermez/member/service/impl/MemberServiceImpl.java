@@ -37,7 +37,7 @@ public class MemberServiceImpl implements MemberService {
 
             if (session != null) {
                 String socialId = (String) session.getAttribute("socialLoginId");
-                Member member=null;
+                Member member = null;
                 if (socialId != null) {
                     String encodedPassword = passwordEncoder.encode(memberRegisterRequest.getEncodedPassword());
                     MemberSocialLoginResponse memberSocialLoginResponse = new MemberSocialLoginResponse(
@@ -51,7 +51,7 @@ public class MemberServiceImpl implements MemberService {
                             memberRegisterRequest.getCreatedAt()
                     );
                     memberMapper.updateSocialMember(memberSocialLoginResponse);
-                }else {
+                } else {
                     String encodedPassword = passwordEncoder.encode(memberRegisterRequest.getEncodedPassword());
                     member = new Member(
                             memberRegisterRequest.getRoleId(),
@@ -109,16 +109,17 @@ public class MemberServiceImpl implements MemberService {
                 session.setAttribute("INSTRUCTOR", instructor);
                 session.setAttribute("ADMIN", admin);
             }
-        }
-        catch (MemberServiceException e) {
+        } catch (MemberServiceException e) {
             throw new MemberServiceException(e.getMessage());
         } catch (Exception e) {
             throw new MemberServiceException("로그인 중 오류가 발생했습니다.", e);
         }
     }
+
     public void update(MemberSocialLoginResponse memberSocialLoginResponse) {
         memberMapper.updateSocialMember(memberSocialLoginResponse);
     }
+
     @Override
     public void save(Member member) {
         memberMapper.registerMember(member);
@@ -152,6 +153,25 @@ public class MemberServiceImpl implements MemberService {
             throw new MemberServiceException(e.getMessage());
         } catch (Exception e) {
             throw new MemberServiceException("내 정보 수정 중 오류가 발생했습니다.", e);
+        }
+    }
+
+    @Override
+    public String changePassword(MemberCheckPasswordRequest memberCheckPasswordRequest) {
+        try {
+              int check = memberMapper.selectCheckPassword(memberCheckPasswordRequest);
+                if (check == 1) {
+                    String encodedPassword = passwordEncoder.encode(memberCheckPasswordRequest.getPasswordConfirm());
+                    memberCheckPasswordRequest.setPasswordConfirm(encodedPassword);
+                    memberMapper.changePassword(memberCheckPasswordRequest);
+                    return "redirect:/flone/login.hm";
+                }else {
+                    throw new MemberServiceException("정보가 일치하지않습니다.");
+                }
+        } catch (MemberServiceException e) {
+            throw new MemberServiceException(e.getMessage());
+        } catch (Exception e) {
+            throw new MemberServiceException("비밀번호 변경 중 오류가 발생했습니다.");
         }
     }
 }

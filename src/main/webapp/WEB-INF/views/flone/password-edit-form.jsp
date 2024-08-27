@@ -58,21 +58,23 @@
             <div class="col-lg-7 col-md-12 ms-auto me-auto">
                 <div class="login-register-wrapper">
                     <div class="login-register-tab-list nav">
-                        <a class="active" href="/flone/member/login.hm"> 로그인 </a>
-                        |
-                        <a class="active" href="/flone/member/register.hm"> 회원가입 </a>
+                        <a class="active" href="/flone/member/login.hm"> 비밀번호 변경 </a>
                     </div>
                     <div class="tab-content">
                         <div id="lg1" class="tab-pane active">
                             <div style="padding: 50px 85px 50px 85px;" class="login-form-container">
                                 <div class="login-register-form">
-                                    <form id="loginForm" action="/flone/member/login.hm" method="post">
+                                    <form id="changePasswordForm" action="/flone/member/changepassword.hm" method="post">
                                         <input type="text" name="email" placeholder="이메일">
-
+                                        <input name="phone" id="phone" type="text"
+                                               value="010"
+                                               placeholder="변경하실 핸드폰 번호를 입력해주세요."
+                                               style="flex: 1; padding-right: 40px; border: 1px solid #ced4da; border-radius: 4px;"
+                                               oninput="formatPhoneNumber(this)">
                                         <div class="col-lg-12 col-md-12">
                                             <div class="billing-info"
                                                  style="position: relative; display: flex; align-items: center;">
-                                                <input id="password" name="password" type="password" placeholder="비밀번호"
+                                                <input id="password" name="passwordConfirm" type="password" placeholder="비밀번호"
                                                        style="flex: 1; padding-right: 40px; border: 1px solid #ced4da; border-radius: 4px;">
                                                 <button type="button"
                                                         onclick="toggleVisibilitySelectorPassword('#password', '#iconConfirm')"
@@ -82,19 +84,13 @@
                                                 </button>
                                             </div>
                                         </div>
+
                                         <div class="button-box"
                                              style="position: relative; padding: 20px; padding-left: 0px; padding-top: 0px; padding-right: 0px;">
                                             <div style="padding-top: 0px; padding-bottom: 40px;"
                                                  class="login-toggle-btn">
-                                                <a href="/flone/member/updatepassword.hm">비밀번호 변경하기</a>
                                             </div>
-                                            <button type="submit"><span>Login</span></button>
-                                            <a href="/flone/oauth/naverlogin.hm"
-                                               style="position: absolute; bottom: 10px; right: 10px; display: block; width: 130px; height: 60px;">
-                                                <img src="http://static.nid.naver.com/oauth/small_g_in.PNG"
-                                                     alt="Naver Login"
-                                                     style="width: 100%; height: 100%; object-fit: contain;">
-                                            </a>
+                                            <button type="submit"><span>변경</span></button>
                                         </div>
                                     </form>
                                 </div>
@@ -111,6 +107,26 @@
 <%@ include file="script.jsp" %>
 
 <script src="/resources/assets/js/toggleVisibility.js"></script>
+<script>
+    function formatPhoneNumber(input) {
+        let value = input.value.replace(/\D/g, '');
+
+        if (!value.startsWith("010")) {
+            value = "010" + value.substring(3);
+        }
+
+        if (value.length > 11) {
+            value = value.substring(0, 11);
+        }
+
+        if (value.length > 3 && value.length <= 7) {
+            value = value.replace(/(\d{3})(\d+)/, "$1-$2");
+        } else if (value.length > 7) {
+            value = value.replace(/(\d{3})(\d{4})(\d+)/, "$1-$2-$3");
+        }
+
+        input.value = value;
+    }
 </script>
 
 

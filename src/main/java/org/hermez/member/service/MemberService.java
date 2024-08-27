@@ -15,5 +15,7 @@ public interface MemberService {
 
    void updateMyAccount(MyAccountEditRequest myAccountEditRequest);
 
+   String changePassword(MemberCheckPasswordRequest memberCheckPasswordRequest);
+
 
 }

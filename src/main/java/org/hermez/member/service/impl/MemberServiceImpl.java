@@ -1,7 +1,6 @@
 package org.hermez.member.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.hermez.admin.model.Admin;
 import org.hermez.instructor.model.Instructor;
 import org.hermez.instructor.service.InstructorService;
 import org.hermez.member.dto.*;
@@ -42,10 +41,11 @@ public class MemberServiceImpl implements MemberService {
             Member member = new Member(
                     memberRegisterRequest.getRoleId(),
                     memberRegisterRequest.getName(),
+                    socialLoginId,
                     memberRegisterRequest.getEmail(),
                     encodedPassword,
                     memberRegisterRequest.getPhone(),
-                    socialLoginId,
+                    memberRegisterRequest.getMemberStatus(),
                     memberRegisterRequest.getCreatedAt()
             );
             save(member);
@@ -84,10 +84,18 @@ public class MemberServiceImpl implements MemberService {
         }
     }
 
+
+
     @Override
     public void save(Member member) {
         memberMapper.registerMember(member);
     }
+
+    @Override
+    public void insertMemberStatus(int memberId) {
+        memberMapper.insertMemberStatus(memberId);
+    }
+
 
     @Override
     public MyAccountResponse getMyAccount(int memberId) {

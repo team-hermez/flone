@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 public class MemberLoginRequest {
     private String email;
     private String password;
+    private int memberStatus;
 
     public MemberLoginRequest(String email, String password) {
         this.email = email;

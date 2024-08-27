@@ -27,7 +27,7 @@
                     <div class="main-menu">
                         <nav>
                             <ul>
-                                <li><a href="/">홈 <i class="fa fa-angle-down"></i></a>
+                                <li><a href="/">홈</a>
                                 </li>
                                 <li><a href="/flone/course/list.hm"> 강의 <i class="fa fa-angle-down"></i> </a>
                                     <ul class="mega-menu mega-menu-padding">

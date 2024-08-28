@@ -37,9 +37,13 @@
                 </div>
             </div>
         </div>
-        <div class="text-center mb-30">
-            <a href="board-register-form.hm?classroomId=${boardListResponse.classroomId}" class="btn btn-primary">과제 등록</a>
-        </div>
+        <c:choose>
+        <c:when test="${not empty sessionScope.INSTRUCTOR}">
+            <div class="text-center mb-30">
+                <a href="board-register-form.hm?classroomId=${boardListResponse.classroomId}" class="btn btn-primary">과제 등록</a>
+            </div>
+        </c:when>
+        </c:choose>
         <div class="row">
             <div class="ms-auto me-auto col-lg-9">
                 <div class="checkout-wrapper">

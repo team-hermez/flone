@@ -6,6 +6,11 @@ import org.hermez.classroom.board.model.Board;
 
 import java.util.List;
 
+/**
+ * 게시판 리스트 응답 데이터입니다.
+ *
+ * @author 김혁진
+ */
 @Getter
 @Setter
 public class BoardListResponse {

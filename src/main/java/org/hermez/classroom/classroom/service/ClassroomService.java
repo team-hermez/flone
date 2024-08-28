@@ -16,23 +16,29 @@ public interface ClassroomService {
      *
      * @param courseId 강의의 고유 ID
      * @param page 조회할 페이지 번호
-     * @return 강의룸 목록과 페이징 정보를 담고 있는 Map 객체
+     * @return 강의룸 목록과 페이징 정보를 담고 있는 Page 객체
      */
     Page<ClassroomCardResponse> getClassroomList(int courseId, int page);
 
     /**
-     * 새로운 강의룸을 등록합니다.
+     * 새로운 강의룸을 등록합니다. 등록할 강의룸의 정보와 이미지 파일을 포함할 수 있습니다.
      *
      * @param classroomRegisterRequest 등록할 강의룸의 정보를 담고 있는 요청 객체
+     * @throws IllegalArgumentException 유효하지 않은 강의룸 정보가 제공된 경우
      */
     void registerClassroom(ClassroomRegisterRequest classroomRegisterRequest);
 
     /**
-     * 지정된 강의룸을 삭제합니다.
+     * 지정된 강의룸을 삭제합니다. 삭제할 강의룸이 존재하지 않는 경우 예외를 발생시킵니다.
      *
      * @param classroomId 삭제할 강의룸의 고유 ID
      */
     void deleteClassroom(int classroomId);
 
+    /**
+     * 전체 강의룸의 총 개수를 반환합니다.
+     *
+     * @return 전체 강의룸의 총 개수
+     */
     int getTotalClassroomCount();
 }

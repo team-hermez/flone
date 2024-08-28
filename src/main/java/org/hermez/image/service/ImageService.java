@@ -20,5 +20,12 @@ public interface ImageService {
      */
     void saveImage(RegisterImageRequest registerImageRequest) throws IOException;
 
+    /**
+     * 주어진 엔티티 ID와 타입에 대한 저장된 이미지의 이름을 조회합니다.
+     *
+     * @param entityId 엔티티의 고유 ID
+     * @param entityType 엔티티 타입 (예: "classroom", "user" 등)
+     * @return 저장된 이미지의 이름
+     */
     String getSaveImage(int entityId, String entityType);
 }

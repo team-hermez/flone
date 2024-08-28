@@ -9,8 +9,6 @@ import org.hermez.image.model.Image;
 /**
  * 이미지 관련 데이터베이스 작업을 처리하는 매퍼 인터페이스입니다.
  *
- * <p>이 인터페이스는 MyBatis를 통해 이미지 데이터를 데이터베이스에 삽입하는 기능을 제공합니다.</p>
- *
  * @author 김혁진
  */
 @Mapper
@@ -25,6 +23,13 @@ public interface ImageMapper {
             "VALUES (#{entityId}, #{entityType}, #{originalName}, #{saveName}, #{filePath})")
     void insertImage(Image image);
 
+    /**
+     * 주어진 엔티티 ID와 타입에 대한 저장된 이미지의 이름을 조회합니다.
+     *
+     * @param entityId 엔티티의 고유 ID
+     * @param entityType 엔티티 타입 (예: "classroom", "user" 등)
+     * @return 저장된 이미지의 이름
+     */
     @Select("SELECT save_name FROM image WHERE entity_id = #{entityId} AND entity_type = #{entityType}")
     String selectImageById(@Param("entityId") int entityId, @Param("entityType") String entityType);
 }

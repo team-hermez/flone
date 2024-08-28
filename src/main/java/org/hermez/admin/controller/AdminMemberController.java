@@ -2,8 +2,10 @@ package org.hermez.admin.controller;
 
 import org.hermez.admin.service.AdminService;
 import org.hermez.common.page.Page;
+import org.hermez.member.dto.MemberLoginResponse;
 import org.hermez.member.model.Member;
 import org.hermez.reservation.dto.MyReservedReservationDTO;
+import org.hermez.reservation.dto.ReservationListResponse;
 import org.hermez.reservation.model.ReservationRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,9 +37,10 @@ public class AdminMemberController {
 
     @GetMapping("member-detail.hm")
     public String getMemberDetailPage(@RequestParam int memberId,@RequestParam(value = "page", defaultValue = "1") int page, Model model){
-        Page<MyReservedReservationDTO> reservations = reservationRepository.findMyReservedReservationList(memberId, page);
+        Page<ReservationListResponse> reservationPage = reservationRepository.getReservationList(memberId,page);
         model.addAttribute("member", adminService.getMemberDetail(memberId));
-        model.addAttribute("reservations", reservations);
+        model.addAttribute("memberId", memberId);
+        model.addAttribute("reservationPage", reservationPage);
         return "flone/admin-member-detail";
     }
 

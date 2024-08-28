@@ -10,6 +10,7 @@
 </head>
 
 <body>
+<%@ include file="refund-payment.jsp" %>
 <%@ include file="admin-sidebar.jsp" %>
 <%@ include file="admin-header.jsp" %>
 <div class="home-sidebar-right">
@@ -86,7 +87,7 @@
                             </div>
                         </div>
                     </div>
-                    <h3 class="cart-page-title">회원의 강의 목록</h3>
+                    <h3 class="cart-page-title">회원의 결제 목록</h3>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                             <form action="#">
@@ -94,55 +95,75 @@
                                     <table>
                                         <thead>
                                         <tr>
-                                            <th>주문 번호</th>
+                                            <th>예약 번호</th>
                                             <th>강의 명</th>
                                             <th>강의 시작일</th>
-                                            <th>강의 종료일</th>
-                                            <th>강의 상태</th>
+                                            <th>가격</th>
+                                            <th>결제상태</th>
+                                            <th>
+                                                <button type="button" id="selectAllBtn">모두선택</button>
+                                            </th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:choose>
-                                            <c:when test="${empty reservations.contents}">
-                                                <tr>
-                                                    <td colspan="5">아직 수강하고 있는 강의가 없습니다.
-                                                    </td>
-                                                </tr>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <c:forEach var="reservation"
-                                                           items="${reservations.contents}">
-                                                    <tr>
-                                                        <td class="product-thumbnail">
-                                                            <a href="reservation-detail.hm?courseId=${reservation.courseId}">${reservation.merchantUid}</a>
-                                                        </td>
-                                                        <td class="product-name">
-                                                        </td>
-                                                        <td class="product-price-cart">${reservation.startDate}</td>
-                                                        <td class="product-subtotal">${reservation.endDate}</td>
-                                                        <c:choose>
-                                                            <c:when test="${reservation.isBefore}">
-                                                                <td>시작 전</td>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <td class="product-remove">강의 중</td>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </tr>
-                                                </c:forEach>
-                                            </c:otherwise>
-                                        </c:choose>
+                                        <c:forEach var="reservation" items="${reservationPage.contents}">
+                                            <tr>
+                                                <td class="product-thumbnail">
+                                                    <a href="my-payment-detail.hm?merchantUid=${reservation.merchantUid}">${reservation.merchantUid}</a>
+                                                </td>
+                                                <td class="product-name"><a
+                                                        href="/flone/course/detail.hm?courseId=${reservation.courseId}">${reservation.title}</a>
+                                                </td>
+                                                <td class="product-price-cart">${reservation.startDate}</td>
+                                                <td class="product-subtotal">${reservation.paymentAmount}</td>
+                                                <td class="product-remove">
+                                                    <c:if test="${reservation.reservationStatusId == 1 and reservation.isBefore}">
+                                                        <a href="#"><i class="fa fa-pencil">예약완료</i></a>
+                                                    </c:if>
+                                                    <c:if test="${reservation.reservationStatusId == 1 and reservation.isAfter}">
+                                                        <a href="#"><i class="fa fa-pencil">예약확정</i></a>
+                                                    </c:if>
+                                                    <c:if test="${reservation.reservationStatusId == 2}">
+                                                        <a href="#"><i class="fa fa-pencil">예약취소</i></a>
+                                                    </c:if>
+                                                </td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${reservation.reservationStatusId == 1 and reservation.isBefore}">
+                                                            <input type="checkbox" class="checkList"
+                                                                   value="${reservation.merchantUid}">
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <input type="checkbox"
+                                                                   value="${reservation.merchantUid}" disabled>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+
                                         </tbody>
                                     </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="cart-shiping-update-wrapper">
+                                            <div class="cart-shiping-update">
+                                            </div>
+                                            <div class="cart-clear">
+                                                <a href="#" id="cancel-btn">취소</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="pro-pagination-style text-center mt-20">
                                     <div>
                                         <ul>
                                             <%--                        Prev Page--%>
                                             <c:choose>
-                                                <c:when test="${reservations.currentPage > 1}">
+                                                <c:when test="${reservationPage.currentPage > 1}">
                                                     <li><a class="prev"
-                                                           href="?page=${reservations.currentPage - 1}"><i
+                                                           href="?page=${reservationPage.currentPage - 1}"><i
                                                             class="fa fa-angle-double-left"></i></a></li>
                                                 </c:when>
                                                 <c:otherwise>
@@ -150,10 +171,11 @@
                                                             class="fa fa-angle-double-left"></i></a></li>
                                                 </c:otherwise>
                                             </c:choose>
-                                            <c:forEach begin="1" end="${reservations.totalPages}"
+                                            <%--                        Current Page--%>
+                                            <c:forEach begin="1" end="${reservationPage.totalPages}"
                                                        var="pageNum">
                                                 <c:choose>
-                                                    <c:when test="${pageNum == reservations.currentPage}">
+                                                    <c:when test="${pageNum == reservationPage.currentPage}">
                                                         <li><a class="active" href="#">${pageNum}</a></li>
                                                     </c:when>
                                                     <c:otherwise>
@@ -161,10 +183,11 @@
                                                     </c:otherwise>
                                                 </c:choose>
                                             </c:forEach>
+                                            <%--                        Next Page--%>
                                             <c:choose>
-                                                <c:when test="${reservations.currentPage < reservations.totalPages}">
+                                                <c:when test="${reservationPage.currentPage < reservationPage.totalPages}">
                                                     <li><a class="next"
-                                                           href="?page=${reservations.currentPage + 1}"><i
+                                                           href="?page=${reservationPage.currentPage + 1}"><i
                                                             class="fa fa-angle-double-right"></i></a></li>
                                                 </c:when>
                                                 <c:otherwise>
@@ -182,6 +205,7 @@
             </div>
         </div>
     </div>
+    <%@ include file="refund-list-payment.jsp" %>
     <%@ include file="admin-footer.jsp" %>
 </div>
 <%@ include file="chart-signup.jsp" %>

@@ -29,6 +29,33 @@ public class CourseRegisterRequest {
 
     CourseRegisterRequest(){}
 
+    /**
+     * CourseRegisterRequest 생성자입니다.
+     * @param courseId
+     * @param title
+     * @param instructorId
+     * @param gradeId
+     * @param description
+     * @param imageFile
+     * @param coursePrice
+     * @param startDate
+     * @param endDate
+     * @param courseTimes
+     */
+
+    /**
+     * CourseRegisterRequest 생성자입니다.
+     * @param courseId
+     * @param title
+     * @param instructorId
+     * @param gradeId
+     * @param description
+     * @param imageFile
+     * @param coursePrice
+     * @param startDate
+     * @param endDate
+     * @param courseTimes
+     */
     public CourseRegisterRequest(int courseId, String title, int instructorId, int gradeId,String description,MultipartFile imageFile, int coursePrice, Date startDate, Date endDate, List<CourseTime> courseTimes) {
         this.courseId = courseId;
         this.title = title;
@@ -42,6 +69,11 @@ public class CourseRegisterRequest {
         this.courseTimes = courseTimes;
     }
 
+    /**
+     * CourseRegisterRequest 생성자입니다.
+     * @param courseId
+     * @param courseTimes
+     */
     public CourseRegisterRequest(int courseId, List<CourseTime> courseTimes) {
         this.courseId = courseId;
         this.courseTimes = courseTimes;

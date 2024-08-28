@@ -1,6 +1,5 @@
 package org.hermez.course.dto;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -56,12 +55,5 @@ public class CourseDetailResponse {
         this.grade = grade;
         this.courseImage = courseImage;
     }
-    /**
-     * 생성자 Builder
-     * @param courseId
-     */
-    @Builder
-    public CourseDetailResponse(int courseId){
-        this.courseId = courseId;
-    }
+
 }

@@ -6,14 +6,11 @@ import org.hermez.course.dto.CourseListResponse;
 import org.hermez.course.dto.CourseRegisterRequest;
 import org.hermez.course.model.CourseTime;
 import org.hermez.course.service.CourseService;
-import org.hermez.instructor.dto.InstructorListResponse;
-import org.hermez.instructor.model.Instructor;
 import org.hermez.member.dto.MemberLoginResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
@@ -33,10 +30,12 @@ public class CourseController {
     private final HttpSession httpSession;
     private CourseRegisterRequest courseRegisterRequest;
     private CourseTime courseTime;
+
     /**
-     * CourseController 생성자입니다.
-     *
+     * CourseController의 생성자입니다.
      * @param courseService
+     * @param httpServletRequest
+     * @param httpSession
      */
     public CourseController(CourseService courseService, @Qualifier("httpServletRequest") ServletRequest httpServletRequest, HttpSession httpSession) {
         this.courseService = courseService;
@@ -45,11 +44,14 @@ public class CourseController {
     }
 
     /**
-     * 전체 강의 목록을 조회합니다.
-     *
-     * @param model 모델 객체
-     * @param page  현재 page
-     * @return 게시판 목록 페이지 뷰 이름
+     * 강의 리스트를 조회합니다.
+     * @param category
+     * @param subject
+     * @param instructorName
+     * @param grade
+     * @param page
+     * @param model
+     * @return 카데고리별 강의 리스트
      */
 
     @GetMapping(value = "list.hm")
@@ -59,8 +61,6 @@ public class CourseController {
                                           @RequestParam (name ="grade", required = false) String grade,
                                           @RequestParam (value = "page", defaultValue = "1") int page,
                                           Model model){
-
-
         if (category.equals("default")) {
             Page<CourseListResponse> courseList = courseService.getCourseList(page);
             model.addAttribute("courses", courseList);
@@ -119,5 +119,4 @@ public class CourseController {
         courseService.insertCourse(courseRegisterRequest);
         return "redirect:list.hm";
     }
-
 }

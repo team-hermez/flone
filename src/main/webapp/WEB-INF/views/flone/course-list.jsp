@@ -52,7 +52,7 @@
                                 <p> ${course.description}</p>
                                 <div class="blog-share-comment">
                                     <div class="blog-btn-2">
-                                        <a href="/blog-details.html">read more</a>
+                                        <a href="/flone/course/detail.hm?courseId=${course.courseId}">강의 보러가기</a>
                                     </div>
                                 </div>
                             </div>
@@ -107,4 +107,3 @@
 
 </html>
 
-&category=${courses.category}&subject=${courses.subject}&name=${courses.instuctorName}&grade${courses.grade}

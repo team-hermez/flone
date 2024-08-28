@@ -1,13 +1,11 @@
 package org.hermez.course.service;
 
-import org.apache.ibatis.annotations.Param;
 import org.hermez.common.page.Page;
 import org.hermez.course.dto.CourseDetailResponse;
 import org.hermez.course.dto.CourseListResponse;
 import org.hermez.course.dto.CourseRegisterRequest;
 import org.hermez.course.exception.CourseRegisterTimeException;
 import org.hermez.course.model.CourseTime;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -45,12 +43,17 @@ public interface CourseService {
     CourseDetailResponse courseDetailService(int courseId);
 
     /**
-     * courseId와 일치하는 course의 시간 정보를 조회합니다.
+     * courseId와 일치하는 강의의 시간 정보를 조회합니다.
      * @param courseId course의 pk값
      * @return course의 시간표 List
      */
     List<CourseTime> courseDetailTime(int courseId);
 
+    /**
+     * 강사 이름과 일치하는 강의를 조회합니다.
+     * @param instructorName
+     * @return 강사 이름과 일치하는 강의
+     */
     List<CourseListResponse> getCourseListByInstructor(String instructorName);
 
     int getInstructorIdByMemberId(int memberId);

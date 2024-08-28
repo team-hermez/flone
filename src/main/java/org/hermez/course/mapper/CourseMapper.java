@@ -44,6 +44,50 @@ public interface CourseMapper {
     @Select("select COUNT(*) from course")
     int courseCount();
 
+    @Select("select\n" +
+            "    c.course_id as courseId,\n" +
+            "    start_date as startDate,\n" +
+            "    c.end_date as endDate,\n" +
+            "    title, description,\n" +
+            "    m.name as instructorName,\n" +
+            "    img.save_name as courseImage, \n" +
+            "    s.subject_name as subject, " +
+            "    g.grade_name as grade " +
+            "    from course c\n" +
+            "        left join instructor i on (i.instructor_id = c.instructor_id)\n" +
+            "        left join member m on (i.member_id = m.member_id)\n" +
+            "        left join image img on (img.entity_id = c.course_id)\n" +
+            "        left join subject s on (i.subject_id = s.subject_id)\n" +
+            "        left join grade g on (c.grade_id = g.grade_id)\n" +
+            "    where (img.entity_type like 'course' and s.subject_name like concat ('%',#{subject},'%')\n" +
+            "    and m.name like concat ('%',#{instructorName},'%') and g.grade_name like concat ('%',#{grade},'%'))\n" +
+            "    order by c.course_id desc " +
+            "limit #{offset}, #{itemPerPage}")
+    List<CourseDetailResponse> getCourseByCategory(@Param("subject") String subject,
+                                                   @Param("instructorName") String instructorName,
+                                                   @Param("grade") String grade,
+                                                   @Param("offset") int offset,
+                                                   @Param("itemsPerPage") int itemsPerPage);
+
+    /**
+     * 카테고리값에 맞는 강의의 갯수를 가져옵니다.
+     * @param subject
+     * @param instructorName
+     * @param grade
+     * @return 카테고리에 맞는 강의의 수
+     */
+    @Select("select count(*) " +
+            "from course c " +
+            "left join instructor i on (c.instructor_id = i.instructor_id) " +
+            "left join member m on (i.member_id = m.member_id) " +
+            "left join image img on (c.course_id=img.entity_id) " +
+            "left join subject s on (i.subject_id=s.subject_id) " +
+            "left join grade g on (c.grade_id = g.grade_id) " +
+            "where (img.entity_type like 'course' and s.subject_name like concat ('%',#{subject},'%')" +
+            "and m.name like concat ('%',#{instuctorName},'%') and g.grade_name like concat ('%',${grade},'%'))")
+    int getCourseCountByCategory(@Param("subject") String subject,
+                              @Param("instructorName") String instructorName,
+                              @Param("grade") String grade);
     /**
      * 같은 과목명을 가진 강의를 조회합니다.
      * @param subject

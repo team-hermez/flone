@@ -56,21 +56,4 @@ public class CourseListResponse {
         this.instructorName = getInstructorName();
         this.courseImage = getCourseImage();
     }
-
-    /*
-      CourseListResponse Builder 입니다.
-
-      @param courseId
-     * @param startDate
-     * @param title
-     * @param description
-     */
-//    public CourseListResponse(int courseId, Date startDate, String title, String description) {
-//        CourseListResponse courseListResponse = CourseListResponse.builder()
-//                .courseId(courseId)
-//                .startDate(startDate)
-//                .title(title)
-//                .description(description)
-//                .build();
-//    }
 }

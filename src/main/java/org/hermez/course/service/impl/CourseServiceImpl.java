@@ -1,7 +1,6 @@
 package org.hermez.course.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Param;
 import org.hermez.common.page.Page;
 import org.hermez.common.page.PaginationUtil;
 import org.hermez.course.dto.CourseDetailResponse;
@@ -13,14 +12,9 @@ import org.hermez.course.model.CourseTime;
 import org.hermez.course.service.CourseService;
 import org.hermez.image.dto.RegisterImageRequest;
 import org.hermez.image.exception.ImageProcessingException;
-import org.hermez.image.mapper.ImageMapper;
 import org.hermez.image.service.ImageService;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -56,6 +50,10 @@ public class CourseServiceImpl implements CourseService {
         List<CourseListResponse> courses = courseMapper.courseAllList(pageInfo.getOffset(), pageInfo.getItemsPerPage());
         return new Page<>(courses, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getAllCourseCount(){
         return courseMapper.courseCount();
@@ -66,9 +64,6 @@ public class CourseServiceImpl implements CourseService {
      */
     @Override
     public Page<CourseListResponse> getCourseListByCategory(String category, String subject, String instructorName, String grade, int page){
-        if(category.equals("instructorName"))
-            System.out.println("교사명");
-
         if(category.equals("subject")) {
             int total = courseMapper.getCourseCountBySubject(subject);
             PaginationUtil.PageInfo pageInfo = PaginationUtil.calculatePagination(total, 9, page);
@@ -86,6 +81,7 @@ public class CourseServiceImpl implements CourseService {
             return new Page<>(courses, pageInfo.getTotalItems(), pageInfo.getTotalPages(), pageInfo.getCurrentPage());
         }
     }
+
     /**
      * {@inheritDoc}
      */
@@ -120,6 +116,7 @@ public class CourseServiceImpl implements CourseService {
         boolean dayFlag = checkDay(courseRegisterRequest);
         boolean dateFlag = checkDate(courseRegisterRequest);
         boolean timeFlag = checkTime(courseRegisterRequest);
+
         if(dayFlag&&dateFlag&&timeFlag) {
             courseMapper.insertCourse(courseRegisterRequest);
             int courseId = courseRegisterRequest.getCourseId();
@@ -144,6 +141,11 @@ public class CourseServiceImpl implements CourseService {
             throw new CourseRegisterTimeException("강의 등록 실패했습니다");
     }
 
+    /**
+     * 동일한 요일을 확인하는 메소드입니다.
+     * @param courseRegisterRequest
+     * @return 요일 중복 유무 (true - 중복없음, false - 중복)
+     */
     private boolean checkDay(CourseRegisterRequest courseRegisterRequest){
         List<CourseTime> courseTimesList =courseRegisterRequest.getCourseTimes();
         int dayCount = courseTimesList.size();
@@ -159,10 +161,17 @@ public class CourseServiceImpl implements CourseService {
                 }
             }
         }
+        flag = true;
         return flag;
     }
 
-
+    /**
+     * 강의 시간이 겹치는지 확인하는 메소드입니다.
+     * @param courseRegisterRequest
+     * @param checkStart
+     * @param checkEnd
+     * @return 시간 중복 유무 (true - 중복없음, false - 중복)
+     */
     private boolean checkTimeSameDay(CourseRegisterRequest courseRegisterRequest,int checkStart,int checkEnd){
         boolean timeFlag = false;
         List<CourseTime> courseTimesList =courseRegisterRequest.getCourseTimes();
@@ -189,6 +198,11 @@ public class CourseServiceImpl implements CourseService {
         return timeFlag;
     }
 
+    /**
+     * 시작시간과 종료시간의 유효성을 검사하는 메소드입니다.
+     * @param courseRegisterRequest
+     * @return 시간 유효성 ( true - 유효, false - 무효)
+     */
     private boolean checkTime(CourseRegisterRequest courseRegisterRequest){
         boolean timeFlag = false;
         List<CourseTime> courseTimesList =courseRegisterRequest.getCourseTimes();
@@ -209,15 +223,16 @@ public class CourseServiceImpl implements CourseService {
         return timeFlag;
     }
 
+    /**
+     * 강의 시작일자와 종료일자의 유효성을 체크하는 메소드입니다.
+     * @param courseRegisterRequest
+     * @return 일자 관련 유효성 (true - 유효, false - 무효)
+     */
     private boolean checkDate(CourseRegisterRequest courseRegisterRequest){
         boolean checkFlag = false;
         Date StartDate = courseRegisterRequest.getStartDate();
         Date EndDate = courseRegisterRequest.getEndDate();
         Date today = new Date();
-
-        System.out.println(StartDate);
-        System.out.println(EndDate);
-        System.out.println(today);
 
         if(StartDate.before(EndDate)) {
             checkFlag = true;

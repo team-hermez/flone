@@ -48,7 +48,7 @@
         <div class="description-review-wrapper">
             <div class="description-review-topbar nav">
                 <a data-bs-toggle="tab" href="#">-</a>
-                <a class="active" data-bs-toggle="tab" href="#des-details3">메신저</a>
+                <a class="active" data-bs-toggle="tab" href="#des-details3">메세지</a>
                 <a data-bs-toggle="tab" href="#des-details2">-</a>
             </div>
             <div class="tab-content description-review-bottom">
@@ -95,7 +95,7 @@
                         </div>
                         <div class="col-lg-5">
                             <div class="ratting-form-wrapper pl-50">
-                                <h2 class="mb-4"> 메신저 </h2>
+                                <h2 class="mb-4"> 메세지 </h2>
                                 <div class="ratting-form">
                                     <form action="/flone/reply/reply-register.hm" method="post">
                                         <input type="hidden" name="boardId" value="${board.boardId}">

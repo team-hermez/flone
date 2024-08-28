@@ -66,16 +66,18 @@
                                                 <div class="row">
                                                     <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
                                                         <div class="entries-info text-center">
-                                                            <p>비회원으로 전환합니다</p>
-
+                                                            <p>비회원으로 전환합니다.</p>
                                                         </div>
+
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
                                                         <div class="entries-edit-delete text-center">
-                                                            <a class="edit" href="#">홈으로</a>
-                                                            <a href="#">회원 전환</a>
+                                                            <a class="edit" href="/flone/index.hm">홈으로</a>
+                                                            <form action="/flone/member/delete.hm?memberId=${member.memberId}" method="post" style="display: inline;">
+                                                                <button type="submit" class="edit" style="color: #fff;display: inline-block;line-height: 1;margin: 0 2px;padding: 12px 15px;text-transform: uppercase;font-weight: 500;background: black;: 0; height: 42px;">회원휴먼</button>                                                </form>
                                                         </div>
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -114,8 +116,7 @@
                                                         <td class="product-thumbnail">
                                                             <a href="reservation-detail.hm?courseId=${reservation.courseId}">${reservation.merchantUid}</a>
                                                         </td>
-                                                        <td class="product-name"><a
-                                                                href="/flone/course/detail.hm?courseId=${reservation.courseId}">${reservation.title}</a>
+                                                        <td class="product-name">
                                                         </td>
                                                         <td class="product-price-cart">${reservation.startDate}</td>
                                                         <td class="product-subtotal">${reservation.endDate}</td>
@@ -149,7 +150,6 @@
                                                             class="fa fa-angle-double-left"></i></a></li>
                                                 </c:otherwise>
                                             </c:choose>
-                                            <%--                        Current Page--%>
                                             <c:forEach begin="1" end="${reservations.totalPages}"
                                                        var="pageNum">
                                                 <c:choose>
@@ -161,7 +161,6 @@
                                                     </c:otherwise>
                                                 </c:choose>
                                             </c:forEach>
-                                            <%--                        Next Page--%>
                                             <c:choose>
                                                 <c:when test="${reservations.currentPage < reservations.totalPages}">
                                                     <li><a class="next"

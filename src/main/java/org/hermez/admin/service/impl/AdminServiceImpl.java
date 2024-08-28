@@ -156,4 +156,8 @@ public class AdminServiceImpl implements AdminService {
         return memberService.getMyAccount(memberId);
     }
 
+    @Override
+    public Page<ReservationListResponse> getReservationListAllByCourseId(int courseId, int page) {
+        return reservationService.getReservationListAllByCourseId(courseId, page);
+    }
 }

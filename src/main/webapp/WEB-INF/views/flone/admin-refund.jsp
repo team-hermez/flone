@@ -31,21 +31,37 @@
                     <table>
                         <thead>
                         <tr>
+                            <th>강의번호</th>
                             <th>주문번호</th>
                             <th>강의제목</th>
                             <th>결제금액</th>
                             <th>결제일</th>
-                            <th>비고</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="refund" items="${refunds.contents}">
+                        <c:forEach var="reservation" items="${reservations.contents}">
                             <tr>
-                                <td class="product-name">${refund.merchantUid}</td>
-                                <td class="product-name">${refund.merchantUid}</td>
-                                <td class="product-name">${refund.paymentAmount}</td>
-                                <td class="product-name">${refund.createdAt}</td>
-                                <td class="product-name">${refund.isBefore}</td>
+                                <td class="product-name">
+                                    <a href="/flone/admin/payment/payment-detail.hm?courseId=${reservation.courseId}&merchantUid=${reservation.merchantUid}">
+                                            ${reservation.courseId}
+                                    </a>
+                                </td>
+                                <td class="product-name">
+                                    <a href="/flone/admin/payment/payment-detail.hm?courseId=${reservation.courseId}&merchantUid=${reservation.merchantUid}">
+                                            ${reservation.merchantUid}
+                                    </a>
+                                </td>
+                                <td class="product-name">
+                                    <a href="/flone/admin/payment/payment-detail.hm?courseId=${reservation.courseId}&merchantUid=${reservation.merchantUid}">
+                                            ${reservation.title}
+                                    </a>
+                                </td>
+                                <td class="product-name">
+                                            ${reservation.paymentAmount}
+                                </td>
+                                <td class="product-name">
+                                            ${reservation.createdAt}
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>

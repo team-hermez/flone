@@ -37,8 +37,6 @@ public interface ClassroomMapper {
 
     /**
      * 클래스룸의 영상링크를 가져오는 메서드입니다.
-     *'
-     *
      *
      * @param classroomId
      * @return 등록된 영상 링크

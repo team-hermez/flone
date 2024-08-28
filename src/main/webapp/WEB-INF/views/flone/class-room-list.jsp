@@ -79,36 +79,37 @@
                         </div>
                     </c:forEach>
                 </div>
-
                 <div class="pro-pagination-style text-center mt-20">
-                    <div>
+                    <ul>
                         <c:choose>
                             <c:when test="${classroomPage.currentPage > 1}">
-                                <a href="?courseId=${courseId}&page=${classroomPage.currentPage - 1}">Previous</a>
+                                <li><a class="prev" href="?page=${classroomPage.currentPage - 1}"><i
+                                        class="fa fa-angle-double-left"></i></a></li>
                             </c:when>
                             <c:otherwise>
-                                <span>Previous</span>
+                                <li><a class="prev" href="#"><i class="fa fa-angle-double-left"></i></a></li>
                             </c:otherwise>
                         </c:choose>
                         <c:forEach begin="1" end="${classroomPage.totalPages}" var="pageNum">
                             <c:choose>
                                 <c:when test="${pageNum == classroomPage.currentPage}">
-                                    <span>${pageNum}</span>
+                                    <li><a class="active" href="#">${pageNum}</a></li>
                                 </c:when>
                                 <c:otherwise>
-                                    <a href="?courseId=${courseId}&page=${pageNum}">${pageNum}</a>
+                                    <li><a href="?page=${pageNum}">${pageNum}</a></li>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
                         <c:choose>
                             <c:when test="${classroomPage.currentPage < classroomPage.totalPages}">
-                                <a href="?courseId=${courseId}&page=${classroomPage.currentPage + 1}">Next</a>
+                                <li><a class="next" href="?page=${classroomPage.currentPage + 1}"><i
+                                        class="fa fa-angle-double-right"></i></a></li>
                             </c:when>
                             <c:otherwise>
-                                <span>Next</span>
+                                <li><a class="next" href="#"><i class="fa fa-angle-double-right"></i></a></li>
                             </c:otherwise>
                         </c:choose>
-                    </div>
+                    </ul>
                 </div>
             </div>
         </div>

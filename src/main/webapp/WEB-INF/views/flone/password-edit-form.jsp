@@ -47,7 +47,7 @@
                 <li>
                     <a href="index.jsp">홈</a>
                 </li>
-                <li class="active">로그인</li>
+                <li class="active">비밀번호 변경</li>
             </ul>
         </div>
     </div>

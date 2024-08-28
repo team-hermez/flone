@@ -41,4 +41,6 @@ public interface AdminService {
     Page<ReservationListResponse> getRefundListAll(int page);
 
     MyAccountResponse getMemberDetail(int memberId);
+
+    Page<ReservationListResponse> getReservationListAllByCourseId(int courseId, int page);
 }

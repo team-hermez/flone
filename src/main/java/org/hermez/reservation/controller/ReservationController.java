@@ -45,15 +45,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 클라이언트의 요청을 처리하기 위한 예약관련 컨트롤러입니다.
  *
  * 이 컨트롤러는 다음과 같은 HTTP 요청을 처리합니다:
- * - GET /flone/reservation/detail.hm: 특정 강의에 대한 결제 상세 페이지 조회
- * - GET /flone/reservation/cancel-payment.hm: 결제 실패시 결과 페이지 조회
- * - GET /flone/reservation/success-page.hm: 결제 성공시 결과 페이지 조회
- * - GET /flone/reservation/list.hm: 현재 사용자의 결제 목록 조회
- * - GET /flone/reservation/reservation-detail.hm: 특정 강의에 대한 수강 예약 강의 상세 페이지 조회
- * - GET /flone/reservation/reserved-course-list.hm: 현재 사용자의 강의 목록 조회
- * - GET /flone/reservation/my-payment-detail.hm: 주문한 강의 결제/환불 명세서 조회
- * - POST /flone/reservation/verify-iamport.hm: 결제 요청에 대한 주문 생성
- * - POST /flone/reservation/cancel-payment.hm: 주문 취소/환불 및 잘못된 결제 요청에 대한 결제 취소
+ * <p>- GET /flone/reservation/detail.hm: 특정 강의에 대한 결제 상세 페이지 조회<p/>
+ * <p>- GET /flone/reservation/cancel-payment.hm: 결제 실패시 결과 페이지 조회</p>
+ * <p>- GET /flone/reservation/success-page.hm: 결제 성공시 결과 페이지 조회</p>
+ * <p>- GET /flone/reservation/list.hm: 현재 사용자의 결제 목록 조회</p>
+ * <p>- GET /flone/reservation/reservation-detail.hm: 특정 강의에 대한 수강 예약 강의 상세 페이지 조회</p>
+ * <p>- GET /flone/reservation/reserved-course-list.hm: 현재 사용자의 강의 목록 조회</p>
+ * <p>- GET /flone/reservation/my-payment-detail.hm: 주문한 강의 결제/환불 명세서 조회</p>
+ * <p>- POST /flone/reservation/verify-iamport.hm: 결제 요청에 대한 주문 생성</p>
+ * <p>- POST /flone/reservation/cancel-payment.hm: 주문 취소/환불 및 잘못된 결제 요청에 대한 결제 취소</p>
  *
  * @author 허상범
  */

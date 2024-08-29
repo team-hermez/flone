@@ -10,15 +10,19 @@
 
 > **2024.07.29. 운영 계획안** <br/> **개발기간: 2024.08.21 ~ 2024.08.27**
 
+---
+
 ## 👨‍👩‍👦‍👦 웹개발팀 소개
 
 |      김혁진       |          엄진수         |       허상범         |       김다은        |
 | :----------------: | :----------------------: | :-----------------: | :----------------: |
-|   <img width="160px" src="https://github.com/user-attachments/assets/7273ae52-9bb0-409c-b545-6446db11775e" />    |   <img width="160px" src="https://github.com/user-attachments/assets/844a52ab-c2ed-458c-b79d-362138b77f81" />    |   <img width="160px" src="https://github.com/user-attachments/assets/f741f255-c9a5-4b52-ba06-539cf152a495" />    |   <img width="160px" src="https://github.com/user-attachments/assets/f677fbaa-d497-4bd6-ac46-08fbe07b0cd6" />   |
+|   <img width="160px" src="https://github.com/user-attachments/assets/7273ae52-9bb0-409c-b545-6446db11775e" />    |   <img width="160px" src="https://github.com/user-attachments/assets/fb751d4d-6251-4da5-beda-60ddfcf103be" />    |   <img width="160px" src="https://github.com/user-attachments/assets/f741f255-c9a5-4b52-ba06-539cf152a495" />    |   <img width="160px" src="https://github.com/user-attachments/assets/f677fbaa-d497-4bd6-ac46-08fbe07b0cd6" />   |
 |   [@hyukjin](https://github.com/HS-hyeokjin)   |    [@jinsu](https://github.com/Gitdoolgi)  | [@sangbum](https://github.com/tokkaiiii)  | [@daeun](https://github.com/daeun)  |
 | 천재교육 풀스택 6기 | 천재교육 풀스택 6기 | 천재교육 풀스택 6기 | 천재교육 풀스택 6기 |
 
-## 📢 프로젝트 소개
+---
+
+## 📢 프로젝트 소개 🔗
 
 Flone 온라인 강의 예약 서비스는 사용자들이 다양한 강의를 예약하고 관리할 수 있는 기능을 제공하는 것을 목표로 합니다. 이 프로젝트는 스프링 MVC를 활용하여 웹 애플리케이션을 개발하며, 사용자 인증, 결제 시스템, 강의 관리 기능을 포함합니다. 이를 통해 사용자들에게 편리하고 효율적인 강의 예약 환경을 제공합니다.
 
@@ -32,6 +36,13 @@ Our website supports the following features:
 2. Course schedule management to prevent overlaps.
 3. Various payment methods for easy transactions.
 4. Secure user authentication and management.
+
+---
+
+## 🔗 Link
+- [발표자료](https://www.miricanvas.com/v/13lkpgs)
+  
+---
 
 ## 🏁 시작 가이드
 ### Requirements

@@ -87,27 +87,16 @@ $ cd dev
 | 메인 페이지  |  강사 페이지   |
 | :-------------------------------------------: | :------------: | 
 |  ![image](https://github.com/user-attachments/assets/530f83c1-5ff1-4559-8512-3a260c43cb5c)   |  ![image](https://github.com/user-attachments/assets/8b7b58d8-1d00-4b83-bc3c-b15b5c7669c1) |  
-
 | 강의 페이지   |   강의 상세 페이지   |  
-| :-------------------------------------------: | :------------: |
 | ![강의목록](https://github.com/user-attachments/assets/271fe213-e2f7-4a29-8aed-5c87520a3bb9)   |      ![강의상세](https://github.com/user-attachments/assets/a4cf3228-8c54-4fb2-9bf2-ad3f3c912369)  |
-
 | 예약 페이지   |  예약 강의 상세 페이지   |  
-| :-------------------------------------------: | :------------: |
 | ![예약](https://github.com/user-attachments/assets/aaf18f37-8b68-4d27-9967-eeb964c6996a)    |  ![수강예약상세](https://github.com/user-attachments/assets/66bb995a-a2fc-415f-b35f-955caea11034)  |
-
 | 결제 내역 페이지   |  결제 완료 페이지   |  
-| :-------------------------------------------: | :------------: |
 | ![결제 내역](https://github.com/user-attachments/assets/e4489659-5631-4be7-8896-91676ae80edc)   |  ![결제 완료](https://github.com/user-attachments/assets/ed4ad1ea-593b-496e-8f87-94c5099a6567) |
-
 | 클래스룸 페이지  |  클래스룸 상세 페이지   |
-| :-------------------------------------------: | :------------: |
 | ![클래스룸](https://github.com/user-attachments/assets/0cf52034-1343-4b6d-9ae3-275defef18a9) | ![클래스룸 상세](https://github.com/user-attachments/assets/069c0ede-58e0-48ea-a5df-e8605e06c389)  |
-
-| 관리자 페이지 |
-| :------------------------------------------: |
-|  ![관리자](https://github.com/user-attachments/assets/06a166eb-4a9a-458a-84ec-29fe44814bfb) |
-
+| 관리자 페이지 | 관리자 회원관리 페이지 |
+| ![관리자](https://github.com/user-attachments/assets/06a166eb-4a9a-458a-84ec-29fe44814bfb) | ![관리자 회원관리](https://github.com/user-attachments/assets/05b7b06c-801a-4602-a438-0a077f74aa1d) 
 
 ---
 ## 📦 주요 기능

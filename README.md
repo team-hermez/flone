@@ -82,6 +82,11 @@ $ cd dev
 
 ---
 
+## 🔗 ERD
+  
+![flone_ERD](https://github.com/user-attachments/assets/9a7fb19e-d14b-4747-ad8f-c2657c376786)
+
+
 ## 📺 화면 구성
 
 | 메인 페이지  |  강사 페이지   |

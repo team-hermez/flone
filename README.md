@@ -16,7 +16,7 @@
 
 |      김혁진       |          엄진수         |       허상범         |       김다은        |
 | :----------------: | :----------------------: | :-----------------: | :----------------: |
-|   <img width="160px" src="https://github.com/user-attachments/assets/7273ae52-9bb0-409c-b545-6446db11775e" />    |   <img width="160px" src="https://github.com/user-attachments/assets/fb751d4d-6251-4da5-beda-60ddfcf103be" />    |   <img width="160px" src="https://github.com/user-attachments/assets/f741f255-c9a5-4b52-ba06-539cf152a495" />    |   <img width="160px" src="https://github.com/user-attachments/assets/f677fbaa-d497-4bd6-ac46-08fbe07b0cd6" />   |
+|  ![혁진님](https://github.com/user-attachments/assets/13d3b195-5de6-4eeb-b8cd-96fc27c9a83b)    |   ![진수님](https://github.com/user-attachments/assets/346832d7-9db4-46f6-94f9-3eb58b2480c5)    |   ![상범님](https://github.com/user-attachments/assets/a5648766-8450-41ad-8743-226975f073e3) |   ![다은님](https://github.com/user-attachments/assets/f099944f-c25e-4d34-a63b-6d48ec9403a5) |
 |   [@hyoekjin](https://github.com/HS-hyeokjin)   |    [@jinsu](https://github.com/Gitdoolgi)  | [@sangbum](https://github.com/tokkaiiii)  | [@daeun](https://github.com/kde0707)  |
 | 천재교육 풀스택 6기 | 천재교육 풀스택 6기 | 천재교육 풀스택 6기 | 천재교육 풀스택 6기 |
 
